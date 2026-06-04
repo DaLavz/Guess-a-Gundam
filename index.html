@@ -110,13 +110,7 @@
     border:1px solid var(--line);border-radius:2px;overflow:hidden;margin-bottom:8px;
     display:flex;align-items:center;justify-content:center;
   }
-  .scanner img{
-    width:100%;height:100%;object-fit:contain;display:block;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    image-rendering: pixelated;
-    filter: contrast(1.05) saturate(1.02);
-  }
+  .scanner img{width:100%;height:100%;object-fit:contain;display:block}
   .scanner .ph{color:var(--txt-dim);font-family:"Share Tech Mono",monospace;font-size:12px;text-align:center;padding:24px;line-height:1.7}
   .scanner .reticle{position:absolute;inset:0;pointer-events:none;
     background:
@@ -160,13 +154,8 @@
   .zoom-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s cubic-bezier(.22,.61,.36,1);will-change:transform}
   
   /* Artstyle diagnostic elements */
-  .art-card{transition:border-color .15s, box-shadow .15s cubic-bezier(.22,.61,.36,1); will-change:border-color;}
+  .art-card{transition:border-color .15s, box-shadow .15s; cubic-bezier(.22,.61,.36,1); will-change:border-color;}
   .art-card:hover:not(:disabled){border-color:var(--hud)!important; box-shadow: 0 0 10px rgba(54,214,195,0.15);}
-  .art-card img {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    image-rendering: pixelated;
-  }
 
   /* results */
   .score-big{font-size:56px;font-weight:700;color:var(--hud);text-align:center;line-height:1;text-shadow:0 0 24px rgba(54,214,195,.4)}
@@ -183,12 +172,7 @@
   .mgr-sep em{font-style:normal;color:var(--txt-dim);letter-spacing:1px}
   .roster-item{display:flex;align-items:flex-start;gap:11px;padding:10px;border:1px solid var(--line);border-radius:2px;margin-bottom:8px;font-family:"Share Tech Mono",monospace;font-size:13px}
   .thmbwrap{width:96px;height:96px;flex-shrink:0}
-  .thmbwrap img{
-    width:96px;height:96px;object-fit:contain;border:1px solid var(--line);background:#05080c;border-radius:2px;display:block;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    image-rendering: pixelated;
-  }
+  .thmbwrap img{width:96px;height:96px;object-fit:contain;border:1px solid var(--line);background:#05080c;border-radius:2px;display:block}
   .noimg{width:96px;height:96px;display:flex;align-items:center;justify-content:center;color:var(--txt-dim);border:1px solid var(--line);font-size:11px;border-radius:2px;text-align:center}
   .noimg.err{color:var(--red);border-color:rgba(255,77,87,.4)}
   .ritem-mid{flex:1;min-width:0}
@@ -784,7 +768,7 @@ function setupArtstyleQuiz() {
   // Generate an array of 5 entries by picking series randomly (allowing repeats if total group counts are low)
   for (let r = 0; r < 5; r++) {
     const sName = eligibleSeries[Math.floor(Math.random() * eligibleSeries.length)];
-    const mainPool = seriesGroups[sName].filter(u => u.img && u.img.trim() !== "").length ? seriesGroups[sName].filter(u => u.img && u.img.trim() !== "") : [];
+    const mainPool = seriesGroups[sName].filter(u => u.img && u.img.trim() !== "");
     
     // Pick 3 random images from this target series
     let shuffledMain = [...mainPool];
@@ -796,7 +780,7 @@ function setupArtstyleQuiz() {
 
     // Grab 1 outsider mobile suit from a completely separate series timeline
     const oddPool = roster.filter(u => (u.series || "Other / Custom") !== sName && u.img && u.img.trim() !== "");
-    if (oddPool.length === 0 || selected3.length < 3) {
+    if (oddPool.length === 0) {
       r--; // retry round index calculation if separate style assets cannot be established
       continue;
     }
