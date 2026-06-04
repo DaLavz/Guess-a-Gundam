@@ -188,6 +188,9 @@
   .hint{font-family:"Share Tech Mono",monospace;font-size:11px;color:var(--txt-dim);line-height:1.6;background:#080c11;border:1px dashed var(--line);padding:10px 12px;border-radius:2px;margin-bottom:16px}
   .hint b{color:var(--amber)}
   .hide{display:none!important}
+  .mode-stat{display:flex;align-items:center;justify-content:space-between;font-family:"Share Tech Mono",monospace;font-size:12px;color:var(--txt-dim);letter-spacing:1px;text-transform:uppercase;border:1px solid var(--line);border-radius:2px;padding:11px 13px;margin-bottom:18px;background:rgba(54,214,195,.04)}
+  .mode-stat b{color:var(--hud);font-size:18px;text-shadow:0 0 10px rgba(54,214,195,.3)}
+  .mode-stat:empty{display:none}
   .spacer{height:10px}
   a{color:var(--hud)}
 </style>
@@ -207,8 +210,9 @@
         <button data-mode="mc" class="on">Multiple Choice</button>
         <button data-mode="type">Type Name</button>
         <button data-mode="zoom">Zoom Recon</button>
-        <button data-mode="artstyle">Artstyle Guess</button>
+        <button data-mode="artstyle">Impostor Hunt</button>
       </div>
+      <div class="mode-stat" id="modeStat"></div>
 
       <div class="field" id="countField">
         <span class="label">Units Per Session</span>
@@ -286,7 +290,7 @@
         <span>SCORE <b id="aScore">0</b></span>
       </div>
       <div class="prog"><i id="aProgBar" style="width:0%"></i></div>
-      <p class="mono" style="text-align:center;color:var(--amber);font-size:11px;letter-spacing:1px;margin-bottom:16px">IDENTIFY THE OUTSIDER (DIFFERENT SERIES/ARTSTYLE)</p>
+      <p class="mono" style="text-align:center;color:var(--amber);font-size:11px;letter-spacing:1px;margin-bottom:16px">SPOT THE IMPOSTOR (FROM A DIFFERENT SERIES)</p>
       
       <div id="artstyleGrid" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px"></div>
 
@@ -362,10 +366,54 @@ let zoomStreak=0;
 let artstyleRounds=[];
 let artstyleCurIdx=0;
 
+/* ---------- persistent stats (saved per browser, survives refresh) ---------- */
+function loadStats(){ try{ return JSON.parse(localStorage.getItem("gundamStats"))||{}; }catch(e){ return {}; } }
+function saveStats(){ try{ localStorage.setItem("gundamStats", JSON.stringify(stats)); }catch(e){} }
+let stats = loadStats();
+["mc","type","artstyle","zoomBest"].forEach(k=>{ if(typeof stats[k]!=="number") stats[k]=0; });
+function addPoint(mode){ stats[mode]=(stats[mode]||0)+1; saveStats(); updateModeStat(); }
+function recordZoomStreak(){ if(zoomStreak>(stats.zoomBest||0)){ stats.zoomBest=zoomStreak; saveStats(); updateModeStat(); } }
+function updateModeStat(){
+  const el=$("modeStat"); if(!el) return;
+  let label,val;
+  if(quizMode==="zoom"){label="BEST STREAK"; val=stats.zoomBest||0;}
+  else if(quizMode==="artstyle"){label="IMPOSTORS FOUND"; val=stats.artstyle||0;}
+  else {label="TOTAL IDENTIFIED"; val=(quizMode==="type"?stats.type:stats.mc)||0;}
+  el.innerHTML='<span>'+label+'</span><b>'+val+'</b>';
+}
+
+/* ---------- helpers for harder MC decoys ---------- */
+function shuffleArr(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function sigTokens(name){
+  const generic=new Set(["gundam","mobile","suit","the","custom","unit","type","mode"]);
+  return (name||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(w=>w.length>2 && !generic.has(w) && !/^[0-9]+$/.test(w));
+}
+function rankRelated(correct, others){
+  const ctoks=new Set(sigTokens(correct.name));
+  const family=[], sameSeries=[];
+  others.forEach(u=>{
+    if(sigTokens(u.name).some(t=>ctoks.has(t))) family.push(u);
+    else if(u.series && correct.series && u.series===correct.series) sameSeries.push(u);
+  });
+  return [...shuffleArr(family), ...shuffleArr(sameSeries)];
+}
+
 function initApp() {
   buildSeriesDropdown();
   updateRosterUI();
   setupEventListeners();
+  updateModeStat();
+}
+
+function dedupeRoster(arr){
+  const seen=new Set(), out=[];
+  (Array.isArray(arr)?arr:[]).forEach(item=>{
+    if(!item || !item.name) return;
+    const k=item.name.trim().toLowerCase();
+    if(seen.has(k)) return;
+    seen.add(k); out.push(item);
+  });
+  return out;
 }
 
 fetch('gundam-roster.json')
@@ -376,7 +424,7 @@ fetch('gundam-roster.json')
     return response.json();
   })
   .then(data => {
-    roster = data;
+    roster = dedupeRoster(data);
     initApp();
   })
   .catch(error => {
@@ -630,6 +678,7 @@ function setupEventListeners(){
       document.querySelectorAll("#modeSeg button").forEach(x=>x.classList.remove("on"));
       b.classList.add("on");quizMode=b.dataset.mode;
       if(quizMode==="zoom" || quizMode==="artstyle"){$("countField").classList.add("hide");}else{$("countField").classList.remove("hide");}
+      updateModeStat();
     };
   });
   document.querySelectorAll("#countSeg button").forEach(b=>{
@@ -712,7 +761,7 @@ function setupArtstyleQuiz() {
   });
 
   if (eligibleSeries.length === 0) {
-    alert("Artstyle Guess requires at least one series inside your database to have 3 or more units with images.");
+    alert("Impostor Hunt requires at least one series inside your database to have 3 or more units with images.");
     return;
   }
 
@@ -804,7 +853,7 @@ function handleArtstyleAnswer(selectedCard, isCorrect, round) {
     selectedCard.style.boxShadow = "0 0 12px rgba(93,255,155,0.25)";
     $("aVerdict").className = "verdict ok";
     $("aVerdict").textContent = "✓ INSIGHT ACCURATE: OUTSIDER ISOLATED";
-    score++;
+    score++;addPoint("artstyle");
   } else {
     selectedCard.style.borderColor = "var(--red)";
     selectedCard.style.boxShadow = "0 0 12px rgba(255,77,87,0.25)";
@@ -854,14 +903,17 @@ function setupQuizQuestion(){
 
 function generateMCChoices(correctItem){
   const box=$("choices");box.innerHTML="";
-  let pool=roster.filter(x=>x.name!==correctItem.name);
-  for(let i=pool.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];
+  const others=roster.filter(x=>x.name!==correctItem.name);
+  let picks=[];
+  // 65% of the time, seed up to 2 decoys that are related (same variant family, else same series)
+  if(Math.random()<0.65){
+    picks = rankRelated(correctItem, others).slice(0,2);
   }
-  let picks=pool.slice(0,3);picks.push(correctItem);
-  for(let i=picks.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));[picks[i],picks[j]]=[picks[j],picks[i]];
-  }
+  // fill remaining decoy slots with random others not already chosen
+  const pool=shuffleArr(others.filter(x=>!picks.includes(x)));
+  while(picks.length<3 && pool.length) picks.push(pool.shift());
+  picks.push(correctItem);
+  shuffleArr(picks);
   picks.forEach(item=>{
     const b=document.createElement("button");b.className="choice";b.textContent=item.name;
     b.onclick=()=>handleMCAnswer(b,item.name===correctItem.name);box.appendChild(b);
@@ -870,7 +922,7 @@ function generateMCChoices(correctItem){
 
 function handleMCAnswer(btn,isCorrect){
   document.querySelectorAll("#choices .choice").forEach(b=>b.disabled=true);
-  if(isCorrect){btn.classList.add("correct");$("verdict").className="verdict ok";$("verdict").textContent="✓ SIGNATURE VERIFIED";score++;}
+  if(isCorrect){btn.classList.add("correct");$("verdict").className="verdict ok";$("verdict").textContent="✓ SIGNATURE VERIFIED";score++;addPoint("mc");}
   else{btn.classList.add("wrong");$("verdict").className="verdict no";$("verdict").textContent="✕ WARNING: IDENTIFICATION ERROR";misidentified.push(sessionUnits[curIdx]);document.querySelectorAll("#choices .choice").forEach(b=>{if(b.textContent===sessionUnits[curIdx].name)b.classList.add("correct");});}
   showQuizReveal();
 }
@@ -896,7 +948,7 @@ function handleTypeAnswer(){
   const normalizedCorrect=item.name.toLowerCase();
   let isCorrect=(ans===normalizedCorrect);
   if(!isCorrect && item.alt && Array.isArray(item.alt)){isCorrect=item.alt.includes(ans);}
-  if(isCorrect){$("verdict").className="verdict ok";$("verdict").textContent="✓ SIGNATURE VERIFIED";score++;}
+  if(isCorrect){$("verdict").className="verdict ok";$("verdict").textContent="✓ SIGNATURE VERIFIED";score++;addPoint("type");}
   else{$("verdict").className="verdict no";$("verdict").textContent="✕ WARNING: IDENTIFICATION ERROR";misidentified.push(item);}
   showQuizReveal();
 }
@@ -957,13 +1009,14 @@ function handleZoomAnswer(){
     $("zInput").disabled=true;$("zSuggest").innerHTML="";$("zSubmit").classList.add("hide");
     $("zVerdict").className="verdict ok";$("zVerdict").textContent="✓ PROFILE LOCK CONFIRMED";
     if(zoomTries===0)score+=10;else if(zoomTries===1)score+=7;else if(zoomTries===2)score+=4;else score+=1;
-    zoomStreak++;updateZoomStreak();
+    zoomStreak++;updateZoomStreak();recordZoomStreak();
     showZoomReveal();
   }else{
     zoomTries++;$("zTries").textContent=zoomTries;
     $("zInput").value="";$("zInput").focus();
-    if(zoomTries===1){$("zImg").style.transform=`scale(3.5) translate(${Math.random()*10-5}%, ${Math.random()*10-5}%)`;$("zStatus").textContent="RESOLVING COARSER DETAIL...";}
+    if(zoomTries===1){$("zImg").style.transform=`scale(3.5) translate(${Math.random()*10-5}%, ${Math.random()*10-5}%)`;$("zStatus").style.color="var(--amber)";$("zStatus").textContent="RESOLVING COARSER DETAIL...";}
     else if(zoomTries===2){$("zImg").style.transform=`scale(2) translate(0,0)`;$("zStatus").textContent="EXPANDING FIELD OF VIEW...";}
+    else if(zoomTries===3){$("zImg").style.transform="scale(1) translate(0,0)";$("zStatus").style.color="var(--amber)";$("zStatus").textContent="FULL IMAGE — LAST GUESS";}
     else{
       $("zImg").style.transform="scale(1) translate(0,0)";
       $("zInput").disabled=true;$("zSuggest").innerHTML="";$("zSubmit").classList.add("hide");
@@ -1074,7 +1127,8 @@ function escapeHtml(str) {
 
 setInterval(()=>{
   const d=new Date();
-  $("clock").textContent="SYS//"+d.toISOString().slice(0,19).replace("T"," ");
+  const p=n=>String(n).padStart(2,"0");
+  $("clock").textContent="SYS//"+d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())+" "+p(d.getHours())+":"+p(d.getMinutes())+":"+p(d.getSeconds());
 },1000);
 </script>
 </body>
