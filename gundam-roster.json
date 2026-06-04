@@ -1,0 +1,1171 @@
+[
+  {
+    "name": "RX-78-2 Gundam",
+    "img": "images1/rx-78-2-gundam.webp",
+    "alt": [
+      "rx782",
+      "gundam",
+      "rx78"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "RX-178 Gundam Mk-II",
+    "img": "images1/rx-178-gundam-mk-ii.webp",
+    "alt": [
+      "mk2",
+      "mkii",
+      "gundam mk2"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "MSZ-006 Zeta Gundam",
+    "img": "images1/msz-006-zeta-gundam.webp",
+    "alt": [
+      "zeta",
+      "z gundam",
+      "zeta gundam"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "MSZ-010 ZZ Gundam",
+    "img": "images1/msz-010-zz-gundam.webp",
+    "alt": [
+      "zz",
+      "double zeta",
+      "zz gundam"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "RX-93 Nu Gundam",
+    "img": "images1/rx-93-nu-gundam.webp",
+    "alt": [
+      "nu gundam",
+      "nu",
+      "rx93",
+      "ν gundam"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "F91 Gundam F91",
+    "img": "images1/f91-gundam-f91.webp",
+    "alt": [
+      "f91",
+      "gundam f91"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "XM-X1 Crossbone Gundam X-1",
+    "img": "images1/xm-x1-crossbone-gundam-x-1.webp",
+    "alt": [
+      "crossbone",
+      "crossbone gundam",
+      "x1"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "LM314V21 V2 Gundam",
+    "img": "images1/lm314v21-v2-gundam.webp",
+    "alt": [
+      "v2",
+      "v2 gundam",
+      "victory 2"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "RX-0 Unicorn Gundam (Unicorn Mode)",
+    "img": "images1/rx-0-unicorn-gundam-unicorn-mode-.webp",
+    "alt": [
+      "unicorn",
+      "unicorn mode",
+      "unicorn gundam"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "RX-0 Unicorn Gundam (Destroy Mode)",
+    "img": "images1/rx-0-unicorn-gundam-destroy-mode-.webp",
+    "alt": [
+      "destroy mode",
+      "unicorn destroy",
+      "unicorn destroy mode"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "RX-0 Full Armor Unicorn Gundam",
+    "img": "images1/rx-0-full-armor-unicorn-gundam.webp",
+    "alt": [
+      "full armor unicorn",
+      "fa unicorn",
+      "full armor unicorn gundam"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "RX-0 Banshee",
+    "img": "images1/rx-0-banshee.webp",
+    "alt": [
+      "banshee"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "GF13-017NJ Shining Gundam",
+    "img": "images1/gf13-017nj-shining-gundam.webp",
+    "alt": [
+      "shining",
+      "shining gundam"
+    ],
+    "series": "G Gundam"
+  },
+  {
+    "name": "GF13-017NJII God Gundam",
+    "img": "images1/gf13-017njii-god-gundam.webp",
+    "alt": [
+      "god gundam",
+      "burning gundam",
+      "god"
+    ],
+    "series": "G Gundam"
+  },
+  {
+    "name": "Master Gundam",
+    "img": "images1/master-gundam.webp",
+    "alt": [
+      "master",
+      "master gundam"
+    ],
+    "series": "G Gundam"
+  },
+  {
+    "name": "Devil Gundam",
+    "img": "images1/devil-gundam.webp",
+    "alt": [
+      "devil gundam",
+      "dark gundam"
+    ],
+    "series": "G Gundam"
+  },
+  {
+    "name": "XXXG-01W Wing Gundam",
+    "img": "images1/xxxg-01w-wing-gundam.webp",
+    "alt": [
+      "wing gundam",
+      "wing"
+    ],
+    "series": "Gundam Wing"
+  },
+  {
+    "name": "XXXG-00W0 Wing Gundam Zero",
+    "img": "images1/xxxg-00w0-wing-gundam-zero.webp",
+    "alt": [
+      "wing zero",
+      "wing gundam zero"
+    ],
+    "series": "Gundam Wing"
+  },
+  {
+    "name": "XXXG-01D Gundam Deathscythe",
+    "img": "images1/xxxg-01d-gundam-deathscythe.webp",
+    "alt": [
+      "deathscythe"
+    ],
+    "series": "Gundam Wing"
+  },
+  {
+    "name": "XXXG-01H Gundam Heavyarms",
+    "img": "images1/xxxg-01h-gundam-heavyarms.webp",
+    "alt": [
+      "heavyarms"
+    ],
+    "series": "Gundam Wing"
+  },
+  {
+    "name": "XXXG-01S Shenlong Gundam",
+    "img": "images1/xxxg-01s-shenlong-gundam.webp",
+    "alt": [
+      "shenlong",
+      "altron"
+    ],
+    "series": "Gundam Wing"
+  },
+  {
+    "name": "XXXG-01SR Sandrock Gundam",
+    "img": "images1/xxxg-01sr-sandrock-gundam.webp",
+    "alt": [
+      "sandrock"
+    ],
+    "series": "Gundam Wing"
+  },
+  {
+    "name": "OZ-13MS Gundam Epyon",
+    "img": "images1/oz-13ms-gundam-epyon.webp",
+    "alt": [
+      "epyon"
+    ],
+    "series": "Gundam Wing"
+  },
+  {
+    "name": "GAT-X105 Strike Gundam",
+    "img": "images1/gat-x105-strike-gundam.webp",
+    "alt": [
+      "strike",
+      "strike gundam"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "ZGMF-X10A Freedom Gundam",
+    "img": "images1/zgmf-x10a-freedom-gundam.webp",
+    "alt": [
+      "freedom",
+      "freedom gundam"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "ZGMF-X09A Justice Gundam",
+    "img": "images1/zgmf-x09a-justice-gundam.webp",
+    "alt": [
+      "justice",
+      "justice gundam"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "GAT-X303 Aegis Gundam",
+    "img": "images1/gat-x303-aegis-gundam.webp",
+    "alt": [
+      "aegis"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "GAT-X102 Duel Gundam",
+    "img": "images1/gat-x102-duel-gundam.webp",
+    "alt": [
+      "duel"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "GAT-X103 Buster Gundam",
+    "img": "images1/gat-x103-buster-gundam.webp",
+    "alt": [
+      "buster"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "GAT-X207 Blitz Gundam",
+    "img": "images1/gat-x207-blitz-gundam.webp",
+    "alt": [
+      "blitz"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "ZGMF-X13A Providence Gundam",
+    "img": "images1/zgmf-x13a-providence-gundam.webp",
+    "alt": [
+      "providence"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "ZGMF-X56S Impulse Gundam",
+    "img": "images1/zgmf-x56s-impulse-gundam.webp",
+    "alt": [
+      "impulse"
+    ],
+    "series": "SEED Destiny"
+  },
+  {
+    "name": "ZGMF-X42S Destiny Gundam",
+    "img": "images1/zgmf-x42s-destiny-gundam.webp",
+    "alt": [
+      "destiny",
+      "destiny gundam"
+    ],
+    "series": "SEED Destiny"
+  },
+  {
+    "name": "ZGMF-X20A Strike Freedom Gundam",
+    "img": "images1/zgmf-x20a-strike-freedom-gundam.webp",
+    "alt": [
+      "strike freedom"
+    ],
+    "series": "SEED Destiny"
+  },
+  {
+    "name": "ZGMF-X19A Infinite Justice Gundam",
+    "img": "images1/zgmf-x19a-infinite-justice-gundam.webp",
+    "alt": [
+      "infinite justice"
+    ],
+    "series": "SEED Destiny"
+  },
+  {
+    "name": "ZGMF-X666S Legend Gundam",
+    "img": "images1/zgmf-x666s-legend-gundam.webp",
+    "alt": [
+      "legend",
+      "legend gundam"
+    ],
+    "series": "SEED Destiny"
+  },
+  {
+    "name": "GN-001 Gundam Exia",
+    "img": "images2/gn-001-gundam-exia.webp",
+    "alt": [
+      "exia"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "GN-002 Gundam Dynames",
+    "img": "images2/gn-002-gundam-dynames.webp",
+    "alt": [
+      "dynames"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "GN-003 Gundam Kyrios",
+    "img": "images2/gn-003-gundam-kyrios.webp",
+    "alt": [
+      "kyrios"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "GN-005 Gundam Virtue",
+    "img": "images2/gn-005-gundam-virtue.webp",
+    "alt": [
+      "virtue"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "GN-0000 00 Gundam",
+    "img": "images2/gn-0000-00-gundam.webp",
+    "alt": [
+      "00 gundam",
+      "double o",
+      "00"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "00 Raiser",
+    "img": "images2/00-raiser.webp",
+    "alt": [
+      "00 raiser",
+      "oo raiser"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "GNW-001 Gundam Throne Eins",
+    "img": "images2/gnw-001-gundam-throne-eins.webp",
+    "alt": [
+      "throne eins",
+      "throne"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "Reborns Gundam",
+    "img": "images2/reborns-gundam.webp",
+    "alt": [
+      "reborns",
+      "reborns gundam"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "ASW-G-08 Gundam Barbatos",
+    "img": "images2/asw-g-08-gundam-barbatos.webp",
+    "alt": [
+      "barbatos"
+    ],
+    "series": "Iron-Blooded Orphans"
+  },
+  {
+    "name": "Gundam Barbatos Lupus Rex",
+    "img": "images2/gundam-barbatos-lupus-rex.webp",
+    "alt": [
+      "lupus rex",
+      "barbatos lupus"
+    ],
+    "series": "Iron-Blooded Orphans"
+  },
+  {
+    "name": "ASW-G-01 Gundam Bael",
+    "img": "images2/asw-g-01-gundam-bael.webp",
+    "alt": [
+      "bael"
+    ],
+    "series": "Iron-Blooded Orphans"
+  },
+  {
+    "name": "ASW-G-66 Gundam Kimaris",
+    "img": "images2/asw-g-66-gundam-kimaris.webp",
+    "alt": [
+      "kimaris"
+    ],
+    "series": "Iron-Blooded Orphans"
+  },
+  {
+    "name": "Turn A Gundam",
+    "img": "images2/turn-a-gundam.webp",
+    "alt": [
+      "turn a",
+      "∀ gundam",
+      "turn a gundam"
+    ],
+    "series": "Turn A Gundam"
+  },
+  {
+    "name": "Turn X",
+    "img": "images2/turn-x.webp",
+    "alt": [
+      "turn x"
+    ],
+    "series": "Turn A Gundam"
+  },
+  {
+    "name": "GX-9900 Gundam X",
+    "img": "images2/gx-9900-gundam-x.webp",
+    "alt": [
+      "gundam x",
+      "gx"
+    ],
+    "series": "After War Gundam X"
+  },
+  {
+    "name": "XVX-016 Gundam Aerial",
+    "img": "images2/xvx-016-gundam-aerial.webp",
+    "alt": [
+      "aerial",
+      "gundam aerial"
+    ],
+    "series": "The Witch from Mercury"
+  },
+  {
+    "name": "Gundam Lfrith",
+    "img": "images2/gundam-lfrith.webp",
+    "alt": [
+      "lfrith"
+    ],
+    "series": "The Witch from Mercury"
+  },
+  {
+    "name": "RX-105 Xi Gundam",
+    "img": "images2/rx-105-xi-gundam.webp",
+    "alt": [
+      "xi",
+      "xi gundam",
+      "ksi",
+      "ξ gundam"
+    ],
+    "series": "Hathaway's Flash"
+  },
+  {
+    "name": "RX-104FF Penelope",
+    "img": "images2/rx-104ff-penelope.webp",
+    "alt": [
+      "penelope"
+    ],
+    "series": "Hathaway's Flash"
+  },
+  {
+    "name": "GQuuuuuuX",
+    "img": "images2/gquuuuuux.webp",
+    "alt": [
+      "gquuuuuux",
+      "gquux",
+      "jeekwux"
+    ],
+    "series": "Gundam GQuuuuuuX"
+  },
+  {
+    "name": "GFreD",
+    "img": "images2/gfred.webp",
+    "alt": [
+      "gfred",
+      "gundam fred"
+    ],
+    "series": "Gundam GQuuuuuuX"
+  },
+  {
+    "name": "Red Gundam",
+    "img": "images2/red-gundam.webp",
+    "alt": [
+      "red gundam",
+      "red"
+    ],
+    "series": "Gundam GQuuuuuuX"
+  },
+  {
+    "name": "White Gundam",
+    "img": "images2/white-gundam.webp",
+    "alt": [
+      "white gundam",
+      "white"
+    ],
+    "series": "Gundam GQuuuuuuX"
+  },
+  {
+    "name": "01 Gundam",
+    "img": "images2/01-gundam.webp",
+    "alt": [
+      "01 gundam",
+      "zero one gundam",
+      "01"
+    ],
+    "series": "Gundam GQuuuuuuX"
+  },
+  {
+    "name": "STTS-909 Rising Freedom Gundam",
+    "img": "images2/stts-909-rising-freedom-gundam.webp",
+    "alt": [
+      "rising freedom",
+      "rising"
+    ],
+    "series": "SEED FREEDOM"
+  },
+  {
+    "name": "ZGMF/A-262PD-P Mighty Strike Freedom Gundam",
+    "img": "images2/zgmf-a-262pd-p-mighty-strike-freedom-gundam.webp",
+    "alt": [
+      "mighty strike freedom",
+      "mighty strike",
+      "msf"
+    ],
+    "series": "SEED FREEDOM"
+  },
+  {
+    "name": "STTS-808 Immortal Justice Gundam",
+    "img": "images2/stts-808-immortal-justice-gundam.webp",
+    "alt": [
+      "immortal justice",
+      "immortal"
+    ],
+    "series": "SEED FREEDOM"
+  },
+  {
+    "name": "ZGMF-1027M Duel Blitz Gundam",
+    "img": "images2/zgmf-1027m-duel-blitz-gundam.webp",
+    "alt": [
+      "duel blitz"
+    ],
+    "series": "SEED FREEDOM"
+  },
+  {
+    "name": "ZGMF-103HD Lightning Buster Gundam",
+    "img": "images2/zgmf-103hd-lightning-buster-gundam.webp",
+    "alt": [
+      "lightning buster"
+    ],
+    "series": "SEED FREEDOM"
+  },
+  {
+    "name": "FA-78 Full Armor Gundam (Thunderbolt)",
+    "img": "images3/fa-78-full-armor-gundam-thunderbolt-.webp",
+    "alt": [
+      "full armor",
+      "full armor gundam",
+      "thunderbolt gundam"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "RX-78AL Atlas Gundam",
+    "img": "images3/rx-78al-atlas-gundam.webp",
+    "alt": [
+      "atlas",
+      "atlas gundam"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "RX-78GP01 Gundam GP01 Zephyranthes",
+    "img": "images3/rx-78gp01-gundam-gp01-zephyranthes.webp",
+    "alt": [
+      "gp01",
+      "zephyranthes"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "RX-78GP01-Fb Gundam GP01 Full Vernian",
+    "img": "images3/rx-78gp01-fb-gundam-gp01-full-vernian.webp",
+    "alt": [
+      "gp01fb",
+      "full vernian",
+      "gp01 fb"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "RX-78GP02A Gundam GP02A Physalis",
+    "img": "images3/rx-78gp02a-gundam-gp02a-physalis.webp",
+    "alt": [
+      "gp02",
+      "physalis"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "RX-78GP03 Gundam GP03 Dendrobium",
+    "img": "images3/rx-78gp03-gundam-gp03-dendrobium.webp",
+    "alt": [
+      "gp03",
+      "dendrobium",
+      "stamen"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "LM312V04 Victory Gundam",
+    "img": "images3/lm312v04-victory-gundam.webp",
+    "alt": [
+      "victory",
+      "victory gundam",
+      "v gundam"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "V-Dash Gundam",
+    "img": "images3/v-dash-gundam.webp",
+    "alt": [
+      "v dash",
+      "victory dash",
+      "vdash"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "V2 Assault Buster Gundam",
+    "img": "images3/v2-assault-buster-gundam.webp",
+    "alt": [
+      "v2 assault buster",
+      "assault buster"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "GSX-401FW Stargazer Gundam",
+    "img": "images3/gsx-401fw-stargazer-gundam.webp",
+    "alt": [
+      "stargazer"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "MBF-P02 Gundam Astray Red Frame",
+    "img": "images3/mbf-p02-gundam-astray-red-frame.webp",
+    "alt": [
+      "astray red",
+      "red frame",
+      "astray red frame"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "MBF-P03 Gundam Astray Blue Frame",
+    "img": "images3/mbf-p03-gundam-astray-blue-frame.webp",
+    "alt": [
+      "astray blue",
+      "blue frame",
+      "astray blue frame"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "MBF-P01-Re2 Gundam Astray Gold Frame",
+    "img": "images3/mbf-p01-re2-gundam-astray-gold-frame.webp",
+    "alt": [
+      "astray gold",
+      "gold frame",
+      "astray gold frame"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "GAT-X131 Calamity Gundam",
+    "img": "images3/gat-x131-calamity-gundam.webp",
+    "alt": [
+      "calamity"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "GAT-X252 Forbidden Gundam",
+    "img": "images3/gat-x252-forbidden-gundam.webp",
+    "alt": [
+      "forbidden"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "GAT-X370 Raider Gundam",
+    "img": "images3/gat-x370-raider-gundam.webp",
+    "alt": [
+      "raider"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "GNT-0000 00 Qan[T]",
+    "img": "images3/gnt-0000-00-qan-t-.webp",
+    "alt": [
+      "qant",
+      "00 qant",
+      "qan t",
+      "quanta"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "GN-006 Cherudim Gundam",
+    "img": "images3/gn-006-cherudim-gundam.webp",
+    "alt": [
+      "checkbox",
+      "cherudim"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "GN-007 Arios Gundam",
+    "img": "images3/gn-007-arios-gundam.webp",
+    "alt": [
+      "arios"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "GN-008 Seravee Gundam",
+    "img": "images3/gn-008-seravee-gundam.webp",
+    "alt": [
+      "seravee"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "CB-002 Raphael Gundam",
+    "img": "images3/cb-002-raphael-gundam.webp",
+    "alt": [
+      "raphael"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "GN-011 Gundam Harute",
+    "img": "images3/gn-011-gundam-harute.webp",
+    "alt": [
+      "harute"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "GN-010 Gundam Zabanya",
+    "img": "images3/gn-010-gundam-zabanya.webp",
+    "alt": [
+      "zabanya"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "GNW-002 Gundam Throne Zwei",
+    "img": "images3/gnw-002-gundam-throne-zwei.webp",
+    "alt": [
+      "throne zwei"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "GNW-003 Gundam Throne Drei",
+    "img": "images3/gnw-003-gundam-throne-drei.webp",
+    "alt": [
+      "throne drei"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "ASW-G-08 Gundam Barbatos Lupus",
+    "img": "images3/asw-g-08-gundam-barbatos-lupus.webp",
+    "alt": [
+      "barbatos lupus",
+      "lupus"
+    ],
+    "series": "Iron-Blooded Orphans"
+  },
+  {
+    "name": "ASW-G-11 Gundam Gusion Rebake",
+    "img": "images3/asw-g-11-gundam-gusion-rebake.webp",
+    "alt": [
+      "gusion rebake",
+      "gusion"
+    ],
+    "series": "Iron-Blooded Orphans"
+  },
+  {
+    "name": "Gundam Vidar",
+    "img": "images3/gundam-vidar.webp",
+    "alt": [
+      "vidar"
+    ],
+    "series": "Iron-Blooded Orphans"
+  },
+  {
+    "name": "ASW-G-64 Gundam Flauros",
+    "img": "images3/asw-g-64-gundam-flauros.webp",
+    "alt": [
+      "flauros"
+    ],
+    "series": "Iron-Blooded Orphans"
+  },
+  {
+    "name": "ASW-G-29 Gundam Astaroth",
+    "img": "images3/asw-g-29-gundam-astaroth.webp",
+    "alt": [
+      "astaroth"
+    ],
+    "series": "Iron-Blooded Orphans"
+  },
+  {
+    "name": "GX-9900-DV Gundam X Divider",
+    "img": "images3/gx-9900-dv-gundam-x-divider.webp",
+    "alt": [
+      "x divider",
+      "gundam x divider",
+      "divider"
+    ],
+    "series": "After War Gundam X"
+  },
+  {
+    "name": "GX-9901-DX Gundam Double X",
+    "img": "images3/gx-9901-dx-gundam-double-x.webp",
+    "alt": [
+      "double x",
+      "gundam double x"
+    ],
+    "series": "After War Gundam X"
+  },
+  {
+    "name": "GW-9800 Gundam Airmaster",
+    "img": "images3/gw-9800-gundam-airmaster.webp",
+    "alt": [
+      "airmaster"
+    ],
+    "series": "After War Gundam X"
+  },
+  {
+    "name": "GT-9600 Gundam Leopard",
+    "img": "images3/gt-9600-gundam-leopard.webp",
+    "alt": [
+      "leopard",
+      "gundam leopard"
+    ],
+    "series": "After War Gundam X"
+  },
+  {
+    "name": "NRX-0013 Gundam Virsago",
+    "img": "images3/nrx-0013-gundam-virsago.webp",
+    "alt": [
+      "virsago"
+    ],
+    "series": "After War Gundam X"
+  },
+  {
+    "name": "NRX-0015 Gundam Ashtaron",
+    "img": "images3/nrx-0015-gundam-ashtaron.webp",
+    "alt": [
+      "ashtaron"
+    ],
+    "series": "After War Gundam X"
+  },
+  {
+    "name": "XVX-016RN Gundam Aerial Rebuild",
+    "img": "images3/xvx-016rn-gundam-aerial-rebuild.webp",
+    "alt": [
+      "aerial rebuild"
+    ],
+    "series": "The Witch from Mercury"
+  },
+  {
+    "name": "X-EX01 Gundam Calibarn",
+    "img": "images3/x-ex01-gundam-calibarn.webp",
+    "alt": [
+      "calibarn"
+    ],
+    "series": "The Witch from Mercury"
+  },
+  {
+    "name": "FP/A-77 Gundam Pharact",
+    "img": "images3/fp-a-77-gundam-pharact.webp",
+    "alt": [
+      "pharact"
+    ],
+    "series": "The Witch from Mercury"
+  },
+  {
+    "name": "MDX-0003 Gundam Schwarzette",
+    "img": "images3/mdx-0003-gundam-schwarzette.webp",
+    "alt": [
+      "schwarzette"
+    ],
+    "series": "The Witch from Mercury"
+  },
+  {
+    "name": "EDM-GA-01 Gundam Lfrith Ur",
+    "img": "images3/edm-ga-01-gundam-lfrith-ur.webp",
+    "alt": [
+      "lfrith ur"
+    ],
+    "series": "The Witch from Mercury"
+  },
+  {
+    "name": "EDM-GA-02 Gundam Lfrith Thorn",
+    "img": "images3/edm-ga-02-gundam-lfrith-thorn.webp",
+    "alt": [
+      "lfrith thorn"
+    ],
+    "series": "The Witch from Mercury"
+  },
+  {
+    "name": "AGE-1 Gundam AGE-1 Normal",
+    "img": "images3/age-1-gundam-age-1-normal.webp",
+    "alt": [
+      "age1",
+      "age-1",
+      "age 1 normal"
+    ],
+    "series": "Gundam AGE"
+  },
+  {
+    "name": "AGE-1T Gundam AGE-1 Titus",
+    "img": "images3/age-1t-gundam-age-1-titus.webp",
+    "alt": [
+      "age1 titus",
+      "titus"
+    ],
+    "series": "Gundam AGE"
+  },
+  {
+    "name": "AGE-1S Gundam AGE-1 Spallow",
+    "img": "images3/age-1s-gundam-age-1-spallow.webp",
+    "alt": [
+      "age1 spallow",
+      "spallow"
+    ],
+    "series": "Gundam AGE"
+  },
+  {
+    "name": "AGE-2 Gundam AGE-2 Normal",
+    "img": "images3/age-2-gundam-age-2-normal.webp",
+    "alt": [
+      "age2",
+      "age-2",
+      "age 2 normal"
+    ],
+    "series": "Gundam AGE"
+  },
+  {
+    "name": "AGE-2DB Gundam AGE-2 Double Bullet",
+    "img": "images3/age-2db-gundam-age-2-double-bullet.webp",
+    "alt": [
+      "double bullet",
+      "age2 double bullet"
+    ],
+    "series": "Gundam AGE"
+  },
+  {
+    "name": "AGE-2DH Gundam AGE-2 Dark Hound",
+    "img": "images3/age-2dh-gundam-age-2-dark-hound.webp",
+    "alt": [
+      "dark hound",
+      "age2 dark hound"
+    ],
+    "series": "Gundam AGE"
+  },
+  {
+    "name": "AGE-3 Gundam AGE-3 Normal",
+    "img": "images3/age-3-gundam-age-3-normal.webp",
+    "alt": [
+      "age3",
+      "age-3",
+      "age 3 normal"
+    ],
+    "series": "Gundam AGE"
+  },
+  {
+    "name": "AGE-3O Gundam AGE-3 Orbital",
+    "img": "images3/age-3o-gundam-age-3-orbital.webp",
+    "alt": [
+      "age3 orbital",
+      "orbital"
+    ],
+    "series": "Gundam AGE"
+  },
+  {
+    "name": "AGE-FX Gundam AGE-FX",
+    "img": "images3/age-fx-gundam-age-fx.webp",
+    "alt": [
+      "agefx",
+      "age fx",
+      "age-fx"
+    ],
+    "series": "Gundam AGE"
+  },
+  {
+    "name": "xvm-fzc Gundam Legilis",
+    "img": "images3/xvm-fzc-gundam-legilis.webp",
+    "alt": [
+      "legilis"
+    ],
+    "series": "Gundam AGE"
+  },
+  {
+    "name": "Build Burning Gundam",
+    "img": "images3/build-burning-gundam.webp",
+    "alt": [
+      "build burning"
+    ],
+    "series": "Build Fighters Try"
+  },
+  {
+    "name": "Try Burning Gundam",
+    "img": "images3/try-burning-gundam.webp",
+    "alt": [
+      "try burning"
+    ],
+    "series": "Build Fighters Try"
+  },
+  {
+    "name": "Lightning Gundam",
+    "img": "images3/lightning-gundam.webp",
+    "alt": [
+      "lightning gundam",
+      "lightning"
+    ],
+    "series": "Build Fighters Try"
+  },
+  {
+    "name": "Gundam Tryon 3",
+    "img": "images3/gundam-tryon-3.webp",
+    "alt": [
+      "tryon 3",
+      "tryon",
+      "tryon3"
+    ],
+    "series": "Build Fighters Try"
+  },
+  {
+    "name": "Gundam 00 Diver",
+    "img": "images3/gundam-00-diver.webp",
+    "alt": [
+      "00 diver",
+      "oo diver"
+    ],
+    "series": "Build Divers"
+  },
+  {
+    "name": "Gundam 00 Sky",
+    "img": "images3/gundam-00-sky.webp",
+    "alt": [
+      "00 sky",
+      "oo sky"
+    ],
+    "series": "Build Divers"
+  },
+  {
+    "name": "Gundam AGEII Magnum",
+    "img": "images3/gundam-ageii-magnum.webp",
+    "alt": [
+      "ageii magnum",
+      "age2 magnum",
+      "age ii magnum"
+    ],
+    "series": "Build Divers"
+  },
+  {
+    "name": "Gundam Seltsam",
+    "img": "images3/gundam-seltsam.webp",
+    "alt": [
+      "seltsam"
+    ],
+    "series": "Build Divers"
+  },
+  {
+    "name": "PFF-X7 Core Gundam",
+    "img": "images3/pff-x7-core-gundam.webp",
+    "alt": [
+      "core gundam",
+      "core"
+    ],
+    "series": "Build Divers Re:RISE"
+  },
+  {
+    "name": "PFF-X7II Core Gundam II",
+    "img": "images3/pff-x7ii-core-gundam-ii.webp",
+    "alt": [
+      "core gundam 2",
+      "core gundam ii",
+      "core 2"
+    ],
+    "series": "Build Divers Re:RISE"
+  },
+  {
+    "name": "Earthree Gundam",
+    "img": "images3/earthree-gundam.webp",
+    "alt": [
+      "earthree"
+    ],
+    "series": "Build Divers Re:RISE"
+  },
+  {
+    "name": "Jupitive Gundam",
+    "img": "images3/jupitive-gundam.webp",
+    "alt": [
+      "jupitive"
+    ],
+    "series": "Build Divers Re:RISE"
+  },
+  {
+    "name": "Uraven Gundam",
+    "img": "images3/uraven-gundam.webp",
+    "alt": [
+      "uraven"
+    ],
+    "series": "Build Divers Re:RISE"
+  },
+  {
+    "name": "Gundam Justice Knight",
+    "img": "images3/gundam-justice-knight.webp",
+    "alt": [
+      "justice knight"
+    ],
+    "series": "Build Divers Re:RISE"
+  },
+  {
+    "name": "Alus Earthree Gundam",
+    "img": "images3/alus-earthree-gundam.webp",
+    "alt": [
+      "alus earthree",
+      "alus"
+    ],
+    "series": "Build Divers Re:RISE"
+  }
+]
