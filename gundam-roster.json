@@ -479,6 +479,26 @@
     ],
     "series": "Hathaway's Flash"
   },
+   {
+    "name": "TX-ff104 Alyzeus",
+    "img": "images/TX-ff104 Alyzeus.webp",
+    "alt": [
+      "alyzeus",
+      "TX ff104",
+      "ff104",
+    ],
+    "series": "Hathaway's Flash"
+  },
+   {
+    "name": "RX-94 Mass Production Nu Gundam",
+    "img": "images/RX-94 Mass Production Type Nu Gundam.webp",
+    "alt": [
+      "mp nu"
+      "mass production nu gundam"
+      "mass produced nu gundam"
+    ],
+    "series": "Hathaway's Flash"
+  },
   {
     "name": "RX-104FF Penelope",
     "img": "images/rx-104ff-penelope.webp",
