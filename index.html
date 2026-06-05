@@ -435,6 +435,9 @@
 </head>
 <body>
 
+<!-- Starfield + Sparks canvas — fixed behind everything -->
+<canvas id="bgCanvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
 <div class="page-title">GUESS THE <span>GUNDAM</span></div>
 
 <div class="shell">
@@ -1325,12 +1328,14 @@ $("zNext").onclick=()=>{curIdx++;if(curIdx<sessionUnits.length){setupZoomQuestio
 function showResults(){
   showSection("results");
   let pct=0;
+  let didWin=false;
   if(quizMode==="zoom"){
     const maxPoss=sessionUnits.length*10;pct=maxPoss>0?Math.round(score/maxPoss*100):0;
     $("finalPct").textContent=score+" pts";$("finalLine").textContent=`Tracking efficiency: ${pct}% across ${sessionUnits.length} units`;
     $("resultLabel").textContent="Analysis Complete";
+    didWin=(pct>=60);
   }else if(quizMode==="artstyle"){
-    const didWin=(score>=3);
+    didWin=(score>=3);
     $("resultLabel").textContent=didWin?"VICTORY // CALIBRATED":"DEFEAT // INCOMPLETE";
     $("finalPct").textContent=score+" / 5";
     $("finalLine").textContent=didWin?"You identified 3+ style anomalies!":"Accuracy under 60%.";
@@ -1339,6 +1344,7 @@ function showResults(){
     $("finalPct").textContent=pct+"%";
     $("finalLine").textContent=`${score} / ${sessionUnits.length} ${quizMode==="pilot"?"pilots identified":"units classified"}`;
     $("resultLabel").textContent=quizMode==="pilot"?"Pilot Database: Accessed":"Analysis Complete";
+    didWin=(pct>=60);
   }
   const mBox=$("missedBox");const mList=$("missedList");
   if(misidentified.length>0){
@@ -1346,6 +1352,8 @@ function showResults(){
     const uniq=[...new Set(misidentified)];
     uniq.forEach(item=>{const d=document.createElement("div");d.textContent="• "+item.name;mList.appendChild(d);});
   }else{mBox.classList.add("hide");}
+  // Launch sparks on a win (>=60% or artstyle >=3/5)
+  if(didWin && window.launchSparks) window.launchSparks();
 }
 
 function loadRoster(arr){
@@ -1385,6 +1393,139 @@ setInterval(()=>{
   const d=new Date();const p=n=>String(n).padStart(2,"0");
   $("clock").textContent=d.getFullYear()+"."+p(d.getMonth()+1)+"."+p(d.getDate())+" "+p(d.getHours())+":"+p(d.getMinutes())+":"+p(d.getSeconds());
 },1000);
+
+/* ═══════════════════════════════════════════════════════════════════
+   STARFIELD + SPARK SYSTEM  (single shared canvas #bgCanvas)
+   ═══════════════════════════════════════════════════════════════════ */
+(function(){
+  const canvas = document.getElementById('bgCanvas');
+  const ctx    = canvas.getContext('2d');
+
+  /* ── resize handling ── */
+  let W, H;
+  function resize(){
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  /* ── STARS ── */
+  const STAR_COUNT = 220;
+  const stars = [];
+
+  function randBetween(a, b){ return a + Math.random() * (b - a); }
+
+  for(let i = 0; i < STAR_COUNT; i++){
+    stars.push({
+      x:     Math.random(),          // 0-1 fraction of W (stays correct on resize)
+      y:     Math.random(),          // 0-1 fraction of H
+      r:     randBetween(0.4, 1.6), // radius px
+      base:  randBetween(0.15, 0.75), // base opacity
+      amp:   randBetween(0.10, 0.35), // blink amplitude
+      speed: randBetween(0.0004, 0.0018), // blink speed
+      phase: Math.random() * Math.PI * 2, // blink phase offset
+    });
+  }
+
+  function drawStars(t){
+    for(const s of stars){
+      const opacity = s.base + s.amp * Math.sin(t * s.speed * 1000 + s.phase);
+      ctx.beginPath();
+      ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200, 220, 255, ${opacity.toFixed(3)})`;
+      ctx.fill();
+    }
+  }
+
+  /* ── SPARKS (Gundam pink confetti) ── */
+  // Spark palette — hot pink / magenta / coral / white-pink
+  const SPARK_COLORS = [
+    '#ff4fa3', '#ff2d87', '#ff6bbf', '#ff85cc',
+    '#ff3370', '#ff80c0', '#ffaad8', '#ffffff',
+    '#ff1a6e', '#fc4dab',
+  ];
+
+  const sparks = [];
+  let sparksActive = false;
+
+  function launchSparks(){
+    sparks.length = 0;
+    sparksActive  = true;
+
+    // Burst origin: top-center of the viewport (just above the shell)
+    const ox = W * 0.5;
+    const oy = H * 0.28;
+
+    for(let i = 0; i < 160; i++){
+      const angle  = randBetween(-Math.PI * 1.1, -Math.PI * 0.0);  // upward cone + sides
+      const speed  = randBetween(2.5, 11);
+      const size   = randBetween(2, 5);
+      // mix of rectangular chips and thin streaks
+      const isStreak = Math.random() < 0.45;
+      sparks.push({
+        x:   ox + randBetween(-60, 60),
+        y:   oy,
+        vx:  Math.cos(angle) * speed,
+        vy:  Math.sin(angle) * speed,
+        grav: randBetween(0.12, 0.28),   // gravity per frame
+        drag: randBetween(0.97, 0.995),  // air resistance
+        rot:  Math.random() * Math.PI * 2,
+        rotV: randBetween(-0.18, 0.18),
+        w:    isStreak ? randBetween(1, 2)  : size,
+        h:    isStreak ? randBetween(6, 14) : size * randBetween(0.5, 1),
+        color: SPARK_COLORS[Math.floor(Math.random() * SPARK_COLORS.length)],
+        life:  1.0,
+        decay: randBetween(0.008, 0.020),
+        glow:  Math.random() < 0.3,
+      });
+    }
+  }
+
+  // Expose so showResults() can call it
+  window.launchSparks = launchSparks;
+
+  function drawSparks(){
+    let alive = false;
+    for(const s of sparks){
+      if(s.life <= 0) continue;
+      alive = true;
+
+      s.x  += s.vx;
+      s.y  += s.vy;
+      s.vx *= s.drag;
+      s.vy  = s.vy * s.drag + s.grav;
+      s.rot += s.rotV;
+      s.life -= s.decay;
+
+      const alpha = Math.max(0, s.life);
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate(s.x, s.y);
+      ctx.rotate(s.rot);
+
+      if(s.glow){
+        ctx.shadowColor = s.color;
+        ctx.shadowBlur  = 8;
+      }
+      ctx.fillStyle = s.color;
+      ctx.fillRect(-s.w / 2, -s.h / 2, s.w, s.h);
+      ctx.restore();
+    }
+    if(!alive) sparksActive = false;
+  }
+
+  /* ── MAIN LOOP ── */
+  function loop(t){
+    ctx.clearRect(0, 0, W, H);
+    drawStars(t);
+    if(sparksActive) drawSparks();
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+
+})();
+/* ═══════════════════════════════════════════════════════════════════ */
 </script>
 </body>
 </html>
