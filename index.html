@@ -492,6 +492,7 @@
         <img id="qImg" alt="mobile suit" class="hide">
         <div class="ph" id="qPh">NO IMAGE DATA</div>
       </div>
+      <div id="pilotUnitName" class="hide" style="text-align:center;font-family:'Teko',sans-serif;font-size:22px;font-weight:600;letter-spacing:2px;color:var(--txt);background:var(--panel-3);border-left:3px solid var(--primary);padding:10px 16px;margin-bottom:10px;"></div>
       <p id="qPrompt" class="qprompt-label">Identify the Mobile Suit</p>
 
       <div class="choices" id="choices"></div>
@@ -638,11 +639,13 @@ function updateModeStat(){
 
 /* ---------- pilot data ---------- */
 const PILOT_DATA={
+  // ── Universal Century ──────────────────────────────────────────────
   "RX-78-2 Gundam":"Amuro Ray",
   "RX-178 Gundam Mk-II":"Kamille Bidan",
   "MSZ-006 Zeta Gundam":"Kamille Bidan",
   "MSZ-010 ZZ Gundam":"Judau Ashta",
   "RX-93 Nu Gundam":"Amuro Ray",
+  "RX-93-ν2 Hi-Nu Gundam":"Amuro Ray",
   "F91 Gundam F91":"Seabook Arno",
   "XM-X1 Crossbone Gundam X-1":"Tobia Arronax",
   "LM312V04 Victory Gundam":"Usso Ewin",
@@ -652,18 +655,30 @@ const PILOT_DATA={
   "RX-0 Unicorn Gundam (Unicorn Mode)":"Banagher Links",
   "RX-0 Unicorn Gundam (Destroy Mode)":"Banagher Links",
   "RX-0 Full Armor Unicorn Gundam":"Banagher Links",
+  "RX-0 Unicorn Gundam Phenex":"Rita Bernal",
+  "RX-0 Unicorn Gundam Banshee":"Marida Cruz",
+  "RX-0 Unicorn Gundam Banshee Norn":"Marida Cruz",
+  "RX-9 Narrative Gundam":"Jona Basta",
+  "RX-78NT-1 Gundam NT-1":"Christina Mackenzie",
+  "RX-79 Gundam Ground Type":"Shiro Amada",
   "RX-78GP01 Gundam GP01 Zephyranthes":"Kou Uraki",
   "RX-78GP01-Fb Gundam GP01 Full Vernian":"Kou Uraki",
   "RX-78GP02A Gundam GP02A Physalis":"Anavel Gato",
   "RX-78GP03 Gundam GP03 Dendrobium":"Kou Uraki",
   "FA-78 Full Armor Gundam (Thunderbolt)":"Io Fleming",
   "RX-78AL Atlas Gundam":"Io Fleming",
+  "MRX-009 Psycho Gundam":"Four Murasame",
+  "MRX-010 Psycho Gundam Mk-II":"Rosammy Baddam",
+  "MRX-012 Psycho Gundam Mk-III":"Purus Twelve",
+  // ── Turn A ──────────────────────────────────────────────────────────
   "Turn A Gundam":"Loran Cehack",
   "Turn X":"Gym Ghingham",
+  // ── G Gundam ────────────────────────────────────────────────────────
   "GF13-017NJ Shining Gundam":"Domon Kasshu",
   "GF13-017NJII God Gundam":"Domon Kasshu",
   "Master Gundam":"Master Asia",
   "Devil Gundam":"Rain Mikamura",
+  // ── Gundam Wing ─────────────────────────────────────────────────────
   "XXXG-01W Wing Gundam":"Heero Yuy",
   "XXXG-00W0 Wing Gundam Zero":"Heero Yuy",
   "XXXG-01D Gundam Deathscythe":"Duo Maxwell",
@@ -671,6 +686,7 @@ const PILOT_DATA={
   "XXXG-01S Shenlong Gundam":"Chang Wufei",
   "XXXG-01SR Sandrock Gundam":"Quatre Raberba Winner",
   "OZ-13MS Gundam Epyon":"Zechs Merquise",
+  // ── After War Gundam X ──────────────────────────────────────────────
   "GX-9900 Gundam X":"Garrod Ran",
   "GX-9900-DV Gundam X Divider":"Garrod Ran",
   "GX-9901-DX Gundam Double X":"Garrod Ran",
@@ -678,6 +694,7 @@ const PILOT_DATA={
   "GT-9600 Gundam Leopard":"Roabea Roy",
   "NRX-0013 Gundam Virsago":"Shagia Frost",
   "NRX-0015 Gundam Ashtaron":"Olba Frost",
+  // ── Gundam SEED ─────────────────────────────────────────────────────
   "GAT-X105 Strike Gundam":"Kira Yamato",
   "ZGMF-X10A Freedom Gundam":"Kira Yamato",
   "ZGMF-X09A Justice Gundam":"Athrun Zala",
@@ -689,37 +706,52 @@ const PILOT_DATA={
   "MBF-P02 Gundam Astray Red Frame":"Lowe Guele",
   "MBF-P03 Gundam Astray Blue Frame":"Gai Murakumo",
   "MBF-P01-Re2 Gundam Astray Gold Frame":"Rondo Ghina Sahaku",
+  "MBF-P04 Gundam Astray Green Frame":"Gai Murakumo",
+  "MBF-P05LM Gundam Astray Mirage Frame":"Rondo Mina Sahaku",
   "GAT-X131 Calamity Gundam":"Orga Sabnak",
   "GAT-X252 Forbidden Gundam":"Shani Andras",
   "GAT-X370 Raider Gundam":"Clotho Buer",
   "GSX-401FW Stargazer Gundam":"Sven Cal Bayang",
+  "ZGMF-X11A Regenerate Gundam":"Rau Le Creuset",
+  "GAT-X105E Strike Noir Gundam":"Sven Cal Bayang",
+  // ── SEED Destiny ────────────────────────────────────────────────────
   "ZGMF-X56S Impulse Gundam":"Shinn Asuka",
   "ZGMF-X42S Destiny Gundam":"Shinn Asuka",
   "ZGMF-X20A Strike Freedom Gundam":"Kira Yamato",
   "ZGMF-X19A Infinite Justice Gundam":"Athrun Zala",
   "ZGMF-X666S Legend Gundam":"Rey Za Burrel",
+  "GFAS-X1 Destroy Gundam":"Stella Loussier",
+  // ── SEED FREEDOM ────────────────────────────────────────────────────
   "STTS-909 Rising Freedom Gundam":"Kira Yamato",
   "ZGMF/A-262PD-P Mighty Strike Freedom Gundam":"Kira Yamato",
   "STTS-808 Immortal Justice Gundam":"Athrun Zala",
   "ZGMF-1027M Duel Blitz Gundam":"Yzak Joule",
   "ZGMF-103HD Lightning Buster Gundam":"Dearka Elsman",
+  // ── Gundam 00 ───────────────────────────────────────────────────────
+  "GN-000 0 Gundam":"Ribbons Almark",
   "GN-001 Gundam Exia":"Setsuna F. Seiei",
   "GN-002 Gundam Dynames":"Lockon Stratos",
   "GN-003 Gundam Kyrios":"Allelujah Haptism",
+  "GN-004 Gundam Nadleeh":"Tieria Erde",
   "GN-005 Gundam Virtue":"Tieria Erde",
   "GN-0000 00 Gundam":"Setsuna F. Seiei",
   "00 Raiser":"Setsuna F. Seiei",
   "GNW-001 Gundam Throne Eins":"Johann Trinity",
   "GNW-002 Gundam Throne Zwei":"Michael Trinity",
   "GNW-003 Gundam Throne Drei":"Nena Trinity",
+  "GNW-20000 Arche Gundam":"Ali Al-Saachez",
   "Reborns Gundam":"Ribbons Almark",
   "GN-006 Cherudim Gundam":"Lockon Stratos",
   "GN-007 Arios Gundam":"Allelujah Haptism",
   "GN-008 Seravee Gundam":"Tieria Erde",
+  "GN-008GNHW3G Seravee Gundam GNHW3G":"Tieria Erde",
   "CB-002 Raphael Gundam":"Tieria Erde",
-  "GN-011 Gundam Harute":"Allelujah Haptism",
   "GN-010 Gundam Zabanya":"Lockon Stratos",
+  "GN-011 Gundam Harute":"Allelujah Haptism",
   "GNT-0000 00 Qan[T]":"Setsuna F. Seiei",
+  "GNY-001 Gundam Astraea":"Grave Violento",
+  "GNY-001F Gundam Astraea Type F":"Fon Spaak",
+  // ── Gundam AGE ──────────────────────────────────────────────────────
   "AGE-1 Gundam AGE-1 Normal":"Flit Asuno",
   "AGE-1T Gundam AGE-1 Titus":"Flit Asuno",
   "AGE-1S Gundam AGE-1 Spallow":"Flit Asuno",
@@ -730,37 +762,72 @@ const PILOT_DATA={
   "AGE-3O Gundam AGE-3 Orbital":"Kio Asuno",
   "AGE-FX Gundam AGE-FX":"Kio Asuno",
   "xvm-fzc Gundam Legilis":"Zeheart Galette",
+  // ── Reconguista in G ────────────────────────────────────────────────
+  "YG-111 Gundam G-Self":"Bellri Zenam",
+  "VGMM-Gf10 Gundam G-Lucifer":"Mask / Luin Lee",
+  "MSAM-033 Gundam G-Arcane":"Aida Surugan",
+  // ── Iron-Blooded Orphans ────────────────────────────────────────────
   "ASW-G-08 Gundam Barbatos":"Mikazuki Augus",
   "ASW-G-08 Gundam Barbatos Lupus":"Mikazuki Augus",
   "Gundam Barbatos Lupus Rex":"Mikazuki Augus",
   "ASW-G-01 Gundam Bael":"McGillis Fareed",
-  "ASW-G-66 Gundam Kimaris":"Gaelio Bauduin",
-  "Gundam Vidar":"Gaelio Bauduin",
   "ASW-G-11 Gundam Gusion Rebake":"Akihiro Altland",
+  "ASW-G-29 Gundam Astaroth":"Norba Shino",
+  "ASW-G-47 Gundam Vual":"Iok Kujan",
   "ASW-G-64 Gundam Flauros":"Dante Mogro",
+  "ASW-G-66 Gundam Kimaris":"Gaelio Bauduin",
+  "ASW-G-71 Gundam Dantalion":"Hush Middy",
+  "Gundam Vidar":"Gaelio Bauduin",
+  // ── The Witch from Mercury ──────────────────────────────────────────
+  "Gundam Lfrith":"Prospera Mercury",
+  "AVP-03 Gundam Lfrith Anavata":"Ericht Samaya",
+  "XGF-01 Gundam Lfrith Jiu":"Lauda Neis",
+  "EDM-GA-01 Gundam Lfrith Ur":"Ericht Samaya",
+  "EDM-GA-02 Gundam Lfrith Thorn":"Norea du Noc",
   "XVX-016 Gundam Aerial":"Suletta Mercury",
   "XVX-016RN Gundam Aerial Rebuild":"Suletta Mercury",
   "X-EX01 Gundam Calibarn":"Suletta Mercury",
   "FP/A-77 Gundam Pharact":"Elan Ceres",
   "MDX-0003 Gundam Schwarzette":"Shaddiq Zenelli",
-  "Gundam Lfrith":"Prospera Mercury",
-  "EDM-GA-01 Gundam Lfrith Ur":"Ericht Samaya",
-  "EDM-GA-02 Gundam Lfrith Thorn":"Norea du Noc",
+  // ── Hathaway's Flash ────────────────────────────────────────────────
+  "RX-94 Mass Production Nu Gundam":"EFSF Pilot",
   "RX-105 Xi Gundam":"Hathaway Noa",
   "RX-104FF Penelope":"Lane Aim",
+  "TX-ff104 Alyzeus":"Gawain Browne",
+  // ── Gundam GQuuuuuuX ────────────────────────────────────────────────
+  "GQuuuuuuX":"GQuuuuuuX",
+  "GFreD":"Fred",
+  "Red Gundam":"Red",
+  "White Gundam":"White",
+  "01 Gundam":"01",
+  // ── Build Fighters ──────────────────────────────────────────────────
+  "AC-01 Miss Sazabi":"Aila Jyrkiäinen",
   "GAT-X105B Build Strike Gundam":"Sei Iori & Reiji",
   "GAT-X105BFP Build Strike Gundam Full Package":"Sei Iori & Reiji",
   "GAT-X105BST Star Build Strike Gundam":"Sei Iori & Reiji",
+  "GAT-X105BGC Build Strike Galaxy Cosmos":"Sei Iori",
   "PPGN-001 Gundam Amazing Exia":"Meijin Kawaguchi",
+  "PPGN-001 Gundam Exia Dark Matter":"Meijin Kawaguchi",
+  "GX-9999 Gundam X Maoh":"Mao Yasaka",
+  "Sengoku Astray Gundam":"Nils Nielsen",
   "XXXG-01Wf Wing Gundam Fenice":"Ricardo Fellini",
   "XXXG-01Wfr Gundam Fenice Rinascita":"Ricardo Fellini",
   "XM-X9999 Crossbone Gundam Maoh":"Nils Nielsen",
+  "GPB-X80 Beginning Gundam":"Haru Irei",
+  "GPB-X80-30F Beginning 30 Gundam":"Haru Irei",
+  // ── Build Fighters Try ──────────────────────────────────────────────
   "Build Burning Gundam":"Sekai Kamiki",
   "Try Burning Gundam":"Sekai Kamiki",
+  "KMK-B01 Kamiki Burning Gundam":"Sekai Kamiki",
   "Lightning Gundam":"Yuuma Kousaka",
   "Gundam Tryon 3":"Fumina Hoshino",
+  // ── Build Divers ────────────────────────────────────────────────────
   "Gundam 00 Diver":"Riku Mikami",
   "Gundam 00 Sky":"Riku Mikami",
+  "Gundam Seltsam":"Ogre",
+  "AGE-IIMG Gundam AGE-2 Magnum":"Sarah",
+  "RX-78GP02R Gundam GP-Rase-Two":"Nanami Ota",
+  // ── Build Divers Re:RISE ────────────────────────────────────────────
   "PFF-X7 Core Gundam":"Hiroto Kuga",
   "PFF-X7II Core Gundam II":"Hiroto Kuga",
   "Earthree Gundam":"Hiroto Kuga",
@@ -768,6 +835,21 @@ const PILOT_DATA={
   "Uraven Gundam":"Kazami",
   "Gundam Justice Knight":"May",
   "Alus Earthree Gundam":"Alus",
+  "PFF-X7V2 Veetwo Gundam":"Hinata Mukai",
+  "PFF-X7RANIMA Gundam Anima\u3010Rize\u3011":"Parviz",
+  "PFF-X7M4 Marsfour Gundam":"Kazami",
+  "PFF-X7M1 Mercuone Gundam":"May",
+  "PFF-X7IIS6 Saturnix Gundam":"Kazami",
+  "PFF-X7IIN8 Nepteight Gundam":"May",
+  "PFF-X7IIBUILD DiVERS ReRising Gundam":"Hiroto Kuga",
+  // ── Build Metaverse ─────────────────────────────────────────────────
+  "ASW-G-08A Gundam Amazing Barbatos Lupus":"Mirai",
+  "GAT-X105BEG Build Strike Exceed Galaxy":"Sei Iori",
+  "GN-0000DVRII Gundam 00 Diver Arc":"Riku Mikami",
+  "PFF-X7II+P9 Plutine Gundam":"Hiroto Kuga",
+  "RX-78-l\u0101-III Lah Gundam":"Lah",
+  "SBG-E01 Shin Burning Gundam":"Sekai Kamiki",
+  "TYP-G12CMR Typhoeus Gundam Chimera":"Alus",
 };
 
 let correctAnswerText="";
@@ -1074,6 +1156,9 @@ function setupQuizQuestion(){
   if(item.img){img.src=item.img;img.classList.remove("hide");ph.classList.add("hide");
     img.onerror=()=>{img.classList.add("hide");ph.classList.remove("hide");ph.textContent="ERROR LOADING IMAGE";};}
   else{img.classList.add("hide");ph.classList.remove("hide");ph.textContent="NO IMAGE ATTACHED";}
+  const pun=$("pilotUnitName");
+  if(quizMode==="pilot"){pun.textContent=item.name;pun.classList.remove("hide");}
+  else{pun.classList.add("hide");}
   if(quizMode==="mc"||quizMode==="pilot"){
     $("choices").classList.remove("hide");$("typeBox").classList.add("hide");
     const pt=$("qPrompt");if(pt)pt.textContent=quizMode==="pilot"?"Name the Pilot":"Identify the Mobile Suit";
@@ -1156,7 +1241,7 @@ function showQuizReveal(){
   const item=sessionUnits[curIdx];
   if(quizMode==="pilot"){
     const pilot=PILOT_DATA[item.name]||"?";
-    $("reveal").innerHTML=escapeHtml(pilot)+`<small>Pilot of: ${escapeHtml(item.name)}</small>`;
+    $("reveal").innerHTML=escapeHtml(pilot)+`<small>${escapeHtml(item.name)}${item.series?' — '+escapeHtml(item.series):''}</small>`;
   }else{
     $("reveal").innerHTML=escapeHtml(item.name)+(item.series?`<small>Series: ${escapeHtml(item.series)}</small>`:'');
   }
