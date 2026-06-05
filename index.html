@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MS Identification System // Gundam Quiz</title>
+<title>Guess the Gundam</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -31,7 +31,7 @@
       var(--bg);
     color:var(--txt);
     font-family:"Chakra Petch",sans-serif;
-    display:flex;align-items:flex-start;justify-content:center;
+    display:flex;flex-direction:column;align-items:center;
     min-height:100%;
     padding:18px;
     overflow-x:hidden;
@@ -41,6 +41,19 @@
     content:"";position:fixed;inset:0;pointer-events:none;z-index:99;
     background:repeating-linear-gradient(to bottom,rgba(255,255,255,.015) 0 1px,transparent 1px 3px);
     mix-blend-mode:overlay;
+  }
+  .page-title{
+    width:100%;max-width:600px;
+    text-align:center;
+    font-family:"Chakra Petch",sans-serif;
+    font-size:clamp(28px,7vw,52px);
+    font-weight:700;
+    color:var(--hud);
+    letter-spacing:4px;
+    text-transform:uppercase;
+    text-shadow:0 0 28px rgba(54,214,195,.55), 0 0 60px rgba(54,214,195,.2);
+    padding:20px 0 14px;
+    margin-bottom:4px;
   }
   .shell{
     width:100%;max-width:600px;margin:auto;
@@ -205,6 +218,7 @@
 </style>
 </head>
 <body>
+<div class="page-title">Guess the Gundam</div>
 <div class="shell">
   <header>
     <span class="dot"></span>
@@ -220,6 +234,7 @@
         <button data-mode="type">Type Name</button>
         <button data-mode="zoom">Zoom Recon</button>
         <button data-mode="artstyle">Impostor Hunt</button>
+        <button data-mode="pilot">Pilots</button>
       </div>
       <div class="mode-stat" id="modeStat"></div>
 
@@ -255,7 +270,7 @@
         <img id="qImg" alt="mobile suit" class="hide">
         <div class="ph" id="qPh">NO IMAGE DATA</div>
       </div>
-      <p class="mono" style="text-align:center;color:var(--txt-dim);font-size:11px;letter-spacing:2px;margin:10px 0 18px">IDENTIFY THE MOBILE SUIT</p>
+      <p id="qPrompt" class="mono" style="text-align:center;color:var(--txt-dim);font-size:11px;letter-spacing:2px;margin:10px 0 18px">IDENTIFY THE MOBILE SUIT</p>
 
       <div class="choices" id="choices"></div>
 
@@ -383,7 +398,7 @@ let artstyleCurIdx=0;
 function loadStats(){ try{ return JSON.parse(localStorage.getItem("gundamStats"))||{}; }catch(e){ return {}; } }
 function saveStats(){ try{ localStorage.setItem("gundamStats", JSON.stringify(stats)); }catch(e){} }
 let stats = loadStats();
-["mc","type","artstyle","zoomBest"].forEach(k=>{ if(typeof stats[k]!=="number") stats[k]=0; });
+["mc","type","artstyle","pilot","zoomBest"].forEach(k=>{ if(typeof stats[k]!=="number") stats[k]=0; });
 function addPoint(mode){ stats[mode]=(stats[mode]||0)+1; saveStats(); updateModeStat(); }
 function recordZoomStreak(){ if(zoomStreak>(stats.zoomBest||0)){ stats.zoomBest=zoomStreak; saveStats(); updateModeStat(); } }
 function updateModeStat(){
@@ -391,15 +406,173 @@ function updateModeStat(){
   let label,val;
   if(quizMode==="zoom"){label="BEST STREAK"; val=stats.zoomBest||0;}
   else if(quizMode==="artstyle"){label="IMPOSTORS FOUND"; val=stats.artstyle||0;}
+  else if(quizMode==="pilot"){label="PILOTS IDENTIFIED"; val=stats.pilot||0;}
   else {label="TOTAL IDENTIFIED"; val=(quizMode==="type"?stats.type:stats.mc)||0;}
   el.innerHTML='<span>'+label+'</span><b>'+val+'</b>';
 }
+
+/* ---------- pilot data: unit name → pilot name ---------- */
+const PILOT_DATA = {
+  // ── Universal Century ────────────────────────────────────────────────
+  "RX-78-2 Gundam":"Amuro Ray",
+  "RX-178 Gundam Mk-II":"Kamille Bidan",
+  "MSZ-006 Zeta Gundam":"Kamille Bidan",
+  "MSZ-010 ZZ Gundam":"Judau Ashta",
+  "RX-93 Nu Gundam":"Amuro Ray",
+  "F91 Gundam F91":"Seabook Arno",
+  "XM-X1 Crossbone Gundam X-1":"Tobia Arronax",
+  "LM312V04 Victory Gundam":"Usso Ewin",
+  "LM314V21 V2 Gundam":"Usso Ewin",
+  "V-Dash Gundam":"Usso Ewin",
+  "V2 Assault Buster Gundam":"Usso Ewin",
+  "RX-0 Unicorn Gundam (Unicorn Mode)":"Banagher Links",
+  "RX-0 Unicorn Gundam (Destroy Mode)":"Banagher Links",
+  "RX-0 Full Armor Unicorn Gundam":"Banagher Links",
+  "RX-0 Banshee":"Marida Cruz",
+  "RX-78GP01 Gundam GP01 Zephyranthes":"Kou Uraki",
+  "RX-78GP01-Fb Gundam GP01 Full Vernian":"Kou Uraki",
+  "RX-78GP02A Gundam GP02A Physalis":"Anavel Gato",
+  "RX-78GP03 Gundam GP03 Dendrobium":"Kou Uraki",
+  "FA-78 Full Armor Gundam (Thunderbolt)":"Io Fleming",
+  "RX-78AL Atlas Gundam":"Io Fleming",
+  "Turn A Gundam":"Loran Cehack",
+  "Turn X":"Gym Ghingham",
+  // ── G Gundam ─────────────────────────────────────────────────────────
+  "GF13-017NJ Shining Gundam":"Domon Kasshu",
+  "GF13-017NJII God Gundam":"Domon Kasshu",
+  "Master Gundam":"Master Asia",
+  "Devil Gundam":"Rain Mikamura",
+  // ── Gundam Wing ──────────────────────────────────────────────────────
+  "XXXG-01W Wing Gundam":"Heero Yuy",
+  "XXXG-00W0 Wing Gundam Zero":"Heero Yuy",
+  "XXXG-01D Gundam Deathscythe":"Duo Maxwell",
+  "XXXG-01H Gundam Heavyarms":"Trowa Barton",
+  "XXXG-01S Shenlong Gundam":"Chang Wufei",
+  "XXXG-01SR Sandrock Gundam":"Quatre Raberba Winner",
+  "OZ-13MS Gundam Epyon":"Zechs Merquise",
+  // ── After War Gundam X ───────────────────────────────────────────────
+  "GX-9900 Gundam X":"Garrod Ran",
+  "GX-9900-DV Gundam X Divider":"Garrod Ran",
+  "GX-9901-DX Gundam Double X":"Garrod Ran",
+  "GW-9800 Gundam Airmaster":"Witz Sou",
+  "GT-9600 Gundam Leopard":"Roabea Roy",
+  "NRX-0013 Gundam Virsago":"Shagia Frost",
+  "NRX-0015 Gundam Ashtaron":"Olba Frost",
+  // ── Gundam SEED ──────────────────────────────────────────────────────
+  "GAT-X105 Strike Gundam":"Kira Yamato",
+  "ZGMF-X10A Freedom Gundam":"Kira Yamato",
+  "ZGMF-X09A Justice Gundam":"Athrun Zala",
+  "GAT-X303 Aegis Gundam":"Athrun Zala",
+  "GAT-X102 Duel Gundam":"Yzak Joule",
+  "GAT-X103 Buster Gundam":"Dearka Elsman",
+  "GAT-X207 Blitz Gundam":"Nicol Amalfi",
+  "ZGMF-X13A Providence Gundam":"Rau Le Creuset",
+  "MBF-P02 Gundam Astray Red Frame":"Lowe Guele",
+  "MBF-P03 Gundam Astray Blue Frame":"Gai Murakumo",
+  "MBF-P01-Re2 Gundam Astray Gold Frame":"Rondo Ghina Sahaku",
+  "GAT-X131 Calamity Gundam":"Orga Sabnak",
+  "GAT-X252 Forbidden Gundam":"Shani Andras",
+  "GAT-X370 Raider Gundam":"Clotho Buer",
+  "GSX-401FW Stargazer Gundam":"Sven Cal Bayang",
+  // ── SEED Destiny ─────────────────────────────────────────────────────
+  "ZGMF-X56S Impulse Gundam":"Shinn Asuka",
+  "ZGMF-X42S Destiny Gundam":"Shinn Asuka",
+  "ZGMF-X20A Strike Freedom Gundam":"Kira Yamato",
+  "ZGMF-X19A Infinite Justice Gundam":"Athrun Zala",
+  "ZGMF-X666S Legend Gundam":"Rey Za Burrel",
+  // ── SEED FREEDOM ─────────────────────────────────────────────────────
+  "STTS-909 Rising Freedom Gundam":"Kira Yamato",
+  "ZGMF/A-262PD-P Mighty Strike Freedom Gundam":"Kira Yamato",
+  "STTS-808 Immortal Justice Gundam":"Athrun Zala",
+  "ZGMF-1027M Duel Blitz Gundam":"Yzak Joule",
+  "ZGMF-103HD Lightning Buster Gundam":"Dearka Elsman",
+  // ── Gundam 00 ────────────────────────────────────────────────────────
+  "GN-001 Gundam Exia":"Setsuna F. Seiei",
+  "GN-002 Gundam Dynames":"Lockon Stratos",
+  "GN-003 Gundam Kyrios":"Allelujah Haptism",
+  "GN-005 Gundam Virtue":"Tieria Erde",
+  "GN-0000 00 Gundam":"Setsuna F. Seiei",
+  "00 Raiser":"Setsuna F. Seiei",
+  "GNW-001 Gundam Throne Eins":"Johann Trinity",
+  "GNW-002 Gundam Throne Zwei":"Michael Trinity",
+  "GNW-003 Gundam Throne Drei":"Nena Trinity",
+  "Reborns Gundam":"Ribbons Almark",
+  "GN-006 Cherudim Gundam":"Lockon Stratos",
+  "GN-007 Arios Gundam":"Allelujah Haptism",
+  "GN-008 Seravee Gundam":"Tieria Erde",
+  "CB-002 Raphael Gundam":"Tieria Erde",
+  "GN-011 Gundam Harute":"Allelujah Haptism",
+  "GN-010 Gundam Zabanya":"Lockon Stratos",
+  "GNT-0000 00 Qan[T]":"Setsuna F. Seiei",
+  // ── Gundam AGE ───────────────────────────────────────────────────────
+  "AGE-1 Gundam AGE-1 Normal":"Flit Asuno",
+  "AGE-1T Gundam AGE-1 Titus":"Flit Asuno",
+  "AGE-1S Gundam AGE-1 Spallow":"Flit Asuno",
+  "AGE-2 Gundam AGE-2 Normal":"Asemu Asuno",
+  "AGE-2DB Gundam AGE-2 Double Bullet":"Asemu Asuno",
+  "AGE-2DH Gundam AGE-2 Dark Hound":"Asemu Asuno",
+  "AGE-3 Gundam AGE-3 Normal":"Kio Asuno",
+  "AGE-3O Gundam AGE-3 Orbital":"Kio Asuno",
+  "AGE-FX Gundam AGE-FX":"Kio Asuno",
+  "xvm-fzc Gundam Legilis":"Zeheart Galette",
+  // ── Iron-Blooded Orphans ─────────────────────────────────────────────
+  "ASW-G-08 Gundam Barbatos":"Mikazuki Augus",
+  "ASW-G-08 Gundam Barbatos Lupus":"Mikazuki Augus",
+  "Gundam Barbatos Lupus Rex":"Mikazuki Augus",
+  "ASW-G-01 Gundam Bael":"McGillis Fareed",
+  "ASW-G-66 Gundam Kimaris":"Gaelio Bauduin",
+  "Gundam Vidar":"Gaelio Bauduin",
+  "ASW-G-11 Gundam Gusion Rebake":"Akihiro Altland",
+  "ASW-G-64 Gundam Flauros":"Dante Mogro",
+  // ── The Witch from Mercury ───────────────────────────────────────────
+  "XVX-016 Gundam Aerial":"Suletta Mercury",
+  "XVX-016RN Gundam Aerial Rebuild":"Suletta Mercury",
+  "X-EX01 Gundam Calibarn":"Suletta Mercury",
+  "FP/A-77 Gundam Pharact":"Elan Ceres",
+  "MDX-0003 Gundam Schwarzette":"Shaddiq Zenelli",
+  "Gundam Lfrith":"Prospera Mercury",
+  "EDM-GA-01 Gundam Lfrith Ur":"Ericht Samaya",
+  "EDM-GA-02 Gundam Lfrith Thorn":"Norea du Noc",
+  // ── Hathaway's Flash ─────────────────────────────────────────────────
+  "RX-105 Xi Gundam":"Hathaway Noa",
+  "RX-104FF Penelope":"Lane Aim",
+  // ── Build Fighters ───────────────────────────────────────────────────
+  "GAT-X105B Build Strike Gundam":"Sei Iori & Reiji",
+  "GAT-X105BFP Build Strike Gundam Full Package":"Sei Iori & Reiji",
+  "Star Build Strike Gundam":"Sei Iori & Reiji",
+  "PPGN-001 Gundam Amazing Exia":"Meijin Kawaguchi",
+  "XXXG-01Wf Wing Gundam Fenice":"Ricardo Fellini",
+  "XXXG-01Wfr Gundam Fenice Rinascita":"Ricardo Fellini",
+  "XM-X9999 Crossbone Gundam Maoh":"Nils Nielsen",
+  // ── Build Fighters Try ───────────────────────────────────────────────
+  "Build Burning Gundam":"Sekai Kamiki",
+  "Try Burning Gundam":"Sekai Kamiki",
+  "Lightning Gundam":"Yuuma Kousaka",
+  "Gundam Tryon 3":"Fumina Hoshino",
+  // ── Build Divers ─────────────────────────────────────────────────────
+  "Gundam 00 Diver":"Riku Mikami",
+  "Gundam 00 Sky":"Riku Mikami",
+  // ── Build Divers Re:RISE ─────────────────────────────────────────────
+  "PFF-X7 Core Gundam":"Hiroto Kuga",
+  "PFF-X7II Core Gundam II":"Hiroto Kuga",
+  "Earthree Gundam":"Hiroto Kuga",
+  "Jupitive Gundam":"Parviz",
+  "Uraven Gundam":"Kazami",
+  "Gundam Justice Knight":"May",
+  "Alus Earthree Gundam":"Alus",
+};
+
+/* tracks the displayed correct answer text for MC/pilot choice highlighting */
+let correctAnswerText="";
 
 /* ---------- helpers for harder MC decoys ---------- */
 function shuffleArr(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function sigTokens(name){
   const generic=new Set(["gundam","mobile","suit","the","custom","unit","type","mode"]);
-  return (name||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(w=>w.length>2 && !generic.has(w) && !/^[0-9]+$/.test(w));
+  const keepShort=new Set(["00","zz"]);  // special 2-char series identifiers
+  return (name||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(w=>
+    keepShort.has(w) || (w.length>2 && !generic.has(w) && !/^[0-9]+$/.test(w))
+  );
 }
 function rankRelated(correct, others){
   const ctoks=new Set(sigTokens(correct.name));
@@ -765,6 +938,19 @@ function startQuiz(){
     setupArtstyleQuiz();
     return;
   }
+
+  if(quizMode==="pilot"){
+    const pool=shuffleArr(roster.filter(u=>u.img&&PILOT_DATA[u.name]));
+    if(pool.length===0){alert("No pilot data found for any unit. Add pilots to your roster to use this mode.");return;}
+    let n=pool.length;
+    if(quizCount==="half") n=Math.max(1,Math.floor(pool.length/2));
+    else if(quizCount!=="all"){ const pn=parseInt(quizCount,10); if(pn>0) n=pn; }
+    n=Math.min(n,pool.length);
+    score=0;curIdx=0;misidentified=[];
+    sessionUnits=pool.slice(0,n);
+    showSection("quiz");setupQuizQuestion();
+    return;
+  }
   
   showSection(quizMode==="zoom"?"zoom":"quiz");
   score=0;curIdx=0;misidentified=[];
@@ -941,19 +1127,23 @@ function setupQuizQuestion(){
     img.src=item.img;img.classList.remove("hide");ph.classList.add("hide");
     img.onerror=()=>{img.classList.add("hide");ph.classList.remove("hide");ph.textContent="ERROR LOADING TARGET VISUAL DATA";};
   }else{img.classList.add("hide");ph.classList.remove("hide");ph.textContent="NO IMAGE LINK ATTACHED";}
-  if(quizMode==="mc"){$("choices").classList.remove("hide");$("typeBox").classList.add("hide");generateMCChoices(item);}
+  if(quizMode==="mc"||quizMode==="pilot"){
+    $("choices").classList.remove("hide");$("typeBox").classList.add("hide");
+    const pt=$("qPrompt"); if(pt) pt.textContent=quizMode==="pilot"?"NAME THE PILOT":"IDENTIFY THE MOBILE SUIT";
+    if(quizMode==="pilot") generatePilotChoices(item);
+    else generateMCChoices(item);
+  }
   else{$("choices").classList.add("hide");$("typeBox").classList.remove("hide");$("typeInput").value="";$("typeInput").disabled=false;$("typeSuggest").innerHTML="";$("submitType").classList.remove("hide");$("typeInput").focus();setupTypeahead($("typeInput"),$("typeSuggest"));}
 }
 
 function generateMCChoices(correctItem){
   const box=$("choices");box.innerHTML="";
+  correctAnswerText=correctItem.name;
   const others=roster.filter(x=>x.name!==correctItem.name);
   let picks=[];
-  // 65% of the time, seed up to 2 decoys that are related (same variant family, else same series)
   if(Math.random()<0.65){
     picks = rankRelated(correctItem, others).slice(0,2);
   }
-  // fill remaining decoy slots with random others not already chosen
   const pool=shuffleArr(others.filter(x=>!picks.includes(x)));
   while(picks.length<3 && pool.length) picks.push(pool.shift());
   picks.push(correctItem);
@@ -964,10 +1154,32 @@ function generateMCChoices(correctItem){
   });
 }
 
+function generatePilotChoices(correctItem){
+  const box=$("choices");box.innerHTML="";
+  const correctPilot=PILOT_DATA[correctItem.name];
+  correctAnswerText=correctPilot;
+  // pool of all other pilot names (deduplicated, excluding correct)
+  const allPilotNames=[...new Set(Object.values(PILOT_DATA))].filter(p=>p!==correctPilot);
+  const pool=shuffleArr(allPilotNames);
+  const picks=[correctPilot];
+  while(picks.length<4 && pool.length) picks.push(pool.shift());
+  shuffleArr(picks);
+  picks.forEach(pilotName=>{
+    const b=document.createElement("button");b.className="choice";b.textContent=pilotName;
+    b.onclick=()=>handleMCAnswer(b,pilotName===correctPilot);box.appendChild(b);
+  });
+}
+
 function handleMCAnswer(btn,isCorrect){
   document.querySelectorAll("#choices .choice").forEach(b=>b.disabled=true);
-  if(isCorrect){btn.classList.add("correct");$("verdict").className="verdict ok";$("verdict").textContent="✓ SIGNATURE VERIFIED";score++;addPoint("mc");}
-  else{btn.classList.add("wrong");$("verdict").className="verdict no";$("verdict").textContent="✕ WARNING: IDENTIFICATION ERROR";misidentified.push(sessionUnits[curIdx]);document.querySelectorAll("#choices .choice").forEach(b=>{if(b.textContent===sessionUnits[curIdx].name)b.classList.add("correct");});}
+  if(isCorrect){
+    btn.classList.add("correct");$("verdict").className="verdict ok";$("verdict").textContent="✓ SIGNATURE VERIFIED";
+    score++;addPoint(quizMode==="pilot"?"pilot":"mc");
+  }else{
+    btn.classList.add("wrong");$("verdict").className="verdict no";$("verdict").textContent="✕ WARNING: IDENTIFICATION ERROR";
+    misidentified.push(sessionUnits[curIdx]);
+    document.querySelectorAll("#choices .choice").forEach(b=>{if(b.textContent===correctAnswerText)b.classList.add("correct");});
+  }
   showQuizReveal();
 }
 
@@ -999,7 +1211,12 @@ function handleTypeAnswer(){
 
 function showQuizReveal(){
   const item=sessionUnits[curIdx];
-  $("reveal").innerHTML=escapeHtml(item.name)+(item.series?`<small>Registry Grouping: ${escapeHtml(item.series)}</small>`:'');
+  if(quizMode==="pilot"){
+    const pilot=PILOT_DATA[item.name]||"?";
+    $("reveal").innerHTML=escapeHtml(pilot)+`<small>Pilot of: ${escapeHtml(item.name)}</small>`;
+  } else {
+    $("reveal").innerHTML=escapeHtml(item.name)+(item.series?`<small>Registry Grouping: ${escapeHtml(item.series)}</small>`:'');
+  }
   $("reveal").classList.remove("hide");$("nextBtn").classList.remove("hide");
 }
 
@@ -1100,8 +1317,8 @@ function showResults(){
   }else{
     pct=sessionUnits.length>0?Math.round(score/sessionUnits.length*100):0;
     $("finalPct").textContent=pct+"%";
-    $("finalLine").textContent=`${score} / ${sessionUnits.length} tactical units classified`;
-    $("resultLabel").textContent="Analysis Complete";
+    $("finalLine").textContent=`${score} / ${sessionUnits.length} ${quizMode==="pilot"?"pilots correctly identified":"tactical units classified"}`;
+    $("resultLabel").textContent=quizMode==="pilot"?"Pilot Database: Accessed":"Analysis Complete";
   }
   const mBox=$("missedBox");const mList=$("missedList");
   if(misidentified.length>0){
