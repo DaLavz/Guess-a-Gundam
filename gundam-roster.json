@@ -1103,16 +1103,6 @@
     "series": "Build Divers"
   },
   {
-    "name": "Gundam AGEII Magnum",
-    "img": "images/gundam-ageii-magnum.webp",
-    "alt": [
-      "ageii magnum",
-      "age2 magnum",
-      "age ii magnum"
-    ],
-    "series": "Build Divers"
-  },
-  {
     "name": "Gundam Seltsam",
     "img": "images/gundam-seltsam.webp",
     "alt": [
@@ -1419,5 +1409,138 @@
       "divers rerising gundam"
     ],
     "series": "Build Divers Re:RISE"
+  },
+  {
+    "name": "AGE-IIMG Gundam AGE-2 Magnum",
+    "img": "images/gundam-ageii-magnum.webp",
+    "alt": [
+      "age-2 magnum",
+      "magnum",
+      "age 2 magnum"
+    ],
+    "series": "Build Divers"
+  },
+  {
+    "name": "RX-78GP02R Gundam GP-Rase-Two",
+    "img": "images/RX-78GP02R Gundam GP-Rase-Two.webp",
+    "alt": [
+      "rase two",
+      "gp rase two",
+      "rase-two",
+      "gundam gp rase two"
+    ],
+    "series": "Build Divers"
+  },
+  {
+    "name": "AC-01 Miss Sazabi",
+    "img": "images/AC-01 Miss Sazabi.webp",
+    "alt": [
+      "miss sazabi"
+    ],
+    "series": "Build Fighters"
+  },
+  {
+    "name": "GAT-X105B Build Strike Gundam",
+    "img": "images/GAT-X105B Build Strike Gundam.webp",
+    "alt": [
+      "build strike",
+      "build strike gundam"
+    ],
+    "series": "Build Fighters"
+  },
+  {
+    "name": "GAT-X105BFP Build Strike Gundam Full Package",
+    "img": "images/GAT-X105BFP Build Strike Gundam Full Package.webp",
+    "alt": [
+      "build strike full package",
+      "build strike gundam full package"
+    ],
+    "series": "Build Fighters"
+  },
+  {
+    "name": "GX-9999 Gundam X Maoh",
+    "img": "images/GX-9999 Gundam X Maoh.webp",
+    "alt": [
+      "gundam x maoh",
+      "x maoh"
+    ],
+    "series": "Build Fighters"
+  },
+  {
+    "name": "PPGN-001 Gundam Amazing Exia",
+    "img": "images/PPGN-001 Gundam Amazing Exia.webp",
+    "alt": [
+      "amazing exia",
+      "gundam amazing exia"
+    ],
+    "series": "Build Fighters"
+  },
+  {
+    "name": "PPGN-001 Gundam Exia Dark Matter",
+    "img": "images/PPGN-001 Gundam Exia Dark Matter.webp",
+    "alt": [
+      "exia dark matter",
+      "gundam exia dark matter",
+      "dark matter"
+    ],
+    "series": "Build Fighters"
+  },
+  {
+    "name": "Sengoku Astray Gundam",
+    "img": "images/Sengoku Astray Gundam.webp",
+    "alt": [
+      "gundam sengoku",
+      "sengoku astray",
+      "gundam astray sengoku",
+      "astray sengoku"
+    ],
+    "series": "Build Fighters"
+  },
+  {
+    "name": "XXXG-01Wf Wing Gundam Fenice",
+    "img": "images/XXXG-01Wf Wing Gundam Fenice.webp",
+    "alt": [
+      "gundam fenice",
+      "fenice",
+      "wing fenice",
+      "wing gundam fenice"
+    ],
+    "series": "Build Fighters"
+  },
+  {
+    "name": "XXXG-01Wfr Gundam Fenice Rinascita",
+    "img": "images/XXXG-01Wfr Gundam Fenice Rinascita.webp",
+    "alt": [
+      "fenice rinascita",
+      "gundam fenice rinascita"
+    ],
+    "series": "Build Fighters"
+  },
+  {
+    "name": "XM-X9999 Crossbone Gundam Maoh",
+    "img": "images/XM-X9999 Crossbone Gundam Maoh.webp",
+    "alt": [
+      "crossbone maoh",
+      "gundam crossbone maoh"
+    ],
+    "series": "Build Fighters"
+  },
+  {
+    "name": "GPB-X80 Beginning Gundam",
+    "img": "images/GPB-X80 Beginning Gundam.webp",
+    "alt": [
+      "beginning gundam"
+    ],
+    "series": "Builders Beginning G"
+  },
+  {
+    "name": "GPB-X80-30F Beginning 30 Gundam",
+    "img": "images/GPB-X80-30F Beginning 30 Gundam.webp",
+    "alt": [
+      "30 gundam",
+      "beginning 30",
+      "beginning 30 gundam"
+    ],
+    "series": "Builders Beginning G"
   }
 ]
