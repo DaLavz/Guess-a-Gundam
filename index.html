@@ -425,6 +425,35 @@
   .hide{display:none!important;}
   a{color:var(--primary);}
 
+  /* ── LEADERBOARD ─────────────────────────────────── */
+  .lb-table{width:100%;border-collapse:collapse;font-family:"Share Tech Mono",monospace;font-size:12px;margin-top:10px;}
+  .lb-table th{color:var(--primary);letter-spacing:2px;text-transform:uppercase;font-size:10px;padding:7px 8px;border-bottom:1px solid var(--line-bright);text-align:left;}
+  .lb-table th.num{text-align:right;}
+  .lb-table td{padding:7px 8px;border-bottom:1px solid var(--line);color:var(--txt-mid);vertical-align:middle;}
+  .lb-table td.num{text-align:right;color:var(--txt);}
+  .lb-table td.rank{color:var(--primary);font-family:"Teko",sans-serif;font-size:18px;width:28px;}
+  .lb-table td.pname{color:var(--txt);font-size:13px;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .lb-table tr:first-child td{padding-top:10px;}
+  .lb-table .gold td{color:var(--amber)!important;}
+  .lb-table .gold td.pname{color:var(--amber)!important;}
+  .lb-empty{font-family:"Share Tech Mono",monospace;font-size:11px;color:var(--txt-dim);text-align:center;padding:18px 0;letter-spacing:1px;}
+  .lb-status{font-family:"Share Tech Mono",monospace;font-size:10px;color:var(--txt-dim);letter-spacing:1px;text-align:right;margin-bottom:6px;}
+
+  /* Submit score panel */
+  .submit-panel{margin-top:18px;border:1px solid var(--primary-dim);background:linear-gradient(180deg,rgba(232,100,10,.08),transparent);padding:16px;}
+  .submit-panel .sp-title{font-family:"Share Tech Mono",monospace;font-size:10px;color:var(--primary);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;display:block;}
+  .submit-row{display:flex;gap:8px;align-items:stretch;}
+  .submit-row input{flex:1;background:#090a0e;border:1px solid var(--line-bright);color:var(--txt);padding:11px 13px;font-family:"Share Tech Mono",monospace;font-size:15px;outline:none;}
+  .submit-row input:focus{border-color:var(--primary-dim);}
+  .submit-row input::placeholder{color:var(--txt-dim);}
+  .submit-btn{flex-shrink:0;padding:0 18px;border:1px solid var(--primary-dim);background:rgba(232,100,10,.14);color:var(--primary);font-family:"Barlow Condensed",sans-serif;font-weight:700;letter-spacing:2px;font-size:14px;text-transform:uppercase;cursor:pointer;transition:.15s;}
+  .submit-btn:hover{background:rgba(232,100,10,.26);}
+  .submit-btn:disabled{opacity:.4;cursor:default;}
+  .submit-msg{font-family:"Share Tech Mono",monospace;font-size:11px;margin-top:8px;min-height:16px;letter-spacing:1px;}
+  .submit-msg.ok{color:var(--green);}
+  .submit-msg.err{color:var(--red);}
+
+
   /* Prompt label under scanner */
   .qprompt-label{
     text-align:center;color:var(--txt-dim);
@@ -480,6 +509,17 @@
       <button class="btn ghost" id="manageBtn">⚙ Manage Roster (<span id="rosterCount">0</span> units)</button>
       <div class="spacer"></div>
       <p class="hint" id="emptyWarn" style="display:none"></p>
+
+      <!-- LEADERBOARD -->
+      <div style="margin-top:6px;">
+        <span class="label" style="display:flex;align-items:center;justify-content:space-between;">
+          <span>Leaderboard</span>
+          <button id="lbRefreshBtn" style="background:none;border:none;color:var(--txt-dim);font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;cursor:pointer;padding:0;" title="Refresh">↻ refresh</button>
+        </span>
+        <div class="lb-status" id="lbStatus">—</div>
+        <div id="lbBody"><div class="lb-empty">Loading scores...</div></div>
+      </div>
+
     </section>
 
     <!-- QUIZ SECTION -->
@@ -566,6 +606,24 @@
       <div class="missed hide" id="missedBox">
         <h3>Misidentified Units</h3>
         <div id="missedList"></div>
+      </div>
+      <!-- SUBMIT SCORE -->
+      <div class="submit-panel" id="submitPanel">
+        <div id="spFirstTime">
+          <span class="sp-title">Submit Score to Leaderboard</span>
+          <div class="submit-row">
+            <input id="submitName" placeholder="enter your name..." maxlength="24" autocomplete="off">
+            <button class="submit-btn" id="submitBtn">Save &amp; Submit</button>
+          </div>
+          <div class="submit-msg" id="submitMsg"></div>
+        </div>
+        <div id="spKnown" class="hide">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <span class="sp-title" style="margin-bottom:0;">Score Submitted</span>
+            <button id="spChangeName" style="background:none;border:none;color:var(--txt-dim);font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;cursor:pointer;text-decoration:underline;">change name</button>
+          </div>
+          <div class="submit-msg ok" id="spKnownMsg"></div>
+        </div>
       </div>
       <button class="btn" id="againBtn">↻ Run Again</button>
       <div class="spacer"></div>
@@ -859,6 +917,134 @@ const PILOT_DATA={
   "TYP-G12CMR Typhoeus Gundam Chimera":"Alus",
 };
 
+
+/* ═══════════════════════════════════════════════════════
+   LEADERBOARD  — paste your Apps Script URL below
+   ═══════════════════════════════════════════════════════ */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyDYm6jG47oyNPVmf7wRMiVrLc_DvKBzY23WoyaY57fRDTKTaLrWCQTxbeDoFohzStm/exec";
+
+const sessionBest = { mc:0, type:0, zoom:0, impostor:0, pilot:0 };
+function recordBest(mode, val){
+  if(val > (sessionBest[mode]||0)) sessionBest[mode] = val;
+}
+
+function getSavedName(){ return localStorage.getItem("gundamPlayerName") || ""; }
+function setSavedName(n){ localStorage.setItem("gundamPlayerName", n.trim()); }
+
+function renderSubmitPanel(){
+  const name = getSavedName();
+  if(name){
+    $("spFirstTime").classList.add("hide");
+    $("spKnown").classList.remove("hide");
+    $("spKnownMsg").textContent = "\u2713 Submitted as \u201c" + name + "\u201d";
+  } else {
+    $("spFirstTime").classList.remove("hide");
+    $("spKnown").classList.add("hide");
+    $("submitMsg").textContent = "";
+    $("submitBtn").disabled = false;
+  }
+}
+
+async function autoSubmit(){
+  const name = getSavedName();
+  if(!name) return;
+  if(!SCRIPT_URL || SCRIPT_URL === "YOUR_APPS_SCRIPT_URL_HERE") return;
+  try{
+    await fetch(SCRIPT_URL + "?action=submit", {
+      method:"POST",
+      body: JSON.stringify({
+        name,
+        mc:       sessionBest.mc       || 0,
+        type:     sessionBest.type     || 0,
+        zoom:     sessionBest.zoom     || 0,
+        impostor: sessionBest.impostor || 0,
+        pilot:    sessionBest.pilot    || 0,
+      }),
+    });
+    fetchLeaderboard();
+  } catch(ex){ /* silent */ }
+}
+
+async function submitScore(){
+  const name = $("submitName").value.trim();
+  if(!name){
+    $("submitMsg").className="submit-msg err";
+    $("submitMsg").textContent="Enter a name first.";
+    return;
+  }
+  if(!SCRIPT_URL || SCRIPT_URL === "YOUR_APPS_SCRIPT_URL_HERE"){
+    $("submitMsg").className="submit-msg err";
+    $("submitMsg").textContent="No leaderboard URL configured.";
+    return;
+  }
+  const btn = $("submitBtn");
+  btn.disabled = true;
+  $("submitMsg").className="submit-msg";
+  $("submitMsg").textContent="Submitting...";
+  try{
+    await fetch(SCRIPT_URL + "?action=submit", {
+      method:"POST",
+      body: JSON.stringify({
+        name,
+        mc:       sessionBest.mc       || 0,
+        type:     sessionBest.type     || 0,
+        zoom:     sessionBest.zoom     || 0,
+        impostor: sessionBest.impostor || 0,
+        pilot:    sessionBest.pilot    || 0,
+      }),
+    });
+    setSavedName(name);
+    renderSubmitPanel();
+    fetchLeaderboard();
+  } catch(ex){
+    $("submitMsg").className="submit-msg err";
+    $("submitMsg").textContent="Submit failed — check connection.";
+    btn.disabled = false;
+  }
+}
+
+async function fetchLeaderboard(){
+  if(!SCRIPT_URL || SCRIPT_URL === "YOUR_APPS_SCRIPT_URL_HERE"){
+    $("lbBody").innerHTML='<div class="lb-empty">Add your Apps Script URL to enable the leaderboard.</div>';
+    $("lbStatus").textContent="--";
+    return;
+  }
+  $("lbStatus").textContent="Loading...";
+  try{
+    const res  = await fetch(SCRIPT_URL + "?action=get");
+    const data = await res.json();
+    renderLeaderboard(data.rows || []);
+    const d=new Date(), p=n=>String(n).padStart(2,"0");
+    $("lbStatus").textContent="Updated "+p(d.getHours())+":"+p(d.getMinutes())+":"+p(d.getSeconds());
+  } catch(ex){
+    $("lbBody").innerHTML='<div class="lb-empty">Could not load scores.</div>';
+    $("lbStatus").textContent="Offline";
+  }
+}
+
+function renderLeaderboard(rows){
+  if(!rows.length){
+    $("lbBody").innerHTML='<div class="lb-empty">No scores yet \u2014 be the first!</div>';
+    return;
+  }
+  let html='<table class="lb-table"><thead><tr><th></th><th>Name</th><th class="num">MC</th><th class="num">Type</th><th class="num">Zoom</th><th class="num">Hunt</th><th class="num">Pilot</th></tr></thead><tbody>';
+  rows.forEach((r,i)=>{
+    const cls  = i===0?' class="gold"':'';
+    const rank = i===0?'\ud83e\udd47':i===1?'\ud83e\udd48':i===2?'\ud83e\udd49':(i+1);
+    const mc = (r.mc!=null&&r.mc!=='')           ? r.mc+'%'     : '\u2014';
+    const ty = (r.type!=null&&r.type!=='')       ? r.type+'%'   : '\u2014';
+    const zm = (r.zoom!=null&&r.zoom!=='')       ? r.zoom+'%'   : '\u2014';
+    const im = (r.impostor!=null&&r.impostor!=='') ? r.impostor+'/5':'\u2014';
+    const pi = (r.pilot!=null&&r.pilot!=='')     ? r.pilot+'%'  : '\u2014';
+    html+=`<tr${cls}><td class="rank">${rank}</td><td class="pname">${escapeHtml(String(r.name))}</td><td class="num">${mc}</td><td class="num">${ty}</td><td class="num">${zm}</td><td class="num">${im}</td><td class="num">${pi}</td></tr>`;
+  });
+  html+='</tbody></table>';
+  $("lbBody").innerHTML=html;
+}
+
+setInterval(()=>{ if(!$("start").classList.contains("hide")) fetchLeaderboard(); }, 60000);
+/* ═══════════════════════════════════════════════════════ */
+
 let correctAnswerText="";
 
 /* ---------- helpers ---------- */
@@ -878,7 +1064,7 @@ function rankRelated(correct,others){
   return[...shuffleArr(family),...shuffleArr(sameSeries)];
 }
 
-function initApp(){buildSeriesDropdown();updateRosterUI();setupEventListeners();updateModeStat();}
+function initApp(){buildSeriesDropdown();updateRosterUI();setupEventListeners();updateModeStat();fetchLeaderboard();}
 
 function dedupeRoster(arr){
   const seen=new Set(),out=[];
@@ -1043,6 +1229,9 @@ function setupEventListeners(){
   $("againBtn").onclick=startQuiz;
   $("backBtn").onclick=()=>showSection("start");
   $("zipAllBtn").onclick=downloadAllImagesAsZip;
+  $("submitBtn").onclick=submitScore;
+  $("lbRefreshBtn").onclick=fetchLeaderboard;
+  $("spChangeName").onclick=()=>{ localStorage.removeItem("gundamPlayerName"); renderSubmitPanel(); };
   $("addSeriesBtn").onclick=()=>{
     const name=(prompt("New series name:")||"").trim();if(!name)return;
     if(!seriesList.includes(name)){const oi=seriesList.indexOf("Other / Custom");if(oi>=0)seriesList.splice(oi,0,name);else seriesList.push(name);}
@@ -1060,6 +1249,10 @@ function setupEventListeners(){
 function showSection(id){
   ["start","quiz","zoom","artstyle","results","manage"].forEach(x=>$(x).classList.add("hide"));
   $(id).classList.remove("hide");window.scrollTo(0,0);
+  // Reset submit panel when leaving results
+  if(id!=="results"){const sm=$("submitMsg");const sb=$("submitBtn");if(sm)sm.textContent="";if(sb)sb.disabled=false;}
+  // Fetch leaderboard when returning to start
+  if(id==="start") fetchLeaderboard();
 }
 
 function startQuiz(){
@@ -1334,17 +1527,20 @@ function showResults(){
     $("finalPct").textContent=score+" pts";$("finalLine").textContent=`Tracking efficiency: ${pct}% across ${sessionUnits.length} units`;
     $("resultLabel").textContent="Analysis Complete";
     didWin=(pct>=60);
+    recordBest("zoom", pct);
   }else if(quizMode==="artstyle"){
     didWin=(score>=3);
     $("resultLabel").textContent=didWin?"VICTORY // CALIBRATED":"DEFEAT // INCOMPLETE";
     $("finalPct").textContent=score+" / 5";
     $("finalLine").textContent=didWin?"You identified 3+ style anomalies!":"Accuracy under 60%.";
+    recordBest("impostor", score);
   }else{
     pct=sessionUnits.length>0?Math.round(score/sessionUnits.length*100):0;
     $("finalPct").textContent=pct+"%";
     $("finalLine").textContent=`${score} / ${sessionUnits.length} ${quizMode==="pilot"?"pilots identified":"units classified"}`;
     $("resultLabel").textContent=quizMode==="pilot"?"Pilot Database: Accessed":"Analysis Complete";
     didWin=(pct>=60);
+    recordBest(quizMode, pct);
   }
   const mBox=$("missedBox");const mList=$("missedList");
   if(misidentified.length>0){
@@ -1354,6 +1550,8 @@ function showResults(){
   }else{mBox.classList.add("hide");}
   // Launch sparks on a win (>=60% or artstyle >=3/5)
   if(didWin && window.launchSparks) window.launchSparks();
+  autoSubmit();
+  renderSubmitPanel();
 }
 
 function loadRoster(arr){
