@@ -7,7 +7,8 @@
       "gundam",
       "rx78"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Amuro Ray"
   },
   {
     "name": "RX-178 Gundam Mk-II",
@@ -17,7 +18,8 @@
       "mkii",
       "gundam mk2"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Kamille Bidan"
   },
   {
     "name": "MSZ-006 Zeta Gundam",
@@ -27,7 +29,8 @@
       "z gundam",
       "zeta gundam"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Kamille Bidan"
   },
   {
     "name": "MSZ-010 ZZ Gundam",
@@ -37,7 +40,8 @@
       "double zeta",
       "zz gundam"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Judau Ashta"
   },
   {
     "name": "RX-93 Nu Gundam",
@@ -48,7 +52,8 @@
       "rx93",
       "ν gundam"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Amuro Ray"
   },
   {
     "name": "F91 Gundam F91",
@@ -57,7 +62,8 @@
       "f91",
       "gundam f91"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Seabook Arno"
   },
   {
     "name": "XM-X1 Crossbone Gundam X-1",
@@ -67,7 +73,8 @@
       "crossbone gundam",
       "x1"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Tobia Arronax"
   },
   {
     "name": "LM314V21 V2 Gundam",
@@ -77,7 +84,8 @@
       "v2 gundam",
       "victory 2"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Usso Ewin"
   },
   {
     "name": "RX-0 Unicorn Gundam (Unicorn Mode)",
@@ -87,7 +95,8 @@
       "unicorn mode",
       "unicorn gundam"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Banagher Links"
   },
   {
     "name": "RX-0 Unicorn Gundam (Destroy Mode)",
@@ -97,7 +106,8 @@
       "unicorn destroy",
       "unicorn destroy mode"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Banagher Links"
   },
   {
     "name": "RX-0 Full Armor Unicorn Gundam",
@@ -107,7 +117,8 @@
       "fa unicorn",
       "full armor unicorn gundam"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Banagher Links"
   },
   {
     "name": "GF13-017NJ Shining Gundam",
@@ -116,7 +127,8 @@
       "shining",
       "shining gundam"
     ],
-    "series": "G Gundam"
+    "series": "G Gundam",
+    "pilot": "Domon Kasshu"
   },
   {
     "name": "GF13-017NJII God Gundam",
@@ -126,7 +138,8 @@
       "burning gundam",
       "god"
     ],
-    "series": "G Gundam"
+    "series": "G Gundam",
+    "pilot": "Domon Kasshu"
   },
   {
     "name": "Master Gundam",
@@ -135,7 +148,8 @@
       "master",
       "master gundam"
     ],
-    "series": "G Gundam"
+    "series": "G Gundam",
+    "pilot": "Master Asia"
   },
   {
     "name": "Devil Gundam",
@@ -144,7 +158,8 @@
       "devil gundam",
       "dark gundam"
     ],
-    "series": "G Gundam"
+    "series": "G Gundam",
+    "pilot": "Rain Mikamura"
   },
   {
     "name": "XXXG-01W Wing Gundam",
@@ -153,7 +168,8 @@
       "wing gundam",
       "wing"
     ],
-    "series": "Gundam Wing"
+    "series": "Gundam Wing",
+    "pilot": "Heero Yuy"
   },
   {
     "name": "XXXG-00W0 Wing Gundam Zero",
@@ -162,7 +178,8 @@
       "wing zero",
       "wing gundam zero"
     ],
-    "series": "Gundam Wing"
+    "series": "Gundam Wing",
+    "pilot": "Heero Yuy"
   },
   {
     "name": "XXXG-01D Gundam Deathscythe",
@@ -170,7 +187,8 @@
     "alt": [
       "deathscythe"
     ],
-    "series": "Gundam Wing"
+    "series": "Gundam Wing",
+    "pilot": "Duo Maxwell"
   },
   {
     "name": "XXXG-01H Gundam Heavyarms",
@@ -178,7 +196,8 @@
     "alt": [
       "heavyarms"
     ],
-    "series": "Gundam Wing"
+    "series": "Gundam Wing",
+    "pilot": "Trowa Barton"
   },
   {
     "name": "XXXG-01S Shenlong Gundam",
@@ -187,7 +206,8 @@
       "shenlong",
       "altron"
     ],
-    "series": "Gundam Wing"
+    "series": "Gundam Wing",
+    "pilot": "Chang Wufei"
   },
   {
     "name": "XXXG-01SR Sandrock Gundam",
@@ -195,7 +215,8 @@
     "alt": [
       "sandrock"
     ],
-    "series": "Gundam Wing"
+    "series": "Gundam Wing",
+    "pilot": "Quatre Raberba Winner"
   },
   {
     "name": "OZ-13MS Gundam Epyon",
@@ -203,7 +224,8 @@
     "alt": [
       "epyon"
     ],
-    "series": "Gundam Wing"
+    "series": "Gundam Wing",
+    "pilot": "Zechs Merquise"
   },
   {
     "name": "GAT-X105 Strike Gundam",
@@ -212,7 +234,8 @@
       "strike",
       "strike gundam"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Kira Yamato"
   },
   {
     "name": "ZGMF-X10A Freedom Gundam",
@@ -221,7 +244,8 @@
       "freedom",
       "freedom gundam"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Kira Yamato"
   },
   {
     "name": "ZGMF-X09A Justice Gundam",
@@ -230,7 +254,8 @@
       "justice",
       "justice gundam"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Athrun Zala"
   },
   {
     "name": "GAT-X303 Aegis Gundam",
@@ -238,7 +263,8 @@
     "alt": [
       "aegis"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Athrun Zala"
   },
   {
     "name": "GAT-X102 Duel Gundam",
@@ -246,7 +272,8 @@
     "alt": [
       "duel"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Yzak Joule"
   },
   {
     "name": "GAT-X103 Buster Gundam",
@@ -254,7 +281,8 @@
     "alt": [
       "buster"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Dearka Elsman"
   },
   {
     "name": "GAT-X207 Blitz Gundam",
@@ -262,7 +290,8 @@
     "alt": [
       "blitz"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Nicol Amalfi"
   },
   {
     "name": "ZGMF-X13A Providence Gundam",
@@ -270,7 +299,8 @@
     "alt": [
       "providence"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Rau Le Creuset"
   },
   {
     "name": "ZGMF-X56S Impulse Gundam",
@@ -278,7 +308,8 @@
     "alt": [
       "impulse"
     ],
-    "series": "SEED Destiny"
+    "series": "SEED Destiny",
+    "pilot": "Shinn Asuka"
   },
   {
     "name": "ZGMF-X42S Destiny Gundam",
@@ -287,7 +318,8 @@
       "destiny",
       "destiny gundam"
     ],
-    "series": "SEED Destiny"
+    "series": "SEED Destiny",
+    "pilot": "Shinn Asuka"
   },
   {
     "name": "ZGMF-X20A Strike Freedom Gundam",
@@ -295,7 +327,8 @@
     "alt": [
       "strike freedom"
     ],
-    "series": "SEED Destiny"
+    "series": "SEED Destiny",
+    "pilot": "Kira Yamato"
   },
   {
     "name": "ZGMF-X19A Infinite Justice Gundam",
@@ -303,7 +336,8 @@
     "alt": [
       "infinite justice"
     ],
-    "series": "SEED Destiny"
+    "series": "SEED Destiny",
+    "pilot": "Athrun Zala"
   },
   {
     "name": "ZGMF-X666S Legend Gundam",
@@ -312,7 +346,8 @@
       "legend",
       "legend gundam"
     ],
-    "series": "SEED Destiny"
+    "series": "SEED Destiny",
+    "pilot": "Rey Za Burrel"
   },
   {
     "name": "GN-001 Gundam Exia",
@@ -320,7 +355,8 @@
     "alt": [
       "exia"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Setsuna F. Seiei"
   },
   {
     "name": "GN-002 Gundam Dynames",
@@ -328,7 +364,8 @@
     "alt": [
       "dynames"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Lockon Stratos"
   },
   {
     "name": "GN-003 Gundam Kyrios",
@@ -336,7 +373,8 @@
     "alt": [
       "kyrios"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Allelujah Haptism"
   },
   {
     "name": "GN-005 Gundam Virtue",
@@ -344,7 +382,8 @@
     "alt": [
       "virtue"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Tieria Erde"
   },
   {
     "name": "GN-0000 00 Gundam",
@@ -354,7 +393,8 @@
       "double o",
       "00"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Setsuna F. Seiei"
   },
   {
     "name": "00 Raiser",
@@ -363,7 +403,8 @@
       "00 raiser",
       "oo raiser"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Setsuna F. Seiei"
   },
   {
     "name": "GNW-001 Gundam Throne Eins",
@@ -372,7 +413,8 @@
       "throne eins",
       "throne"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Johann Trinity"
   },
   {
     "name": "Reborns Gundam",
@@ -381,7 +423,8 @@
       "reborns",
       "reborns gundam"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Ribbons Almark"
   },
   {
     "name": "ASW-G-08 Gundam Barbatos",
@@ -389,7 +432,8 @@
     "alt": [
       "barbatos"
     ],
-    "series": "Iron-Blooded Orphans"
+    "series": "Iron-Blooded Orphans",
+    "pilot": "Mikazuki Augus"
   },
   {
     "name": "Gundam Barbatos Lupus Rex",
@@ -398,7 +442,8 @@
       "lupus rex",
       "barbatos lupus"
     ],
-    "series": "Iron-Blooded Orphans"
+    "series": "Iron-Blooded Orphans",
+    "pilot": "Mikazuki Augus"
   },
   {
     "name": "ASW-G-01 Gundam Bael",
@@ -406,7 +451,8 @@
     "alt": [
       "bael"
     ],
-    "series": "Iron-Blooded Orphans"
+    "series": "Iron-Blooded Orphans",
+    "pilot": "McGillis Fareed"
   },
   {
     "name": "ASW-G-66 Gundam Kimaris",
@@ -414,7 +460,8 @@
     "alt": [
       "kimaris"
     ],
-    "series": "Iron-Blooded Orphans"
+    "series": "Iron-Blooded Orphans",
+    "pilot": "Gaelio Bauduin"
   },
   {
     "name": "Turn A Gundam",
@@ -424,7 +471,8 @@
       "∀ gundam",
       "turn a gundam"
     ],
-    "series": "Turn A Gundam"
+    "series": "Turn A Gundam",
+    "pilot": "Loran Cehack"
   },
   {
     "name": "Turn X",
@@ -432,7 +480,8 @@
     "alt": [
       "turn x"
     ],
-    "series": "Turn A Gundam"
+    "series": "Turn A Gundam",
+    "pilot": "Gym Ghingham"
   },
   {
     "name": "GX-9900 Gundam X",
@@ -441,7 +490,8 @@
       "gundam x",
       "gx"
     ],
-    "series": "After War Gundam X"
+    "series": "After War Gundam X",
+    "pilot": "Garrod Ran"
   },
   {
     "name": "XVX-016 Gundam Aerial",
@@ -450,7 +500,8 @@
       "aerial",
       "gundam aerial"
     ],
-    "series": "The Witch from Mercury"
+    "series": "The Witch from Mercury",
+    "pilot": "Suletta Mercury"
   },
   {
     "name": "Gundam Lfrith",
@@ -458,7 +509,8 @@
     "alt": [
       "lfrith"
     ],
-    "series": "The Witch from Mercury"
+    "series": "The Witch from Mercury",
+    "pilot": "Prospera Mercury"
   },
   {
     "name": "RX-105 Xi Gundam",
@@ -469,7 +521,8 @@
       "ksi",
       "ξ gundam"
     ],
-    "series": "Hathaway's Flash"
+    "series": "Hathaway's Flash",
+    "pilot": "Hathaway Noa"
   },
   {
     "name": "TX-ff104 Alyzeus",
@@ -479,7 +532,8 @@
       "TX ff104",
       "ff104"
     ],
-    "series": "Hathaway's Flash"
+    "series": "Hathaway's Flash",
+    "pilot": "Gawain Browne"
   },
   {
     "name": "RX-94 Mass Production Nu Gundam",
@@ -489,7 +543,8 @@
       "mass production nu gundam",
       "mass produced nu gundam"
     ],
-    "series": "Hathaway's Flash"
+    "series": "Hathaway's Flash",
+    "pilot": "EFSF Pilot"
   },
   {
     "name": "RX-104FF Penelope",
@@ -497,7 +552,8 @@
     "alt": [
       "penelope"
     ],
-    "series": "Hathaway's Flash"
+    "series": "Hathaway's Flash",
+    "pilot": "Lane Aim"
   },
   {
     "name": "GQuuuuuuX",
@@ -507,7 +563,8 @@
       "gquux",
       "jeekwux"
     ],
-    "series": "Gundam GQuuuuuuX"
+    "series": "Gundam GQuuuuuuX",
+    "pilot": "GQuuuuuuX"
   },
   {
     "name": "GFreD",
@@ -516,7 +573,8 @@
       "gfred",
       "gundam fred"
     ],
-    "series": "Gundam GQuuuuuuX"
+    "series": "Gundam GQuuuuuuX",
+    "pilot": "Fred"
   },
   {
     "name": "Red Gundam",
@@ -525,7 +583,8 @@
       "red gundam",
       "red"
     ],
-    "series": "Gundam GQuuuuuuX"
+    "series": "Gundam GQuuuuuuX",
+    "pilot": "Red"
   },
   {
     "name": "White Gundam",
@@ -534,7 +593,8 @@
       "white gundam",
       "white"
     ],
-    "series": "Gundam GQuuuuuuX"
+    "series": "Gundam GQuuuuuuX",
+    "pilot": "White"
   },
   {
     "name": "01 Gundam",
@@ -544,7 +604,8 @@
       "zero one gundam",
       "01"
     ],
-    "series": "Gundam GQuuuuuuX"
+    "series": "Gundam GQuuuuuuX",
+    "pilot": "01"
   },
   {
     "name": "STTS-909 Rising Freedom Gundam",
@@ -553,7 +614,8 @@
       "rising freedom",
       "rising"
     ],
-    "series": "SEED FREEDOM"
+    "series": "SEED FREEDOM",
+    "pilot": "Kira Yamato"
   },
   {
     "name": "ZGMF/A-262PD-P Mighty Strike Freedom Gundam",
@@ -563,7 +625,8 @@
       "mighty strike",
       "msf"
     ],
-    "series": "SEED FREEDOM"
+    "series": "SEED FREEDOM",
+    "pilot": "Kira Yamato"
   },
   {
     "name": "STTS-808 Immortal Justice Gundam",
@@ -572,7 +635,8 @@
       "immortal justice",
       "immortal"
     ],
-    "series": "SEED FREEDOM"
+    "series": "SEED FREEDOM",
+    "pilot": "Athrun Zala"
   },
   {
     "name": "ZGMF-1027M Duel Blitz Gundam",
@@ -580,7 +644,8 @@
     "alt": [
       "duel blitz"
     ],
-    "series": "SEED FREEDOM"
+    "series": "SEED FREEDOM",
+    "pilot": "Yzak Joule"
   },
   {
     "name": "ZGMF-103HD Lightning Buster Gundam",
@@ -588,7 +653,8 @@
     "alt": [
       "lightning buster"
     ],
-    "series": "SEED FREEDOM"
+    "series": "SEED FREEDOM",
+    "pilot": "Dearka Elsman"
   },
   {
     "name": "FA-78 Full Armor Gundam (Thunderbolt)",
@@ -598,7 +664,8 @@
       "full armor gundam",
       "thunderbolt gundam"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Io Fleming"
   },
   {
     "name": "RX-78AL Atlas Gundam",
@@ -607,7 +674,8 @@
       "atlas",
       "atlas gundam"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Io Fleming"
   },
   {
     "name": "RX-78GP01 Gundam GP01 Zephyranthes",
@@ -616,7 +684,8 @@
       "gp01",
       "zephyranthes"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Kou Uraki"
   },
   {
     "name": "RX-78GP01-Fb Gundam GP01 Full Vernian",
@@ -626,7 +695,8 @@
       "full vernian",
       "gp01 fb"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Kou Uraki"
   },
   {
     "name": "RX-78GP02A Gundam GP02A Physalis",
@@ -635,7 +705,8 @@
       "gp02",
       "physalis"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Anavel Gato"
   },
   {
     "name": "RX-78GP03 Gundam GP03 Dendrobium",
@@ -645,7 +716,8 @@
       "dendrobium",
       "stamen"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Kou Uraki"
   },
   {
     "name": "LM312V04 Victory Gundam",
@@ -655,7 +727,8 @@
       "victory gundam",
       "v gundam"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Usso Ewin"
   },
   {
     "name": "V-Dash Gundam",
@@ -665,7 +738,8 @@
       "victory dash",
       "vdash"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Usso Ewin"
   },
   {
     "name": "V2 Assault Buster Gundam",
@@ -674,7 +748,8 @@
       "v2 assault buster",
       "assault buster"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Usso Ewin"
   },
   {
     "name": "GSX-401FW Stargazer Gundam",
@@ -682,7 +757,8 @@
     "alt": [
       "stargazer"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Sven Cal Bayang"
   },
   {
     "name": "MBF-P02 Gundam Astray Red Frame",
@@ -692,7 +768,8 @@
       "red frame",
       "astray red frame"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Lowe Guele"
   },
   {
     "name": "MBF-P03 Gundam Astray Blue Frame",
@@ -702,7 +779,8 @@
       "blue frame",
       "astray blue frame"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Gai Murakumo"
   },
   {
     "name": "MBF-P01-Re2 Gundam Astray Gold Frame",
@@ -712,7 +790,8 @@
       "gold frame",
       "astray gold frame"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Rondo Ghina Sahaku"
   },
   {
     "name": "GAT-X131 Calamity Gundam",
@@ -720,7 +799,8 @@
     "alt": [
       "calamity"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Orga Sabnak"
   },
   {
     "name": "GAT-X252 Forbidden Gundam",
@@ -728,7 +808,8 @@
     "alt": [
       "forbidden"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Shani Andras"
   },
   {
     "name": "GAT-X370 Raider Gundam",
@@ -736,7 +817,8 @@
     "alt": [
       "raider"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Clotho Buer"
   },
   {
     "name": "GNT-0000 00 Qan[T]",
@@ -747,7 +829,8 @@
       "qan t",
       "quanta"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Setsuna F. Seiei"
   },
   {
     "name": "GN-006 Cherudim Gundam",
@@ -756,7 +839,8 @@
       "checkbox",
       "cherudim"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Lockon Stratos"
   },
   {
     "name": "GN-007 Arios Gundam",
@@ -764,7 +848,8 @@
     "alt": [
       "arios"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Allelujah Haptism"
   },
   {
     "name": "GN-008 Seravee Gundam",
@@ -772,7 +857,8 @@
     "alt": [
       "seravee"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Tieria Erde"
   },
   {
     "name": "CB-002 Raphael Gundam",
@@ -780,7 +866,8 @@
     "alt": [
       "raphael"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Tieria Erde"
   },
   {
     "name": "GN-011 Gundam Harute",
@@ -788,7 +875,8 @@
     "alt": [
       "harute"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Allelujah Haptism"
   },
   {
     "name": "GN-010 Gundam Zabanya",
@@ -796,7 +884,8 @@
     "alt": [
       "zabanya"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Lockon Stratos"
   },
   {
     "name": "GNW-002 Gundam Throne Zwei",
@@ -804,7 +893,8 @@
     "alt": [
       "throne zwei"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Michael Trinity"
   },
   {
     "name": "GNW-003 Gundam Throne Drei",
@@ -812,7 +902,8 @@
     "alt": [
       "throne drei"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Nena Trinity"
   },
   {
     "name": "ASW-G-08 Gundam Barbatos Lupus",
@@ -821,7 +912,8 @@
       "barbatos lupus",
       "lupus"
     ],
-    "series": "Iron-Blooded Orphans"
+    "series": "Iron-Blooded Orphans",
+    "pilot": "Mikazuki Augus"
   },
   {
     "name": "ASW-G-11 Gundam Gusion Rebake",
@@ -830,7 +922,8 @@
       "gusion rebake",
       "gusion"
     ],
-    "series": "Iron-Blooded Orphans"
+    "series": "Iron-Blooded Orphans",
+    "pilot": "Akihiro Altland"
   },
   {
     "name": "Gundam Vidar",
@@ -838,7 +931,8 @@
     "alt": [
       "vidar"
     ],
-    "series": "Iron-Blooded Orphans"
+    "series": "Iron-Blooded Orphans",
+    "pilot": "Gaelio Bauduin"
   },
   {
     "name": "ASW-G-64 Gundam Flauros",
@@ -846,7 +940,8 @@
     "alt": [
       "flauros"
     ],
-    "series": "Iron-Blooded Orphans"
+    "series": "Iron-Blooded Orphans",
+    "pilot": "Dante Mogro"
   },
   {
     "name": "ASW-G-29 Gundam Astaroth",
@@ -854,7 +949,8 @@
     "alt": [
       "astaroth"
     ],
-    "series": "Iron-Blooded Orphans"
+    "series": "Iron-Blooded Orphans",
+    "pilot": "Norba Shino"
   },
   {
     "name": "GX-9900-DV Gundam X Divider",
@@ -864,7 +960,8 @@
       "gundam x divider",
       "divider"
     ],
-    "series": "After War Gundam X"
+    "series": "After War Gundam X",
+    "pilot": "Garrod Ran"
   },
   {
     "name": "GX-9901-DX Gundam Double X",
@@ -873,7 +970,8 @@
       "double x",
       "gundam double x"
     ],
-    "series": "After War Gundam X"
+    "series": "After War Gundam X",
+    "pilot": "Garrod Ran"
   },
   {
     "name": "GW-9800 Gundam Airmaster",
@@ -881,7 +979,8 @@
     "alt": [
       "airmaster"
     ],
-    "series": "After War Gundam X"
+    "series": "After War Gundam X",
+    "pilot": "Witz Sou"
   },
   {
     "name": "GT-9600 Gundam Leopard",
@@ -890,7 +989,8 @@
       "leopard",
       "gundam leopard"
     ],
-    "series": "After War Gundam X"
+    "series": "After War Gundam X",
+    "pilot": "Roabea Roy"
   },
   {
     "name": "NRX-0013 Gundam Virsago",
@@ -898,7 +998,8 @@
     "alt": [
       "virsago"
     ],
-    "series": "After War Gundam X"
+    "series": "After War Gundam X",
+    "pilot": "Shagia Frost"
   },
   {
     "name": "NRX-0015 Gundam Ashtaron",
@@ -906,7 +1007,8 @@
     "alt": [
       "ashtaron"
     ],
-    "series": "After War Gundam X"
+    "series": "After War Gundam X",
+    "pilot": "Olba Frost"
   },
   {
     "name": "XVX-016RN Gundam Aerial Rebuild",
@@ -914,7 +1016,8 @@
     "alt": [
       "aerial rebuild"
     ],
-    "series": "The Witch from Mercury"
+    "series": "The Witch from Mercury",
+    "pilot": "Suletta Mercury"
   },
   {
     "name": "X-EX01 Gundam Calibarn",
@@ -922,7 +1025,8 @@
     "alt": [
       "calibarn"
     ],
-    "series": "The Witch from Mercury"
+    "series": "The Witch from Mercury",
+    "pilot": "Suletta Mercury"
   },
   {
     "name": "FP/A-77 Gundam Pharact",
@@ -930,7 +1034,8 @@
     "alt": [
       "pharact"
     ],
-    "series": "The Witch from Mercury"
+    "series": "The Witch from Mercury",
+    "pilot": "Elan Ceres"
   },
   {
     "name": "MDX-0003 Gundam Schwarzette",
@@ -938,7 +1043,8 @@
     "alt": [
       "schwarzette"
     ],
-    "series": "The Witch from Mercury"
+    "series": "The Witch from Mercury",
+    "pilot": "Shaddiq Zenelli"
   },
   {
     "name": "EDM-GA-01 Gundam Lfrith Ur",
@@ -946,7 +1052,8 @@
     "alt": [
       "lfrith ur"
     ],
-    "series": "The Witch from Mercury"
+    "series": "The Witch from Mercury",
+    "pilot": "Ericht Samaya"
   },
   {
     "name": "EDM-GA-02 Gundam Lfrith Thorn",
@@ -954,7 +1061,8 @@
     "alt": [
       "lfrith thorn"
     ],
-    "series": "The Witch from Mercury"
+    "series": "The Witch from Mercury",
+    "pilot": "Norea du Noc"
   },
   {
     "name": "AGE-1 Gundam AGE-1 Normal",
@@ -964,7 +1072,8 @@
       "age-1",
       "age 1 normal"
     ],
-    "series": "Gundam AGE"
+    "series": "Gundam AGE",
+    "pilot": "Flit Asuno"
   },
   {
     "name": "AGE-1T Gundam AGE-1 Titus",
@@ -973,7 +1082,8 @@
       "age1 titus",
       "titus"
     ],
-    "series": "Gundam AGE"
+    "series": "Gundam AGE",
+    "pilot": "Flit Asuno"
   },
   {
     "name": "AGE-1S Gundam AGE-1 Spallow",
@@ -982,7 +1092,8 @@
       "age1 spallow",
       "spallow"
     ],
-    "series": "Gundam AGE"
+    "series": "Gundam AGE",
+    "pilot": "Flit Asuno"
   },
   {
     "name": "AGE-2 Gundam AGE-2 Normal",
@@ -992,7 +1103,8 @@
       "age-2",
       "age 2 normal"
     ],
-    "series": "Gundam AGE"
+    "series": "Gundam AGE",
+    "pilot": "Asemu Asuno"
   },
   {
     "name": "AGE-2DB Gundam AGE-2 Double Bullet",
@@ -1001,7 +1113,8 @@
       "double bullet",
       "age2 double bullet"
     ],
-    "series": "Gundam AGE"
+    "series": "Gundam AGE",
+    "pilot": "Asemu Asuno"
   },
   {
     "name": "AGE-2DH Gundam AGE-2 Dark Hound",
@@ -1010,7 +1123,8 @@
       "dark hound",
       "age2 dark hound"
     ],
-    "series": "Gundam AGE"
+    "series": "Gundam AGE",
+    "pilot": "Asemu Asuno"
   },
   {
     "name": "AGE-3 Gundam AGE-3 Normal",
@@ -1020,7 +1134,8 @@
       "age-3",
       "age 3 normal"
     ],
-    "series": "Gundam AGE"
+    "series": "Gundam AGE",
+    "pilot": "Kio Asuno"
   },
   {
     "name": "AGE-3O Gundam AGE-3 Orbital",
@@ -1029,7 +1144,8 @@
       "age3 orbital",
       "orbital"
     ],
-    "series": "Gundam AGE"
+    "series": "Gundam AGE",
+    "pilot": "Kio Asuno"
   },
   {
     "name": "AGE-FX Gundam AGE-FX",
@@ -1039,7 +1155,8 @@
       "age fx",
       "age-fx"
     ],
-    "series": "Gundam AGE"
+    "series": "Gundam AGE",
+    "pilot": "Kio Asuno"
   },
   {
     "name": "xvm-fzc Gundam Legilis",
@@ -1047,7 +1164,8 @@
     "alt": [
       "legilis"
     ],
-    "series": "Gundam AGE"
+    "series": "Gundam AGE",
+    "pilot": "Zeheart Galette"
   },
   {
     "name": "Build Burning Gundam",
@@ -1055,7 +1173,8 @@
     "alt": [
       "build burning"
     ],
-    "series": "Build Fighters Try"
+    "series": "Build Fighters Try",
+    "pilot": "Sekai Kamiki"
   },
   {
     "name": "Try Burning Gundam",
@@ -1063,7 +1182,8 @@
     "alt": [
       "try burning"
     ],
-    "series": "Build Fighters Try"
+    "series": "Build Fighters Try",
+    "pilot": "Sekai Kamiki"
   },
   {
     "name": "Lightning Gundam",
@@ -1072,7 +1192,8 @@
       "lightning gundam",
       "lightning"
     ],
-    "series": "Build Fighters Try"
+    "series": "Build Fighters Try",
+    "pilot": "Yuuma Kousaka"
   },
   {
     "name": "Gundam Tryon 3",
@@ -1082,7 +1203,8 @@
       "tryon",
       "tryon3"
     ],
-    "series": "Build Fighters Try"
+    "series": "Build Fighters Try",
+    "pilot": "Fumina Hoshino"
   },
   {
     "name": "Gundam 00 Diver",
@@ -1091,7 +1213,8 @@
       "00 diver",
       "oo diver"
     ],
-    "series": "Build Divers"
+    "series": "Build Divers",
+    "pilot": "Riku Mikami"
   },
   {
     "name": "Gundam 00 Sky",
@@ -1100,7 +1223,8 @@
       "00 sky",
       "oo sky"
     ],
-    "series": "Build Divers"
+    "series": "Build Divers",
+    "pilot": "Riku Mikami"
   },
   {
     "name": "Gundam Seltsam",
@@ -1108,7 +1232,8 @@
     "alt": [
       "seltsam"
     ],
-    "series": "Build Divers"
+    "series": "Build Divers",
+    "pilot": "Ogre"
   },
   {
     "name": "PFF-X7 Core Gundam",
@@ -1117,7 +1242,8 @@
       "core gundam",
       "core"
     ],
-    "series": "Build Divers Re:RISE"
+    "series": "Build Divers Re:RISE",
+    "pilot": "Hiroto Kuga"
   },
   {
     "name": "PFF-X7II Core Gundam II",
@@ -1127,7 +1253,8 @@
       "core gundam ii",
       "core 2"
     ],
-    "series": "Build Divers Re:RISE"
+    "series": "Build Divers Re:RISE",
+    "pilot": "Hiroto Kuga"
   },
   {
     "name": "PFF-X7/E3 Earthree Gundam",
@@ -1135,7 +1262,8 @@
     "alt": [
       "earthree"
     ],
-    "series": "Build Divers Re:RISE"
+    "series": "Build Divers Re:RISE",
+    "pilot": "Hiroto Kuga"
   },
   {
     "name": "PFF-X7/J5 Jupitive Gundam",
@@ -1143,7 +1271,8 @@
     "alt": [
       "jupitive"
     ],
-    "series": "Build Divers Re:RISE"
+    "series": "Build Divers Re:RISE",
+    "pilot": "Parviz"
   },
   {
     "name": "PFF-X7II/U7 Uraven Gundam",
@@ -1151,7 +1280,8 @@
     "alt": [
       "uraven"
     ],
-    "series": "Build Divers Re:RISE"
+    "series": "Build Divers Re:RISE",
+    "pilot": "Kazami"
   },
   {
     "name": "ZGMF-X19AK Gundam Justice Knight",
@@ -1159,7 +1289,8 @@
     "alt": [
       "justice knight"
     ],
-    "series": "Build Divers Re:RISE"
+    "series": "Build Divers Re:RISE",
+    "pilot": "May"
   },
   {
     "name": "AGP-X1/E3 Alus Earthree Gundam",
@@ -1168,7 +1299,8 @@
       "alus earthree",
       "alus"
     ],
-    "series": "Build Divers Re:RISE"
+    "series": "Build Divers Re:RISE",
+    "pilot": "Alus"
   },
   {
     "name": "RX-0 Unicorn Gundam Phenex",
@@ -1177,7 +1309,8 @@
       "phenex",
       "gundam phenex"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Rita Bernal"
   },
   {
     "name": "RX-9 Narrative Gundam",
@@ -1186,7 +1319,8 @@
       "narrative",
       "narrative gundam"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Jona Basta"
   },
   {
     "name": "RX-78NT-1 Gundam NT-1",
@@ -1197,7 +1331,8 @@
       "gundam nt",
       "gundam nt"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Christina Mackenzie"
   },
   {
     "name": "RX-79 Gundam Ground Type",
@@ -1206,7 +1341,8 @@
       "ground type",
       "gundam ground type"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Shiro Amada"
   },
   {
     "name": "MBF-P05LM Gundam Astray Mirage Frame",
@@ -1217,7 +1353,8 @@
       "astray mirage frame",
       "gundam astray mirage frame"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Rondo Mina Sahaku"
   },
   {
     "name": "MBF-P04 Gundam Astray Green Frame",
@@ -1228,7 +1365,8 @@
       "astray green frame",
       "gundam astray green frame"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Gai Murakumo"
   },
   {
     "name": "ASW-G-47 Gundam Vual",
@@ -1237,7 +1375,8 @@
       "vual",
       "gundam vual"
     ],
-    "series": "Iron-Blooded Orphans"
+    "series": "Iron-Blooded Orphans",
+    "pilot": "Iok Kujan"
   },
   {
     "name": "ASW-G-71 Gundam Dantalion",
@@ -1246,7 +1385,8 @@
       "dantalion",
       "gundam dantalion"
     ],
-    "series": "Iron-Blooded Orphans"
+    "series": "Iron-Blooded Orphans",
+    "pilot": "Hush Middy"
   },
   {
     "name": "GN-000 0 Gundam",
@@ -1254,7 +1394,8 @@
     "alt": [
       "0 gundam"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Ribbons Almark"
   },
   {
     "name": "GNW-20000 Arche Gundam",
@@ -1263,7 +1404,8 @@
       "arche gundam",
       "arche"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Ali Al-Saachez"
   },
   {
     "name": "GN-004 Gundam Nadleeh",
@@ -1272,7 +1414,8 @@
       "nadleeh",
       "gundam nadleeh"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Tieria Erde"
   },
   {
     "name": "AVP-03 Gundam Lfrith Anavata",
@@ -1282,7 +1425,8 @@
       "anavata",
       "gundam lfrith anavata"
     ],
-    "series": "The Witch from Mercury"
+    "series": "The Witch from Mercury",
+    "pilot": "Ericht Samaya"
   },
   {
     "name": "XGF-01 Gundam Lfrith Jiu",
@@ -1292,7 +1436,8 @@
       "lfrith jiu",
       "gundam lfrith jiu"
     ],
-    "series": "The Witch from Mercury"
+    "series": "The Witch from Mercury",
+    "pilot": "Lauda Neis"
   },
   {
     "name": "YG-111 Gundam G-Self",
@@ -1302,7 +1447,8 @@
       "g self",
       "gself"
     ],
-    "series": "Reconguista in G"
+    "series": "Reconguista in G",
+    "pilot": "Bellri Zenam"
   },
   {
     "name": "VGMM-Gf10 Gundam G-Lucifer",
@@ -1313,7 +1459,8 @@
       "g lucifer",
       "gundam glucifer"
     ],
-    "series": "Reconguista in G"
+    "series": "Reconguista in G",
+    "pilot": "Mask / Luin Lee"
   },
   {
     "name": "MSAM-033 Gundam G-Arcane",
@@ -1324,7 +1471,8 @@
       "g arcane",
       "gundam garcane"
     ],
-    "series": "Reconguista in G"
+    "series": "Reconguista in G",
+    "pilot": "Aida Surugan"
   },
   {
     "name": "RX-0 Unicorn Gundam Banshee",
@@ -1334,7 +1482,8 @@
       "unicorn banshee",
       "gundam banshee"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Marida Cruz"
   },
   {
     "name": "RX-0 Unicorn Gundam Banshee Norn",
@@ -1344,7 +1493,8 @@
       "gundam banshee norn",
       "unicorn banshee norn"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Marida Cruz"
   },
   {
     "name": "PFF-X7V2 Veetwo Gundam",
@@ -1353,7 +1503,8 @@
       "veetwo gundam",
       "veetwo"
     ],
-    "series": "Build Divers Re:RISE"
+    "series": "Build Divers Re:RISE",
+    "pilot": "Hinata Mukai"
   },
   {
     "name": "PFF-X7RANIMA Gundam Anima［Rize］",
@@ -1362,7 +1513,8 @@
       "gundam anima",
       "anima"
     ],
-    "series": "Build Divers Re:RISE"
+    "series": "Build Divers Re:RISE",
+    "pilot": "Parviz"
   },
   {
     "name": "PFF-X7M4 Marsfour Gundam",
@@ -1371,7 +1523,8 @@
       "marsfour gundam",
       "marsfour"
     ],
-    "series": "Build Divers Re:RISE"
+    "series": "Build Divers Re:RISE",
+    "pilot": "Kazami"
   },
   {
     "name": "PFF-X7M1 Mercuone Gundam",
@@ -1380,7 +1533,8 @@
       "mercuone gundam",
       "mercuone"
     ],
-    "series": "Build Divers Re:RISE"
+    "series": "Build Divers Re:RISE",
+    "pilot": "May"
   },
   {
     "name": "PFF-X7IIS6 Saturnix Gundam",
@@ -1389,7 +1543,8 @@
       "saturnix gundam",
       "saturnix"
     ],
-    "series": "Build Divers Re:RISE"
+    "series": "Build Divers Re:RISE",
+    "pilot": "Kazami"
   },
   {
     "name": "PFF-X7IIN8 Nepteight Gundam",
@@ -1398,7 +1553,8 @@
       "nepteight gundam",
       "nepteight"
     ],
-    "series": "Build Divers Re:RISE"
+    "series": "Build Divers Re:RISE",
+    "pilot": "May"
   },
   {
     "name": "PFF-X7IIBUILD DiVERS ReRising Gundam",
@@ -1408,7 +1564,8 @@
       "rerise gundam",
       "divers rerising gundam"
     ],
-    "series": "Build Divers Re:RISE"
+    "series": "Build Divers Re:RISE",
+    "pilot": "Hiroto Kuga"
   },
   {
     "name": "AGE-IIMG Gundam AGE-2 Magnum",
@@ -1418,7 +1575,8 @@
       "magnum",
       "age 2 magnum"
     ],
-    "series": "Build Divers"
+    "series": "Build Divers",
+    "pilot": "Sarah"
   },
   {
     "name": "RX-78GP02R Gundam GP-Rase-Two",
@@ -1429,7 +1587,8 @@
       "rase-two",
       "gundam gp rase two"
     ],
-    "series": "Build Divers"
+    "series": "Build Divers",
+    "pilot": "Nanami Ota"
   },
   {
     "name": "AC-01 Miss Sazabi",
@@ -1437,7 +1596,8 @@
     "alt": [
       "miss sazabi"
     ],
-    "series": "Build Fighters"
+    "series": "Build Fighters",
+    "pilot": "Aila Jyrkiäinen"
   },
   {
     "name": "GAT-X105B Build Strike Gundam",
@@ -1446,7 +1606,8 @@
       "build strike",
       "build strike gundam"
     ],
-    "series": "Build Fighters"
+    "series": "Build Fighters",
+    "pilot": "Sei Iori & Reiji"
   },
   {
     "name": "GAT-X105BFP Build Strike Gundam Full Package",
@@ -1455,7 +1616,8 @@
       "build strike full package",
       "build strike gundam full package"
     ],
-    "series": "Build Fighters"
+    "series": "Build Fighters",
+    "pilot": "Sei Iori & Reiji"
   },
   {
     "name": "GX-9999 Gundam X Maoh",
@@ -1464,7 +1626,8 @@
       "gundam x maoh",
       "x maoh"
     ],
-    "series": "Build Fighters"
+    "series": "Build Fighters",
+    "pilot": "Mao Yasaka"
   },
   {
     "name": "PPGN-001 Gundam Amazing Exia",
@@ -1473,7 +1636,8 @@
       "amazing exia",
       "gundam amazing exia"
     ],
-    "series": "Build Fighters"
+    "series": "Build Fighters",
+    "pilot": "Meijin Kawaguchi"
   },
   {
     "name": "PPGN-001 Gundam Exia Dark Matter",
@@ -1483,7 +1647,8 @@
       "gundam exia dark matter",
       "dark matter"
     ],
-    "series": "Build Fighters"
+    "series": "Build Fighters",
+    "pilot": "Meijin Kawaguchi"
   },
   {
     "name": "Sengoku Astray Gundam",
@@ -1494,7 +1659,8 @@
       "gundam astray sengoku",
       "astray sengoku"
     ],
-    "series": "Build Fighters"
+    "series": "Build Fighters",
+    "pilot": "Nils Nielsen"
   },
   {
     "name": "XXXG-01Wf Wing Gundam Fenice",
@@ -1505,7 +1671,8 @@
       "wing fenice",
       "wing gundam fenice"
     ],
-    "series": "Build Fighters"
+    "series": "Build Fighters",
+    "pilot": "Ricardo Fellini"
   },
   {
     "name": "XXXG-01Wfr Gundam Fenice Rinascita",
@@ -1514,7 +1681,8 @@
       "fenice rinascita",
       "gundam fenice rinascita"
     ],
-    "series": "Build Fighters"
+    "series": "Build Fighters",
+    "pilot": "Ricardo Fellini"
   },
   {
     "name": "XM-X9999 Crossbone Gundam Maoh",
@@ -1523,7 +1691,8 @@
       "crossbone maoh",
       "gundam crossbone maoh"
     ],
-    "series": "Build Fighters"
+    "series": "Build Fighters",
+    "pilot": "Nils Nielsen"
   },
   {
     "name": "GPB-X80 Beginning Gundam",
@@ -1531,7 +1700,8 @@
     "alt": [
       "beginning gundam"
     ],
-    "series": "Builders Beginning G"
+    "series": "Builders Beginning G",
+    "pilot": "Haru Irei"
   },
   {
     "name": "GPB-X80-30F Beginning 30 Gundam",
@@ -1541,7 +1711,8 @@
       "beginning 30",
       "beginning 30 gundam"
     ],
-    "series": "Builders Beginning G"
+    "series": "Builders Beginning G",
+    "pilot": "Haru Irei"
   },
   {
     "name": "GAT-X105BST Star Build Strike Gundam",
@@ -1551,7 +1722,8 @@
       "star build",
       "star build strike gundam"
     ],
-    "series": "Build Fighters"
+    "series": "Build Fighters",
+    "pilot": "Sei Iori & Reiji"
   },
   {
     "name": "GAT-X105BGC Build Strike Galaxy Cosmos",
@@ -1561,7 +1733,8 @@
       "strike galaxy cosmos",
       "build strike galaxy"
     ],
-    "series": "Build Fighters"
+    "series": "Build Fighters",
+    "pilot": "Sei Iori"
   },
   {
     "name": "KMK-B01 Kamiki Burning Gundam",
@@ -1571,7 +1744,8 @@
       "kamiki burning",
       "kamiki burning gundam"
     ],
-    "series": "Build Fighters Try"
+    "series": "Build Fighters Try",
+    "pilot": "Sekai Kamiki"
   },
   {
     "name": "ASW-G-08A Gundam Amazing Barbatos Lupus",
@@ -1582,7 +1756,8 @@
       "amazing barbatos lupus",
       "gundam amazing barbatos lupus"
     ],
-    "series": "Build Metaverse"
+    "series": "Build Metaverse",
+    "pilot": "Mirai"
   },
   {
     "name": "GAT-X105BEG Build Strike Exceed Galaxy",
@@ -1592,7 +1767,8 @@
       "strike exceed",
       "build strike exceed galaxy"
     ],
-    "series": "Build Metaverse"
+    "series": "Build Metaverse",
+    "pilot": "Sei Iori"
   },
   {
     "name": "GN-0000DVRII Gundam 00 Diver Arc",
@@ -1602,7 +1778,8 @@
       "diver arc",
       "00 diver arc"
     ],
-    "series": "Build Metaverse"
+    "series": "Build Metaverse",
+    "pilot": "Riku Mikami"
   },
   {
     "name": "PFF-X7II+P9 Plutine Gundam",
@@ -1611,7 +1788,8 @@
       "plutine",
       "plutine gundam"
     ],
-    "series": "Build Metaverse"
+    "series": "Build Metaverse",
+    "pilot": "Hiroto Kuga"
   },
   {
     "name": "RX-78-lā-III Lah Gundam",
@@ -1620,7 +1798,8 @@
       "lah",
       "lah gundam"
     ],
-    "series": "Build Metaverse"
+    "series": "Build Metaverse",
+    "pilot": "Lah"
   },
   {
     "name": "SBG-E01 Shin Burning Gundam",
@@ -1629,7 +1808,8 @@
       "shin burning",
       "shin burning gundam"
     ],
-    "series": "Build Metaverse"
+    "series": "Build Metaverse",
+    "pilot": "Sekai Kamiki"
   },
   {
     "name": "TYP-G12CMR Typhoeus Gundam Chimera",
@@ -1638,7 +1818,8 @@
       "typhoeus gundam chimera",
       "gundam chimera"
     ],
-    "series": "Build Metaverse"
+    "series": "Build Metaverse",
+    "pilot": "Alus"
   },
   {
     "name": "GFAS-X1 Destroy Gundam",
@@ -1646,7 +1827,8 @@
     "alt": [
       "destroy gundam"
     ],
-    "series": "SEED Destiny"
+    "series": "SEED Destiny",
+    "pilot": "Stella Loussier"
   },
   {
     "name": "MRX-009 Psycho Gundam",
@@ -1654,7 +1836,8 @@
     "alt": [
       "psycho gundam"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Four Murasame"
   },
   {
     "name": "MRX-010 Psycho Gundam Mk-II",
@@ -1665,7 +1848,8 @@
       "psycho mk2",
       "psycho gundam mk2"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Rosammy Baddam"
   },
   {
     "name": "MRX-012 Psycho Gundam Mk-III",
@@ -1675,7 +1859,8 @@
       "psycho mk3",
       "psycho mkiii"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Purus Twelve"
   },
   {
     "name": "GN-008GNHW3G Seravee Gundam GNHW3G",
@@ -1685,7 +1870,8 @@
       "gundam gnhw3g",
       "gnhw3g"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Tieria Erde"
   },
   {
     "name": "RX-93-ν2 Hi-Nu Gundam",
@@ -1696,7 +1882,8 @@
       "hinu",
       "hi nu"
     ],
-    "series": "Universal Century"
+    "series": "Universal Century",
+    "pilot": "Amuro Ray"
   },
   {
     "name": "ZGMF-X11A Regenerate Gundam",
@@ -1705,7 +1892,8 @@
       "regenerate",
       "regenerate gundam"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Rau Le Creuset"
   },
   {
     "name": "GAT-X105E Strike Noir Gundam",
@@ -1714,7 +1902,8 @@
       "strike noir",
       "strike noir gundam"
     ],
-    "series": "Gundam SEED"
+    "series": "Gundam SEED",
+    "pilot": "Sven Cal Bayang"
   },
   {
     "name": "GNY-001F Gundam Astraea Type F",
@@ -1724,7 +1913,8 @@
       "astraea type f",
       "gundam astraea type f"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Fon Spaak"
   },
   {
     "name": "GNY-001 Gundam Astraea",
@@ -1732,6 +1922,7 @@
     "alt": [
       "gundam astraea"
     ],
-    "series": "Gundam 00"
+    "series": "Gundam 00",
+    "pilot": "Grave Violento"
   }
 ]
