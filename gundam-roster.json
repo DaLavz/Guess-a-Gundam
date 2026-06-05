@@ -1542,5 +1542,15 @@
       "beginning 30 gundam"
     ],
     "series": "Builders Beginning G"
+  },
+  {
+    "name": "GAT-X105BST Star Build Strike Gundam",
+    "img": "images/GAT-X105BST Star Build Strike Gundam.webp",
+    "alt": [
+      "star build strike",
+      "star build",
+      "star build strike gundam"
+    ],
+    "series": "Build Fighters"
   }
 ]
