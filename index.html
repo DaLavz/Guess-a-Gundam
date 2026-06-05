@@ -381,6 +381,10 @@
 
   .url-in{flex:1;min-width:0;background:#090a0e;border:1px solid var(--line-bright);color:var(--primary);padding:8px 10px;font-family:"Share Tech Mono",monospace;font-size:14px;outline:none;}
   .url-in:focus{border-color:var(--primary-dim);}
+  
+  /* Shared style for name inputs inside roster list items */
+  .name-in{flex:1;min-width:0;background:transparent;border:none;border-bottom:1px dashed var(--line-bright);color:var(--txt);padding:2px 4px;font-family:"Share Tech Mono",monospace;font-size:13px;outline:none;}
+  .name-in:focus{border-color:var(--primary);color:var(--primary);}
 
   .paste-btn,.dl-btn{flex-shrink:0;border:1px solid var(--primary-dim);background:rgba(232,100,10,.10);color:var(--primary);padding:0 12px;font-size:16px;transition:.12s;}
   .paste-btn:hover,.dl-btn:hover{background:rgba(232,100,10,.22);}
@@ -983,10 +987,14 @@ function renderManageList(query=""){
       else{thmb.innerHTML='<div class="noimg">N/A</div>';}
       const mid=document.createElement("div");mid.className="ritem-mid";
       const top=document.createElement("div");top.className="ritem-top";
-      const nm=document.createElement("div");nm.className="nm";nm.textContent=item.name;
+      
+      /* CHANGED: Swapped out static text div for an interactive text input linked to roster item name */
+      const nameIn=document.createElement("input");nameIn.className="name-in";nameIn.value=item.name;nameIn.placeholder="Edit mobile suit name...";
+      nameIn.onchange=e=>{roster[idx].name=e.target.value.trim() || "Unnamed Unit";};
+      
       const dbtn=document.createElement("button");dbtn.className="del";dbtn.textContent="✕";dbtn.title="Remove";
       dbtn.onclick=()=>{if(confirm("Remove "+item.name+"?")){{roster.splice(idx,1);updateRosterUI();}}};
-      top.appendChild(nm);top.appendChild(dbtn);
+      top.appendChild(nameIn);top.appendChild(dbtn);
       const ctrl=document.createElement("div");ctrl.className="ritem-ctrl";
       const inp=document.createElement("input");inp.className="url-in";inp.value=imgFileName(item.img);inp.placeholder="image file e.g. unicorn.webp";
       inp.onchange=e=>{roster[idx].img=normalizeImg(e.target.value);updateRosterUI();};
