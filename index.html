@@ -921,15 +921,11 @@ const PILOT_DATA={
 /* ═══════════════════════════════════════════════════════
    LEADERBOARD  — paste your Apps Script URL below
    ═══════════════════════════════════════════════════════ */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxWgIprof11lLg657z3ZnQTBxE48byZlklKe1aEPcRj7WusFcvR8m2T8-gng329ZD0m/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwCCpTNx6vpfSHlUubyK5p8z-uJLkchHBClkn31pKpXpdE9XHJIGUl9V0UMQimE4JcVkg/exec";
 
-// Each entry: { score, total, display } — stores raw numbers not %
-const sessionBest = { mc:null, type:null, zoom:null, impostor:null, pilot:null };
-function recordBest(mode, s, total, display){
-  const cur = sessionBest[mode];
-  // keep whichever has a higher score
-  if(!cur || s > cur.score) sessionBest[mode] = { score:s, total:total, display:display };
-}
+// Stats are already tracked in localStorage via stats.mc / stats.type etc.
+// recordBest is a no-op now — we just read stats directly when submitting.
+function recordBest(){} // kept so existing calls don't error
 
 function getSavedName(){ return localStorage.getItem("gundamPlayerName") || ""; }
 function setSavedName(n){ localStorage.setItem("gundamPlayerName", n.trim()); }
@@ -957,11 +953,11 @@ async function autoSubmit(){
       method:"POST",
       body: JSON.stringify({
         name,
-        mc:       sessionBest.mc       ? sessionBest.mc.display       : '',
-        type:     sessionBest.type     ? sessionBest.type.display     : '',
-        zoom:     sessionBest.zoom     ? sessionBest.zoom.display     : '',
-        impostor: sessionBest.impostor ? sessionBest.impostor.display : '',
-        pilot:    sessionBest.pilot    ? sessionBest.pilot.display    : '',
+        mc:       stats.mc       || 0,
+        type:     stats.type     || 0,
+        zoom:     stats.zoomBest || 0,
+        impostor: stats.artstyle || 0,
+        pilot:    stats.pilot    || 0,
       }),
     });
     fetchLeaderboard();
@@ -989,11 +985,11 @@ async function submitScore(){
       method:"POST",
       body: JSON.stringify({
         name,
-        mc:       sessionBest.mc       ? sessionBest.mc.display       : '',
-        type:     sessionBest.type     ? sessionBest.type.display     : '',
-        zoom:     sessionBest.zoom     ? sessionBest.zoom.display     : '',
-        impostor: sessionBest.impostor ? sessionBest.impostor.display : '',
-        pilot:    sessionBest.pilot    ? sessionBest.pilot.display    : '',
+        mc:       stats.mc       || 0,
+        type:     stats.type     || 0,
+        zoom:     stats.zoomBest || 0,
+        impostor: stats.artstyle || 0,
+        pilot:    stats.pilot    || 0,
       }),
     });
     setSavedName(name);
@@ -1034,11 +1030,12 @@ function renderLeaderboard(rows){
   rows.forEach((r,i)=>{
     const cls  = i===0?' class="gold"':'';
     const rank = i===0?'\ud83e\udd47':i===1?'\ud83e\udd48':i===2?'\ud83e\udd49':(i+1);
-    const mc = (r.mc!=null&&r.mc!=='')             ? r.mc           : '—';
-    const ty = (r.type!=null&&r.type!=='')         ? r.type         : '—';
-    const zm = (r.zoom!=null&&r.zoom!=='')         ? r.zoom         : '—';
-    const im = (r.impostor!=null&&r.impostor!=='') ? r.impostor     : '—';
-    const pi = (r.pilot!=null&&r.pilot!=='')       ? r.pilot        : '—';
+    const fmtN = v => (v!=null && v!=='' && v!=='0' && Number(v)>0) ? Number(v) : '—';
+    const mc = fmtN(r.mc);
+    const ty = fmtN(r.type);
+    const zm = fmtN(r.zoom);
+    const im = fmtN(r.impostor);
+    const pi = fmtN(r.pilot);
     html+=`<tr${cls}><td class="rank">${rank}</td><td class="pname">${escapeHtml(String(r.name))}</td><td class="num">${mc}</td><td class="num">${ty}</td><td class="num">${zm}</td><td class="num">${im}</td><td class="num">${pi}</td></tr>`;
   });
   html+='</tbody></table>';
