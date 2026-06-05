@@ -110,14 +110,6 @@
     "series": "Universal Century"
   },
   {
-    "name": "RX-0 Banshee",
-    "img": "images/rx-0-banshee.webp",
-    "alt": [
-      "banshee"
-    ],
-    "series": "Universal Century"
-  },
-  {
     "name": "GF13-017NJ Shining Gundam",
     "img": "images/gf13-017nj-shining-gundam.webp",
     "alt": [
@@ -1343,5 +1335,89 @@
       "gundam garcane"
     ],
     "series": "Reconguista in G"
+  },
+  {
+    "name": "RX-0 Unicorn Gundam Banshee",
+    "img": "images/rx-0-banshee.webp",
+    "alt": [
+      "banshee",
+      "unicorn banshee",
+      "gundam banshee"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "RX-0 Unicorn Gundam Banshee Norn",
+    "img": "images/RX-0 Unicorn Gundam Banshee Norn.webp",
+    "alt": [
+      "banshee norn",
+      "gundam banshee norn",
+      "unicorn banshee norn"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "PFF-X7V2 Veetwo Gundam",
+    "img": "images/PFF-X7V2 Veetwo Gundam.webp",
+    "alt": [
+      "veetwo gundam",
+      "veetwo"
+    ],
+    "series": "Build Divers Re:RISE"
+  },
+  {
+    "name": "PFF-X7RANIMA Gundam Anima［Rize］",
+    "img": "images/PFF-X7RANIMA Gundam Anima［Rize］.webp",
+    "alt": [
+      "gundam anima",
+      "anima"
+    ],
+    "series": "Build Divers Re:RISE"
+  },
+  {
+    "name": "PFF-X7M4 Marsfour Gundam",
+    "img": "images/PFF-X7M4 Marsfour Gundam.webp",
+    "alt": [
+      "marsfour gundam",
+      "marsfour"
+    ],
+    "series": "Build Divers Re:RISE"
+  },
+  {
+    "name": "PFF-X7M1 Mercuone Gundam",
+    "img": "images/PFF-X7M1 Mercuone Gundam.webp",
+    "alt": [
+      "mercuone gundam",
+      "mercuone"
+    ],
+    "series": "Build Divers Re:RISE"
+  },
+  {
+    "name": "PFF-X7IIS6 Saturnix Gundam",
+    "img": "images/PFF-X7IIS6 Saturnix Gundam.webp",
+    "alt": [
+      "saturnix gundam",
+      "saturnix"
+    ],
+    "series": "Build Divers Re:RISE"
+  },
+  {
+    "name": "PFF-X7IIN8 Nepteight Gundam",
+    "img": "images/PFF-X7IIN8 Nepteight Gundam.webp",
+    "alt": [
+      "nepteight gundam",
+      "nepteight"
+    ],
+    "series": "Build Divers Re:RISE"
+  },
+  {
+    "name": "PFF-X7IIBUILD DiVERS ReRising Gundam",
+    "img": "images/PFF-X7IIBUILD DiVERS ReRising Gundam.webp",
+    "alt": [
+      "rerising gundam",
+      "rerise gundam",
+      "divers rerising gundam"
+    ],
+    "series": "Build Divers Re:RISE"
   }
 ]
