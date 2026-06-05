@@ -456,11 +456,11 @@
     <section id="start">
       <span class="label">Analysis Mode</span>
       <div class="seg" id="modeSeg">
-        <button data-mode="mc" class="on">MC</button>
-        <button data-mode="type">Type</button>
-        <button data-mode="zoom">Zoom</button>
-        <button data-mode="artstyle">Impostor</button>
-        <button data-mode="pilot">Pilots</button>
+        <button data-mode="mc" class="on">Multiple Choice</button>
+        <button data-mode="type">Type Answer</button>
+        <button data-mode="zoom">Zoom Recon</button>
+        <button data-mode="artstyle">Impostor Hunt</button>
+        <button data-mode="pilot">Pilot Guessing</button>
       </div>
       <div class="mode-stat" id="modeStat"></div>
 
@@ -1423,7 +1423,7 @@ setInterval(()=>{
       r:     randBetween(0.4, 1.6), // radius px
       base:  randBetween(0.15, 0.75), // base opacity
       amp:   randBetween(0.10, 0.35), // blink amplitude
-      speed: randBetween(0.0004, 0.0018), // blink speed
+      speed: randBetween(0.00008, 0.00035), // blink speed — slow drift
       phase: Math.random() * Math.PI * 2, // blink phase offset
     });
   }
