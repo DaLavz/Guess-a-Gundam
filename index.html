@@ -175,18 +175,27 @@
   .thmbwrap img{width:96px;height:96px;object-fit:contain;border:1px solid var(--line);background:#05080c;border-radius:2px;display:block}
   .noimg{width:96px;height:96px;display:flex;align-items:center;justify-content:center;color:var(--txt-dim);border:1px solid var(--line);font-size:11px;border-radius:2px;text-align:center}
   .noimg.err{color:var(--red);border-color:rgba(255,77,87,.4)}
-  .ritem-mid{flex:1;min-width:0}
-  .ritem-mid .nm{color:var(--txt);font-size:14px;margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ritem-mid{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+  .ritem-top{display:flex;align-items:center;gap:6px}
+  .ritem-mid .nm{color:var(--txt);font-size:14px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .ritem-ctrl{display:flex;gap:6px}
-  .url-in{flex:1;min-width:0;background:#080c11;border:1px solid var(--line);color:var(--hud);padding:9px 10px;font-family:"Share Tech Mono",monospace;font-size:13px;border-radius:2px;outline:none}
+  .url-in{flex:1;min-width:0;background:#080c11;border:1px solid var(--line);color:var(--hud);padding:9px 10px;font-family:"Share Tech Mono",monospace;font-size:16px;border-radius:2px;outline:none}
   .url-in:focus{border-color:var(--hud-dim);box-shadow:0 0 0 1px rgba(54,214,195,.2)}
   .paste-btn, .dl-btn{flex-shrink:0;border:1px solid var(--hud-dim);background:rgba(54,214,195,.10);color:var(--hud);padding:0 13px;border-radius:2px;font-size:16px;transition:.12s}
   .paste-btn:hover, .dl-btn:hover{background:rgba(54,214,195,.22)}
   .dl-btn{border-color: rgba(255,177,59,.4); background: rgba(255,177,59,.10); color: var(--amber);}
   .dl-btn:hover{background: rgba(255,177,59,.22);}
-  .del{align-self:flex-start;color:var(--red);padding:8px 11px;border:1px solid rgba(255,77,87,.3);border-radius:2px;font-size:12px;letter-spacing:1px;flex-shrink:0}
+  .del{color:var(--red);padding:6px 10px;border:1px solid rgba(255,77,87,.3);border-radius:2px;font-size:14px;flex-shrink:0;cursor:pointer;transition:.12s}
+  .del:hover{background:rgba(255,77,87,.12)}
   .hint{font-family:"Share Tech Mono",monospace;font-size:11px;color:var(--txt-dim);line-height:1.6;background:#080c11;border:1px dashed var(--line);padding:10px 12px;border-radius:2px;margin-bottom:16px}
   .hint b{color:var(--amber)}
+  .custom-count{width:100%;background:#080c11;border:1px solid var(--line);color:var(--txt);padding:12px 13px;font-family:"Share Tech Mono",monospace;font-size:15px;border-radius:2px;outline:none;margin-top:10px}
+  .custom-count:focus{border-color:var(--hud-dim);box-shadow:0 0 0 1px rgba(54,214,195,.2)}
+  .custom-count.on{border-color:var(--hud-dim);color:var(--hud)}
+  .series-row{display:flex;gap:8px;align-items:stretch}
+  .series-row select{flex:1}
+  .series-add{flex-shrink:0;width:50px;border:1px solid var(--hud-dim);background:rgba(54,214,195,.10);color:var(--hud);border-radius:2px;font-size:22px;font-weight:700;line-height:1;cursor:pointer;transition:.12s}
+  .series-add:hover{background:rgba(54,214,195,.22)}
   .hide{display:none!important}
   .mode-stat{display:flex;align-items:center;justify-content:space-between;font-family:"Share Tech Mono",monospace;font-size:12px;color:var(--txt-dim);letter-spacing:1px;text-transform:uppercase;border:1px solid var(--line);border-radius:2px;padding:11px 13px;margin-bottom:18px;background:rgba(54,214,195,.04)}
   .mode-stat b{color:var(--hud);font-size:18px;text-shadow:0 0 10px rgba(54,214,195,.3)}
@@ -222,6 +231,7 @@
           <button data-count="half">Half</button>
           <button data-count="all">All</button>
         </div>
+        <input id="customCount" type="number" min="1" class="custom-count" placeholder="…or enter a custom number of units">
       </div>
 
       <button class="btn" id="startBtn">▶ Begin Analysis</button>
@@ -315,9 +325,12 @@
     <section id="manage" class="hide">
       <span class="label">Add A New Unit</span>
       <div class="field"><input id="addName" placeholder="name  e.g. RX-78-2 Gundam"></div>
-      <div class="field"><input id="addImg" placeholder="image URL (optional)"></div>
+      <div class="field"><input id="addImg" placeholder="image file name  e.g. unicorn.webp"></div>
       <div class="field"><input id="addAlt" placeholder="alt answers, comma-separated (optional)"></div>
-      <div class="field"><select id="addSeries"></select></div>
+      <div class="field series-row">
+        <select id="addSeries"></select>
+        <button class="series-add" id="addSeriesBtn" title="Add a new series">＋</button>
+      </div>
       <button class="btn" id="addBtn">+ Add To Roster</button>
 
       <span class="label" style="margin-top:18px">Save/Sync Files</span>
@@ -434,11 +447,26 @@ fetch('gundam-roster.json')
   });
 
 function buildSeriesDropdown(){
-  const s=$("addSeries");s.innerHTML="";
-  seriesList.forEach(srv=>{
-    const o=document.createElement("option");o.value=srv;o.textContent=srv;s.appendChild(o);
-  });
+  const s=$("addSeries"); if(!s) return;
+  const merged=[];
+  seriesList.forEach(v=>{ if(v!=="Other / Custom" && !merged.includes(v)) merged.push(v); });
+  roster.forEach(r=>{ if(r && r.series && !merged.includes(r.series)) merged.push(r.series); });
+  merged.push("Other / Custom");
+  const cur=s.value;
+  s.innerHTML="";
+  merged.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;s.appendChild(o);});
+  if(cur && merged.includes(cur)) s.value=cur;
 }
+
+// Image is stored as images/<file>; user only types the file name.
+function normalizeImg(v){
+  v=(v||"").trim();
+  if(!v) return "";
+  if(/^https?:\/\//i.test(v)) return v;                 // legacy full URLs still accepted
+  if(/^images[\/\\]/i.test(v)) return "images/"+v.replace(/^images[\/\\]/i,"");
+  return "images/"+v.replace(/^[\/\\]+/,"");
+}
+function imgFileName(v){ return (v||"").trim().replace(/^images[\/\\]/i,""); }
 
 function updateRosterUI(){
   const c=roster.length;
@@ -606,64 +634,53 @@ function renderManageList(query=""){
       
       const mid = document.createElement("div");
       mid.className = "ritem-mid";
-      
+
+      // top row: name + delete button share the full mid width
+      const top = document.createElement("div");
+      top.className = "ritem-top";
       const nm = document.createElement("div");
       nm.className = "nm";
       nm.textContent = item.name;
-      
+      const dbtn = document.createElement("button");
+      dbtn.className = "del";
+      dbtn.textContent = "✕";
+      dbtn.title = "Remove from roster";
+      dbtn.onclick = () => {
+        if (confirm("Remove " + item.name + " from the roster?")) {
+          roster.splice(idx, 1);
+          updateRosterUI();
+        }
+      };
+      top.appendChild(nm);
+      top.appendChild(dbtn);
+
+      // bottom row: filename input + download button
       const ctrl = document.createElement("div");
       ctrl.className = "ritem-ctrl";
-      
       const inp = document.createElement("input");
       inp.className = "url-in";
-      inp.value = item.img || "";
-      inp.placeholder = "Paste Image Asset URL...";
+      inp.value = imgFileName(item.img);
+      inp.placeholder = "image file e.g. unicorn.webp";
       inp.onchange = e => {
-        roster[idx].img = e.target.value.trim();
+        roster[idx].img = normalizeImg(e.target.value);
         updateRosterUI();
       };
-      
-      const pbtn = document.createElement("button");
-      pbtn.className = "paste-btn";
-      pbtn.innerHTML = "📋";
-      pbtn.title = "Paste from clipboard";
-      pbtn.onclick = async () => {
-        try {
-          const t = await navigator.clipboard.readText();
-          inp.value = t;
-          roster[idx].img = t.trim();
-          updateRosterUI();
-        } catch (err) {}
-      };
-      
       const dlbtn = document.createElement("button");
       dlbtn.className = "dl-btn";
       dlbtn.innerHTML = "💾";
       dlbtn.title = "Download image locally";
       dlbtn.onclick = () => {
-        if (!item.img) { alert("No active image link attached to download."); return; }
+        if (!item.img) { alert("No image file set to download."); return; }
         downloadTargetImage(item.img, item.name);
       };
-
       ctrl.appendChild(inp);
-      ctrl.appendChild(pbtn);
       ctrl.appendChild(dlbtn);
-      mid.appendChild(nm);
+
+      mid.appendChild(top);
       mid.appendChild(ctrl);
-      
-      const dbtn = document.createElement("button");
-      dbtn.className = "del";
-      dbtn.textContent = "DELETE";
-      dbtn.onclick = () => {
-        if (confirm("Purge data for " + item.name + "?")) {
-          roster.splice(idx, 1);
-          updateRosterUI();
-        }
-      };
-      
+
       div.appendChild(thmb);
       div.appendChild(mid);
-      div.appendChild(dbtn);
       sectionBlock.appendChild(div);
     });
 
@@ -685,8 +702,24 @@ function setupEventListeners(){
     b.onclick=()=>{
       document.querySelectorAll("#countSeg button").forEach(x=>x.classList.remove("on"));
       b.classList.add("on");quizCount=b.dataset.count;
+      const cc=$("customCount"); if(cc){cc.value="";cc.classList.remove("on");}
     };
   });
+  const cc=$("customCount");
+  if(cc){
+    cc.addEventListener("input",()=>{
+      const v=parseInt(cc.value,10);
+      if(v>0){
+        document.querySelectorAll("#countSeg button").forEach(x=>x.classList.remove("on"));
+        cc.classList.add("on");
+        quizCount=String(v);
+      } else {
+        cc.classList.remove("on");
+        document.querySelectorAll("#countSeg button").forEach(x=>x.classList.toggle("on",x.dataset.count==="5"));
+        quizCount="5";
+      }
+    });
+  }
   $("startBtn").onclick=startQuiz;
   $("manageBtn").onclick=()=>{showSection("manage");$("floatBack").classList.remove("hide");};
   $("floatBack").onclick=()=>{updateRosterUI();showSection("start");$("floatBack").classList.add("hide");};
@@ -697,9 +730,20 @@ function setupEventListeners(){
   $("backBtn").onclick=()=>showSection("start");
   
   $("zipAllBtn").onclick=downloadAllImagesAsZip;
-  
+
+  $("addSeriesBtn").onclick=()=>{
+    const name=(prompt("Enter a new series name:")||"").trim();
+    if(!name) return;
+    if(!seriesList.includes(name)){
+      const oi=seriesList.indexOf("Other / Custom");
+      if(oi>=0) seriesList.splice(oi,0,name); else seriesList.push(name);
+    }
+    buildSeriesDropdown();
+    $("addSeries").value=name;
+  };
+
   $("addBtn").onclick=()=>{
-    const name=$("addName").value.trim();const img=$("addImg").value.trim();
+    const name=$("addName").value.trim();const img=normalizeImg($("addImg").value);
     const series=$("addSeries").value;const altStr=$("addAlt").value.trim();
     if(!name){alert("Item name designation required.");return;}
     const alt=altStr?altStr.split(",").map(x=>x.toLowerCase().trim()).filter(Boolean):[];
@@ -731,9 +775,9 @@ function startQuiz(){
   }
   let c=pools.length;
   if(quizMode!=="zoom"){
-    if(quizCount==="5")c=5;
-    else if(quizCount==="10")c=10;
-    else if(quizCount==="half")c=Math.max(1,Math.floor(pools.length/2));
+    if(quizCount==="all") c=pools.length;
+    else if(quizCount==="half") c=Math.max(1,Math.floor(pools.length/2));
+    else { const n=parseInt(quizCount,10); c=(n&&n>0)?n:pools.length; }
     c=Math.min(c,pools.length);
   }else{c=pools.length;}
   sessionUnits=pools.slice(0,c);
