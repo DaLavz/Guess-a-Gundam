@@ -479,7 +479,7 @@
     ],
     "series": "Hathaway's Flash"
   },
-   {
+  {
     "name": "TX-ff104 Alyzeus",
     "img": "images/TX-ff104 Alyzeus.webp",
     "alt": [
@@ -489,7 +489,7 @@
     ],
     "series": "Hathaway's Flash"
   },
-   {
+  {
     "name": "RX-94 Mass Production Nu Gundam",
     "img": "images/RX-94 Mass Production Type Nu Gundam.webp",
     "alt": [
@@ -1187,5 +1187,161 @@
       "alus"
     ],
     "series": "Build Divers Re:RISE"
+  },
+  {
+    "name": "RX-0 Unicorn Gundam Phenex",
+    "img": "images/RX-0 Unicorn Gundam Phenex.webp",
+    "alt": [
+      "phenex",
+      "gundam phenex"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "RX-9 Narrative Gundam",
+    "img": "images/RX-9 Narrative Gundam.webp",
+    "alt": [
+      "narrative",
+      "narrative gundam"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "RX-78NT-1 Gundam NT-1",
+    "img": "images/RX-78NT-1 Gundam NT-1.webp",
+    "alt": [
+      "nt",
+      "nt",
+      "gundam nt",
+      "gundam nt"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "RX-79 Gundam Ground Type",
+    "img": "images/RX-79 Gundam Ground Type.webp",
+    "alt": [
+      "ground type",
+      "gundam ground type"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "MBF-P05LM Gundam Astray Mirage Frame",
+    "img": "images/MBF-P05LM Gundam Astray Mirage Frame.webp",
+    "alt": [
+      "astray mirage",
+      "mirage frame",
+      "astray mirage frame",
+      "gundam astray mirage frame"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "MBF-P04 Gundam Astray Green Frame",
+    "img": "images/MBF-P04 Gundam Astray Green Frame.webp",
+    "alt": [
+      "green frame",
+      "astray green",
+      "astray green frame",
+      "gundam astray green frame"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "ASW-G-47 Gundam Vual",
+    "img": "images/ASW-G-47 Gundam Vual.webp",
+    "alt": [
+      "vual",
+      "gundam vual"
+    ],
+    "series": "Iron-Blooded Orphans"
+  },
+  {
+    "name": "ASW-G-71 Gundam Dantalion",
+    "img": "images/ASW-G-71 Gundam Dantalion.webp",
+    "alt": [
+      "dantalion",
+      "gundam dantalion"
+    ],
+    "series": "Iron-Blooded Orphans"
+  },
+  {
+    "name": "GN-000 0 Gundam",
+    "img": "images/GN-000 0 Gundam.webp",
+    "alt": [
+      "0 gundam"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "GNW-20000 Arche Gundam",
+    "img": "images/GNW-20000 Arche Gundam.webp",
+    "alt": [
+      "arche gundam",
+      "arche"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "GN-004 Gundam Nadleeh",
+    "img": "images/GN-004 Gundam Nadleeh.webp",
+    "alt": [
+      "nadleeh",
+      "gundam nadleeh"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "AVP-03 Gundam Lfrith Anavata",
+    "img": "images/AVP-03 Gundam Lfrith Anavata.webp",
+    "alt": [
+      "lfrith anavata",
+      "anavata",
+      "gundam lfrith anavata"
+    ],
+    "series": "The Witch from Mercury"
+  },
+  {
+    "name": "XGF-01 Gundam Lfrith Jiu",
+    "img": "images/XGF-01 Gundam Lfrith Jiu.webp",
+    "alt": [
+      "jiu",
+      "lfrith jiu",
+      "gundam lfrith jiu"
+    ],
+    "series": "The Witch from Mercury"
+  },
+  {
+    "name": "YG-111 Gundam G-Self",
+    "img": "images/YG-111 Gundam G-Self.webp",
+    "alt": [
+      "g-self",
+      "g self",
+      "gself"
+    ],
+    "series": "Reconguista in G"
+  },
+  {
+    "name": "VGMM-Gf10 Gundam G-Lucifer",
+    "img": "images/VGMM-Gf10 Gundam G-Lucifer.webp",
+    "alt": [
+      "g-lucifer",
+      "glucifer",
+      "g lucifer",
+      "gundam glucifer"
+    ],
+    "series": "Reconguista in G"
+  },
+  {
+    "name": "MSAM-033 Gundam G-Arcane",
+    "img": "images/MSAM-033 Gundam G-Arcane.webp",
+    "alt": [
+      "garcane",
+      "g-arcane",
+      "g arcane",
+      "gundam garcane"
+    ],
+    "series": "Reconguista in G"
   }
 ]
