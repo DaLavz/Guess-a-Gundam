@@ -1639,5 +1639,99 @@
       "gundam chimera"
     ],
     "series": "Build Metaverse"
+  },
+  {
+    "name": "GFAS-X1 Destroy Gundam",
+    "img": "images/GFAS-X1 Destroy Gundam.webp",
+    "alt": [
+      "destroy gundam"
+    ],
+    "series": "SEED Destiny"
+  },
+  {
+    "name": "MRX-009 Psycho Gundam",
+    "img": "images/MRX-009 Psycho Gundam.webp",
+    "alt": [
+      "psycho gundam"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "MRX-010 Psycho Gundam Mk-II",
+    "img": "images/MRX-010 Psycho Gundam Mk-II.webp",
+    "alt": [
+      "psycho gundam 2",
+      "psycho gundam mkii",
+      "psycho mk2",
+      "psycho gundam mk2"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "MRX-012 Psycho Gundam Mk-III",
+    "img": "images/MRX-012 Psycho Gundam Mk-III.webp",
+    "alt": [
+      "psycho gundam mk-iii",
+      "psycho mk3",
+      "psycho mkiii"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "GN-008GNHW3G Seravee Gundam GNHW3G",
+    "img": "images/GN-008GNHW3G Seravee Gundam GNHW3G.webp",
+    "alt": [
+      "seravee gnhw3g",
+      "gundam gnhw3g",
+      "gnhw3g"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "RX-93-ν2 Hi-Nu Gundam",
+    "img": "images/RX-93-ν2 Hi-Nu Gundam.webp",
+    "alt": [
+      "hi-nu gundam",
+      "hinu gundam",
+      "hinu",
+      "hi nu"
+    ],
+    "series": "Universal Century"
+  },
+  {
+    "name": "ZGMF-X11A Regenerate Gundam",
+    "img": "images/ZGMF-X11A Regenerate Gundam.webp",
+    "alt": [
+      "regenerate",
+      "regenerate gundam"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "GAT-X105E Strike Noir Gundam",
+    "img": "images/GAT-X105E Strike Noir Gundam.webp",
+    "alt": [
+      "strike noir",
+      "strike noir gundam"
+    ],
+    "series": "Gundam SEED"
+  },
+  {
+    "name": "GNY-001F Gundam Astraea Type F",
+    "img": "images/GNY-001F Gundam Astraea Type F.webp",
+    "alt": [
+      "gundam astraea f",
+      "astraea type f",
+      "gundam astraea type f"
+    ],
+    "series": "Gundam 00"
+  },
+  {
+    "name": "GNY-001 Gundam Astraea",
+    "img": "images/GNY-001 Gundam Astraea.webp",
+    "alt": [
+      "gundam astraea"
+    ],
+    "series": "Gundam 00"
   }
 ]
