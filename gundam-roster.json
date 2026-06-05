@@ -1552,5 +1552,92 @@
       "star build strike gundam"
     ],
     "series": "Build Fighters"
+  },
+  {
+    "name": "GAT-X105BGC Build Strike Galaxy Cosmos",
+    "img": "images/GAT-X105BGC Build Strike Galaxy Cosmos.webp",
+    "alt": [
+      "galaxy cosmos",
+      "strike galaxy cosmos",
+      "build strike galaxy"
+    ],
+    "series": "Build Fighters"
+  },
+  {
+    "name": "KMK-B01 Kamiki Burning Gundam",
+    "img": "images/KMK-B01 Kamiki Burning Gundam.webp",
+    "alt": [
+      "kamiki gundam",
+      "kamiki burning",
+      "kamiki burning gundam"
+    ],
+    "series": "Build Fighters Try"
+  },
+  {
+    "name": "ASW-G-08A Gundam Amazing Barbatos Lupus",
+    "img": "images/ASW-G-08A Gundam Amazing Barbatos Lupus.webp",
+    "alt": [
+      "amazing barbatos",
+      "amazing lupus",
+      "amazing barbatos lupus",
+      "gundam amazing barbatos lupus"
+    ],
+    "series": "Build Metaverse"
+  },
+  {
+    "name": "GAT-X105BEG Build Strike Exceed Galaxy",
+    "img": "images/GAT-X105BEG Build Strike Exceed Galaxy.webp",
+    "alt": [
+      "exceed galaxy",
+      "strike exceed",
+      "build strike exceed galaxy"
+    ],
+    "series": "Build Metaverse"
+  },
+  {
+    "name": "GN-0000DVRII Gundam 00 Diver Arc",
+    "img": "images/GN-0000DVRII Gundam 00 Diver Arc.webp",
+    "alt": [
+      "gundam 00 diver arc",
+      "diver arc",
+      "00 diver arc"
+    ],
+    "series": "Build Metaverse"
+  },
+  {
+    "name": "PFF-X7II+P9 Plutine Gundam",
+    "img": "images/PFF-X7II+P9 Plutine Gundam.webp",
+    "alt": [
+      "plutine",
+      "plutine gundam"
+    ],
+    "series": "Build Metaverse"
+  },
+  {
+    "name": "RX-78-lā-III Lah Gundam",
+    "img": "images/RX-78-lā-III Lah Gundam.webp",
+    "alt": [
+      "lah",
+      "lah gundam"
+    ],
+    "series": "Build Metaverse"
+  },
+  {
+    "name": "SBG-E01 Shin Burning Gundam",
+    "img": "images/SBG-E01 Shin Burning Gundam.webp",
+    "alt": [
+      "shin burning",
+      "shin burning gundam"
+    ],
+    "series": "Build Metaverse"
+  },
+  {
+    "name": "TYP-G12CMR Typhoeus Gundam Chimera",
+    "img": "images/TYP-G12CMR Typhoeus Gundam Chimera.webp",
+    "alt": [
+      "typhoeus gundam chimera",
+      "gundam chimera"
+    ],
+    "series": "Build Metaverse"
   }
 ]
