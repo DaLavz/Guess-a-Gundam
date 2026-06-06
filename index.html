@@ -65,10 +65,10 @@
   /* ── PAGE TITLE ───────────────────────────────── */
   .page-title{
     position:relative;
-    width:100%;max-width:620px;
+    width:100%;max-width:860px;
     text-align:center;
     font-family:"Teko",sans-serif;
-    font-size:clamp(38px,11vw,76px);
+    font-size:clamp(42px,11vw,88px);
     font-weight:700;
     color:var(--txt);
     letter-spacing:6px;
@@ -91,7 +91,7 @@
   /* ── SHELL ────────────────────────────────────── */
   .shell{
     position:relative;
-    width:100%;max-width:620px;
+    width:100%;max-width:860px;
     background:var(--panel);
     border:1px solid var(--line-bright);
     border-top:2px solid var(--primary);
@@ -194,15 +194,205 @@
     background:var(--panel-2);
   }
   .seg button{
-    flex:1;padding:11px 6px;font-size:12px;
+    flex:1;padding:12px 6px;font-size:13px;
     letter-spacing:2px;text-transform:uppercase;color:var(--txt-dim);
     transition:.12s;font-weight:600;border-right:1px solid var(--line);
-    font-family:"Barlow Condensed",sans-serif;
+    font-family:"Barlow Condensed",sans-serif;min-width:80px;
   }
   .seg button:last-child{border-right:none;}
   .seg button.on{
     background:linear-gradient(180deg,rgba(232,100,10,.18),rgba(232,100,10,.06));
     color:var(--primary);border-bottom:2px solid var(--primary);
+  }
+  /* Gundamle tab in seg */
+  .seg button[data-mode="gundamle"]{
+    color:#7ee8ff;border-color:rgba(99,210,255,.2);
+    background:linear-gradient(180deg,rgba(99,210,255,.06),transparent);
+    position:relative;overflow:hidden;
+  }
+  .seg button[data-mode="gundamle"]::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(105deg,transparent 40%,rgba(99,210,255,.12) 50%,transparent 60%);
+    animation:glint 4s ease-in-out infinite;pointer-events:none;
+  }
+  .seg button[data-mode="gundamle"].on{
+    background:linear-gradient(180deg,rgba(99,210,255,.22),rgba(99,210,255,.06));
+    border-bottom:2px solid #7ee8ff;color:#aaf0ff;
+    text-shadow:0 0 10px rgba(99,210,255,.6);
+  }
+
+  /* ── START SCREEN SECTION DIVIDERS ─────────────── */
+  .start-section{
+    border:1px solid var(--line-bright);
+    background:var(--panel-2);
+    padding:16px 18px;
+    margin-bottom:14px;
+  }
+  .start-section-label{
+    font-family:"Share Tech Mono",monospace;
+    font-size:10px;letter-spacing:3px;text-transform:uppercase;
+    color:var(--primary);
+    border-left:2px solid var(--primary);
+    padding-left:10px;
+    margin-bottom:14px;display:block;
+  }
+  .start-section-label.blue{color:#7ee8ff;border-color:#7ee8ff;}
+
+  /* ── COLOR EDITOR SCREEN ────────────────────────── */
+  #colorEditor{padding-bottom:60px;}
+  .ce-header{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:18px;
+  }
+  .ce-title{
+    font-family:"Teko",sans-serif;font-size:24px;font-weight:700;
+    color:var(--primary);letter-spacing:3px;text-transform:uppercase;
+  }
+  .ce-search-wrap{position:relative;margin-bottom:10px;}
+  .ce-search-wrap input{
+    width:100%;background:#090a0e;border:1px solid var(--line-bright);color:var(--txt);
+    padding:12px 14px;font-family:"Share Tech Mono",monospace;font-size:14px;outline:none;
+  }
+  .ce-search-wrap input:focus{border-color:var(--primary-dim);}
+  .ce-suggest{display:flex;flex-direction:column;gap:3px;margin-bottom:12px;max-height:220px;overflow-y:auto;}
+  .ce-suggest:empty{display:none;}
+  .ce-suggest button{
+    text-align:left;padding:8px 12px;border:1px solid var(--line-bright);
+    background:var(--panel-2);color:var(--txt);
+    font-family:"Share Tech Mono",monospace;font-size:12px;
+    display:flex;align-items:center;gap:10px;transition:.1s;cursor:pointer;
+  }
+  .ce-suggest button:hover{border-color:var(--primary-dim);color:var(--primary);}
+  .ce-suggest button img{width:36px;height:36px;object-fit:contain;background:#06070a;flex-shrink:0;}
+
+  .ce-unit-display{
+    border:1px solid var(--line-bright);background:var(--panel-3);
+    padding:20px;margin-bottom:16px;display:none;
+  }
+  .ce-unit-display.visible{display:block;}
+  .ce-unit-img{
+    width:100%;max-height:260px;object-fit:contain;display:block;
+    background:#06070a;margin-bottom:14px;border:1px solid var(--line);
+  }
+  .ce-unit-name{
+    font-family:"Teko",sans-serif;font-size:22px;font-weight:700;
+    color:var(--txt);letter-spacing:2px;margin-bottom:16px;
+  }
+  .ce-color-row{display:flex;gap:12px;align-items:flex-end;margin-bottom:12px;}
+  .ce-color-field{flex:1;}
+  .ce-color-field label{
+    display:block;font-family:"Share Tech Mono",monospace;font-size:10px;
+    color:var(--txt-dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;
+  }
+  .ce-color-inp-wrap{display:flex;align-items:center;gap:8px;}
+  .ce-color-preview{
+    width:36px;height:36px;border-radius:3px;border:1px solid var(--line-bright);
+    flex-shrink:0;cursor:pointer;
+  }
+  .ce-color-inp-wrap input[type=text]{
+    flex:1;background:#090a0e;border:1px solid var(--line-bright);color:var(--txt);
+    padding:10px 12px;font-family:"Share Tech Mono",monospace;font-size:13px;outline:none;
+  }
+  .ce-color-inp-wrap input[type=text]:focus{border-color:var(--primary-dim);}
+  .ce-color-inp-wrap input[type=color]{
+    width:36px;height:36px;padding:2px;border:1px solid var(--line-bright);
+    background:#090a0e;cursor:pointer;flex-shrink:0;
+  }
+  .ce-save-btn{
+    width:100%;padding:13px 18px;margin-top:4px;
+    border:1px solid var(--primary-dim);
+    background:linear-gradient(180deg,rgba(232,100,10,.14),rgba(232,100,10,.04));
+    color:var(--primary);font-family:"Barlow Condensed",sans-serif;
+    font-size:15px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+    cursor:pointer;transition:.15s;
+    clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);
+  }
+  .ce-save-btn:hover{background:rgba(232,100,10,.22);}
+  .ce-saved-msg{
+    font-family:"Share Tech Mono",monospace;font-size:11px;
+    color:var(--green);letter-spacing:1px;margin-top:8px;min-height:16px;
+  }
+
+  /* color swatches in manage list */
+  .roster-colors{display:flex;gap:4px;align-items:center;margin-top:4px;}
+  .roster-csq{width:18px;height:18px;border-radius:2px;border:1px solid rgba(255,255,255,.12);flex-shrink:0;}
+  .roster-color-label{font-family:"Share Tech Mono",monospace;font-size:9px;color:var(--txt-dim);letter-spacing:1px;}
+
+  /* ── GO-TO-TOP FLOAT ────────────────────────────── */
+  .float-top{
+    position:fixed;right:14px;bottom:14px;z-index:200;
+    width:42px;height:42px;
+    border:1px solid var(--line-bright);
+    background:rgba(10,11,16,.94);backdrop-filter:blur(6px);
+    color:var(--txt-mid);font-size:18px;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 16px rgba(0,0,0,.5);cursor:pointer;transition:.15s;
+  }
+  .float-top:hover{border-color:var(--primary-dim);color:var(--primary);}
+
+  /* ── GUNDAMLE SCREEN (wider) ────────────────────── */
+  .gl-guess-row,
+  .gl-guess-row.header{
+    display:grid;
+    grid-template-columns:64px 1fr 90px 62px 64px 64px 64px 90px;
+    gap:4px;
+  }
+  .gl-guess-row.header .gl-cell{
+    background:transparent;border-color:transparent;
+    color:var(--txt-dim);font-size:9px;letter-spacing:1px;text-transform:uppercase;
+    padding:3px 4px;justify-content:center;
+  }
+  .gl-cell{
+    display:flex;align-items:center;justify-content:center;
+    padding:6px 5px;border:1px solid var(--line-bright);
+    background:var(--panel-2);
+    font-family:"Share Tech Mono",monospace;font-size:11px;
+    color:var(--txt);text-align:center;min-height:52px;
+    position:relative;transition:background .3s,border-color .3s;
+    line-height:1.25;cursor:default;
+  }
+  .gl-cell.clickable{cursor:zoom-in;}
+  .gl-cell.green{background:rgba(78,201,122,.22);border-color:var(--green);color:var(--green);}
+  .gl-cell.yellow{background:rgba(240,180,41,.18);border-color:var(--amber);color:var(--amber);}
+  .gl-cell.red{background:rgba(217,58,58,.14);border-color:var(--red);color:var(--red);}
+  .gl-cell.img-cell{padding:3px;cursor:zoom-in;}
+  .gl-cell.img-cell img{width:56px;height:48px;object-fit:contain;display:block;}
+  .gl-cell .arr{font-size:15px;display:block;}
+  .gl-cell .val{font-size:10px;display:block;line-height:1.2;}
+  .gl-cell .color-pair{display:flex;gap:4px;align-items:center;}
+  .gl-cell .csq{width:18px;height:18px;border-radius:2px;border:1px solid rgba(255,255,255,.15);flex-shrink:0;}
+
+  /* Gundamle preview — full scanner style */
+  .gl-preview-scanner{
+    position:relative;width:100%;background:#06070a;
+    border:1px solid rgba(99,210,255,.3);
+    overflow:hidden;margin-bottom:12px;
+    display:none;
+    aspect-ratio:4/3;
+    align-items:center;justify-content:center;
+  }
+  .gl-preview-scanner.visible{display:flex;}
+  .gl-preview-scanner::before{content:"";position:absolute;top:10px;left:10px;width:22px;height:22px;border-top:2px solid #7ee8ff;border-left:2px solid #7ee8ff;z-index:3;}
+  .gl-preview-scanner::after{content:"";position:absolute;bottom:10px;right:10px;width:22px;height:22px;border-bottom:2px solid #7ee8ff;border-right:2px solid #7ee8ff;z-index:3;}
+  .gl-preview-scanner .gl-ps-br{position:absolute;bottom:10px;left:10px;width:22px;height:22px;border-bottom:2px solid #7ee8ff;border-left:2px solid #7ee8ff;z-index:3;}
+  .gl-preview-scanner .gl-ps-tr{position:absolute;top:10px;right:10px;width:22px;height:22px;border-top:2px solid #7ee8ff;border-right:2px solid #7ee8ff;z-index:3;}
+  .gl-preview-scanner img{width:100%;height:100%;object-fit:contain;display:block;}
+  .gl-preview-scanner .gl-ps-name{
+    position:absolute;bottom:0;left:0;right:0;
+    background:linear-gradient(transparent,rgba(6,7,10,.92));
+    font-family:"Teko",sans-serif;font-size:20px;font-weight:700;
+    color:#7ee8ff;letter-spacing:2px;
+    padding:18px 14px 10px;text-align:center;
+    z-index:4;
+  }
+
+  @media(max-width:500px){
+    .gl-guess-row,.gl-guess-row.header{
+      grid-template-columns:44px 1fr 70px 44px 46px 46px 46px 68px;
+    }
+    .gl-cell{font-size:9px;min-height:40px;padding:4px 2px;}
+    .gl-cell.img-cell img{width:38px;height:34px;}
+    .gl-cell .csq{width:13px;height:13px;}
   }
 
   /* ── FIELD / INPUT ─────────────────────────────── */
@@ -476,35 +666,6 @@
     font-size:10px;letter-spacing:3px;margin:8px 0 16px;text-transform:uppercase;
   }
 
-  /* ── GUNDAMLE BUTTON ─────────────────────────────── */
-  .btn-gundamle{
-    display:inline-flex;align-items:center;justify-content:center;gap:10px;
-    width:100%;padding:16px 18px;
-    border:1px solid rgba(99,210,255,.45);
-    background:linear-gradient(135deg,rgba(30,80,140,.55) 0%,rgba(10,30,80,.4) 50%,rgba(99,210,255,.12) 100%);
-    color:#7ee8ff;
-    letter-spacing:3px;text-transform:uppercase;font-weight:700;font-size:16px;
-    clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);
-    font-family:"Barlow Condensed",sans-serif;
-    position:relative;overflow:hidden;cursor:pointer;
-    transition:.2s;
-    text-shadow:0 0 14px rgba(99,210,255,.8);
-    box-shadow:0 0 18px rgba(99,210,255,.12), inset 0 1px 0 rgba(99,210,255,.15);
-  }
-  .btn-gundamle::before{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(105deg,transparent 40%,rgba(99,210,255,.18) 50%,transparent 60%);
-    animation:glint 3.5s ease-in-out infinite;
-    pointer-events:none;
-  }
-  @keyframes glint{0%,100%{transform:translateX(-120%)}60%,70%{transform:translateX(120%)}}
-  .btn-gundamle:hover{
-    background:linear-gradient(135deg,rgba(40,100,180,.65) 0%,rgba(20,50,120,.5) 50%,rgba(99,210,255,.2) 100%);
-    box-shadow:0 0 28px rgba(99,210,255,.3),inset 0 1px 0 rgba(99,210,255,.2);
-    color:#aaf0ff;
-  }
-  .btn-gundamle .gl-star{font-size:18px;filter:drop-shadow(0 0 6px #7ee8ff);}
-
   /* ── GUNDAMLE SCREEN ─────────────────────────────── */
   #gundamle .gl-header{
     display:flex;align-items:center;justify-content:space-between;
@@ -539,15 +700,6 @@
   }
   .gl-suggest button:hover,.gl-suggest button.active{border-color:rgba(99,210,255,.4);color:#7ee8ff;background:var(--panel-3);}
   .gl-suggest button img{width:32px;height:32px;object-fit:contain;flex-shrink:0;background:#06070a;}
-
-  /* Preview */
-  .gl-preview{
-    display:flex;align-items:center;gap:12px;
-    border:1px solid rgba(99,210,255,.25);background:rgba(99,210,255,.05);
-    padding:10px 12px;margin-bottom:10px;
-  }
-  .gl-preview img{width:52px;height:52px;object-fit:contain;background:#06070a;flex-shrink:0;}
-  .gl-preview-name{font-family:"Teko",sans-serif;font-size:18px;color:var(--txt);letter-spacing:1px;}
 
   /* Submit */
   .gl-submit{
@@ -594,41 +746,6 @@
   }
   .gl-hint-reveal-btn:hover{background:rgba(0,0,0,.15);}
 
-  /* Guess grid */
-  .gl-guesses{display:flex;flex-direction:column;gap:6px;margin-top:14px;}
-  .gl-guess-row{
-    display:grid;
-    grid-template-columns:56px 1fr 80px 54px 56px 56px 56px 80px;
-    gap:3px;
-  }
-  .gl-guess-row.header{
-    grid-template-columns:56px 1fr 80px 54px 56px 56px 56px 80px;
-    margin-bottom:2px;
-  }
-  .gl-guess-row.header .gl-cell{
-    background:transparent;border-color:transparent;
-    color:var(--txt-dim);font-size:8px;letter-spacing:1px;text-transform:uppercase;
-    padding:3px 4px;justify-content:center;
-  }
-  .gl-cell{
-    display:flex;align-items:center;justify-content:center;
-    padding:5px 4px;border:1px solid var(--line-bright);
-    background:var(--panel-2);
-    font-family:"Share Tech Mono",monospace;font-size:10px;
-    color:var(--txt);text-align:center;min-height:44px;
-    position:relative;transition:background .3s,border-color .3s;
-    line-height:1.2;
-  }
-  .gl-cell.green{background:rgba(78,201,122,.22);border-color:var(--green);color:var(--green);}
-  .gl-cell.yellow{background:rgba(240,180,41,.18);border-color:var(--amber);color:var(--amber);}
-  .gl-cell.red{background:rgba(217,58,58,.14);border-color:var(--red);color:var(--red);}
-  .gl-cell.img-cell{padding:2px;}
-  .gl-cell.img-cell img{width:48px;height:42px;object-fit:contain;display:block;}
-  .gl-cell .arr{font-size:14px;display:block;}
-  .gl-cell .val{font-size:9px;display:block;line-height:1.2;}
-  .gl-cell .color-pair{display:flex;gap:3px;align-items:center;}
-  .gl-cell .csq{width:16px;height:16px;border-radius:2px;border:1px solid rgba(255,255,255,.15);flex-shrink:0;}
-
   /* End screen */
   .gl-end{display:flex;flex-direction:column;align-items:center;padding:16px 0;}
   .gl-end-img{width:120px;height:120px;object-fit:contain;border:1px solid rgba(99,210,255,.3);margin-bottom:12px;}
@@ -636,17 +753,9 @@
   .gl-end-tries{font-family:"Share Tech Mono",monospace;font-size:12px;color:var(--txt-dim);letter-spacing:2px;text-align:center;margin-bottom:14px;}
 
   /* Leaderboard inside gundamle */
-  .gl-lb{margin-top:16px;}
+  .gl-lb{margin-top:16px;width:100%;}
   .gl-lb .lb-table th:last-child{text-align:right;}
-
-  @media(max-width:420px){
-    .gl-guess-row,.gl-guess-row.header{
-      grid-template-columns:44px 1fr 70px 44px 46px 46px 46px 68px;
-    }
-    .gl-cell{font-size:9px;min-height:40px;padding:4px 2px;}
-    .gl-cell.img-cell img{width:38px;height:34px;}
-    .gl-cell .csq{width:13px;height:13px;}
-  }
+  .gl-guesses{display:flex;flex-direction:column;gap:6px;margin-top:14px;}
 </style>
 </head>
 <body>
@@ -676,18 +785,28 @@
 
     <!-- START SCREEN -->
     <section id="start">
-      <span class="label">Analysis Mode</span>
-      <div class="seg" id="modeSeg">
-        <button data-mode="mc" class="on">Multiple Choice</button>
-        <button data-mode="type">Type Answer</button>
-        <button data-mode="zoom">Zoom Recon</button>
-        <button data-mode="artstyle">Impostor Hunt</button>
-        <button data-mode="pilot">Pilot Guessing</button>
-      </div>
-      <div class="mode-stat" id="modeStat"></div>
 
-      <div class="field" id="countField">
-        <span class="label">Units Per Session</span>
+      <!-- MODE SELECTOR -->
+      <div class="start-section">
+        <span class="start-section-label">Analysis Mode</span>
+        <div class="seg" id="modeSeg">
+          <button data-mode="mc" class="on">Multiple<br>Choice</button>
+          <button data-mode="type">Type<br>Answer</button>
+          <button data-mode="zoom">Zoom<br>Recon</button>
+          <button data-mode="artstyle">Impostor<br>Hunt</button>
+          <button data-mode="pilot">Pilot<br>Guess</button>
+          <button data-mode="gundamle">✦ Gundamle</button>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="start-section" style="padding:12px 18px;">
+        <div class="mode-stat" id="modeStat" style="margin-bottom:0;border:none;background:transparent;padding:0;"></div>
+      </div>
+
+      <!-- SESSION SIZE (hidden for zoom/artstyle/gundamle) -->
+      <div class="start-section" id="countField">
+        <span class="start-section-label">Units Per Session</span>
         <div class="seg" id="countSeg">
           <button data-count="5" class="on">5</button>
           <button data-count="10">10</button>
@@ -697,23 +816,24 @@
         <input id="customCount" type="number" min="1" class="custom-count" placeholder="…or enter a custom number">
       </div>
 
-      <button class="btn" id="startBtn">▶ Begin Analysis</button>
-      <div class="spacer"></div>
-      <button class="btn-gundamle" id="gundamleBtn"><span class="gl-star">✦</span> Gundamle <span class="gl-star">✦</span></button>
-      <div class="spacer"></div>
-      <button class="btn ghost" id="manageBtn">⚙ Manage Roster (<span id="rosterCount">0</span> units)</button>
-      <div class="spacer"></div>
-      <p class="hint" id="emptyWarn" style="display:none"></p>
+      <!-- ACTION BUTTONS -->
+      <div class="start-section">
+        <button class="btn" id="startBtn">▶ Begin Analysis</button>
+        <p class="hint" id="emptyWarn" style="display:none;margin-top:10px;margin-bottom:0;"></p>
+      </div>
 
       <!-- LEADERBOARD -->
-      <div style="margin-top:6px;">
-        <span class="label" style="display:flex;align-items:center;justify-content:space-between;">
+      <div class="start-section">
+        <span class="start-section-label" style="display:flex;align-items:center;justify-content:space-between;">
           <span>Leaderboard</span>
           <button id="lbRefreshBtn" style="background:none;border:none;color:var(--txt-dim);font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;cursor:pointer;padding:0;" title="Refresh">↻ refresh</button>
         </span>
         <div class="lb-status" id="lbStatus">—</div>
         <div id="lbBody"><div class="lb-empty">Loading scores...</div></div>
       </div>
+
+      <!-- MANAGE -->
+      <button class="btn ghost" id="manageBtn" style="margin-top:4px;">⚙ Manage Roster (<span id="rosterCount">0</span> units)</button>
 
     </section>
 
@@ -840,10 +960,15 @@
           <input id="glInput" placeholder="Type a Gundam name…" autocomplete="off">
         </div>
         <div id="glSuggest" class="gl-suggest"></div>
-        <div id="glPreview" class="gl-preview" style="display:none;">
+
+        <!-- Full scanner-style preview -->
+        <div class="gl-preview-scanner" id="glPreviewScanner">
+          <div class="gl-ps-br"></div>
+          <div class="gl-ps-tr"></div>
           <img id="glPreviewImg" src="" alt="">
-          <div class="gl-preview-name" id="glPreviewName"></div>
+          <div class="gl-ps-name" id="glPreviewName"></div>
         </div>
+
         <button class="gl-submit" id="glSubmit">Submit Guess</button>
         <button class="gl-hint-btn hide" id="glHintBtn">💡 Reveal Hint (blurred image)</button>
         <div id="glHintWrap" class="gl-hint-img-wrap hide">
@@ -857,11 +982,10 @@
 
       <!-- end screen (hidden until solved) -->
       <div id="glEnd" class="gl-end hide">
-        <img id="glEndImg" class="gl-end-img" src="" alt="">
+        <img id="glEndImg" class="gl-end-img" src="" alt="" style="cursor:zoom-in;" onclick="openLightbox(null,this.src)">
         <div class="gl-end-name" id="glEndName"></div>
         <div class="gl-end-tries" id="glEndTries"></div>
-        <div style="margin-top:4px;margin-bottom:16px;">
-          <!-- Gundamle leaderboard submit -->
+        <div style="margin-top:4px;margin-bottom:16px;width:100%;">
           <div class="submit-panel" id="glSubmitPanel" style="margin-top:0;">
             <div id="glSpFirst">
               <span class="sp-title">Submit to Gundamle Board</span>
@@ -880,8 +1004,7 @@
             </div>
           </div>
         </div>
-        <!-- Gundamle leaderboard -->
-        <div class="gl-lb" style="width:100%;">
+        <div class="gl-lb">
           <span class="label">Today's Gundamle Board</span>
           <div class="lb-status" id="glLbStatus">—</div>
           <div id="glLbBody"><div class="lb-empty">Loading…</div></div>
@@ -918,15 +1041,56 @@
       </div>
 
       <div class="spacer"></div>
-      <span class="label">Current Roster (<span id="manageCount">0</span>)</span>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <span class="label" style="margin-bottom:0;">Current Roster (<span id="manageCount">0</span>)</span>
+        <button class="btn data" id="openColorEditorBtn" style="width:auto;padding:9px 16px;font-size:13px;">🎨 Edit Colors</button>
+      </div>
       <input id="rosterSearch" class="search-in" placeholder="🔍 search units…" autocomplete="off">
       <div id="rosterList"></div>
+    </section>
+
+    <!-- COLOR EDITOR SECTION -->
+    <section id="colorEditor" class="hide">
+      <button class="menu-back" id="colorEditorBack">◀ Roster</button>
+      <div class="ce-header">
+        <div class="ce-title">🎨 Color Editor</div>
+      </div>
+      <p class="hint" style="margin-bottom:14px;">Search a unit, see it large, enter hex codes for its 2 primary colors, then save. Changes are stored in the roster JSON.</p>
+      <div class="ce-search-wrap">
+        <input id="ceSearchInput" placeholder="Search unit name or series…" autocomplete="off">
+      </div>
+      <div id="ceSuggest" class="ce-suggest"></div>
+      <div class="ce-unit-display" id="ceUnitDisplay">
+        <img id="ceUnitImg" class="ce-unit-img" src="" alt="">
+        <div class="ce-unit-name" id="ceUnitName"></div>
+        <div class="ce-color-row">
+          <div class="ce-color-field">
+            <label>Primary Color</label>
+            <div class="ce-color-inp-wrap">
+              <div class="ce-color-preview" id="cePreview1"></div>
+              <input type="text" id="ceHex1" placeholder="#rrggbb" maxlength="7">
+              <input type="color" id="cePicker1">
+            </div>
+          </div>
+          <div class="ce-color-field">
+            <label>Secondary Color</label>
+            <div class="ce-color-inp-wrap">
+              <div class="ce-color-preview" id="cePreview2"></div>
+              <input type="text" id="ceHex2" placeholder="#rrggbb" maxlength="7">
+              <input type="color" id="cePicker2">
+            </div>
+          </div>
+        </div>
+        <button class="ce-save-btn" id="ceSaveBtn">💾 Save Colors</button>
+        <div class="ce-saved-msg" id="ceSavedMsg"></div>
+      </div>
     </section>
 
   </div><!-- /body -->
 </div><!-- /shell -->
 
 <button id="floatBack" class="float-back hide">◀ Done</button>
+<button id="floatTop" class="float-top hide" title="Back to top">▲</button>
 
 <script>
 let roster = [];
@@ -995,13 +1159,13 @@ const PILOT_DATA={
   "MRX-010 Psycho Gundam Mk-II":"Rosammy Baddam",
   "MRX-012 Psycho Gundam Mk-III":"Purus Twelve",
   // ── Turn A ──────────────────────────────────────────────────────────
-  "Turn A Gundam":"Loran Cehack",
-  "Turn X":"Gym Ghingham",
+  "WD-M01 Turn A Gundam":"Loran Cehack",
+  "CONCEPT-X 6-1-2 Turn X":"Gym Ghingham",
   // ── G Gundam ────────────────────────────────────────────────────────
   "GF13-017NJ Shining Gundam":"Domon Kasshu",
   "GF13-017NJII God Gundam":"Domon Kasshu",
-  "Master Gundam":"Master Asia",
-  "Devil Gundam":"Rain Mikamura",
+  "GF13-001NHII Master Gundam":"Master Asia",
+  "JDG-00X Devil Gundam":"Rain Mikamura",
   // ── Gundam Wing ─────────────────────────────────────────────────────
   "XXXG-01W Wing Gundam":"Heero Yuy",
   "XXXG-00W0 Wing Gundam Zero":"Heero Yuy",
@@ -1059,12 +1223,12 @@ const PILOT_DATA={
   "GN-004 Gundam Nadleeh":"Tieria Erde",
   "GN-005 Gundam Virtue":"Tieria Erde",
   "GN-0000 00 Gundam":"Setsuna F. Seiei",
-  "00 Raiser":"Setsuna F. Seiei",
+  "GN-0000+GNR-010 00 Raiser":"Setsuna F. Seiei",
   "GNW-001 Gundam Throne Eins":"Johann Trinity",
   "GNW-002 Gundam Throne Zwei":"Michael Trinity",
   "GNW-003 Gundam Throne Drei":"Nena Trinity",
   "GNW-20000 Arche Gundam":"Ali Al-Saachez",
-  "Reborns Gundam":"Ribbons Almark",
+  "CB-0000G/C Reborns Gundam":"Ribbons Almark",
   "GN-006 Cherudim Gundam":"Lockon Stratos",
   "GN-007 Arios Gundam":"Allelujah Haptism",
   "GN-008 Seravee Gundam":"Tieria Erde",
@@ -1093,26 +1257,26 @@ const PILOT_DATA={
   // ── Iron-Blooded Orphans ────────────────────────────────────────────
   "ASW-G-08 Gundam Barbatos":"Mikazuki Augus",
   "ASW-G-08 Gundam Barbatos Lupus":"Mikazuki Augus",
-  "Gundam Barbatos Lupus Rex":"Mikazuki Augus",
+  "ASW-G-08 Gundam Barbatos Lupus Rex":"Mikazuki Augus",
   "ASW-G-01 Gundam Bael":"McGillis Fareed",
   "ASW-G-11 Gundam Gusion Rebake":"Akihiro Altland",
-  "ASW-G-29 Gundam Astaroth":"Norba Shino",
-  "ASW-G-47 Gundam Vual":"Iok Kujan",
-  "ASW-G-64 Gundam Flauros":"Dante Mogro",
+  "ASW-G-29 Gundam Astaroth":"Argi Mirage",
+  "ASW-G-47 Gundam Vual":"Rosario Leone",
+  "ASW-G-64 Gundam Flauros":"Norba Shino",
   "ASW-G-66 Gundam Kimaris":"Gaelio Bauduin",
-  "ASW-G-71 Gundam Dantalion":"Hush Middy",
-  "Gundam Vidar":"Gaelio Bauduin",
+  "ASW-G-71 Gundam Dantalion":"Zaza Fossil",
+  "ASW-G-29 Gundam Vidar":"Gaelio Bauduin",
   // ── The Witch from Mercury ──────────────────────────────────────────
-  "Gundam Lfrith":"Prospera Mercury",
+  "MD-0031 Gundam Lfrith":"Elnora Samaya",
+  "XGF-01 Gundam Lfrith Jiu":"Prospera Mercury",
   "AVP-03 Gundam Lfrith Anavata":"Ericht Samaya",
-  "XGF-01 Gundam Lfrith Jiu":"Lauda Neis",
-  "EDM-GA-01 Gundam Lfrith Ur":"Ericht Samaya",
-  "EDM-GA-02 Gundam Lfrith Thorn":"Norea du Noc",
+  "EDM-GA-01 Gundam Lfrith Ur":"Sophie Pulone",
+  "EDM-GA-02 Gundam Lfrith Thorn":"Norea Du Noc",
   "XVX-016 Gundam Aerial":"Suletta Mercury",
   "XVX-016RN Gundam Aerial Rebuild":"Suletta Mercury",
   "X-EX01 Gundam Calibarn":"Suletta Mercury",
   "FP/A-77 Gundam Pharact":"Elan Ceres",
-  "MDX-0003 Gundam Schwarzette":"Shaddiq Zenelli",
+  "MDX-0003 Gundam Schwarzette":"Lauda Neis",
   // ── Hathaway's Flash ────────────────────────────────────────────────
   "RX-94 Mass Production Nu Gundam":"EFSF Pilot",
   "RX-105 Xi Gundam":"Hathaway Noa",
@@ -1414,7 +1578,6 @@ function renderManageList(query=""){
     groups[seriesName].forEach(({item,idx})=>{
       const div=document.createElement("div");div.className="roster-item";
       const thmb=document.createElement("div");thmb.className="thmbwrap";
-      // Click thumbnail to open lightbox
       thmb.onclick=()=>{if(item.img) openLightbox(null,item.img);};
       const zoomHint=document.createElement("div");zoomHint.className="thmb-zoom";zoomHint.textContent="🔍";
       thmb.appendChild(zoomHint);
@@ -1422,11 +1585,8 @@ function renderManageList(query=""){
       else{const noimg=document.createElement("div");noimg.className="noimg";noimg.textContent="CLICK TO ADD";thmb.appendChild(noimg);}
       const mid=document.createElement("div");mid.className="ritem-mid";
       const top=document.createElement("div");top.className="ritem-top";
-      
-      /* CHANGED: Swapped out static text div for an interactive text input linked to roster item name */
       const nameIn=document.createElement("input");nameIn.className="name-in";nameIn.value=item.name;nameIn.placeholder="Edit mobile suit name...";
       nameIn.onchange=e=>{roster[idx].name=e.target.value.trim() || "Unnamed Unit";};
-      
       const dbtn=document.createElement("button");dbtn.className="del";dbtn.textContent="✕";dbtn.title="Remove";
       dbtn.onclick=()=>{if(confirm("Remove "+item.name+"?")){{roster.splice(idx,1);updateRosterUI();}}};
       top.appendChild(nameIn);top.appendChild(dbtn);
@@ -1436,7 +1596,20 @@ function renderManageList(query=""){
       const dlbtn=document.createElement("button");dlbtn.className="dl-btn";dlbtn.innerHTML="💾";dlbtn.title="Download image";
       dlbtn.onclick=()=>{if(!item.img){alert("No image set.");return;}downloadTargetImage(item.img,item.name);};
       ctrl.appendChild(inp);ctrl.appendChild(dlbtn);
-      mid.appendChild(top);mid.appendChild(ctrl);
+      // Color swatches row
+      const colRow=document.createElement("div");colRow.className="roster-colors";
+      const c=item.colors||(typeof GL_COLORS!=="undefined"&&GL_COLORS[item.name])||null;
+      if(c&&c[0]&&c[1]){
+        const sq1=document.createElement("div");sq1.className="roster-csq";sq1.style.background=c[0];
+        const sq2=document.createElement("div");sq2.className="roster-csq";sq2.style.background=c[1];
+        const lbl=document.createElement("span");lbl.className="roster-color-label";
+        lbl.textContent=(c[2]||c[0])+" / "+(c[3]||c[1]);
+        colRow.appendChild(sq1);colRow.appendChild(sq2);colRow.appendChild(lbl);
+      } else {
+        const lbl=document.createElement("span");lbl.className="roster-color-label";lbl.textContent="No colors set";
+        colRow.appendChild(lbl);
+      }
+      mid.appendChild(top);mid.appendChild(ctrl);mid.appendChild(colRow);
       div.appendChild(thmb);div.appendChild(mid);sectionBlock.appendChild(div);
     });
     container.appendChild(sectionBlock);
@@ -1449,7 +1622,14 @@ function setupEventListeners(){
     b.onclick=()=>{
       document.querySelectorAll("#modeSeg button").forEach(x=>x.classList.remove("on"));
       b.classList.add("on");quizMode=b.dataset.mode;
-      if(quizMode==="zoom"||quizMode==="artstyle"){$("countField").classList.add("hide");}else{$("countField").classList.remove("hide");}
+      if(quizMode==="gundamle"){
+        // hide count field, then open gundamle
+        $("countField").classList.add("hide");
+        glOpen();
+        return;
+      }
+      if(quizMode==="zoom"||quizMode==="artstyle"){$("countField").classList.add("hide");}
+      else{$("countField").classList.remove("hide");}
       updateModeStat();
     };
   });
@@ -1467,8 +1647,14 @@ function setupEventListeners(){
     else{cc.classList.remove("on");document.querySelectorAll("#countSeg button").forEach(x=>x.classList.toggle("on",x.dataset.count==="5"));quizCount="5";}
   });}
   $("startBtn").onclick=startQuiz;
-  $("manageBtn").onclick=()=>{showSection("manage");$("floatBack").classList.remove("hide");};
-  $("floatBack").onclick=()=>{updateRosterUI();showSection("start");$("floatBack").classList.add("hide");};
+  $("manageBtn").onclick=()=>{showSection("manage");};
+  $("floatBack").onclick=()=>{
+    const ce=$("colorEditor");
+    if(ce&&!ce.classList.contains("hide")){showSection("manage");return;}
+    updateRosterUI();showSection("start");
+  };
+  const ft=$("floatTop");
+  if(ft)ft.onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
   $("quizBack").onclick=()=>showSection("start");
   $("zoomBack").onclick=()=>{zoomStreak=0;updateZoomStreak();showSection("start");};
   $("artstyleBack").onclick=()=>showSection("start");
@@ -1490,22 +1676,28 @@ function setupEventListeners(){
     const alt=altStr?altStr.split(",").map(x=>x.toLowerCase().trim()).filter(Boolean):[];
     roster.push({name,img,alt,series});$("addName").value="";$("addImg").value="";$("addAlt").value="";updateRosterUI();
   };
+  // Color editor
+  $("openColorEditorBtn").onclick=()=>{ setupColorEditor(); showSection("colorEditor"); };
+  $("colorEditorBack").onclick=()=>showSection("manage");
 }
 
 function showSection(id){
-  ["start","quiz","zoom","artstyle","results","manage","gundamle"].forEach(x=>$(x).classList.add("hide"));
-  $(id).classList.remove("hide");window.scrollTo(0,0);
-  // Reset submit panel when leaving results
+  ["start","quiz","zoom","artstyle","results","manage","gundamle","colorEditor"].forEach(x=>{const el=$(x);if(el)el.classList.add("hide");});
+  const target=$(id);if(target)target.classList.remove("hide");
+  window.scrollTo(0,0);
   if(id!=="results"){const sm=$("submitMsg");const sb=$("submitBtn");if(sm)sm.textContent="";if(sb)sb.disabled=false;}
-  // Fetch leaderboard when returning to start
   if(id==="start") fetchLeaderboard();
+  // show/hide float buttons
+  const fb=$("floatBack");const ft=$("floatTop");
+  if(id==="manage"||id==="colorEditor"){if(fb)fb.classList.remove("hide");}else{if(fb)fb.classList.add("hide");}
+  if(id==="manage"||id==="colorEditor"){if(ft)ft.classList.remove("hide");}else{if(ft)ft.classList.add("hide");}
 }
 
 function startQuiz(){
   if(roster.length===0){alert("No units in database.");return;}
   if(quizMode==="artstyle"){setupArtstyleQuiz();return;}
   if(quizMode==="pilot"){
-    const pool=shuffleArr(roster.filter(u=>u.img&&PILOT_DATA[u.name]));
+    const pool=shuffleArr(roster.filter(u=>u.img&&(u.pilot||PILOT_DATA[u.name])));
     if(pool.length===0){alert("No pilot data found. Add units with known pilots.");return;}
     let n=pool.length;
     if(quizCount==="half")n=Math.max(1,Math.floor(pool.length/2));
@@ -1639,7 +1831,7 @@ function generateMCChoices(correctItem){
 
 function generatePilotChoices(correctItem){
   const box=$("choices");box.innerHTML="";
-  const correctPilot=PILOT_DATA[correctItem.name];
+  const correctPilot=correctItem.pilot||PILOT_DATA[correctItem.name];
   correctAnswerText=correctPilot;
   const allPilotNames=[...new Set(Object.values(PILOT_DATA))].filter(p=>p!==correctPilot);
   const pool=shuffleArr(allPilotNames);
@@ -1770,7 +1962,7 @@ function handleTypeAnswer(){
 function showQuizReveal(){
   const item=sessionUnits[curIdx];
   if(quizMode==="pilot"){
-    const pilot=PILOT_DATA[item.name]||"?";
+    const pilot=item.pilot||PILOT_DATA[item.name]||"?";
     $("reveal").innerHTML=escapeHtml(pilot)+`<small>${escapeHtml(item.name)}${item.series?' — '+escapeHtml(item.series):''}</small>`;
   }else{
     $("reveal").innerHTML=escapeHtml(item.name)+(item.series?`<small>Series: ${escapeHtml(item.series)}</small>`:'');
@@ -1954,16 +2146,104 @@ setInterval(()=>{
   $("clock").textContent=d.getFullYear()+"."+p(d.getMonth()+1)+"."+p(d.getDate())+" "+p(d.getHours())+":"+p(d.getMinutes())+":"+p(d.getSeconds());
 },1000);
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════════════════
+   COLOR EDITOR
+   ══════════════════════════════════════════════════════════════════ */
+function getUnitColors(unit){
+  if(unit.colors&&unit.colors[0]) return unit.colors;
+  if(typeof GL_COLORS!=="undefined"&&GL_COLORS[unit.name]) return GL_COLORS[unit.name];
+  return ["#444444","#888888","Dark","Grey"];
+}
+
+function setupColorEditor(){
+  const inp=$("ceSearchInput");
+  const sugBox=$("ceSuggest");
+  const display=$("ceUnitDisplay");
+  let ceUnit=null;
+
+  function hexValid(h){return /^#[0-9a-fA-F]{6}$/.test(h);}
+  function syncPreview(hexEl,previewEl,pickerEl){
+    const v=hexEl.value.trim();
+    if(hexValid(v)){previewEl.style.background=v;pickerEl.value=v;}
+  }
+  $("ceHex1").oninput=()=>syncPreview($("ceHex1"),$("cePreview1"),$("cePicker1"));
+  $("ceHex2").oninput=()=>syncPreview($("ceHex2"),$("cePreview2"),$("cePicker2"));
+  $("cePicker1").oninput=()=>{$("ceHex1").value=$("cePicker1").value;syncPreview($("ceHex1"),$("cePreview1"),$("cePicker1"));};
+  $("cePicker2").oninput=()=>{$("ceHex2").value=$("cePicker2").value;syncPreview($("ceHex2"),$("cePreview2"),$("cePicker2"));};
+
+  function loadUnit(unit){
+    ceUnit=unit;
+    $("ceUnitImg").src=unit.img||"";
+    $("ceUnitName").textContent=unit.name;
+    const c=getUnitColors(unit);
+    $("ceHex1").value=c[0]||"#444444";
+    $("ceHex2").value=c[1]||"#888888";
+    syncPreview($("ceHex1"),$("cePreview1"),$("cePicker1"));
+    syncPreview($("ceHex2"),$("cePreview2"),$("cePicker2"));
+    display.classList.add("visible");
+    $("ceSavedMsg").textContent="";
+    sugBox.innerHTML="";inp.value="";
+  }
+
+  function renderSuggestions(matches){
+    sugBox.innerHTML="";
+    matches.forEach(u=>{
+      const b=document.createElement("button");
+      if(u.img){const img=document.createElement("img");img.src=u.img;img.alt="";b.appendChild(img);}
+      const span=document.createElement("span");span.textContent=u.name;b.appendChild(span);
+      b.onclick=()=>loadUnit(u);
+      sugBox.appendChild(b);
+    });
+  }
+
+  inp.oninput=()=>{
+    const val=inp.value.toLowerCase().trim();
+    if(!val){sugBox.innerHTML="";return;}
+    // Reuse SERIES_ALIASES for series search
+    const SERIES_ALIASES={
+      "uc":"Universal Century","zeta":"Universal Century","zz":"Universal Century","unicorn":"Universal Century","thunderbolt":"Universal Century",
+      "gg":"G Gundam","wing":"Gundam Wing","x":"After War Gundam X","turn a":"Turn A Gundam",
+      "seed":"Gundam SEED","destiny":"SEED Destiny","freedom":"SEED FREEDOM",
+      "00":"Gundam 00","age":"Gundam AGE","rg":"Reconguista in G","ibo":"Iron-Blooded Orphans",
+      "wfm":"The Witch from Mercury","hathaway":"Hathaway's Flash","gquuuuuux":"Gundam GQuuuuuuX",
+      "bf":"Build Fighters","bft":"Build Fighters Try","bd":"Build Divers","rerise":"Build Divers Re:RISE","bm":"Build Metaverse",
+    };
+    const seriesMatch=SERIES_ALIASES[val];
+    let results;
+    if(seriesMatch){
+      results=roster.filter(u=>u.series&&u.series.toLowerCase().includes(seriesMatch.toLowerCase()));
+    } else {
+      results=roster.filter(u=>u.name.toLowerCase().includes(val)||(u.series||"").toLowerCase().includes(val));
+    }
+    renderSuggestions(results.slice(0,10));
+  };
+
+  $("ceSaveBtn").onclick=()=>{
+    if(!ceUnit) return;
+    const h1=$("ceHex1").value.trim();
+    const h2=$("ceHex2").value.trim();
+    if(!hexValid(h1)||!hexValid(h2)){$("ceSavedMsg").textContent="⚠ Enter valid hex codes (e.g. #ff0000)";$("ceSavedMsg").style.color="var(--red)";return;}
+    const idx=roster.findIndex(u=>u.name===ceUnit.name);
+    if(idx>=0){
+      roster[idx].colors=[h1,h2];
+      if(typeof GL_COLORS!=="undefined") GL_COLORS[ceUnit.name]=[h1,h2,h1,h2];
+      ceUnit=roster[idx];
+    }
+    $("ceSavedMsg").textContent="✓ Colors saved for "+ceUnit.name;
+    $("ceSavedMsg").style.color="var(--green)";
+    syncPreview($("ceHex1"),$("cePreview1"),$("cePicker1"));
+    syncPreview($("ceHex2"),$("cePreview2"),$("cePicker2"));
+  };
+}
+
+/* ══════════════════════════════════════════════════════════════════
    GUNDAMLE
-   ═══════════════════════════════════════════════════════════════════ */
+   ══════════════════════════════════════════════════════════════════ */
 (function(){
 
-/* ── GUNDAMLE DATA ──────────────────────────────────────────────── */
+/* ── DATA ───────────────────────────────────────────────────────── */
 
-// Release years (real-world anime/OVA premiere year)
 const GL_YEAR = {
-  // Universal Century
   "RX-78-2 Gundam":1979,"RX-178 Gundam Mk-II":1985,"MSZ-006 Zeta Gundam":1985,
   "MSZ-010 ZZ Gundam":1986,"RX-93 Nu Gundam":1988,"RX-93-ν2 Hi-Nu Gundam":1988,
   "F91 Gundam F91":1991,"XM-X1 Crossbone Gundam X-1":1994,
@@ -1979,22 +2259,17 @@ const GL_YEAR = {
   "FA-78 Full Armor Gundam (Thunderbolt)":2015,"RX-78AL Atlas Gundam":2016,
   "MRX-009 Psycho Gundam":1985,"MRX-010 Psycho Gundam Mk-II":1986,
   "MRX-012 Psycho Gundam Mk-III":1992,
-  // Turn A
   "WD-M01 Turn A Gundam":1999,"CONCEPT-X 6-1-2 Turn X":1999,
-  // G Gundam
   "GF13-017NJ Shining Gundam":1994,"GF13-017NJII God Gundam":1994,
   "GF13-001NHII Master Gundam":1994,"JDG-00X Devil Gundam":1994,
-  // Wing
   "XXXG-01W Wing Gundam":1995,"XXXG-00W0 Wing Gundam Zero":1995,
   "XXXG-01D Gundam Deathscythe":1995,"XXXG-01H Gundam Heavyarms":1995,
   "XXXG-01S Shenlong Gundam":1995,"XXXG-01SR Sandrock Gundam":1995,
   "OZ-13MS Gundam Epyon":1995,
-  // After War X
   "GX-9900 Gundam X":1996,"GX-9900-DV Gundam X Divider":1996,
   "GX-9901-DX Gundam Double X":1996,"GW-9800 Gundam Airmaster":1996,
   "GT-9600 Gundam Leopard":1996,"NRX-0013 Gundam Virsago":1996,
   "NRX-0015 Gundam Ashtaron":1996,
-  // SEED
   "GAT-X105 Strike Gundam":2002,"ZGMF-X10A Freedom Gundam":2002,
   "ZGMF-X09A Justice Gundam":2003,"GAT-X303 Aegis Gundam":2002,
   "GAT-X102 Duel Gundam":2002,"GAT-X103 Buster Gundam":2002,
@@ -2005,15 +2280,12 @@ const GL_YEAR = {
   "GAT-X131 Calamity Gundam":2003,"GAT-X252 Forbidden Gundam":2003,
   "GAT-X370 Raider Gundam":2003,"GSX-401FW Stargazer Gundam":2006,
   "ZGMF-X11A Regenerate Gundam":2004,"GAT-X105E Strike Noir Gundam":2006,
-  // SEED Destiny
   "ZGMF-X56S Impulse Gundam":2004,"ZGMF-X42S Destiny Gundam":2004,
   "ZGMF-X20A Strike Freedom Gundam":2004,"ZGMF-X19A Infinite Justice Gundam":2005,
   "ZGMF-X666S Legend Gundam":2005,"GFAS-X1 Destroy Gundam":2004,
-  // SEED FREEDOM
   "STTS-909 Rising Freedom Gundam":2024,"ZGMF/A-262PD-P Mighty Strike Freedom Gundam":2024,
   "STTS-808 Immortal Justice Gundam":2024,"ZGMF-1027M Duel Blitz Gundam":2024,
   "ZGMF-103HD Lightning Buster Gundam":2024,
-  // 00
   "GN-001 Gundam Exia":2007,"GN-002 Gundam Dynames":2007,"GN-003 Gundam Kyrios":2007,
   "GN-004 Gundam Nadleeh":2007,"GN-005 Gundam Virtue":2007,
   "GN-0000 00 Gundam":2008,"GN-0000+GNR-010 00 Raiser":2008,
@@ -2026,50 +2298,39 @@ const GL_YEAR = {
   "GN-011 Gundam Harute":2010,"GNT-0000 00 Qan[T]":2010,
   "GN-000 0 Gundam":2008,"GNY-001 Gundam Astraea":2009,
   "GNY-001F Gundam Astraea Type F":2009,
-  // AGE
   "AGE-1 Gundam AGE-1 Normal":2011,"AGE-1T Gundam AGE-1 Titus":2011,
   "AGE-1S Gundam AGE-1 Spallow":2011,"AGE-2 Gundam AGE-2 Normal":2012,
   "AGE-2DB Gundam AGE-2 Double Bullet":2012,"AGE-2DH Gundam AGE-2 Dark Hound":2012,
   "AGE-3 Gundam AGE-3 Normal":2012,"AGE-3O Gundam AGE-3 Orbital":2012,
   "AGE-FX Gundam AGE-FX":2012,"xvm-fzc Gundam Legilis":2012,
-  // Reconguista
   "YG-111 Gundam G-Self":2014,"VGMM-Gf10 Gundam G-Lucifer":2014,"MSAM-033 Gundam G-Arcane":2014,
-  // IBO
   "ASW-G-08 Gundam Barbatos":2015,"ASW-G-08 Gundam Barbatos Lupus":2016,
   "ASW-G-08 Gundam Barbatos Lupus Rex":2016,"ASW-G-01 Gundam Bael":2016,
   "ASW-G-11 Gundam Gusion Rebake":2015,"ASW-G-29 Gundam Vidar":2016,
   "ASW-G-64 Gundam Flauros":2016,"ASW-G-29 Gundam Astaroth":2016,
   "ASW-G-47 Gundam Vual":2016,"ASW-G-71 Gundam Dantalion":2017,
   "ASW-G-66 Gundam Kimaris":2015,
-  // Hathaway
   "RX-105 Xi Gundam":2021,"RX-104FF Penelope":2021,
-  "RX-94 Mass Production Nu Gundam":2021,"TX-ff104 Alyzeus":2021,
-  // WfM
+  "RX-94 Mass Production Nu Gundam":2021,"TX-ff104 Alyzeus":2026,
   "XVX-016 Gundam Aerial":2022,"XVX-016RN Gundam Aerial Rebuild":2022,
   "X-EX01 Gundam Calibarn":2023,"FP/A-77 Gundam Pharact":2022,
   "MDX-0003 Gundam Schwarzette":2023,"MD-0031 Gundam Lfrith":2022,
   "AVP-03 Gundam Lfrith Anavata":2023,"XGF-01 Gundam Lfrith Jiu":2023,
   "EDM-GA-01 Gundam Lfrith Ur":2023,"EDM-GA-02 Gundam Lfrith Thorn":2022,
-  // GQuuuuuuX
   "GQuuuuuuX":2025,"GFreD":2025,"Red Gundam":2025,"White Gundam":2025,"01 Gundam":2025,
-  // Build Fighters
   "GAT-X105B Build Strike Gundam":2013,"GAT-X105BFP Build Strike Gundam Full Package":2013,
   "GAT-X105BST Star Build Strike Gundam":2013,"GAT-X105BGC Build Strike Galaxy Cosmos":2013,
   "PPGN-001 Gundam Amazing Exia":2013,"PPGN-001 Gundam Exia Dark Matter":2013,
   "GX-9999 Gundam X Maoh":2013,"Sengoku Astray Gundam":2013,
   "XXXG-01Wf Wing Gundam Fenice":2013,"XXXG-01Wfr Gundam Fenice Rinascita":2014,
   "XM-X9999 Crossbone Gundam Maoh":2013,"AC-01 Miss Sazabi":2013,
-  // Build Fighters Try
   "JMF-1336R Build Burning Gundam":2014,"JMF-1337T Try Burning Gundam":2014,
   "LGZ-91 Lightning Gundam":2014,"KUMA-PP Gundam Tryon 3":2014,
   "KMK-B01 Kamiki Burning Gundam":2014,
-  // Builders Beginning G
   "GPB-X80 Beginning Gundam":2010,"GPB-X80-30F Beginning 30 Gundam":2010,
-  // Build Divers
   "GN-0000DVR Gundam 00 Diver":2018,"GN-0000DVR/S Gundam 00 Sky":2018,
   "GN-1001N Seltsam":2018,"AGE-IIMG Gundam AGE-2 Magnum":2018,
   "RX-78GP02R Gundam GP-Rase-Two":2018,
-  // Build Divers Re:RISE
   "PFF-X7 Core Gundam":2019,"PFF-X7II Core Gundam II":2020,
   "PFF-X7/E3 Earthree Gundam":2019,"PFF-X7/J5 Jupitive Gundam":2019,
   "PFF-X7II/U7 Uraven Gundam":2020,"ZGMF-X19AK Gundam Justice Knight":2020,
@@ -2077,14 +2338,12 @@ const GL_YEAR = {
   "PFF-X7RANIMA Gundam Anima\u3010Rize\u3011":2020,"PFF-X7M4 Marsfour Gundam":2020,
   "PFF-X7M1 Mercuone Gundam":2020,"PFF-X7IIS6 Saturnix Gundam":2020,
   "PFF-X7IIN8 Nepteight Gundam":2020,"PFF-X7IIBUILD DiVERS ReRising Gundam":2020,
-  // Build Metaverse
   "ASW-G-08A Gundam Amazing Barbatos Lupus":2023,"GAT-X105BEG Build Strike Exceed Galaxy":2023,
   "GN-0000DVRII Gundam 00 Diver Arc":2023,"PFF-X7II+P9 Plutine Gundam":2023,
   "RX-78-l\u0101-III Lah Gundam":2023,"SBG-E01 Shin Burning Gundam":2023,
   "TYP-G12CMR Typhoeus Gundam Chimera":2023,
 };
 
-// Role: MC=main character, Side=ally/support, Villain=antagonist
 const GL_ROLE = {
   "RX-78-2 Gundam":"MC","RX-178 Gundam Mk-II":"MC","MSZ-006 Zeta Gundam":"MC",
   "MSZ-010 ZZ Gundam":"MC","RX-93 Nu Gundam":"MC","RX-93-ν2 Hi-Nu Gundam":"MC",
@@ -2137,7 +2396,7 @@ const GL_ROLE = {
   "GN-008GNHW3G Seravee Gundam GNHW3G":"Side",
   "CB-002 Raphael Gundam":"Side","GN-010 Gundam Zabanya":"Side",
   "GN-011 Gundam Harute":"Side","GNT-0000 00 Qan[T]":"MC",
-  "GN-000 0 Gundam":"Villain","GNY-001 Gundam Astraea":"Side",
+  "GN-000 0 Gundam":"Side","GNY-001 Gundam Astraea":"Side",
   "GNY-001F Gundam Astraea Type F":"Side",
   "AGE-1 Gundam AGE-1 Normal":"MC","AGE-1T Gundam AGE-1 Titus":"MC",
   "AGE-1S Gundam AGE-1 Spallow":"MC","AGE-2 Gundam AGE-2 Normal":"MC",
@@ -2152,7 +2411,7 @@ const GL_ROLE = {
   "ASW-G-47 Gundam Vual":"Villain","ASW-G-71 Gundam Dantalion":"Side",
   "ASW-G-66 Gundam Kimaris":"Villain",
   "RX-105 Xi Gundam":"MC","RX-104FF Penelope":"Villain",
-  "RX-94 Mass Production Nu Gundam":"Side","TX-ff104 Alyzeus":"Side",
+  "RX-94 Mass Production Nu Gundam":"Side","TX-ff104 Alyzeus":"Villain",
   "XVX-016 Gundam Aerial":"MC","XVX-016RN Gundam Aerial Rebuild":"MC",
   "X-EX01 Gundam Calibarn":"MC","FP/A-77 Gundam Pharact":"Villain",
   "MDX-0003 Gundam Schwarzette":"Villain","MD-0031 Gundam Lfrith":"Side",
@@ -2185,7 +2444,6 @@ const GL_ROLE = {
   "TYP-G12CMR Typhoeus Gundam Chimera":"Villain",
 };
 
-// Series position: early / mid / late
 const GL_ERA = {
   "RX-78-2 Gundam":"Early","RX-178 Gundam Mk-II":"Early","MSZ-006 Zeta Gundam":"Mid",
   "MSZ-010 ZZ Gundam":"Mid","RX-93 Nu Gundam":"Late","RX-93-ν2 Hi-Nu Gundam":"Late",
@@ -2253,7 +2511,7 @@ const GL_ERA = {
   "ASW-G-47 Gundam Vual":"Mid","ASW-G-71 Gundam Dantalion":"Late",
   "ASW-G-66 Gundam Kimaris":"Early",
   "RX-105 Xi Gundam":"Early","RX-104FF Penelope":"Early",
-  "RX-94 Mass Production Nu Gundam":"Early","TX-ff104 Alyzeus":"Mid",
+  "RX-94 Mass Production Nu Gundam":"Early","TX-ff104 Alyzeus":"Late",
   "XVX-016 Gundam Aerial":"Early","XVX-016RN Gundam Aerial Rebuild":"Late",
   "X-EX01 Gundam Calibarn":"Late","FP/A-77 Gundam Pharact":"Early",
   "MDX-0003 Gundam Schwarzette":"Mid","MD-0031 Gundam Lfrith":"Early",
@@ -2286,851 +2544,716 @@ const GL_ERA = {
   "TYP-G12CMR Typhoeus Gundam Chimera":"Late",
 };
 
-// Primary colors: [color1hex, color2hex, colorName1, colorName2]
 const GL_COLORS = {
-  "RX-78-2 Gundam":["#f0f0f0","#2255aa","White","Blue"],
-  "RX-178 Gundam Mk-II":["#f0f0f0","#222266","White","Dark Blue"],
-  "MSZ-006 Zeta Gundam":["#f0f0f0","#334499","White","Blue"],
-  "MSZ-010 ZZ Gundam":["#f0f0f0","#1144bb","White","Blue"],
-  "RX-93 Nu Gundam":["#f0f0f0","#334488","White","Blue"],
-  "RX-93-ν2 Hi-Nu Gundam":["#f0f0f0","#1a3d9c","White","Blue"],
-  "F91 Gundam F91":["#f0f0f0","#cc2222","White","Red"],
-  "XM-X1 Crossbone Gundam X-1":["#f0f0f0","#cc2222","White","Red"],
-  "LM312V04 Victory Gundam":["#f0f0f0","#3355bb","White","Blue"],
-  "V-Dash Gundam":["#f0f0f0","#3355bb","White","Blue"],
-  "LM314V21 V2 Gundam":["#f0f0f0","#3355bb","White","Blue"],
-  "LM314V23/24 V2 Assault Buster Gundam":["#f0f0f0","#3355bb","White","Blue"],
-  "RX-0 Unicorn Gundam (Unicorn Mode)":["#f0f0f0","#cccccc","White","Silver"],
-  "RX-0 Unicorn Gundam (Destroy Mode)":["#f0f0f0","#cc2222","White","Red"],
-  "RX-0 Full Armor Unicorn Gundam":["#f0f0f0","#cc2222","White","Red"],
+  "RX-78-2 Gundam":["#e8e8e8","#2255aa","White","Blue"],
+  "RX-178 Gundam Mk-II":["#e8e8e8","#222266","White","Dark Blue"],
+  "MSZ-006 Zeta Gundam":["#e8e8e8","#334499","White","Blue"],
+  "MSZ-010 ZZ Gundam":["#e8e8e8","#1144bb","White","Blue"],
+  "RX-93 Nu Gundam":["#e8e8e8","#334488","White","Blue"],
+  "RX-93-ν2 Hi-Nu Gundam":["#e8e8e8","#1a3d9c","White","Blue"],
+  "F91 Gundam F91":["#e8e8e8","#cc2222","White","Red"],
+  "XM-X1 Crossbone Gundam X-1":["#e8e8e8","#cc2222","White","Red"],
+  "LM312V04 Victory Gundam":["#e8e8e8","#3355bb","White","Blue"],
+  "V-Dash Gundam":["#e8e8e8","#3355bb","White","Blue"],
+  "LM314V21 V2 Gundam":["#e8e8e8","#3355bb","White","Blue"],
+  "LM314V23/24 V2 Assault Buster Gundam":["#e8e8e8","#3355bb","White","Blue"],
+  "RX-0 Unicorn Gundam (Unicorn Mode)":["#e8e8e8","#cccccc","White","Silver"],
+  "RX-0 Unicorn Gundam (Destroy Mode)":["#e8e8e8","#cc2222","White","Red"],
+  "RX-0 Full Armor Unicorn Gundam":["#e8e8e8","#cc2222","White","Red"],
   "RX-0 Unicorn Gundam Phenex":["#d4aa00","#cc8800","Gold","Orange"],
   "RX-0 Unicorn Gundam Banshee":["#111111","#d4aa00","Black","Gold"],
   "RX-0 Unicorn Gundam Banshee Norn":["#111111","#d4aa00","Black","Gold"],
-  "RX-9 Narrative Gundam":["#f0f0f0","#cc2222","White","Red"],
-  "RX-78NT-1 Gundam NT-1":["#f0f0f0","#2255aa","White","Blue"],
+  "RX-9 Narrative Gundam":["#e8e8e8","#cc2222","White","Red"],
+  "RX-78NT-1 Gundam NT-1":["#e8e8e8","#2255aa","White","Blue"],
   "RX-79 Gundam Ground Type":["#8b9e6a","#556b2f","Olive","Green"],
-  "RX-78GP01 Gundam GP01 Zephyranthes":["#f0f0f0","#2255aa","White","Blue"],
-  "RX-78GP01-Fb Gundam GP01 Full Vernian":["#f0f0f0","#2255aa","White","Blue"],
-  "RX-78GP02A Gundam GP02A Physalis":["#f0f0f0","#cc3300","White","Red"],
-  "RX-78GP03 Gundam GP03 Dendrobium":["#f0f0f0","#2255aa","White","Blue"],
-  "FA-78 Full Armor Gundam (Thunderbolt)":["#f0f0f0","#2255aa","White","Blue"],
-  "RX-78AL Atlas Gundam":["#f0f0f0","#3366cc","White","Blue"],
+  "RX-78GP01 Gundam GP01 Zephyranthes":["#e8e8e8","#2255aa","White","Blue"],
+  "RX-78GP01-Fb Gundam GP01 Full Vernian":["#e8e8e8","#2255aa","White","Blue"],
+  "RX-78GP02A Gundam GP02A Physalis":["#e8e8e8","#cc3300","White","Red"],
+  "RX-78GP03 Gundam GP03 Dendrobium":["#e8e8e8","#2255aa","White","Blue"],
+  "FA-78 Full Armor Gundam (Thunderbolt)":["#e8e8e8","#2255aa","White","Blue"],
+  "RX-78AL Atlas Gundam":["#e8e8e8","#3366cc","White","Blue"],
   "MRX-009 Psycho Gundam":["#cc2222","#111133","Red","Dark Blue"],
   "MRX-010 Psycho Gundam Mk-II":["#aa1111","#111133","Red","Dark Blue"],
   "MRX-012 Psycho Gundam Mk-III":["#880000","#111133","Dark Red","Dark Blue"],
-  "WD-M01 Turn A Gundam":["#f0f0f0","#ddddcc","White","Cream"],
+  "WD-M01 Turn A Gundam":["#e8e8e8","#ddddcc","White","Cream"],
   "CONCEPT-X 6-1-2 Turn X":["#cccccc","#111111","Silver","Black"],
-  "GF13-017NJ Shining Gundam":["#f0f0f0","#cc2222","White","Red"],
-  "GF13-017NJII God Gundam":["#cc2222","#f0f0f0","Red","White"],
+  "GF13-017NJ Shining Gundam":["#e8e8e8","#cc2222","White","Red"],
+  "GF13-017NJII God Gundam":["#cc2222","#e8e8e8","Red","White"],
   "GF13-001NHII Master Gundam":["#111111","#880000","Black","Dark Red"],
   "JDG-00X Devil Gundam":["#555555","#cc2222","Grey","Red"],
-  "XXXG-01W Wing Gundam":["#f0f0f0","#333333","White","Dark Grey"],
-  "XXXG-00W0 Wing Gundam Zero":["#f0f0f0","#333333","White","Dark Grey"],
+  "XXXG-01W Wing Gundam":["#e8e8e8","#333333","White","Dark Grey"],
+  "XXXG-00W0 Wing Gundam Zero":["#e8e8e8","#333333","White","Dark Grey"],
   "XXXG-01D Gundam Deathscythe":["#111111","#222222","Black","Dark Grey"],
-  "XXXG-01H Gundam Heavyarms":["#555555","#f0f0f0","Grey","White"],
-  "XXXG-01S Shenlong Gundam":["#cc2222","#333333","Red","Dark"],
-  "XXXG-01SR Sandrock Gundam":["#f0f0f0","#cc8800","White","Orange"],
+  "XXXG-01H Gundam Heavyarms":["#555555","#e8e8e8","Grey","White"],
+  "XXXG-01S Shenlong Gundam":["#cc2222","#333333","Red","Dark Grey"],
+  "XXXG-01SR Sandrock Gundam":["#e8e8e8","#cc8800","White","Orange"],
   "OZ-13MS Gundam Epyon":["#cc2222","#111111","Red","Black"],
-  "GX-9900 Gundam X":["#f0f0f0","#333366","White","Navy"],
-  "GX-9900-DV Gundam X Divider":["#f0f0f0","#333366","White","Navy"],
-  "GX-9901-DX Gundam Double X":["#f0f0f0","#333366","White","Navy"],
-  "GW-9800 Gundam Airmaster":["#f0f0f0","#44aa44","White","Green"],
+  "GX-9900 Gundam X":["#e8e8e8","#333366","White","Navy"],
+  "GX-9900-DV Gundam X Divider":["#e8e8e8","#333366","White","Navy"],
+  "GX-9901-DX Gundam Double X":["#e8e8e8","#333366","White","Navy"],
+  "GW-9800 Gundam Airmaster":["#e8e8e8","#44aa44","White","Green"],
   "GT-9600 Gundam Leopard":["#ccaa44","#333333","Yellow","Dark"],
   "NRX-0013 Gundam Virsago":["#660000","#111111","Dark Red","Black"],
   "NRX-0015 Gundam Ashtaron":["#550055","#111111","Purple","Black"],
-  "GAT-X105 Strike Gundam":["#f0f0f0","#cc2222","White","Red"],
-  "ZGMF-X10A Freedom Gundam":["#f0f0f0","#2244aa","White","Blue"],
-  "ZGMF-X09A Justice Gundam":["#cc0000","#f0f0f0","Red","White"],
-  "GAT-X303 Aegis Gundam":["#cc2222","#f0f0f0","Red","White"],
-  "GAT-X102 Duel Gundam":["#3355aa","#f0f0f0","Blue","White"],
-  "GAT-X103 Buster Gundam":["#447722","#f0f0f0","Green","White"],
+  "GAT-X105 Strike Gundam":["#e8e8e8","#cc2222","White","Red"],
+  "ZGMF-X10A Freedom Gundam":["#e8e8e8","#2244aa","White","Blue"],
+  "ZGMF-X09A Justice Gundam":["#cc0000","#e8e8e8","Red","White"],
+  "GAT-X303 Aegis Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "GAT-X102 Duel Gundam":["#3355aa","#e8e8e8","Blue","White"],
+  "GAT-X103 Buster Gundam":["#447722","#e8e8e8","Green","White"],
   "GAT-X207 Blitz Gundam":["#111111","#3344aa","Black","Blue"],
-  "ZGMF-X13A Providence Gundam":["#660066","#f0f0f0","Purple","White"],
-  "MBF-P02 Gundam Astray Red Frame":["#cc2222","#f0f0f0","Red","White"],
-  "MBF-P03 Gundam Astray Blue Frame":["#2244aa","#f0f0f0","Blue","White"],
+  "ZGMF-X13A Providence Gundam":["#660066","#e8e8e8","Purple","White"],
+  "MBF-P02 Gundam Astray Red Frame":["#cc2222","#e8e8e8","Red","White"],
+  "MBF-P03 Gundam Astray Blue Frame":["#2244aa","#e8e8e8","Blue","White"],
   "MBF-P01-Re2 Gundam Astray Gold Frame":["#cc9900","#111111","Gold","Black"],
-  "MBF-P04 Gundam Astray Green Frame":["#226622","#f0f0f0","Green","White"],
-  "MBF-P05LM Gundam Astray Mirage Frame":["#cc4400","#f0f0f0","Orange","White"],
+  "MBF-P04 Gundam Astray Green Frame":["#226622","#e8e8e8","Green","White"],
+  "MBF-P05LM Gundam Astray Mirage Frame":["#cc4400","#e8e8e8","Orange","White"],
   "GAT-X131 Calamity Gundam":["#880000","#333333","Dark Red","Grey"],
   "GAT-X252 Forbidden Gundam":["#115511","#111111","Dark Green","Black"],
   "GAT-X370 Raider Gundam":["#3333aa","#111111","Blue","Black"],
-  "GSX-401FW Stargazer Gundam":["#f0f0f0","#cccccc","White","Silver"],
-  "ZGMF-X11A Regenerate Gundam":["#660066","#f0f0f0","Purple","White"],
+  "GSX-401FW Stargazer Gundam":["#e8e8e8","#cccccc","White","Silver"],
+  "ZGMF-X11A Regenerate Gundam":["#660066","#e8e8e8","Purple","White"],
   "GAT-X105E Strike Noir Gundam":["#111111","#666666","Black","Grey"],
-  "ZGMF-X56S Impulse Gundam":["#f0f0f0","#cc2222","White","Red"],
-  "ZGMF-X42S Destiny Gundam":["#555588","#f0f0f0","Blue-Grey","White"],
-  "ZGMF-X20A Strike Freedom Gundam":["#f0f0f0","#d4aa00","White","Gold"],
-  "ZGMF-X19A Infinite Justice Gundam":["#cc0000","#f0f0f0","Red","White"],
-  "ZGMF-X666S Legend Gundam":["#660066","#f0f0f0","Purple","White"],
+  "ZGMF-X56S Impulse Gundam":["#e8e8e8","#cc2222","White","Red"],
+  "ZGMF-X42S Destiny Gundam":["#555588","#e8e8e8","Blue-Grey","White"],
+  "ZGMF-X20A Strike Freedom Gundam":["#e8e8e8","#d4aa00","White","Gold"],
+  "ZGMF-X19A Infinite Justice Gundam":["#cc0000","#e8e8e8","Red","White"],
+  "ZGMF-X666S Legend Gundam":["#660066","#e8e8e8","Purple","White"],
   "GFAS-X1 Destroy Gundam":["#888800","#cc6600","Yellow","Orange"],
-  "STTS-909 Rising Freedom Gundam":["#f0f0f0","#2244cc","White","Blue"],
-  "ZGMF/A-262PD-P Mighty Strike Freedom Gundam":["#f0f0f0","#d4aa00","White","Gold"],
-  "STTS-808 Immortal Justice Gundam":["#cc0000","#f0f0f0","Red","White"],
+  "STTS-909 Rising Freedom Gundam":["#e8e8e8","#2244cc","White","Blue"],
+  "ZGMF/A-262PD-P Mighty Strike Freedom Gundam":["#e8e8e8","#d4aa00","White","Gold"],
+  "STTS-808 Immortal Justice Gundam":["#cc0000","#e8e8e8","Red","White"],
   "ZGMF-1027M Duel Blitz Gundam":["#3355aa","#111111","Blue","Black"],
-  "ZGMF-103HD Lightning Buster Gundam":["#224422","#f0f0f0","Dark Green","White"],
-  "GN-001 Gundam Exia":["#2244bb","#f0f0f0","Blue","White"],
-  "GN-002 Gundam Dynames":["#226622","#f0f0f0","Green","White"],
-  "GN-003 Gundam Kyrios":["#886600","#f0f0f0","Brown","White"],
-  "GN-004 Gundam Nadleeh":["#f0f0f0","#cc9900","White","Gold"],
-  "GN-005 Gundam Virtue":["#226622","#f0f0f0","Green","White"],
-  "GN-0000 00 Gundam":["#2244bb","#f0f0f0","Blue","White"],
-  "GN-0000+GNR-010 00 Raiser":["#2244bb","#f0f0f0","Blue","White"],
-  "GNW-001 Gundam Throne Eins":["#cc3300","#f0f0f0","Orange-Red","White"],
-  "GNW-002 Gundam Throne Zwei":["#cc3300","#f0f0f0","Orange-Red","White"],
-  "GNW-003 Gundam Throne Drei":["#cc3300","#f0f0f0","Orange-Red","White"],
+  "ZGMF-103HD Lightning Buster Gundam":["#224422","#e8e8e8","Dark Green","White"],
+  "GN-001 Gundam Exia":["#2244bb","#e8e8e8","Blue","White"],
+  "GN-002 Gundam Dynames":["#226622","#e8e8e8","Green","White"],
+  "GN-003 Gundam Kyrios":["#886600","#e8e8e8","Brown","White"],
+  "GN-004 Gundam Nadleeh":["#e8e8e8","#cc9900","White","Gold"],
+  "GN-005 Gundam Virtue":["#226622","#e8e8e8","Green","White"],
+  "GN-0000 00 Gundam":["#2244bb","#e8e8e8","Blue","White"],
+  "GN-0000+GNR-010 00 Raiser":["#2244bb","#e8e8e8","Blue","White"],
+  "GNW-001 Gundam Throne Eins":["#cc3300","#e8e8e8","Orange-Red","White"],
+  "GNW-002 Gundam Throne Zwei":["#cc3300","#e8e8e8","Orange-Red","White"],
+  "GNW-003 Gundam Throne Drei":["#cc3300","#e8e8e8","Orange-Red","White"],
   "GNW-20000 Arche Gundam":["#cc3300","#111111","Orange-Red","Black"],
-  "CB-0000G/C Reborns Gundam":["#f0f0f0","#2244cc","White","Blue"],
-  "GN-006 Cherudim Gundam":["#226622","#f0f0f0","Green","White"],
-  "GN-007 Arios Gundam":["#886600","#f0f0f0","Brown","White"],
-  "GN-008 Seravee Gundam":["#226622","#f0f0f0","Dark Green","White"],
-  "GN-008GNHW3G Seravee Gundam GNHW3G":["#226622","#f0f0f0","Dark Green","White"],
-  "CB-002 Raphael Gundam":["#226622","#f0f0f0","Dark Green","White"],
-  "GN-010 Gundam Zabanya":["#226622","#f0f0f0","Green","White"],
-  "GN-011 Gundam Harute":["#886600","#f0f0f0","Brown","White"],
-  "GNT-0000 00 Qan[T]":["#2244bb","#f0f0f0","Blue","White"],
-  "GN-000 0 Gundam":["#f0f0f0","#cccccc","White","Silver"],
-  "GNY-001 Gundam Astraea":["#cc6600","#f0f0f0","Orange","White"],
-  "GNY-001F Gundam Astraea Type F":["#cc6600","#f0f0f0","Orange","White"],
-  "AGE-1 Gundam AGE-1 Normal":["#f0f0f0","#cc2222","White","Red"],
+  "CB-0000G/C Reborns Gundam":["#e8e8e8","#2244cc","White","Blue"],
+  "GN-006 Cherudim Gundam":["#226622","#e8e8e8","Green","White"],
+  "GN-007 Arios Gundam":["#886600","#e8e8e8","Brown","White"],
+  "GN-008 Seravee Gundam":["#226622","#e8e8e8","Dark Green","White"],
+  "GN-008GNHW3G Seravee Gundam GNHW3G":["#226622","#e8e8e8","Dark Green","White"],
+  "CB-002 Raphael Gundam":["#226622","#e8e8e8","Dark Green","White"],
+  "GN-010 Gundam Zabanya":["#226622","#e8e8e8","Green","White"],
+  "GN-011 Gundam Harute":["#886600","#e8e8e8","Brown","White"],
+  "GNT-0000 00 Qan[T]":["#2244bb","#e8e8e8","Blue","White"],
+  "GN-000 0 Gundam":["#e8e8e8","#cccccc","White","Silver"],
+  "GNY-001 Gundam Astraea":["#cc6600","#e8e8e8","Orange","White"],
+  "GNY-001F Gundam Astraea Type F":["#cc6600","#e8e8e8","Orange","White"],
+  "AGE-1 Gundam AGE-1 Normal":["#e8e8e8","#cc2222","White","Red"],
   "AGE-1T Gundam AGE-1 Titus":["#cc2222","#cc6600","Red","Orange"],
-  "AGE-1S Gundam AGE-1 Spallow":["#f0f0f0","#cc2222","White","Red"],
-  "AGE-2 Gundam AGE-2 Normal":["#f0f0f0","#cc2222","White","Red"],
-  "AGE-2DB Gundam AGE-2 Double Bullet":["#f0f0f0","#cc2222","White","Red"],
+  "AGE-1S Gundam AGE-1 Spallow":["#e8e8e8","#cc2222","White","Red"],
+  "AGE-2 Gundam AGE-2 Normal":["#e8e8e8","#cc2222","White","Red"],
+  "AGE-2DB Gundam AGE-2 Double Bullet":["#e8e8e8","#cc2222","White","Red"],
   "AGE-2DH Gundam AGE-2 Dark Hound":["#111111","#cc6600","Black","Orange"],
-  "AGE-3 Gundam AGE-3 Normal":["#f0f0f0","#cc2222","White","Red"],
-  "AGE-3O Gundam AGE-3 Orbital":["#f0f0f0","#cc6600","White","Orange"],
-  "AGE-FX Gundam AGE-FX":["#f0f0f0","#22aacc","White","Cyan"],
-  "xvm-fzc Gundam Legilis":["#550055","#f0f0f0","Purple","White"],
-  "YG-111 Gundam G-Self":["#f0f0f0","#cc2222","White","Red"],
-  "VGMM-Gf10 Gundam G-Lucifer":["#f0f0f0","#cc6600","White","Orange"],
-  "MSAM-033 Gundam G-Arcane":["#f0f0f0","#445599","White","Blue"],
-  "ASW-G-08 Gundam Barbatos":["#cc6600","#f0f0f0","Orange","White"],
-  "ASW-G-08 Gundam Barbatos Lupus":["#cc6600","#f0f0f0","Orange","White"],
+  "AGE-3 Gundam AGE-3 Normal":["#e8e8e8","#cc2222","White","Red"],
+  "AGE-3O Gundam AGE-3 Orbital":["#e8e8e8","#cc6600","White","Orange"],
+  "AGE-FX Gundam AGE-FX":["#e8e8e8","#22aacc","White","Cyan"],
+  "xvm-fzc Gundam Legilis":["#550055","#e8e8e8","Purple","White"],
+  "YG-111 Gundam G-Self":["#e8e8e8","#cc2222","White","Red"],
+  "VGMM-Gf10 Gundam G-Lucifer":["#e8e8e8","#cc6600","White","Orange"],
+  "MSAM-033 Gundam G-Arcane":["#e8e8e8","#445599","White","Blue"],
+  "ASW-G-08 Gundam Barbatos":["#cc6600","#e8e8e8","Orange","White"],
+  "ASW-G-08 Gundam Barbatos Lupus":["#cc6600","#e8e8e8","Orange","White"],
   "ASW-G-08 Gundam Barbatos Lupus Rex":["#111111","#cc5500","Black","Dark Orange"],
-  "ASW-G-01 Gundam Bael":["#f0f0f0","#ccaa44","White","Gold"],
-  "ASW-G-11 Gundam Gusion Rebake":["#cc6600","#f0f0f0","Orange","White"],
-  "ASW-G-29 Gundam Vidar":["#330066","#f0f0f0","Dark Purple","White"],
-  "ASW-G-64 Gundam Flauros":["#cc3300","#f0f0f0","Red-Orange","White"],
+  "ASW-G-01 Gundam Bael":["#e8e8e8","#ccaa44","White","Gold"],
+  "ASW-G-11 Gundam Gusion Rebake":["#cc6600","#e8e8e8","Orange","White"],
+  "ASW-G-29 Gundam Vidar":["#330066","#e8e8e8","Dark Purple","White"],
+  "ASW-G-64 Gundam Flauros":["#cc3300","#e8e8e8","Red-Orange","White"],
   "ASW-G-29 Gundam Astaroth":["#555555","#cc2222","Grey","Red"],
-  "ASW-G-47 Gundam Vual":["#006633","#f0f0f0","Green","White"],
-  "ASW-G-71 Gundam Dantalion":["#2255aa","#f0f0f0","Blue","White"],
-  "ASW-G-66 Gundam Kimaris":["#f0f0f0","#cc4400","White","Orange"],
-  "RX-105 Xi Gundam":["#f0f0f0","#2255aa","White","Blue"],
-  "RX-104FF Penelope":["#f0f0f0","#cc4400","White","Orange"],
-  "RX-94 Mass Production Nu Gundam":["#f0f0f0","#2255aa","White","Blue"],
-  "TX-ff104 Alyzeus":["#cc9900","#f0f0f0","Gold","White"],
-  "XVX-016 Gundam Aerial":["#f0f0f0","#22aacc","White","Cyan"],
-  "XVX-016RN Gundam Aerial Rebuild":["#f0f0f0","#22aacc","White","Cyan"],
+  "ASW-G-47 Gundam Vual":["#006633","#e8e8e8","Green","White"],
+  "ASW-G-71 Gundam Dantalion":["#2255aa","#e8e8e8","Blue","White"],
+  "ASW-G-66 Gundam Kimaris":["#e8e8e8","#cc4400","White","Orange"],
+  "RX-105 Xi Gundam":["#e8e8e8","#2255aa","White","Blue"],
+  "RX-104FF Penelope":["#e8e8e8","#cc4400","White","Orange"],
+  "RX-94 Mass Production Nu Gundam":["#e8e8e8","#2255aa","White","Blue"],
+  "TX-ff104 Alyzeus":["#cc9900","#e8e8e8","Gold","White"],
+  "XVX-016 Gundam Aerial":["#e8e8e8","#22aacc","White","Cyan"],
+  "XVX-016RN Gundam Aerial Rebuild":["#e8e8e8","#22aacc","White","Cyan"],
   "X-EX01 Gundam Calibarn":["#cc2222","#111111","Red","Black"],
-  "FP/A-77 Gundam Pharact":["#f0f0f0","#888888","White","Grey"],
+  "FP/A-77 Gundam Pharact":["#e8e8e8","#888888","White","Grey"],
   "MDX-0003 Gundam Schwarzette":["#111111","#4444cc","Black","Blue"],
-  "MD-0031 Gundam Lfrith":["#f0f0f0","#22aacc","White","Cyan"],
-  "AVP-03 Gundam Lfrith Anavata":["#f0f0f0","#22aacc","White","Cyan"],
-  "XGF-01 Gundam Lfrith Jiu":["#f0f0f0","#22aacc","White","Cyan"],
-  "EDM-GA-01 Gundam Lfrith Ur":["#f0f0f0","#22aacc","White","Cyan"],
-  "EDM-GA-02 Gundam Lfrith Thorn":["#f0f0f0","#22aacc","White","Cyan"],
+  "MD-0031 Gundam Lfrith":["#e8e8e8","#22aacc","White","Cyan"],
+  "AVP-03 Gundam Lfrith Anavata":["#e8e8e8","#22aacc","White","Cyan"],
+  "XGF-01 Gundam Lfrith Jiu":["#e8e8e8","#22aacc","White","Cyan"],
+  "EDM-GA-01 Gundam Lfrith Ur":["#e8e8e8","#22aacc","White","Cyan"],
+  "EDM-GA-02 Gundam Lfrith Thorn":["#e8e8e8","#22aacc","White","Cyan"],
   "GQuuuuuuX":["#333333","#cc4400","Dark","Orange"],
-  "GFreD":["#cc4400","#f0f0f0","Orange","White"],
-  "Red Gundam":["#cc2222","#f0f0f0","Red","White"],
-  "White Gundam":["#f0f0f0","#dddddd","White","Light Grey"],
-  "01 Gundam":["#f0f0f0","#2255aa","White","Blue"],
-  "GAT-X105B Build Strike Gundam":["#cc2222","#f0f0f0","Red","White"],
-  "GAT-X105BFP Build Strike Gundam Full Package":["#cc2222","#f0f0f0","Red","White"],
-  "GAT-X105BST Star Build Strike Gundam":["#cc2222","#f0f0f0","Red","White"],
-  "GAT-X105BGC Build Strike Galaxy Cosmos":["#2244cc","#f0f0f0","Blue","White"],
-  "PPGN-001 Gundam Amazing Exia":["#2244bb","#f0f0f0","Blue","White"],
+  "GFreD":["#cc4400","#e8e8e8","Orange","White"],
+  "Red Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "White Gundam":["#e8e8e8","#dddddd","White","Light Grey"],
+  "01 Gundam":["#e8e8e8","#2255aa","White","Blue"],
+  "GAT-X105B Build Strike Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "GAT-X105BFP Build Strike Gundam Full Package":["#cc2222","#e8e8e8","Red","White"],
+  "GAT-X105BST Star Build Strike Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "GAT-X105BGC Build Strike Galaxy Cosmos":["#2244cc","#e8e8e8","Blue","White"],
+  "PPGN-001 Gundam Amazing Exia":["#2244bb","#e8e8e8","Blue","White"],
   "PPGN-001 Gundam Exia Dark Matter":["#111111","#9900aa","Black","Purple"],
-  "GX-9999 Gundam X Maoh":["#550055","#f0f0f0","Purple","White"],
+  "GX-9999 Gundam X Maoh":["#550055","#e8e8e8","Purple","White"],
   "Sengoku Astray Gundam":["#cc2222","#cc8800","Red","Gold"],
-  "XXXG-01Wf Wing Gundam Fenice":["#cc2222","#f0f0f0","Red","White"],
-  "XXXG-01Wfr Gundam Fenice Rinascita":["#cc2222","#f0f0f0","Red","White"],
-  "XM-X9999 Crossbone Gundam Maoh":["#880000","#f0f0f0","Dark Red","White"],
+  "XXXG-01Wf Wing Gundam Fenice":["#226622","#cc2222","Green","Red"],
+  "XXXG-01Wfr Gundam Fenice Rinascita":["#226622","#cc2222","Green","Red"],
+  "XM-X9999 Crossbone Gundam Maoh":["#880000","#e8e8e8","Dark Red","White"],
   "AC-01 Miss Sazabi":["#cc0022","#111111","Deep Red","Black"],
-  "JMF-1336R Build Burning Gundam":["#cc2222","#f0f0f0","Red","White"],
-  "JMF-1337T Try Burning Gundam":["#cc2222","#f0f0f0","Red","White"],
-  "LGZ-91 Lightning Gundam":["#f0f0f0","#cc8800","White","Yellow"],
-  "KUMA-PP Gundam Tryon 3":["#cc2222","#f0f0f0","Red","White"],
-  "KMK-B01 Kamiki Burning Gundam":["#cc2222","#f0f0f0","Red","White"],
-  "GPB-X80 Beginning Gundam":["#f0f0f0","#cc2222","White","Red"],
-  "GPB-X80-30F Beginning 30 Gundam":["#f0f0f0","#cc2222","White","Red"],
-  "GN-0000DVR Gundam 00 Diver":["#2244bb","#f0f0f0","Blue","White"],
+  "JMF-1336R Build Burning Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "JMF-1337T Try Burning Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "LGZ-91 Lightning Gundam":["#e8e8e8","#cc8800","White","Yellow"],
+  "KUMA-PP Gundam Tryon 3":["#cc2222","#e8e8e8","Red","White"],
+  "KMK-B01 Kamiki Burning Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "GPB-X80 Beginning Gundam":["#e8e8e8","#cc2222","White","Red"],
+  "GPB-X80-30F Beginning 30 Gundam":["#e8e8e8","#cc2222","White","Red"],
+  "GN-0000DVR Gundam 00 Diver":["#2244bb","#e8e8e8","Blue","White"],
   "GN-0000DVR/S Gundam 00 Sky":["#2244bb","#88ddff","Blue","Light Blue"],
   "GN-1001N Seltsam":["#111111","#880044","Black","Dark Purple"],
-  "AGE-IIMG Gundam AGE-2 Magnum":["#cc2222","#f0f0f0","Red","White"],
-  "RX-78GP02R Gundam GP-Rase-Two":["#f0f0f0","#cc3300","White","Red"],
-  "PFF-X7 Core Gundam":["#f0f0f0","#cc2222","White","Red"],
-  "PFF-X7II Core Gundam II":["#f0f0f0","#cc2222","White","Red"],
-  "PFF-X7/E3 Earthree Gundam":["#f0f0f0","#3399cc","White","Blue"],
-  "PFF-X7/J5 Jupitive Gundam":["#cc6600","#f0f0f0","Orange","White"],
-  "PFF-X7II/U7 Uraven Gundam":["#440066","#f0f0f0","Purple","White"],
-  "ZGMF-X19AK Gundam Justice Knight":["#cc0000","#f0f0f0","Red","White"],
-  "AGP-X1/E3 Alus Earthree Gundam":["#335577","#f0f0f0","Steel Blue","White"],
-  "PFF-X7V2 Veetwo Gundam":["#2244bb","#f0f0f0","Blue","White"],
-  "PFF-X7RANIMA Gundam Anima\u3010Rize\u3011":["#cc6600","#f0f0f0","Orange","White"],
-  "PFF-X7M4 Marsfour Gundam":["#cc2222","#f0f0f0","Red","White"],
-  "PFF-X7M1 Mercuone Gundam":["#007744","#f0f0f0","Green","White"],
-  "PFF-X7IIS6 Saturnix Gundam":["#cc6600","#f0f0f0","Orange","White"],
-  "PFF-X7IIN8 Nepteight Gundam":["#226699","#f0f0f0","Blue","White"],
+  "AGE-IIMG Gundam AGE-2 Magnum":["#cc2222","#e8e8e8","Red","White"],
+  "RX-78GP02R Gundam GP-Rase-Two":["#e8e8e8","#cc3300","White","Red"],
+  "PFF-X7 Core Gundam":["#e8e8e8","#cc2222","White","Red"],
+  "PFF-X7II Core Gundam II":["#e8e8e8","#cc2222","White","Red"],
+  "PFF-X7/E3 Earthree Gundam":["#e8e8e8","#3399cc","White","Blue"],
+  "PFF-X7/J5 Jupitive Gundam":["#cc6600","#e8e8e8","Orange","White"],
+  "PFF-X7II/U7 Uraven Gundam":["#440066","#e8e8e8","Purple","White"],
+  "ZGMF-X19AK Gundam Justice Knight":["#cc0000","#e8e8e8","Red","White"],
+  "AGP-X1/E3 Alus Earthree Gundam":["#335577","#e8e8e8","Steel Blue","White"],
+  "PFF-X7V2 Veetwo Gundam":["#2244bb","#e8e8e8","Blue","White"],
+  "PFF-X7RANIMA Gundam Anima\u3010Rize\u3011":["#cc6600","#e8e8e8","Orange","White"],
+  "PFF-X7M4 Marsfour Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "PFF-X7M1 Mercuone Gundam":["#007744","#e8e8e8","Green","White"],
+  "PFF-X7IIS6 Saturnix Gundam":["#cc6600","#e8e8e8","Orange","White"],
+  "PFF-X7IIN8 Nepteight Gundam":["#226699","#e8e8e8","Blue","White"],
   "PFF-X7IIBUILD DiVERS ReRising Gundam":["#2244bb","#cc2222","Blue","Red"],
-  "ASW-G-08A Gundam Amazing Barbatos Lupus":["#cc4400","#f0f0f0","Orange","White"],
-  "GAT-X105BEG Build Strike Exceed Galaxy":["#2255cc","#f0f0f0","Blue","White"],
+  "ASW-G-08A Gundam Amazing Barbatos Lupus":["#cc4400","#e8e8e8","Orange","White"],
+  "GAT-X105BEG Build Strike Exceed Galaxy":["#2255cc","#e8e8e8","Blue","White"],
   "GN-0000DVRII Gundam 00 Diver Arc":["#2244bb","#cc2222","Blue","Red"],
-  "PFF-X7II+P9 Plutine Gundam":["#f0f0f0","#aaccff","White","Light Blue"],
-  "RX-78-l\u0101-III Lah Gundam":["#cc2222","#f0f0f0","Red","White"],
+  "PFF-X7II+P9 Plutine Gundam":["#e8e8e8","#aaccff","White","Light Blue"],
+  "RX-78-l\u0101-III Lah Gundam":["#cc2222","#e8e8e8","Red","White"],
   "SBG-E01 Shin Burning Gundam":["#cc2222","#111111","Red","Black"],
   "TYP-G12CMR Typhoeus Gundam Chimera":["#111111","#cc2222","Black","Red"],
 };
 
-// Series groupings for yellow (close but not exact)
+// Series yellow groupings
 const GL_SERIES_GROUPS = [
   ["Gundam SEED","SEED Destiny","SEED FREEDOM"],
   ["Build Fighters","Build Fighters Try","Build Divers","Build Divers Re:RISE","Build Metaverse","Builders Beginning G"],
 ];
 
-/* ── DAILY PICK ENGINE ──────────────────────────────────────────── */
+// ── SHARED SERIES ALIASES (same as typeahead) ──────────────────
+const GL_SERIES_ALIASES={
+  "uc":"Universal Century","0079":"Universal Century","zeta":"Universal Century",
+  "zz":"Universal Century","cca":"Universal Century","f91":"Universal Century",
+  "victory":"Universal Century","unicorn":"Universal Century","thunderbolt":"Universal Century",
+  "gg":"G Gundam","g gundam":"G Gundam",
+  "wing":"Gundam Wing","gw":"Gundam Wing","endless waltz":"Gundam Wing",
+  "x":"After War Gundam X","aw":"After War Gundam X","after war":"After War Gundam X",
+  "turn a":"Turn A Gundam","∀":"Turn A Gundam",
+  "seed":"Gundam SEED","destiny":"SEED Destiny","freedom":"SEED FREEDOM","sf":"SEED FREEDOM",
+  "00":"Gundam 00","double o":"Gundam 00",
+  "age":"Gundam AGE",
+  "rg":"Reconguista in G","g reco":"Reconguista in G","reconguista":"Reconguista in G",
+  "ibo":"Iron-Blooded Orphans","tekketsu":"Iron-Blooded Orphans","iron blooded":"Iron-Blooded Orphans",
+  "wfm":"The Witch from Mercury","witch":"The Witch from Mercury","mercury":"The Witch from Mercury",
+  "hathaway":"Hathaway's Flash","flash":"Hathaway's Flash",
+  "gquuuuuux":"Gundam GQuuuuuuX","gquux":"Gundam GQuuuuuuX",
+  "bf":"Build Fighters","build fighters":"Build Fighters",
+  "bft":"Build Fighters Try","try":"Build Fighters Try",
+  "bbg":"Builders Beginning G","beginning":"Builders Beginning G",
+  "bd":"Build Divers","divers":"Build Divers",
+  "rerise":"Build Divers Re:RISE","re rise":"Build Divers Re:RISE",
+  "bm":"Build Metaverse","metaverse":"Build Metaverse",
+};
+
+/* ── DAILY PICK ──────────────────────────────────────────────── */
 
 function getTodayKey(){
-  // Use UTC date shifted by +21h so "day" flips at 21:00 UTC (= 23:00 Brussels in winter, local 9pm)
-  const now = new Date();
-  // Shift: subtract 21 hours offset → the "Gundamle day" starts at 21:00 UTC
-  const shifted = new Date(now.getTime() - (21 * 60 * 60 * 1000));
-  const y = shifted.getUTCFullYear();
-  const m = String(shifted.getUTCMonth()+1).padStart(2,'0');
-  const d = String(shifted.getUTCDate()).padStart(2,'0');
+  const now=new Date();
+  const shifted=new Date(now.getTime()-(21*60*60*1000));
+  const y=shifted.getUTCFullYear();
+  const m=String(shifted.getUTCMonth()+1).padStart(2,'0');
+  const d=String(shifted.getUTCDate()).padStart(2,'0');
   return `${y}-${m}-${d}`;
 }
 
 function seededRandom(seed){
-  // Simple LCG seeded by a number
-  let s = seed;
-  return function(){
-    s = (s * 1664525 + 1013904223) & 0xffffffff;
-    return (s >>> 0) / 4294967296;
-  };
+  let s=seed;
+  return function(){s=(s*1664525+1013904223)&0xffffffff;return(s>>>0)/4294967296;};
 }
 
-function dateToSeed(key){
-  // Convert "YYYY-MM-DD" to number
-  return parseInt(key.replace(/-/g,''), 10);
-}
+function dateToSeed(key){return parseInt(key.replace(/-/g,''),10);}
 
 function getEligibleUnits(rosterArr){
-  // Only units with images and with enough data
-  return rosterArr.filter(u => u.img && u.img.trim() !== '');
+  // Only units with images; sort alphabetically for stable ordering
+  return rosterArr.filter(u=>u.img&&u.img.trim()!=='').slice().sort((a,b)=>a.name.localeCompare(b.name));
 }
 
-// 10-day exclusion window: store last 10 picks by date key
 function getRecentPicks(){
-  try{ return JSON.parse(localStorage.getItem('gundamleHistory')) || {}; }catch(e){ return {}; }
+  try{return JSON.parse(localStorage.getItem('gundamleHistory'))||{};}catch(e){return {};}
 }
-function saveRecentPick(dateKey, unitName){
-  const hist = getRecentPicks();
-  hist[dateKey] = unitName;
-  // Prune old entries beyond 15 days
-  const keys = Object.keys(hist).sort();
-  while(keys.length > 15){ delete hist[keys.shift()]; keys.shift(); }
-  try{ localStorage.setItem('gundamleHistory', JSON.stringify(hist)); }catch(e){}
+function saveRecentPick(dateKey,unitName){
+  const hist=getRecentPicks();
+  hist[dateKey]=unitName;
+  const keys=Object.keys(hist).sort();
+  while(keys.length>15){delete hist[keys.shift()];}
+  try{localStorage.setItem('gundamleHistory',JSON.stringify(hist));}catch(e){}
 }
 
 function getDailyUnit(rosterArr){
-  const key = getTodayKey();
-  const eligible = getEligibleUnits(rosterArr);
+  const key=getTodayKey();
+  const eligible=getEligibleUnits(rosterArr);
   if(!eligible.length) return null;
-
-  const hist = getRecentPicks();
-  // Build set of recently used names (last 10 days)
-  const recentNames = new Set(Object.values(hist));
-  let pool = eligible.filter(u => !recentNames.has(u.name));
-  if(!pool.length) pool = eligible; // fallback: use all if exhausted
-
-  const rng = seededRandom(dateToSeed(key));
-  const idx = Math.floor(rng() * pool.length);
-  return pool[idx];
+  const hist=getRecentPicks();
+  const recentNames=new Set(Object.values(hist));
+  let pool=eligible.filter(u=>!recentNames.has(u.name));
+  if(!pool.length) pool=eligible;
+  const rng=seededRandom(dateToSeed(key));
+  return pool[Math.floor(rng()*pool.length)];
 }
 
-/* ── COUNTDOWN TIMER ────────────────────────────────────────────── */
+/* ── PILOT LOOKUP (robust — falls back to PILOT_DATA by name) ── */
+
+function getPilot(unit){
+  // Prefer pilot field from roster JSON (authoritative source)
+  if(unit.pilot&&unit.pilot.trim()) return unit.pilot.trim();
+  // Fallback to PILOT_DATA hardcoded table
+  if(PILOT_DATA[unit.name]) return PILOT_DATA[unit.name];
+  // Try stripping model number prefix
+  const stripped=unit.name.replace(/^[A-Z0-9\-\/\.+\[\]\u03bd²]+\s/,'').trim();
+  if(PILOT_DATA[stripped]) return PILOT_DATA[stripped];
+  return null;
+}
+
+/* ── COUNTDOWN ───────────────────────────────────────────────── */
 
 function updateCountdown(){
-  const el = document.getElementById('glCountdown');
-  if(!el) return;
-  const now = new Date();
-  // Next reset is at 21:00 UTC today or tomorrow
-  const next = new Date();
-  next.setUTCHours(21, 0, 0, 0);
-  if(next <= now) next.setUTCDate(next.getUTCDate() + 1);
-  const diff = next - now;
-  const h = String(Math.floor(diff / 3600000)).padStart(2,'0');
-  const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
-  const s = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
-  el.textContent = `${h}:${m}:${s}`;
+  const el=document.getElementById('glCountdown');if(!el)return;
+  const now=new Date();
+  const next=new Date();next.setUTCHours(21,0,0,0);
+  if(next<=now)next.setUTCDate(next.getUTCDate()+1);
+  const diff=next-now;
+  const h=String(Math.floor(diff/3600000)).padStart(2,'0');
+  const m=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+  const s=String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+  el.textContent=`${h}:${m}:${s}`;
 }
 
-/* ── STATE ──────────────────────────────────────────────────────── */
+/* ── STATE ───────────────────────────────────────────────────── */
 
-let glState = {
-  todayKey: '',
-  answer: null,       // roster unit object
-  guesses: [],        // array of unit names guessed
-  solved: false,
-  hintShown: false,
-  selectedUnit: null, // unit currently typed in search
-};
-
-const GL_STORAGE_KEY = 'gundamleState';
+let glState={todayKey:'',answer:null,guesses:[],solved:false,hintShown:false,selectedUnit:null};
+const GL_STORAGE_KEY='gundamleState';
 
 function glSave(){
-  try{
-    localStorage.setItem(GL_STORAGE_KEY, JSON.stringify({
-      todayKey: glState.todayKey,
-      guesses: glState.guesses,
-      solved: glState.solved,
-      hintShown: glState.hintShown,
-    }));
-  }catch(e){}
+  try{localStorage.setItem(GL_STORAGE_KEY,JSON.stringify({todayKey:glState.todayKey,guesses:glState.guesses,solved:glState.solved,hintShown:glState.hintShown}));}catch(e){}
 }
 
 function glLoad(rosterArr){
-  const key = getTodayKey();
-  glState.todayKey = key;
-  glState.answer = getDailyUnit(rosterArr);
-  glState.guesses = [];
-  glState.solved = false;
-  glState.hintShown = false;
-  glState.selectedUnit = null;
-
+  const key=getTodayKey();
+  glState={todayKey:key,answer:getDailyUnit(rosterArr),guesses:[],solved:false,hintShown:false,selectedUnit:null};
   try{
-    const saved = JSON.parse(localStorage.getItem(GL_STORAGE_KEY));
-    if(saved && saved.todayKey === key){
-      glState.guesses = saved.guesses || [];
-      glState.solved = saved.solved || false;
-      glState.hintShown = saved.hintShown || false;
-    }
+    const saved=JSON.parse(localStorage.getItem(GL_STORAGE_KEY));
+    if(saved&&saved.todayKey===key){glState.guesses=saved.guesses||[];glState.solved=saved.solved||false;glState.hintShown=saved.hintShown||false;}
   }catch(e){}
 }
 
-/* ── SCORING LOGIC ──────────────────────────────────────────────── */
+/* ── SCORING ─────────────────────────────────────────────────── */
 
-const ERA_ORDER = {Early:0, Mid:1, Late:2};
+const ERA_ORDER={Early:0,Mid:1,Late:2};
 
-function scoreCell(category, guessedUnit, answerUnit){
-  // Returns 'green' | 'yellow' | 'red' and optional arrow direction/count
-  const gn = guessedUnit.name;
-  const an = answerUnit.name;
+function getUnitColors2(unit){
+  if(unit.colors&&unit.colors[0]) return unit.colors;
+  return GL_COLORS[unit.name]||["#444","#888","Dark","Grey"];
+}
 
-  if(category === 'image') return gn === an ? 'green' : 'red';
-
-  if(category === 'name'){
-    if(gn === an) return 'green';
-    // Same token overlap
-    const gt = sigTokens(gn);
-    const at = new Set(sigTokens(an));
-    if(gt.some(t => at.has(t))) return 'yellow';
+function scoreCell(cat,gu,au){
+  if(cat==='name'){
+    if(gu.name===au.name) return 'green';
+    const gt=sigTokens(gu.name),at=new Set(sigTokens(au.name));
+    if(gt.some(t=>at.has(t))) return 'yellow';
     return 'red';
   }
-
-  if(category === 'series'){
-    const gs = guessedUnit.series || '';
-    const as = answerUnit.series || '';
-    if(gs === as) return 'green';
-    // Check group
-    for(const grp of GL_SERIES_GROUPS){
-      if(grp.includes(gs) && grp.includes(as)) return 'yellow';
-    }
+  if(cat==='series'){
+    const gs=gu.series||'',as=au.series||'';
+    if(gs===as) return 'green';
+    for(const grp of GL_SERIES_GROUPS){if(grp.includes(gs)&&grp.includes(as)) return 'yellow';}
     return 'red';
   }
-
-  if(category === 'year'){
-    const gy = GL_YEAR[gn] || 0;
-    const ay = GL_YEAR[an] || 0;
-    if(gy === ay) return 'green';
-    const diff = Math.abs(gy - ay);
-    if(diff <= 5) return 'yellow';
+  if(cat==='year'){
+    const gy=GL_YEAR[gu.name]||0,ay=GL_YEAR[au.name]||0;
+    if(!gy||!ay) return 'red';
+    if(gy===ay) return 'green';
+    if(Math.abs(gy-ay)<=5) return 'yellow';
     return 'red';
   }
-
-  if(category === 'role'){
-    const gr = GL_ROLE[gn] || '';
-    const ar = GL_ROLE[an] || '';
-    if(gr === ar) return 'green';
+  if(cat==='role'){const gr=GL_ROLE[gu.name]||'',ar=GL_ROLE[au.name]||'';return gr&&gr===ar?'green':'red';}
+  if(cat==='colors'){
+    const gc=getUnitColors2(gu),ac=getUnitColors2(au);
+    if(gc[0]===ac[0]&&gc[1]===ac[1]) return 'green';
+    if(gc[0]===ac[0]||gc[0]===ac[1]||gc[1]===ac[0]||gc[1]===ac[1]) return 'yellow';
+    if(gc.length>2&&ac.length>2){const gn=[gc[2],gc[3]],an=[ac[2],ac[3]];if(gn.some(n=>an.includes(n))) return 'yellow';}
     return 'red';
   }
-
-  if(category === 'colors'){
-    const gc = GL_COLORS[gn] || [];
-    const ac = GL_COLORS[an] || [];
-    if(gc[0]===ac[0] && gc[1]===ac[1]) return 'green';
-    if(gc.length && ac.length && (gc[0]===ac[0]||gc[0]===ac[1]||gc[1]===ac[0]||gc[1]===ac[1])) return 'yellow';
-    // Close color match by name
-    if(gc.length>2 && ac.length>2){
-      const gNames=[gc[2],gc[3]];const aNames=[ac[2],ac[3]];
-      if(gNames.some(n=>aNames.includes(n))) return 'yellow';
-    }
+  if(cat==='era'){
+    const ge=GL_ERA[gu.name]||'',ae=GL_ERA[au.name]||'';
+    if(!ge||!ae) return 'red';
+    if(ge===ae) return 'green';
+    if(Math.abs(ERA_ORDER[ge]-ERA_ORDER[ae])===1) return 'yellow';
     return 'red';
   }
-
-  if(category === 'era'){
-    const ge = GL_ERA[gn] || '';
-    const ae = GL_ERA[an] || '';
-    if(ge === ae) return 'green';
-    if(ge && ae && Math.abs(ERA_ORDER[ge] - ERA_ORDER[ae]) === 1) return 'yellow';
-    return 'red';
+  if(cat==='pilot'){
+    const gp=getPilot(gu),ap=getPilot(au);
+    if(!gp||!ap) return 'red';
+    return gp===ap?'green':'red';
   }
-
-  if(category === 'pilot'){
-    const gp = PILOT_DATA[gn] || '';
-    const ap = PILOT_DATA[an] || '';
-    if(!gp || !ap) return 'red';
-    if(gp === ap) return 'green';
-    return 'red';
-  }
-
   return 'red';
 }
 
-function getYearArrow(guessedUnit, answerUnit){
-  const gy = GL_YEAR[guessedUnit.name] || 0;
-  const ay = GL_YEAR[answerUnit.name] || 0;
-  if(!gy || !ay || gy === ay) return '';
-  const diff = ay - gy;
-  const absDiff = Math.abs(diff);
-  const dir = diff > 0 ? '▲' : '▼';
-  if(absDiff >= 30) return dir+dir+dir;
-  if(absDiff >= 15) return dir+dir;
+function yearArrow(gu,au){
+  const gy=GL_YEAR[gu.name]||0,ay=GL_YEAR[au.name]||0;
+  if(!gy||!ay||gy===ay) return '';
+  const diff=ay-gy,abs=Math.abs(diff),dir=diff>0?'▲':'▼';
+  if(abs>=30) return dir+dir+dir;
+  if(abs>=15) return dir+dir;
   return dir;
 }
-
-function getEraArrow(guessedUnit, answerUnit){
-  const ge = ERA_ORDER[GL_ERA[guessedUnit.name]];
-  const ae = ERA_ORDER[GL_ERA[answerUnit.name]];
-  if(ge === undefined || ae === undefined || ge === ae) return '';
-  return ae > ge ? '▲' : '▼';
+function eraArrow(gu,au){
+  const ge=ERA_ORDER[GL_ERA[gu.name]],ae=ERA_ORDER[GL_ERA[au.name]];
+  if(ge===undefined||ae===undefined||ge===ae) return '';
+  return ae>ge?'▲':'▼';
 }
 
-/* ── RENDER ─────────────────────────────────────────────────────── */
+/* ── RENDER GUESSES ─────────────────────────────────────────── */
 
 function glRenderAll(){
-  const container = document.getElementById('glGuesses');
-  container.innerHTML = '';
-
-  // Header row
-  const header = document.createElement('div');
-  header.className = 'gl-guess-row header';
-  ['Image','Name','Series','Year','Role','Colors','Era','Pilot'].forEach(label => {
-    const c = document.createElement('div');
-    c.className = 'gl-cell';
-    c.textContent = label;
-    header.appendChild(c);
+  const container=document.getElementById('glGuesses');
+  container.innerHTML='';
+  // Header
+  const hdr=document.createElement('div');hdr.className='gl-guess-row header';
+  ['Image','Name','Series','Year','Role','Colors','Era','Pilot'].forEach(lbl=>{
+    const c=document.createElement('div');c.className='gl-cell';c.textContent=lbl;hdr.appendChild(c);
   });
-  container.appendChild(header);
-
-  // Guess rows
-  glState.guesses.forEach(guessName => {
-    const guessUnit = roster.find(u => u.name === guessName);
-    if(!guessUnit) return;
-    container.appendChild(glBuildRow(guessUnit));
+  container.appendChild(hdr);
+  glState.guesses.forEach(name=>{
+    const u=roster.find(x=>x.name===name);if(u)container.appendChild(glBuildRow(u));
   });
 }
 
-function glBuildRow(guessUnit){
-  const row = document.createElement('div');
-  row.className = 'gl-guess-row';
-  const an = glState.answer;
+function glBuildRow(gu){
+  const row=document.createElement('div');row.className='gl-guess-row';
+  const an=glState.answer;
 
-  // Image cell
-  const imgCell = document.createElement('div');
-  imgCell.className = 'gl-cell img-cell ' + (guessUnit.name === an.name ? 'green' : 'red');
-  if(guessUnit.img){
-    const img = document.createElement('img');
-    img.src = guessUnit.img;
-    img.alt = guessUnit.name;
-    imgCell.appendChild(img);
-  } else {
-    imgCell.textContent = '?';
-  }
-  row.appendChild(imgCell);
+  // Image
+  const ic=document.createElement('div');ic.className='gl-cell img-cell '+(gu.name===an.name?'green':'red');
+  if(gu.img){
+    const img=document.createElement('img');img.src=gu.img;img.alt=gu.name;
+    ic.onclick=()=>openLightbox(null,gu.img);
+    ic.appendChild(img);
+  } else ic.textContent='?';
+  row.appendChild(ic);
 
-  // Name cell
-  const nameResult = scoreCell('name', guessUnit, an);
-  const nameCell = document.createElement('div');
-  nameCell.className = 'gl-cell ' + nameResult;
-  nameCell.style.fontSize = '9px';
-  nameCell.style.wordBreak = 'break-word';
-  nameCell.style.lineHeight = '1.2';
-  // Display shortened name
-  const shortName = guessUnit.name.replace(/^[A-Z0-9\-\/\.+\[\]]+\s/,'').trim();
-  nameCell.textContent = shortName.length > 18 ? shortName.slice(0,17)+'…' : shortName;
-  row.appendChild(nameCell);
+  // Name
+  const nc=document.createElement('div');nc.className='gl-cell '+scoreCell('name',gu,an);
+  nc.style.cssText='font-size:9px;word-break:break-word;line-height:1.2;';
+  const sn=gu.name.replace(/^[A-Z0-9\-\/\.+\[\]]+\s/,'').trim();
+  nc.textContent=sn.length>20?sn.slice(0,19)+'…':sn;
+  row.appendChild(nc);
 
-  // Series cell
-  const seriesResult = scoreCell('series', guessUnit, an);
-  const seriesCell = document.createElement('div');
-  seriesCell.className = 'gl-cell ' + seriesResult;
-  seriesCell.style.fontSize = '8px';
-  const shortSeries = (guessUnit.series||'?').replace(/^(Gundam |SEED |Build |Builders )/,'').trim();
-  seriesCell.textContent = shortSeries.length > 10 ? shortSeries.slice(0,9)+'…' : shortSeries;
-  row.appendChild(seriesCell);
+  // Series
+  const sc2=document.createElement('div');sc2.className='gl-cell '+scoreCell('series',gu,an);
+  sc2.style.fontSize='8px';
+  const ss=(gu.series||'?').replace(/^(Gundam |SEED |Build |Builders )/,'').trim();
+  sc2.textContent=ss.length>11?ss.slice(0,10)+'…':ss;
+  row.appendChild(sc2);
 
-  // Year cell
-  const yearResult = scoreCell('year', guessUnit, an);
-  const yearCell = document.createElement('div');
-  yearCell.className = 'gl-cell ' + yearResult;
-  const yearArrow = getYearArrow(guessUnit, an);
-  const yr = GL_YEAR[guessUnit.name] || '?';
-  yearCell.innerHTML = `<span class="arr">${yearArrow}</span><span class="val">${yr}</span>`;
-  row.appendChild(yearCell);
+  // Year
+  const yc=document.createElement('div');yc.className='gl-cell '+scoreCell('year',gu,an);
+  const ya=yearArrow(gu,an);const yr=GL_YEAR[gu.name]||'?';
+  yc.innerHTML=`<span class="arr">${ya}</span><span class="val">${yr}</span>`;
+  row.appendChild(yc);
 
-  // Role cell
-  const roleResult = scoreCell('role', guessUnit, an);
-  const roleCell = document.createElement('div');
-  roleCell.className = 'gl-cell ' + roleResult;
-  roleCell.style.fontSize = '9px';
-  roleCell.textContent = GL_ROLE[guessUnit.name] || '?';
-  row.appendChild(roleCell);
+  // Role
+  const rc=document.createElement('div');rc.className='gl-cell '+scoreCell('role',gu,an);
+  rc.style.fontSize='9px';rc.textContent=GL_ROLE[gu.name]||'?';
+  row.appendChild(rc);
 
-  // Colors cell
-  const colorsResult = scoreCell('colors', guessUnit, an);
-  const colorsCell = document.createElement('div');
-  colorsCell.className = 'gl-cell ' + colorsResult;
-  const cols = GL_COLORS[guessUnit.name] || ['#444','#444'];
-  const pair = document.createElement('div');
-  pair.className = 'color-pair';
-  [cols[0], cols[1]].forEach(hex => {
-    const sq = document.createElement('div');
-    sq.className = 'csq';
-    sq.style.background = hex;
-    pair.appendChild(sq);
-  });
-  colorsCell.appendChild(pair);
-  row.appendChild(colorsCell);
+  // Colors
+  const cc2=document.createElement('div');cc2.className='gl-cell '+scoreCell('colors',gu,an);
+  const cols=getUnitColors2(gu);
+  const pair=document.createElement('div');pair.className='color-pair';
+  [cols[0],cols[1]].forEach(hex=>{const sq=document.createElement('div');sq.className='csq';sq.style.background=hex;pair.appendChild(sq);});
+  cc2.appendChild(pair);
+  row.appendChild(cc2);
 
-  // Era cell
-  const eraResult = scoreCell('era', guessUnit, an);
-  const eraCell = document.createElement('div');
-  eraCell.className = 'gl-cell ' + eraResult;
-  const eraArrow = getEraArrow(guessUnit, an);
-  const eraVal = GL_ERA[guessUnit.name] || '?';
-  eraCell.innerHTML = `<span class="arr">${eraArrow}</span><span class="val">${eraVal.slice(0,4)}</span>`;
-  row.appendChild(eraCell);
+  // Era
+  const ec=document.createElement('div');ec.className='gl-cell '+scoreCell('era',gu,an);
+  const ea=eraArrow(gu,an);const ev=GL_ERA[gu.name]||'?';
+  ec.innerHTML=`<span class="arr">${ea}</span><span class="val">${ev.slice(0,4)}</span>`;
+  row.appendChild(ec);
 
-  // Pilot cell
-  const pilotResult = scoreCell('pilot', guessUnit, an);
-  const pilotCell = document.createElement('div');
-  pilotCell.className = 'gl-cell ' + pilotResult;
-  pilotCell.style.fontSize = '8px';
-  const pName = PILOT_DATA[guessUnit.name] || '?';
-  const shortPilot = pName.split(' ')[0];
-  pilotCell.textContent = shortPilot.length > 9 ? shortPilot.slice(0,8)+'…' : shortPilot;
-  row.appendChild(pilotCell);
+  // Pilot
+  const pc=document.createElement('div');pc.className='gl-cell '+scoreCell('pilot',gu,an);
+  pc.style.fontSize='8px';
+  const pn=getPilot(gu)||'?';
+  const pShort=pn.split(' ')[0];
+  pc.textContent=pShort.length>9?pShort.slice(0,8)+'…':pShort;
+  row.appendChild(pc);
 
   return row;
 }
 
-/* ── AUTOCOMPLETE ───────────────────────────────────────────────── */
+/* ── AUTOCOMPLETE (unified with setupTypeahead) ─────────────── */
 
 function glSetupSearch(){
-  const inp = document.getElementById('glInput');
-  const sugBox = document.getElementById('glSuggest');
-  const preview = document.getElementById('glPreview');
-  const previewImg = document.getElementById('glPreviewImg');
-  const previewName = document.getElementById('glPreviewName');
-  let activeIdx = -1;
+  const inp=document.getElementById('glInput');
+  const sugBox=document.getElementById('glSuggest');
+  const scanner=document.getElementById('glPreviewScanner');
+  const previewImg=document.getElementById('glPreviewImg');
+  const previewName=document.getElementById('glPreviewName');
+  let activeIdx=-1;
 
-  function getMatches(val){
-    if(!val.trim()) return [];
-    const v = val.toLowerCase();
-    const scored = [];
-    for(const u of roster){
-      const nm = u.name.toLowerCase();
-      let sc = 0;
-      if(nm.includes(v)) sc = 3;
-      else if(nm.split(/\s+/).some(w=>w.startsWith(v))) sc = 2;
-      else if((u.alt||[]).some(a=>a.includes(v))) sc = 1;
-      if(sc > 0) scored.push({unit:u, sc});
+  function getMatches(raw){
+    const val=raw.toLowerCase().trim();
+    if(!val) return [];
+    const seriesMatch=GL_SERIES_ALIASES[val];
+    if(seriesMatch) return roster.filter(x=>x.series&&x.series.toLowerCase().includes(seriesMatch.toLowerCase())).slice(0,8);
+    const scored=[];
+    for(const x of roster){
+      const nm=x.name.toLowerCase();let sc=0;
+      if(nm.includes(val)) sc=3;
+      else if(nm.split(/\s+/).some(w=>w.startsWith(val))) sc=2;
+      else if((x.alt||[]).some(a=>a.includes(val))) sc=1;
+      else{for(const[alias,series]of Object.entries(GL_SERIES_ALIASES)){if(alias.startsWith(val)&&x.series&&x.series.toLowerCase().includes(series.toLowerCase())){sc=1;break;}}}
+      if(sc>0) scored.push({unit:x,sc});
     }
     scored.sort((a,b)=>b.sc-a.sc);
     return scored.slice(0,8).map(s=>s.unit);
   }
 
   function selectUnit(u){
-    inp.value = u.name;
-    sugBox.innerHTML = '';
-    glState.selectedUnit = u;
+    inp.value=u.name;
+    sugBox.innerHTML='';
+    glState.selectedUnit=u;
     if(u.img){
-      previewImg.src = u.img;
-      previewName.textContent = u.name;
-      preview.style.display = 'flex';
+      previewImg.src=u.img;
+      previewName.textContent=u.name;
+      scanner.classList.add('visible');
     } else {
-      preview.style.display = 'none';
+      scanner.classList.remove('visible');
     }
   }
 
   function renderSuggestions(matches){
-    sugBox.innerHTML = '';
-    activeIdx = -1;
-    matches.forEach((m,i) => {
-      const b = document.createElement('button');
-      b.dataset.idx = i;
-      if(m.img){
-        const img = document.createElement('img');
-        img.src = m.img; img.alt = '';
-        b.appendChild(img);
-      }
-      const span = document.createElement('span');
-      span.textContent = m.name;
-      b.appendChild(span);
-      b.onclick = () => selectUnit(m);
+    sugBox.innerHTML='';activeIdx=-1;
+    matches.forEach((m,i)=>{
+      const b=document.createElement('button');b.dataset.idx=i;
+      if(m.img){const img=document.createElement('img');img.src=m.img;img.alt='';b.appendChild(img);}
+      const span=document.createElement('span');span.textContent=m.name;b.appendChild(span);
+      b.onclick=()=>selectUnit(m);
       sugBox.appendChild(b);
     });
   }
 
-  inp.oninput = () => {
-    glState.selectedUnit = null;
-    preview.style.display = 'none';
+  inp.oninput=()=>{
+    glState.selectedUnit=null;scanner.classList.remove('visible');
     renderSuggestions(getMatches(inp.value));
   };
 
-  inp.onkeydown = e => {
-    const btns = [...sugBox.querySelectorAll('button')];
-    if(!btns.length) return;
-    if(e.key === 'ArrowDown'){
-      e.preventDefault();
-      activeIdx = Math.min(activeIdx+1, btns.length-1);
-    } else if(e.key === 'ArrowUp'){
-      e.preventDefault();
-      activeIdx = Math.max(activeIdx-1, -1);
-    } else if(e.key === 'Enter'){
-      if(activeIdx >= 0){
-        const matches = getMatches(inp.value);
-        if(matches[activeIdx]) selectUnit(matches[activeIdx]);
-      }
+  inp.onkeydown=e=>{
+    const btns=[...sugBox.querySelectorAll('button')];
+    if(e.key==='ArrowDown'){e.preventDefault();activeIdx=Math.min(activeIdx+1,btns.length-1);}
+    else if(e.key==='ArrowUp'){e.preventDefault();activeIdx=Math.max(activeIdx-1,-1);}
+    else if(e.key==='Enter'){
+      if(glState.selectedUnit){glSubmitGuess();return;}
+      if(activeIdx>=0){const matches=getMatches(inp.value);if(matches[activeIdx])selectUnit(matches[activeIdx]);}
+      else if(btns.length){btns[0].click();}
       return;
     } else return;
-    btns.forEach((b,i) => b.classList.toggle('active', i===activeIdx));
+    btns.forEach((b,i)=>b.classList.toggle('active',i===activeIdx));
   };
 }
 
-/* ── SUBMIT GUESS ───────────────────────────────────────────────── */
+/* ── SUBMIT ──────────────────────────────────────────────────── */
 
 function glSubmitGuess(){
-  const u = glState.selectedUnit;
-  if(!u) return;
-  if(glState.solved) return;
+  const u=glState.selectedUnit;if(!u||glState.solved) return;
   if(glState.guesses.includes(u.name)){
-    // already guessed — flash input
-    document.getElementById('glInput').style.borderColor = 'var(--amber)';
-    setTimeout(()=>{ document.getElementById('glInput').style.borderColor=''; }, 600);
-    return;
+    const inp=document.getElementById('glInput');
+    inp.style.borderColor='var(--amber)';setTimeout(()=>{inp.style.borderColor='';},600);return;
   }
-
   glState.guesses.push(u.name);
-  if(u.name === glState.answer.name){
-    glState.solved = true;
-    saveRecentPick(glState.todayKey, glState.answer.name);
-  }
+  if(u.name===glState.answer.name){glState.solved=true;saveRecentPick(glState.todayKey,glState.answer.name);}
   glSave();
-
-  // Clear search
-  document.getElementById('glInput').value = '';
-  document.getElementById('glSuggest').innerHTML = '';
-  document.getElementById('glPreview').style.display = 'none';
-  glState.selectedUnit = null;
-
-  glRenderAll();
-  glUpdateHint();
-
+  document.getElementById('glInput').value='';
+  document.getElementById('glSuggest').innerHTML='';
+  document.getElementById('glPreviewScanner').classList.remove('visible');
+  glState.selectedUnit=null;
+  glRenderAll();glUpdateHint();
   if(glState.solved) glShowEnd();
 }
 
-/* ── HINT ───────────────────────────────────────────────────────── */
+/* ── HINT ────────────────────────────────────────────────────── */
 
 function glUpdateHint(){
-  const hintBtn = document.getElementById('glHintBtn');
-  if(glState.solved || glState.guesses.length < 5){
-    hintBtn.classList.add('hide');
-  } else {
-    hintBtn.classList.remove('hide');
-    if(glState.hintShown) glShowHintImage();
-  }
+  const btn=document.getElementById('glHintBtn');
+  if(glState.solved||glState.guesses.length<5){btn.classList.add('hide');return;}
+  btn.classList.remove('hide');
+  if(glState.hintShown) glShowHintImage();
 }
 
 function glShowHintImage(){
-  const wrap = document.getElementById('glHintWrap');
-  const img = document.getElementById('glHintImg');
-  if(!glState.answer || !glState.answer.img) return;
-  img.src = glState.answer.img;
-  wrap.classList.remove('hide');
-  glState.hintShown = true;
-  glSave();
+  const wrap=document.getElementById('glHintWrap');
+  const img=document.getElementById('glHintImg');
+  if(!glState.answer||!glState.answer.img) return;
+  img.src=glState.answer.img;wrap.classList.remove('hide');
+  glState.hintShown=true;glSave();
 }
 
-/* ── END SCREEN ─────────────────────────────────────────────────── */
+/* ── END SCREEN ─────────────────────────────────────────────── */
 
 function glShowEnd(){
-  document.getElementById('glGame').style.display = 'none';
-  const endDiv = document.getElementById('glEnd');
-  endDiv.classList.remove('hide');
-  const an = glState.answer;
-  const endImg = document.getElementById('glEndImg');
-  if(an.img) endImg.src = an.img;
-  document.getElementById('glEndName').textContent = an.name;
-  const tries = glState.guesses.length;
-  document.getElementById('glEndTries').textContent =
-    tries === 1 ? 'First try! 🎯' : `Solved in ${tries} ${tries===1?'guess':'guesses'}`;
-
+  document.getElementById('glGame').style.display='none';
+  const endDiv=document.getElementById('glEnd');endDiv.classList.remove('hide');
+  const an=glState.answer;
+  const endImg=document.getElementById('glEndImg');if(an.img)endImg.src=an.img;
+  document.getElementById('glEndName').textContent=an.name;
+  const tries=glState.guesses.length;
+  document.getElementById('glEndTries').textContent=tries===1?'First try! 🎯':`Solved in ${tries} guess${tries===1?'':'es'}`;
   glRenderSubmitPanel();
   glFetchLeaderboard();
 }
 
-/* ── GUNDAMLE LEADERBOARD (same Google Apps Script, different action) ── */
+/* ── LEADERBOARD ─────────────────────────────────────────────── */
 
 function glRenderSubmitPanel(){
-  const name = getSavedName();
+  const name=getSavedName();
   if(name){
     document.getElementById('glSpFirst').classList.add('hide');
     document.getElementById('glSpKnown').classList.remove('hide');
-    document.getElementById('glSpKnownMsg').textContent = '✓ Submitted as "' + name + '"';
+    document.getElementById('glSpKnownMsg').textContent='✓ Submitted as "'+name+'"';
     glAutoSubmit(name);
   } else {
     document.getElementById('glSpFirst').classList.remove('hide');
     document.getElementById('glSpKnown').classList.add('hide');
-    document.getElementById('glSubmitMsg').textContent = '';
-    document.getElementById('glSubmitBtn').disabled = false;
+    document.getElementById('glSubmitMsg').textContent='';
+    document.getElementById('glSubmitBtn').disabled=false;
   }
 }
 
 async function glAutoSubmit(name){
-  if(!SCRIPT_URL || SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') return;
-  const tries = glState.guesses.length;
-  const p = new URLSearchParams({action:'gundamle', name, date:glState.todayKey, tries, solved:glState.solved?'1':'0'});
-  try{ await fetch(SCRIPT_URL+'?'+p, {redirect:'follow'}); }catch(e){}
+  if(!SCRIPT_URL||SCRIPT_URL==='YOUR_APPS_SCRIPT_URL_HERE') return;
+  const tries=glState.guesses.length;
+  const p=new URLSearchParams({action:'gundamle',name,date:glState.todayKey,tries,solved:glState.solved?'1':'0'});
+  try{await fetch(SCRIPT_URL+'?'+p,{redirect:'follow'});}catch(e){}
 }
 
 async function glSubmitScore(){
-  const inp = document.getElementById('glSubmitName');
-  const name = inp.value.trim();
-  if(!name){
-    document.getElementById('glSubmitMsg').className='submit-msg err';
-    document.getElementById('glSubmitMsg').textContent='Enter a name first.';
-    return;
+  const inp=document.getElementById('glSubmitName');
+  const name=inp.value.trim();
+  if(!name){const msg=document.getElementById('glSubmitMsg');msg.className='submit-msg err';msg.textContent='Enter a name first.';return;}
+  if(!SCRIPT_URL||SCRIPT_URL==='YOUR_APPS_SCRIPT_URL_HERE'){
+    const msg=document.getElementById('glSubmitMsg');msg.className='submit-msg err';msg.textContent='No leaderboard URL.';return;
   }
-  if(!SCRIPT_URL || SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE'){
-    document.getElementById('glSubmitMsg').className='submit-msg err';
-    document.getElementById('glSubmitMsg').textContent='No leaderboard URL configured.';
-    return;
-  }
-  document.getElementById('glSubmitBtn').disabled = true;
-  document.getElementById('glSubmitMsg').className='submit-msg';
-  document.getElementById('glSubmitMsg').textContent='Submitting…';
-  const tries = glState.guesses.length;
-  const p = new URLSearchParams({action:'gundamle', name, date:glState.todayKey, tries, solved:glState.solved?'1':'0'});
+  document.getElementById('glSubmitBtn').disabled=true;
+  const msg=document.getElementById('glSubmitMsg');msg.className='submit-msg';msg.textContent='Submitting…';
+  const tries=glState.guesses.length;
+  const p=new URLSearchParams({action:'gundamle',name,date:glState.todayKey,tries,solved:glState.solved?'1':'0'});
   try{
-    await fetch(SCRIPT_URL+'?'+p, {redirect:'follow'});
+    const res=await fetch(SCRIPT_URL+'?'+p,{redirect:'follow'});
+    await res.text(); // consume body
     setSavedName(name);
     glRenderSubmitPanel();
     glFetchLeaderboard();
   }catch(ex){
-    document.getElementById('glSubmitMsg').className='submit-msg err';
-    document.getElementById('glSubmitMsg').textContent='Submit failed.';
-    document.getElementById('glSubmitBtn').disabled = false;
+    msg.className='submit-msg err';msg.textContent='Submit failed.';
+    document.getElementById('glSubmitBtn').disabled=false;
   }
 }
 
 async function glFetchLeaderboard(){
-  if(!SCRIPT_URL || SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE'){
-    document.getElementById('glLbBody').innerHTML='<div class="lb-empty">No leaderboard URL.</div>';
-    return;
-  }
-  document.getElementById('glLbStatus').textContent='Loading…';
+  const statusEl=document.getElementById('glLbStatus');
+  const bodyEl=document.getElementById('glLbBody');
+  if(!SCRIPT_URL||SCRIPT_URL==='YOUR_APPS_SCRIPT_URL_HERE'){bodyEl.innerHTML='<div class="lb-empty">No leaderboard URL.</div>';return;}
+  if(statusEl)statusEl.textContent='Loading…';
   try{
-    const res = await fetch(SCRIPT_URL+'?action=gundamleGet&date='+glState.todayKey, {redirect:'follow'});
-    const text = await res.text();
-    const data = JSON.parse(text);
-    glRenderLeaderboard(data.rows || []);
+    const res=await fetch(SCRIPT_URL+'?action=gundamleGet&date='+glState.todayKey,{redirect:'follow'});
+    const text=await res.text();
+    // Strip any BOM or non-JSON prefix
+    const jsonStart=text.indexOf('{');
+    const data=JSON.parse(jsonStart>=0?text.slice(jsonStart):text);
+    glRenderLeaderboard(data.rows||[]);
     const d=new Date(),p2=n=>String(n).padStart(2,'0');
-    document.getElementById('glLbStatus').textContent='Updated '+p2(d.getHours())+':'+p2(d.getMinutes());
+    if(statusEl)statusEl.textContent='Updated '+p2(d.getHours())+':'+p2(d.getMinutes());
   }catch(ex){
-    document.getElementById('glLbBody').innerHTML='<div class="lb-empty">Could not load.</div>';
-    document.getElementById('glLbStatus').textContent='Offline';
+    if(bodyEl)bodyEl.innerHTML='<div class="lb-empty">Could not load board.</div>';
+    if(statusEl)statusEl.textContent='Offline';
   }
 }
 
 function glRenderLeaderboard(rows){
-  const el = document.getElementById('glLbBody');
-  if(!rows.length){ el.innerHTML='<div class="lb-empty">No scores yet — be the first!</div>'; return; }
-  // rows expected: {name, tries, solved}; sort by tries asc
-  const sorted = [...rows].filter(r=>r.solved==='1'||r.solved===1||r.solved===true).sort((a,b)=>Number(a.tries)-Number(b.tries));
+  const el=document.getElementById('glLbBody');
+  const solved=rows.filter(r=>r.solved==='1'||r.solved===1||r.solved===true);
+  if(!solved.length){el.innerHTML='<div class="lb-empty">No scores yet — be the first!</div>';return;}
+  solved.sort((a,b)=>Number(a.tries)-Number(b.tries));
   let html='<table class="lb-table"><thead><tr><th></th><th>Name</th><th class="num">Tries</th></tr></thead><tbody>';
-  sorted.slice(0,8).forEach((r,i)=>{
-    const cls = i===0?' class="gold"':'';
-    const rank = i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1);
+  solved.slice(0,8).forEach((r,i)=>{
+    const cls=i===0?' class="gold"':'';
+    const rank=i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1);
     html+=`<tr${cls}><td class="rank">${rank}</td><td class="pname">${escapeHtml(String(r.name))}</td><td class="num">${r.tries}</td></tr>`;
   });
   html+='</tbody></table>';
-  el.innerHTML = html;
+  el.innerHTML=html;
 }
 
-/* ── INIT ───────────────────────────────────────────────────────── */
+/* ── INIT ────────────────────────────────────────────────────── */
 
 function glOpen(){
   glLoad(roster);
-  if(!glState.answer){ alert('No units available for Gundamle.'); return; }
+  if(!glState.answer){alert('No units available for Gundamle.');return;}
   showSection('gundamle');
   glSetupSearch();
   glRenderAll();
   glUpdateHint();
-
-  // If already solved from today, show end screen directly
   if(glState.solved){
-    document.getElementById('glGame').style.display = 'none';
+    document.getElementById('glGame').style.display='none';
     document.getElementById('glEnd').classList.remove('hide');
-    const an = glState.answer;
-    if(an.img) document.getElementById('glEndImg').src = an.img;
-    document.getElementById('glEndName').textContent = an.name;
-    const tries = glState.guesses.length;
-    document.getElementById('glEndTries').textContent =
-      tries === 1 ? 'First try! 🎯' : `Solved in ${tries} ${tries===1?'guess':'guesses'}`;
+    const an=glState.answer;
+    if(an.img)document.getElementById('glEndImg').src=an.img;
+    document.getElementById('glEndName').textContent=an.name;
+    const tries=glState.guesses.length;
+    document.getElementById('glEndTries').textContent=tries===1?'First try! 🎯':`Solved in ${tries} guess${tries===1?'':'es'}`;
     glRenderSubmitPanel();
     glFetchLeaderboard();
   } else {
-    document.getElementById('glGame').style.display = '';
+    document.getElementById('glGame').style.display='';
     document.getElementById('glEnd').classList.add('hide');
-    // also show already-made guesses
   }
 }
 
-// Wire buttons
-document.getElementById('gundamleBtn').onclick = glOpen;
-document.getElementById('gundamleBack').onclick = () => showSection('start');
-document.getElementById('glSubmit').onclick = glSubmitGuess;
-document.getElementById('glInput').addEventListener('keydown', e => {
-  if(e.key === 'Enter'){
-    // If a unit is selected, submit; else try to auto-select first suggestion
-    if(glState.selectedUnit){ glSubmitGuess(); return; }
-    const first = document.querySelector('#glSuggest button');
-    if(first) first.click();
-  }
-});
-document.getElementById('glHintBtn').onclick = () => {
-  glShowHintImage();
-  document.getElementById('glHintBtn').classList.add('hide');
+// Wire Gundamle buttons
+document.getElementById('gundamleBack').onclick=()=>{
+  // Reset mode seg to previous non-gundamle tab
+  document.querySelectorAll('#modeSeg button').forEach(b=>{b.classList.toggle('on',b.dataset.mode==='mc');});
+  quizMode='mc';
+  $('countField').classList.remove('hide');
+  updateModeStat();
+  showSection('start');
 };
-document.getElementById('glHintReveal').onclick = e => {
-  const img = document.getElementById('glHintImg');
-  img.classList.add('revealed');
-  e.currentTarget.style.display = 'none';
-};
-document.getElementById('glSubmitBtn').onclick = glSubmitScore;
-document.getElementById('glChangeName').onclick = () => {
-  localStorage.removeItem('gundamPlayerName');
-  glRenderSubmitPanel();
-};
+document.getElementById('glSubmit').onclick=glSubmitGuess;
+document.getElementById('glHintBtn').onclick=()=>{glShowHintImage();document.getElementById('glHintBtn').classList.add('hide');};
+document.getElementById('glHintReveal').onclick=e=>{document.getElementById('glHintImg').classList.add('revealed');e.currentTarget.style.display='none';};
+document.getElementById('glSubmitBtn').onclick=glSubmitScore;
+document.getElementById('glChangeName').onclick=()=>{localStorage.removeItem('gundamPlayerName');glRenderSubmitPanel();};
 
-// Countdown timer (runs globally)
-setInterval(updateCountdown, 1000);
+setInterval(updateCountdown,1000);
 updateCountdown();
 
 })();
-/* ═══════════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════ */
+
 
 /* ═══════════════════════════════════════════════════════════════════
    STARFIELD + SPARK SYSTEM  (single shared canvas #bgCanvas)
