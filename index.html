@@ -405,53 +405,99 @@
   }
   input:focus,textarea:focus,select:focus{border-color:var(--primary-dim);box-shadow:0 0 0 1px rgba(232,100,10,.25);}
 
-  /* ── SCANNER FRAME ─────────────────────────────── */
-  .scanner{
-    position:relative;width:100%;aspect-ratio:4/3;background:#06070a;
-    border:1px solid var(--line-bright);overflow:hidden;margin-bottom:10px;
-    display:flex;align-items:center;justify-content:center;
+/* ── SCANNER FRAME ─────────────────────────────── */
+  .scanner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #06070a;
+    border: 1px solid var(--line-bright);
+    overflow: hidden;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   /* Corner brackets - angular feel */
-  .scanner::before,.scanner::after{
-    content:"";position:absolute;width:22px;height:22px;z-index:3;
+  .scanner::before,
+  .scanner::after {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    z-index: 3;
   }
-  .scanner::before{top:10px;left:10px;border-top:2px solid var(--primary);border-left:2px solid var(--primary);}
-  .scanner::after{bottom:10px;right:10px;border-bottom:2px solid var(--primary);border-right:2px solid var(--primary);}
-  .scanner .corner-br{position:absolute;bottom:10px;left:10px;width:22px;height:22px;border-bottom:2px solid var(--primary);border-left:2px solid var(--primary);z-index:3;}
-  .scanner .corner-tl{position:absolute;top:10px;right:10px;width:22px;height:22px;border-top:2px solid var(--primary);border-right:2px solid var(--primary);z-index:3;}
-
-  .scanner img{width:100%;height:100%;object-fit:contain;display:block;}
-  .scanner.clickable{cursor:zoom-in;}
-  /* Spyglass hint */
-  .spy-hint{position:absolute;bottom:12px;right:12px;z-index:4;
-    background:rgba(9,10,14,.72);border:1px solid var(--primary-dim);
-    color:var(--primary);font-size:15px;width:28px;height:28px;
-    display:flex;align-items:center;justify-content:center;
-    border-radius:2px;pointer-events:none;opacity:.7;}
-  /* Manager thumbnail lightbox hint */
-  .thmbwrap .thmb-zoom{position:absolute;bottom:3px;right:3px;
-    background:rgba(9,10,14,.8);color:var(--primary);font-size:11px;
-    width:18px;height:18px;display:flex;align-items:center;justify-content:center;
-    border-radius:1px;pointer-events:none;opacity:0;transition:.15s;z-index:2;}
-  .thmbwrap:hover .thmb-zoom{opacity:1;}
-  .scanner .ph{color:var(--txt-dim);font-family:"Share Tech Mono",monospace;font-size:11px;text-align:center;padding:24px;line-height:1.7;}
-
-  /* scan beam */
-  .scanline{
-    position:absolute;left:0;right:0;height:1px;z-index:2;
-    background:linear-gradient(90deg,transparent 0%,var(--primary) 30%,rgba(232,100,10,.9) 50%,var(--primary) 70%,transparent 100%);
-    opacity:.45;animation:scan 4s linear infinite;
+  .scanner::before {
+    top: 10px;
+    left: 10px;
+    border-top: 2px solid var(--primary);
+    border-left: 2px solid var(--primary);
   }
-  @keyframes scan{0%{top:0;}100%{top:100%;}}
+  .scanner::after {
+    bottom: 10px;
+    right: 10px;
+    border-bottom: 2px solid var(--primary);
+    border-right: 2px solid var(--primary);
+  }
+  .scanner .corner-br {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 22px;
+    height: 22px;
+    border-bottom: 2px solid var(--primary);
+    border-left: 2px solid var(--primary);
+    z-index: 3;
+  }
+  .scanner .corner-tl {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 22px;
+    height: 22px;
+    border-top: 2px solid var(--primary);
+    border-right: 2px solid var(--primary);
+    z-index: 3;
+  }
 
-  /* Subtle grid overlay on scanner */
-  .scan-grid{
-    position:absolute;inset:0;z-index:1;pointer-events:none;
+  /* Core Image display adjustment */
+  .scanner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Keeps your Gundam dimensions clean without stretching */
+    display: block;
+  }
+  .scanner.clickable {
+    cursor: zoom-in;
+  }
+
+  /* Scanline laser beam overlay */
+  .scanline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    z-index: 2;
+    background: linear-gradient(90deg, transparent 0%, var(--primary) 30%, rgba(232,100,10,.9) 50%, var(--primary) 70%, transparent 100%);
+    opacity: .45;
+    animation: scan 4s linear infinite;
+  }
+  @keyframes scan {
+    0% { top: 0; }
+    100% { top: 100%; }
+  }
+
+  /* Subtle tactical grid background on scanner */
+  .scan-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
     background-image:
-      linear-gradient(rgba(232,100,10,.04) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(232,100,10,.04) 1px,transparent 1px);
-    background-size:40px 40px;
+      linear-gradient(rgba(232,100,10,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,100,10,.04) 1px, transparent 1px);
+    background-size: 40px 40px;
   }
 
   /* ── BACK BUTTON (in-quiz) ─────────────────────── */
