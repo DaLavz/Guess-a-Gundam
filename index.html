@@ -1036,30 +1036,6 @@
         <img id="glEndImg" class="gl-end-img" src="" alt="" style="cursor:zoom-in;" onclick="openLightbox(null,this.src)">
         <div class="gl-end-name" id="glEndName"></div>
         <div class="gl-end-tries" id="glEndTries"></div>
-        <div style="margin-top:4px;margin-bottom:16px;width:100%;">
-          <div class="submit-panel" id="glSubmitPanel" style="margin-top:0;">
-            <div id="glSpFirst">
-              <span class="sp-title">Submit to Gundamle Board</span>
-              <div class="submit-row">
-                <input id="glSubmitName" placeholder="your name…" maxlength="24" autocomplete="off">
-                <button class="submit-btn" id="glSubmitBtn">Submit</button>
-              </div>
-              <div class="submit-msg" id="glSubmitMsg"></div>
-            </div>
-            <div id="glSpKnown" class="hide">
-              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-                <span class="sp-title" style="margin-bottom:0;">Score Submitted</span>
-                <button id="glChangeName" style="background:none;border:none;color:var(--txt-dim);font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;cursor:pointer;text-decoration:underline;">change name</button>
-              </div>
-              <div class="submit-msg ok" id="glSpKnownMsg"></div>
-            </div>
-          </div>
-        </div>
-        <div class="gl-lb">
-          <span class="label">Today's Gundamle Board</span>
-          <div class="lb-status" id="glLbStatus">—</div>
-          <div id="glLbBody"><div class="lb-empty">Loading…</div></div>
-        </div>
       </div>
     </section>
 
@@ -1689,10 +1665,11 @@ function renderManageList(query=""){
       const hasCustom=!!(item.colors&&item.colors[0]);
       const c=item.colors||(typeof GL_COLORS!=="undefined"&&GL_COLORS[item.name])||null;
       if(c&&c[0]&&c[1]){
-        const sq1=document.createElement("div");sq1.className="roster-csq";sq1.style.background=c[0];sq1.title=c[0];
-        const sq2=document.createElement("div");sq2.className="roster-csq";sq2.style.background=c[1];sq2.title=c[1];
+        const sq1=document.createElement("div");sq1.className="roster-csq";sq1.style.background=c[0];sq1.title=c[2]||c[0];
+        const sq2=document.createElement("div");sq2.className="roster-csq";sq2.style.background=c[1];sq2.title=c[3]||c[1];
         const lbl=document.createElement("span");lbl.className="roster-color-label";
-        lbl.textContent=c[0]+" / "+c[1]+(hasCustom?" ✓":"");
+        const n1=c[2]||c[0]; const n2=c[3]||c[1];
+        lbl.textContent=n1+" / "+n2+(hasCustom?" ✓":" (default)");
         lbl.style.color=hasCustom?"var(--green)":"var(--txt-dim)";
         colRow.appendChild(sq1);colRow.appendChild(sq2);colRow.appendChild(lbl);
       } else {
@@ -2413,6 +2390,201 @@ function setupColorEditor(){
   };
 }
 
+
+const GL_COLORS = {
+  "RX-78-2 Gundam":["#e8e8e8","#2255aa","White","Blue"],
+  "RX-178 Gundam Mk-II":["#e8e8e8","#222266","White","Dark Blue"],
+  "MSZ-006 Zeta Gundam":["#e8e8e8","#334499","White","Blue"],
+  "MSZ-010 ZZ Gundam":["#e8e8e8","#1144bb","White","Blue"],
+  "RX-93 Nu Gundam":["#e8e8e8","#334488","White","Blue"],
+  "RX-93-ν2 Hi-Nu Gundam":["#e8e8e8","#1a3d9c","White","Blue"],
+  "F91 Gundam F91":["#e8e8e8","#cc2222","White","Red"],
+  "XM-X1 Crossbone Gundam X-1":["#e8e8e8","#cc2222","White","Red"],
+  "LM312V04 Victory Gundam":["#e8e8e8","#3355bb","White","Blue"],
+  "V-Dash Gundam":["#e8e8e8","#3355bb","White","Blue"],
+  "LM314V21 V2 Gundam":["#e8e8e8","#3355bb","White","Blue"],
+  "LM314V23/24 V2 Assault Buster Gundam":["#e8e8e8","#3355bb","White","Blue"],
+  "RX-0 Unicorn Gundam (Unicorn Mode)":["#e8e8e8","#cccccc","White","Silver"],
+  "RX-0 Unicorn Gundam (Destroy Mode)":["#e8e8e8","#cc2222","White","Red"],
+  "RX-0 Full Armor Unicorn Gundam":["#e8e8e8","#cc2222","White","Red"],
+  "RX-0 Unicorn Gundam Phenex":["#d4aa00","#cc8800","Gold","Orange"],
+  "RX-0 Unicorn Gundam Banshee":["#111111","#d4aa00","Black","Gold"],
+  "RX-0 Unicorn Gundam Banshee Norn":["#111111","#d4aa00","Black","Gold"],
+  "RX-9 Narrative Gundam":["#e8e8e8","#cc2222","White","Red"],
+  "RX-78NT-1 Gundam NT-1":["#e8e8e8","#2255aa","White","Blue"],
+  "RX-79 Gundam Ground Type":["#8b9e6a","#556b2f","Olive","Green"],
+  "RX-78GP01 Gundam GP01 Zephyranthes":["#e8e8e8","#2255aa","White","Blue"],
+  "RX-78GP01-Fb Gundam GP01 Full Vernian":["#e8e8e8","#2255aa","White","Blue"],
+  "RX-78GP02A Gundam GP02A Physalis":["#e8e8e8","#cc3300","White","Red"],
+  "RX-78GP03 Gundam GP03 Dendrobium":["#e8e8e8","#2255aa","White","Blue"],
+  "FA-78 Full Armor Gundam (Thunderbolt)":["#e8e8e8","#2255aa","White","Blue"],
+  "RX-78AL Atlas Gundam":["#e8e8e8","#3366cc","White","Blue"],
+  "MRX-009 Psycho Gundam":["#cc2222","#111133","Red","Dark Blue"],
+  "MRX-010 Psycho Gundam Mk-II":["#aa1111","#111133","Red","Dark Blue"],
+  "MRX-012 Psycho Gundam Mk-III":["#880000","#111133","Dark Red","Dark Blue"],
+  "WD-M01 Turn A Gundam":["#e8e8e8","#ddddcc","White","Cream"],
+  "CONCEPT-X 6-1-2 Turn X":["#cccccc","#111111","Silver","Black"],
+  "GF13-017NJ Shining Gundam":["#e8e8e8","#cc2222","White","Red"],
+  "GF13-017NJII God Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "GF13-001NHII Master Gundam":["#111111","#880000","Black","Dark Red"],
+  "JDG-00X Devil Gundam":["#555555","#cc2222","Grey","Red"],
+  "XXXG-01W Wing Gundam":["#e8e8e8","#333333","White","Dark Grey"],
+  "XXXG-00W0 Wing Gundam Zero":["#e8e8e8","#333333","White","Dark Grey"],
+  "XXXG-01D Gundam Deathscythe":["#111111","#222222","Black","Dark Grey"],
+  "XXXG-01H Gundam Heavyarms":["#555555","#e8e8e8","Grey","White"],
+  "XXXG-01S Shenlong Gundam":["#cc2222","#333333","Red","Dark Grey"],
+  "XXXG-01SR Sandrock Gundam":["#e8e8e8","#cc8800","White","Orange"],
+  "OZ-13MS Gundam Epyon":["#cc2222","#111111","Red","Black"],
+  "GX-9900 Gundam X":["#e8e8e8","#333366","White","Navy"],
+  "GX-9900-DV Gundam X Divider":["#e8e8e8","#333366","White","Navy"],
+  "GX-9901-DX Gundam Double X":["#e8e8e8","#333366","White","Navy"],
+  "GW-9800 Gundam Airmaster":["#e8e8e8","#44aa44","White","Green"],
+  "GT-9600 Gundam Leopard":["#ccaa44","#333333","Yellow","Dark"],
+  "NRX-0013 Gundam Virsago":["#660000","#111111","Dark Red","Black"],
+  "NRX-0015 Gundam Ashtaron":["#550055","#111111","Purple","Black"],
+  "GAT-X105 Strike Gundam":["#e8e8e8","#cc2222","White","Red"],
+  "ZGMF-X10A Freedom Gundam":["#e8e8e8","#2244aa","White","Blue"],
+  "ZGMF-X09A Justice Gundam":["#cc0000","#e8e8e8","Red","White"],
+  "GAT-X303 Aegis Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "GAT-X102 Duel Gundam":["#3355aa","#e8e8e8","Blue","White"],
+  "GAT-X103 Buster Gundam":["#447722","#e8e8e8","Green","White"],
+  "GAT-X207 Blitz Gundam":["#111111","#3344aa","Black","Blue"],
+  "ZGMF-X13A Providence Gundam":["#660066","#e8e8e8","Purple","White"],
+  "MBF-P02 Gundam Astray Red Frame":["#cc2222","#e8e8e8","Red","White"],
+  "MBF-P03 Gundam Astray Blue Frame":["#2244aa","#e8e8e8","Blue","White"],
+  "MBF-P01-Re2 Gundam Astray Gold Frame":["#cc9900","#111111","Gold","Black"],
+  "MBF-P04 Gundam Astray Green Frame":["#226622","#e8e8e8","Green","White"],
+  "MBF-P05LM Gundam Astray Mirage Frame":["#cc4400","#e8e8e8","Orange","White"],
+  "GAT-X131 Calamity Gundam":["#880000","#333333","Dark Red","Grey"],
+  "GAT-X252 Forbidden Gundam":["#115511","#111111","Dark Green","Black"],
+  "GAT-X370 Raider Gundam":["#3333aa","#111111","Blue","Black"],
+  "GSX-401FW Stargazer Gundam":["#e8e8e8","#cccccc","White","Silver"],
+  "ZGMF-X11A Regenerate Gundam":["#660066","#e8e8e8","Purple","White"],
+  "GAT-X105E Strike Noir Gundam":["#111111","#666666","Black","Grey"],
+  "ZGMF-X56S Impulse Gundam":["#e8e8e8","#cc2222","White","Red"],
+  "ZGMF-X42S Destiny Gundam":["#555588","#e8e8e8","Blue-Grey","White"],
+  "ZGMF-X20A Strike Freedom Gundam":["#e8e8e8","#d4aa00","White","Gold"],
+  "ZGMF-X19A Infinite Justice Gundam":["#cc0000","#e8e8e8","Red","White"],
+  "ZGMF-X666S Legend Gundam":["#660066","#e8e8e8","Purple","White"],
+  "GFAS-X1 Destroy Gundam":["#888800","#cc6600","Yellow","Orange"],
+  "STTS-909 Rising Freedom Gundam":["#e8e8e8","#2244cc","White","Blue"],
+  "ZGMF/A-262PD-P Mighty Strike Freedom Gundam":["#e8e8e8","#d4aa00","White","Gold"],
+  "STTS-808 Immortal Justice Gundam":["#cc0000","#e8e8e8","Red","White"],
+  "ZGMF-1027M Duel Blitz Gundam":["#3355aa","#111111","Blue","Black"],
+  "ZGMF-103HD Lightning Buster Gundam":["#224422","#e8e8e8","Dark Green","White"],
+  "GN-001 Gundam Exia":["#2244bb","#e8e8e8","Blue","White"],
+  "GN-002 Gundam Dynames":["#226622","#e8e8e8","Green","White"],
+  "GN-003 Gundam Kyrios":["#886600","#e8e8e8","Brown","White"],
+  "GN-004 Gundam Nadleeh":["#e8e8e8","#cc9900","White","Gold"],
+  "GN-005 Gundam Virtue":["#226622","#e8e8e8","Green","White"],
+  "GN-0000 00 Gundam":["#2244bb","#e8e8e8","Blue","White"],
+  "GN-0000+GNR-010 00 Raiser":["#2244bb","#e8e8e8","Blue","White"],
+  "GNW-001 Gundam Throne Eins":["#cc3300","#e8e8e8","Orange-Red","White"],
+  "GNW-002 Gundam Throne Zwei":["#cc3300","#e8e8e8","Orange-Red","White"],
+  "GNW-003 Gundam Throne Drei":["#cc3300","#e8e8e8","Orange-Red","White"],
+  "GNW-20000 Arche Gundam":["#cc3300","#111111","Orange-Red","Black"],
+  "CB-0000G/C Reborns Gundam":["#e8e8e8","#2244cc","White","Blue"],
+  "GN-006 Cherudim Gundam":["#226622","#e8e8e8","Green","White"],
+  "GN-007 Arios Gundam":["#886600","#e8e8e8","Brown","White"],
+  "GN-008 Seravee Gundam":["#226622","#e8e8e8","Dark Green","White"],
+  "GN-008GNHW3G Seravee Gundam GNHW3G":["#226622","#e8e8e8","Dark Green","White"],
+  "CB-002 Raphael Gundam":["#226622","#e8e8e8","Dark Green","White"],
+  "GN-010 Gundam Zabanya":["#226622","#e8e8e8","Green","White"],
+  "GN-011 Gundam Harute":["#886600","#e8e8e8","Brown","White"],
+  "GNT-0000 00 Qan[T]":["#2244bb","#e8e8e8","Blue","White"],
+  "GN-000 0 Gundam":["#e8e8e8","#cccccc","White","Silver"],
+  "GNY-001 Gundam Astraea":["#cc6600","#e8e8e8","Orange","White"],
+  "GNY-001F Gundam Astraea Type F":["#cc6600","#e8e8e8","Orange","White"],
+  "AGE-1 Gundam AGE-1 Normal":["#e8e8e8","#cc2222","White","Red"],
+  "AGE-1T Gundam AGE-1 Titus":["#cc2222","#cc6600","Red","Orange"],
+  "AGE-1S Gundam AGE-1 Spallow":["#e8e8e8","#cc2222","White","Red"],
+  "AGE-2 Gundam AGE-2 Normal":["#e8e8e8","#cc2222","White","Red"],
+  "AGE-2DB Gundam AGE-2 Double Bullet":["#e8e8e8","#cc2222","White","Red"],
+  "AGE-2DH Gundam AGE-2 Dark Hound":["#111111","#cc6600","Black","Orange"],
+  "AGE-3 Gundam AGE-3 Normal":["#e8e8e8","#cc2222","White","Red"],
+  "AGE-3O Gundam AGE-3 Orbital":["#e8e8e8","#cc6600","White","Orange"],
+  "AGE-FX Gundam AGE-FX":["#e8e8e8","#22aacc","White","Cyan"],
+  "xvm-fzc Gundam Legilis":["#550055","#e8e8e8","Purple","White"],
+  "YG-111 Gundam G-Self":["#e8e8e8","#cc2222","White","Red"],
+  "VGMM-Gf10 Gundam G-Lucifer":["#e8e8e8","#cc6600","White","Orange"],
+  "MSAM-033 Gundam G-Arcane":["#e8e8e8","#445599","White","Blue"],
+  "ASW-G-08 Gundam Barbatos":["#cc6600","#e8e8e8","Orange","White"],
+  "ASW-G-08 Gundam Barbatos Lupus":["#cc6600","#e8e8e8","Orange","White"],
+  "ASW-G-08 Gundam Barbatos Lupus Rex":["#111111","#cc5500","Black","Dark Orange"],
+  "ASW-G-01 Gundam Bael":["#e8e8e8","#ccaa44","White","Gold"],
+  "ASW-G-11 Gundam Gusion Rebake":["#cc6600","#e8e8e8","Orange","White"],
+  "ASW-G-29 Gundam Vidar":["#330066","#e8e8e8","Dark Purple","White"],
+  "ASW-G-64 Gundam Flauros":["#cc3300","#e8e8e8","Red-Orange","White"],
+  "ASW-G-29 Gundam Astaroth":["#555555","#cc2222","Grey","Red"],
+  "ASW-G-47 Gundam Vual":["#006633","#e8e8e8","Green","White"],
+  "ASW-G-71 Gundam Dantalion":["#2255aa","#e8e8e8","Blue","White"],
+  "ASW-G-66 Gundam Kimaris":["#e8e8e8","#cc4400","White","Orange"],
+  "RX-105 Xi Gundam":["#e8e8e8","#2255aa","White","Blue"],
+  "RX-104FF Penelope":["#e8e8e8","#cc4400","White","Orange"],
+  "RX-94 Mass Production Nu Gundam":["#e8e8e8","#2255aa","White","Blue"],
+  "TX-ff104 Alyzeus":["#cc9900","#e8e8e8","Gold","White"],
+  "XVX-016 Gundam Aerial":["#e8e8e8","#22aacc","White","Cyan"],
+  "XVX-016RN Gundam Aerial Rebuild":["#e8e8e8","#22aacc","White","Cyan"],
+  "X-EX01 Gundam Calibarn":["#cc2222","#111111","Red","Black"],
+  "FP/A-77 Gundam Pharact":["#e8e8e8","#888888","White","Grey"],
+  "MDX-0003 Gundam Schwarzette":["#111111","#4444cc","Black","Blue"],
+  "MD-0031 Gundam Lfrith":["#e8e8e8","#22aacc","White","Cyan"],
+  "AVP-03 Gundam Lfrith Anavata":["#e8e8e8","#22aacc","White","Cyan"],
+  "XGF-01 Gundam Lfrith Jiu":["#e8e8e8","#22aacc","White","Cyan"],
+  "EDM-GA-01 Gundam Lfrith Ur":["#e8e8e8","#22aacc","White","Cyan"],
+  "EDM-GA-02 Gundam Lfrith Thorn":["#e8e8e8","#22aacc","White","Cyan"],
+  "GQuuuuuuX":["#333333","#cc4400","Dark","Orange"],
+  "GFreD":["#cc4400","#e8e8e8","Orange","White"],
+  "Red Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "White Gundam":["#e8e8e8","#dddddd","White","Light Grey"],
+  "01 Gundam":["#e8e8e8","#2255aa","White","Blue"],
+  "GAT-X105B Build Strike Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "GAT-X105BFP Build Strike Gundam Full Package":["#cc2222","#e8e8e8","Red","White"],
+  "GAT-X105BST Star Build Strike Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "GAT-X105BGC Build Strike Galaxy Cosmos":["#2244cc","#e8e8e8","Blue","White"],
+  "PPGN-001 Gundam Amazing Exia":["#2244bb","#e8e8e8","Blue","White"],
+  "PPGN-001 Gundam Exia Dark Matter":["#111111","#9900aa","Black","Purple"],
+  "GX-9999 Gundam X Maoh":["#550055","#e8e8e8","Purple","White"],
+  "Sengoku Astray Gundam":["#cc2222","#cc8800","Red","Gold"],
+  "XXXG-01Wf Wing Gundam Fenice":["#226622","#cc2222","Green","Red"],
+  "XXXG-01Wfr Gundam Fenice Rinascita":["#226622","#cc2222","Green","Red"],
+  "XM-X9999 Crossbone Gundam Maoh":["#880000","#e8e8e8","Dark Red","White"],
+  "AC-01 Miss Sazabi":["#cc0022","#111111","Deep Red","Black"],
+  "JMF-1336R Build Burning Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "JMF-1337T Try Burning Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "LGZ-91 Lightning Gundam":["#e8e8e8","#cc8800","White","Yellow"],
+  "KUMA-PP Gundam Tryon 3":["#cc2222","#e8e8e8","Red","White"],
+  "KMK-B01 Kamiki Burning Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "GPB-X80 Beginning Gundam":["#e8e8e8","#cc2222","White","Red"],
+  "GPB-X80-30F Beginning 30 Gundam":["#e8e8e8","#cc2222","White","Red"],
+  "GN-0000DVR Gundam 00 Diver":["#2244bb","#e8e8e8","Blue","White"],
+  "GN-0000DVR/S Gundam 00 Sky":["#2244bb","#88ddff","Blue","Light Blue"],
+  "GN-1001N Seltsam":["#111111","#880044","Black","Dark Purple"],
+  "AGE-IIMG Gundam AGE-2 Magnum":["#cc2222","#e8e8e8","Red","White"],
+  "RX-78GP02R Gundam GP-Rase-Two":["#e8e8e8","#cc3300","White","Red"],
+  "PFF-X7 Core Gundam":["#e8e8e8","#cc2222","White","Red"],
+  "PFF-X7II Core Gundam II":["#e8e8e8","#cc2222","White","Red"],
+  "PFF-X7/E3 Earthree Gundam":["#e8e8e8","#3399cc","White","Blue"],
+  "PFF-X7/J5 Jupitive Gundam":["#cc6600","#e8e8e8","Orange","White"],
+  "PFF-X7II/U7 Uraven Gundam":["#440066","#e8e8e8","Purple","White"],
+  "ZGMF-X19AK Gundam Justice Knight":["#cc0000","#e8e8e8","Red","White"],
+  "AGP-X1/E3 Alus Earthree Gundam":["#335577","#e8e8e8","Steel Blue","White"],
+  "PFF-X7V2 Veetwo Gundam":["#2244bb","#e8e8e8","Blue","White"],
+  "PFF-X7RANIMA Gundam Anima\u3010Rize\u3011":["#cc6600","#e8e8e8","Orange","White"],
+  "PFF-X7M4 Marsfour Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "PFF-X7M1 Mercuone Gundam":["#007744","#e8e8e8","Green","White"],
+  "PFF-X7IIS6 Saturnix Gundam":["#cc6600","#e8e8e8","Orange","White"],
+  "PFF-X7IIN8 Nepteight Gundam":["#226699","#e8e8e8","Blue","White"],
+  "PFF-X7IIBUILD DiVERS ReRising Gundam":["#2244bb","#cc2222","Blue","Red"],
+  "ASW-G-08A Gundam Amazing Barbatos Lupus":["#cc4400","#e8e8e8","Orange","White"],
+  "GAT-X105BEG Build Strike Exceed Galaxy":["#2255cc","#e8e8e8","Blue","White"],
+  "GN-0000DVRII Gundam 00 Diver Arc":["#2244bb","#cc2222","Blue","Red"],
+  "PFF-X7II+P9 Plutine Gundam":["#e8e8e8","#aaccff","White","Light Blue"],
+  "RX-78-l\u0101-III Lah Gundam":["#cc2222","#e8e8e8","Red","White"],
+  "SBG-E01 Shin Burning Gundam":["#cc2222","#111111","Red","Black"],
+  "TYP-G12CMR Typhoeus Gundam Chimera":["#111111","#cc2222","Black","Red"],
+};
+
 /* ══════════════════════════════════════════════════════════════════
    GUNDAMLE
    ══════════════════════════════════════════════════════════════════ */
@@ -2721,199 +2893,6 @@ const GL_ERA = {
   "TYP-G12CMR Typhoeus Gundam Chimera":"Late",
 };
 
-const GL_COLORS = {
-  "RX-78-2 Gundam":["#e8e8e8","#2255aa","White","Blue"],
-  "RX-178 Gundam Mk-II":["#e8e8e8","#222266","White","Dark Blue"],
-  "MSZ-006 Zeta Gundam":["#e8e8e8","#334499","White","Blue"],
-  "MSZ-010 ZZ Gundam":["#e8e8e8","#1144bb","White","Blue"],
-  "RX-93 Nu Gundam":["#e8e8e8","#334488","White","Blue"],
-  "RX-93-ν2 Hi-Nu Gundam":["#e8e8e8","#1a3d9c","White","Blue"],
-  "F91 Gundam F91":["#e8e8e8","#cc2222","White","Red"],
-  "XM-X1 Crossbone Gundam X-1":["#e8e8e8","#cc2222","White","Red"],
-  "LM312V04 Victory Gundam":["#e8e8e8","#3355bb","White","Blue"],
-  "V-Dash Gundam":["#e8e8e8","#3355bb","White","Blue"],
-  "LM314V21 V2 Gundam":["#e8e8e8","#3355bb","White","Blue"],
-  "LM314V23/24 V2 Assault Buster Gundam":["#e8e8e8","#3355bb","White","Blue"],
-  "RX-0 Unicorn Gundam (Unicorn Mode)":["#e8e8e8","#cccccc","White","Silver"],
-  "RX-0 Unicorn Gundam (Destroy Mode)":["#e8e8e8","#cc2222","White","Red"],
-  "RX-0 Full Armor Unicorn Gundam":["#e8e8e8","#cc2222","White","Red"],
-  "RX-0 Unicorn Gundam Phenex":["#d4aa00","#cc8800","Gold","Orange"],
-  "RX-0 Unicorn Gundam Banshee":["#111111","#d4aa00","Black","Gold"],
-  "RX-0 Unicorn Gundam Banshee Norn":["#111111","#d4aa00","Black","Gold"],
-  "RX-9 Narrative Gundam":["#e8e8e8","#cc2222","White","Red"],
-  "RX-78NT-1 Gundam NT-1":["#e8e8e8","#2255aa","White","Blue"],
-  "RX-79 Gundam Ground Type":["#8b9e6a","#556b2f","Olive","Green"],
-  "RX-78GP01 Gundam GP01 Zephyranthes":["#e8e8e8","#2255aa","White","Blue"],
-  "RX-78GP01-Fb Gundam GP01 Full Vernian":["#e8e8e8","#2255aa","White","Blue"],
-  "RX-78GP02A Gundam GP02A Physalis":["#e8e8e8","#cc3300","White","Red"],
-  "RX-78GP03 Gundam GP03 Dendrobium":["#e8e8e8","#2255aa","White","Blue"],
-  "FA-78 Full Armor Gundam (Thunderbolt)":["#e8e8e8","#2255aa","White","Blue"],
-  "RX-78AL Atlas Gundam":["#e8e8e8","#3366cc","White","Blue"],
-  "MRX-009 Psycho Gundam":["#cc2222","#111133","Red","Dark Blue"],
-  "MRX-010 Psycho Gundam Mk-II":["#aa1111","#111133","Red","Dark Blue"],
-  "MRX-012 Psycho Gundam Mk-III":["#880000","#111133","Dark Red","Dark Blue"],
-  "WD-M01 Turn A Gundam":["#e8e8e8","#ddddcc","White","Cream"],
-  "CONCEPT-X 6-1-2 Turn X":["#cccccc","#111111","Silver","Black"],
-  "GF13-017NJ Shining Gundam":["#e8e8e8","#cc2222","White","Red"],
-  "GF13-017NJII God Gundam":["#cc2222","#e8e8e8","Red","White"],
-  "GF13-001NHII Master Gundam":["#111111","#880000","Black","Dark Red"],
-  "JDG-00X Devil Gundam":["#555555","#cc2222","Grey","Red"],
-  "XXXG-01W Wing Gundam":["#e8e8e8","#333333","White","Dark Grey"],
-  "XXXG-00W0 Wing Gundam Zero":["#e8e8e8","#333333","White","Dark Grey"],
-  "XXXG-01D Gundam Deathscythe":["#111111","#222222","Black","Dark Grey"],
-  "XXXG-01H Gundam Heavyarms":["#555555","#e8e8e8","Grey","White"],
-  "XXXG-01S Shenlong Gundam":["#cc2222","#333333","Red","Dark Grey"],
-  "XXXG-01SR Sandrock Gundam":["#e8e8e8","#cc8800","White","Orange"],
-  "OZ-13MS Gundam Epyon":["#cc2222","#111111","Red","Black"],
-  "GX-9900 Gundam X":["#e8e8e8","#333366","White","Navy"],
-  "GX-9900-DV Gundam X Divider":["#e8e8e8","#333366","White","Navy"],
-  "GX-9901-DX Gundam Double X":["#e8e8e8","#333366","White","Navy"],
-  "GW-9800 Gundam Airmaster":["#e8e8e8","#44aa44","White","Green"],
-  "GT-9600 Gundam Leopard":["#ccaa44","#333333","Yellow","Dark"],
-  "NRX-0013 Gundam Virsago":["#660000","#111111","Dark Red","Black"],
-  "NRX-0015 Gundam Ashtaron":["#550055","#111111","Purple","Black"],
-  "GAT-X105 Strike Gundam":["#e8e8e8","#cc2222","White","Red"],
-  "ZGMF-X10A Freedom Gundam":["#e8e8e8","#2244aa","White","Blue"],
-  "ZGMF-X09A Justice Gundam":["#cc0000","#e8e8e8","Red","White"],
-  "GAT-X303 Aegis Gundam":["#cc2222","#e8e8e8","Red","White"],
-  "GAT-X102 Duel Gundam":["#3355aa","#e8e8e8","Blue","White"],
-  "GAT-X103 Buster Gundam":["#447722","#e8e8e8","Green","White"],
-  "GAT-X207 Blitz Gundam":["#111111","#3344aa","Black","Blue"],
-  "ZGMF-X13A Providence Gundam":["#660066","#e8e8e8","Purple","White"],
-  "MBF-P02 Gundam Astray Red Frame":["#cc2222","#e8e8e8","Red","White"],
-  "MBF-P03 Gundam Astray Blue Frame":["#2244aa","#e8e8e8","Blue","White"],
-  "MBF-P01-Re2 Gundam Astray Gold Frame":["#cc9900","#111111","Gold","Black"],
-  "MBF-P04 Gundam Astray Green Frame":["#226622","#e8e8e8","Green","White"],
-  "MBF-P05LM Gundam Astray Mirage Frame":["#cc4400","#e8e8e8","Orange","White"],
-  "GAT-X131 Calamity Gundam":["#880000","#333333","Dark Red","Grey"],
-  "GAT-X252 Forbidden Gundam":["#115511","#111111","Dark Green","Black"],
-  "GAT-X370 Raider Gundam":["#3333aa","#111111","Blue","Black"],
-  "GSX-401FW Stargazer Gundam":["#e8e8e8","#cccccc","White","Silver"],
-  "ZGMF-X11A Regenerate Gundam":["#660066","#e8e8e8","Purple","White"],
-  "GAT-X105E Strike Noir Gundam":["#111111","#666666","Black","Grey"],
-  "ZGMF-X56S Impulse Gundam":["#e8e8e8","#cc2222","White","Red"],
-  "ZGMF-X42S Destiny Gundam":["#555588","#e8e8e8","Blue-Grey","White"],
-  "ZGMF-X20A Strike Freedom Gundam":["#e8e8e8","#d4aa00","White","Gold"],
-  "ZGMF-X19A Infinite Justice Gundam":["#cc0000","#e8e8e8","Red","White"],
-  "ZGMF-X666S Legend Gundam":["#660066","#e8e8e8","Purple","White"],
-  "GFAS-X1 Destroy Gundam":["#888800","#cc6600","Yellow","Orange"],
-  "STTS-909 Rising Freedom Gundam":["#e8e8e8","#2244cc","White","Blue"],
-  "ZGMF/A-262PD-P Mighty Strike Freedom Gundam":["#e8e8e8","#d4aa00","White","Gold"],
-  "STTS-808 Immortal Justice Gundam":["#cc0000","#e8e8e8","Red","White"],
-  "ZGMF-1027M Duel Blitz Gundam":["#3355aa","#111111","Blue","Black"],
-  "ZGMF-103HD Lightning Buster Gundam":["#224422","#e8e8e8","Dark Green","White"],
-  "GN-001 Gundam Exia":["#2244bb","#e8e8e8","Blue","White"],
-  "GN-002 Gundam Dynames":["#226622","#e8e8e8","Green","White"],
-  "GN-003 Gundam Kyrios":["#886600","#e8e8e8","Brown","White"],
-  "GN-004 Gundam Nadleeh":["#e8e8e8","#cc9900","White","Gold"],
-  "GN-005 Gundam Virtue":["#226622","#e8e8e8","Green","White"],
-  "GN-0000 00 Gundam":["#2244bb","#e8e8e8","Blue","White"],
-  "GN-0000+GNR-010 00 Raiser":["#2244bb","#e8e8e8","Blue","White"],
-  "GNW-001 Gundam Throne Eins":["#cc3300","#e8e8e8","Orange-Red","White"],
-  "GNW-002 Gundam Throne Zwei":["#cc3300","#e8e8e8","Orange-Red","White"],
-  "GNW-003 Gundam Throne Drei":["#cc3300","#e8e8e8","Orange-Red","White"],
-  "GNW-20000 Arche Gundam":["#cc3300","#111111","Orange-Red","Black"],
-  "CB-0000G/C Reborns Gundam":["#e8e8e8","#2244cc","White","Blue"],
-  "GN-006 Cherudim Gundam":["#226622","#e8e8e8","Green","White"],
-  "GN-007 Arios Gundam":["#886600","#e8e8e8","Brown","White"],
-  "GN-008 Seravee Gundam":["#226622","#e8e8e8","Dark Green","White"],
-  "GN-008GNHW3G Seravee Gundam GNHW3G":["#226622","#e8e8e8","Dark Green","White"],
-  "CB-002 Raphael Gundam":["#226622","#e8e8e8","Dark Green","White"],
-  "GN-010 Gundam Zabanya":["#226622","#e8e8e8","Green","White"],
-  "GN-011 Gundam Harute":["#886600","#e8e8e8","Brown","White"],
-  "GNT-0000 00 Qan[T]":["#2244bb","#e8e8e8","Blue","White"],
-  "GN-000 0 Gundam":["#e8e8e8","#cccccc","White","Silver"],
-  "GNY-001 Gundam Astraea":["#cc6600","#e8e8e8","Orange","White"],
-  "GNY-001F Gundam Astraea Type F":["#cc6600","#e8e8e8","Orange","White"],
-  "AGE-1 Gundam AGE-1 Normal":["#e8e8e8","#cc2222","White","Red"],
-  "AGE-1T Gundam AGE-1 Titus":["#cc2222","#cc6600","Red","Orange"],
-  "AGE-1S Gundam AGE-1 Spallow":["#e8e8e8","#cc2222","White","Red"],
-  "AGE-2 Gundam AGE-2 Normal":["#e8e8e8","#cc2222","White","Red"],
-  "AGE-2DB Gundam AGE-2 Double Bullet":["#e8e8e8","#cc2222","White","Red"],
-  "AGE-2DH Gundam AGE-2 Dark Hound":["#111111","#cc6600","Black","Orange"],
-  "AGE-3 Gundam AGE-3 Normal":["#e8e8e8","#cc2222","White","Red"],
-  "AGE-3O Gundam AGE-3 Orbital":["#e8e8e8","#cc6600","White","Orange"],
-  "AGE-FX Gundam AGE-FX":["#e8e8e8","#22aacc","White","Cyan"],
-  "xvm-fzc Gundam Legilis":["#550055","#e8e8e8","Purple","White"],
-  "YG-111 Gundam G-Self":["#e8e8e8","#cc2222","White","Red"],
-  "VGMM-Gf10 Gundam G-Lucifer":["#e8e8e8","#cc6600","White","Orange"],
-  "MSAM-033 Gundam G-Arcane":["#e8e8e8","#445599","White","Blue"],
-  "ASW-G-08 Gundam Barbatos":["#cc6600","#e8e8e8","Orange","White"],
-  "ASW-G-08 Gundam Barbatos Lupus":["#cc6600","#e8e8e8","Orange","White"],
-  "ASW-G-08 Gundam Barbatos Lupus Rex":["#111111","#cc5500","Black","Dark Orange"],
-  "ASW-G-01 Gundam Bael":["#e8e8e8","#ccaa44","White","Gold"],
-  "ASW-G-11 Gundam Gusion Rebake":["#cc6600","#e8e8e8","Orange","White"],
-  "ASW-G-29 Gundam Vidar":["#330066","#e8e8e8","Dark Purple","White"],
-  "ASW-G-64 Gundam Flauros":["#cc3300","#e8e8e8","Red-Orange","White"],
-  "ASW-G-29 Gundam Astaroth":["#555555","#cc2222","Grey","Red"],
-  "ASW-G-47 Gundam Vual":["#006633","#e8e8e8","Green","White"],
-  "ASW-G-71 Gundam Dantalion":["#2255aa","#e8e8e8","Blue","White"],
-  "ASW-G-66 Gundam Kimaris":["#e8e8e8","#cc4400","White","Orange"],
-  "RX-105 Xi Gundam":["#e8e8e8","#2255aa","White","Blue"],
-  "RX-104FF Penelope":["#e8e8e8","#cc4400","White","Orange"],
-  "RX-94 Mass Production Nu Gundam":["#e8e8e8","#2255aa","White","Blue"],
-  "TX-ff104 Alyzeus":["#cc9900","#e8e8e8","Gold","White"],
-  "XVX-016 Gundam Aerial":["#e8e8e8","#22aacc","White","Cyan"],
-  "XVX-016RN Gundam Aerial Rebuild":["#e8e8e8","#22aacc","White","Cyan"],
-  "X-EX01 Gundam Calibarn":["#cc2222","#111111","Red","Black"],
-  "FP/A-77 Gundam Pharact":["#e8e8e8","#888888","White","Grey"],
-  "MDX-0003 Gundam Schwarzette":["#111111","#4444cc","Black","Blue"],
-  "MD-0031 Gundam Lfrith":["#e8e8e8","#22aacc","White","Cyan"],
-  "AVP-03 Gundam Lfrith Anavata":["#e8e8e8","#22aacc","White","Cyan"],
-  "XGF-01 Gundam Lfrith Jiu":["#e8e8e8","#22aacc","White","Cyan"],
-  "EDM-GA-01 Gundam Lfrith Ur":["#e8e8e8","#22aacc","White","Cyan"],
-  "EDM-GA-02 Gundam Lfrith Thorn":["#e8e8e8","#22aacc","White","Cyan"],
-  "GQuuuuuuX":["#333333","#cc4400","Dark","Orange"],
-  "GFreD":["#cc4400","#e8e8e8","Orange","White"],
-  "Red Gundam":["#cc2222","#e8e8e8","Red","White"],
-  "White Gundam":["#e8e8e8","#dddddd","White","Light Grey"],
-  "01 Gundam":["#e8e8e8","#2255aa","White","Blue"],
-  "GAT-X105B Build Strike Gundam":["#cc2222","#e8e8e8","Red","White"],
-  "GAT-X105BFP Build Strike Gundam Full Package":["#cc2222","#e8e8e8","Red","White"],
-  "GAT-X105BST Star Build Strike Gundam":["#cc2222","#e8e8e8","Red","White"],
-  "GAT-X105BGC Build Strike Galaxy Cosmos":["#2244cc","#e8e8e8","Blue","White"],
-  "PPGN-001 Gundam Amazing Exia":["#2244bb","#e8e8e8","Blue","White"],
-  "PPGN-001 Gundam Exia Dark Matter":["#111111","#9900aa","Black","Purple"],
-  "GX-9999 Gundam X Maoh":["#550055","#e8e8e8","Purple","White"],
-  "Sengoku Astray Gundam":["#cc2222","#cc8800","Red","Gold"],
-  "XXXG-01Wf Wing Gundam Fenice":["#226622","#cc2222","Green","Red"],
-  "XXXG-01Wfr Gundam Fenice Rinascita":["#226622","#cc2222","Green","Red"],
-  "XM-X9999 Crossbone Gundam Maoh":["#880000","#e8e8e8","Dark Red","White"],
-  "AC-01 Miss Sazabi":["#cc0022","#111111","Deep Red","Black"],
-  "JMF-1336R Build Burning Gundam":["#cc2222","#e8e8e8","Red","White"],
-  "JMF-1337T Try Burning Gundam":["#cc2222","#e8e8e8","Red","White"],
-  "LGZ-91 Lightning Gundam":["#e8e8e8","#cc8800","White","Yellow"],
-  "KUMA-PP Gundam Tryon 3":["#cc2222","#e8e8e8","Red","White"],
-  "KMK-B01 Kamiki Burning Gundam":["#cc2222","#e8e8e8","Red","White"],
-  "GPB-X80 Beginning Gundam":["#e8e8e8","#cc2222","White","Red"],
-  "GPB-X80-30F Beginning 30 Gundam":["#e8e8e8","#cc2222","White","Red"],
-  "GN-0000DVR Gundam 00 Diver":["#2244bb","#e8e8e8","Blue","White"],
-  "GN-0000DVR/S Gundam 00 Sky":["#2244bb","#88ddff","Blue","Light Blue"],
-  "GN-1001N Seltsam":["#111111","#880044","Black","Dark Purple"],
-  "AGE-IIMG Gundam AGE-2 Magnum":["#cc2222","#e8e8e8","Red","White"],
-  "RX-78GP02R Gundam GP-Rase-Two":["#e8e8e8","#cc3300","White","Red"],
-  "PFF-X7 Core Gundam":["#e8e8e8","#cc2222","White","Red"],
-  "PFF-X7II Core Gundam II":["#e8e8e8","#cc2222","White","Red"],
-  "PFF-X7/E3 Earthree Gundam":["#e8e8e8","#3399cc","White","Blue"],
-  "PFF-X7/J5 Jupitive Gundam":["#cc6600","#e8e8e8","Orange","White"],
-  "PFF-X7II/U7 Uraven Gundam":["#440066","#e8e8e8","Purple","White"],
-  "ZGMF-X19AK Gundam Justice Knight":["#cc0000","#e8e8e8","Red","White"],
-  "AGP-X1/E3 Alus Earthree Gundam":["#335577","#e8e8e8","Steel Blue","White"],
-  "PFF-X7V2 Veetwo Gundam":["#2244bb","#e8e8e8","Blue","White"],
-  "PFF-X7RANIMA Gundam Anima\u3010Rize\u3011":["#cc6600","#e8e8e8","Orange","White"],
-  "PFF-X7M4 Marsfour Gundam":["#cc2222","#e8e8e8","Red","White"],
-  "PFF-X7M1 Mercuone Gundam":["#007744","#e8e8e8","Green","White"],
-  "PFF-X7IIS6 Saturnix Gundam":["#cc6600","#e8e8e8","Orange","White"],
-  "PFF-X7IIN8 Nepteight Gundam":["#226699","#e8e8e8","Blue","White"],
-  "PFF-X7IIBUILD DiVERS ReRising Gundam":["#2244bb","#cc2222","Blue","Red"],
-  "ASW-G-08A Gundam Amazing Barbatos Lupus":["#cc4400","#e8e8e8","Orange","White"],
-  "GAT-X105BEG Build Strike Exceed Galaxy":["#2255cc","#e8e8e8","Blue","White"],
-  "GN-0000DVRII Gundam 00 Diver Arc":["#2244bb","#cc2222","Blue","Red"],
-  "PFF-X7II+P9 Plutine Gundam":["#e8e8e8","#aaccff","White","Light Blue"],
-  "RX-78-l\u0101-III Lah Gundam":["#cc2222","#e8e8e8","Red","White"],
-  "SBG-E01 Shin Burning Gundam":["#cc2222","#111111","Red","Black"],
-  "TYP-G12CMR Typhoeus Gundam Chimera":["#111111","#cc2222","Black","Red"],
-};
 
 // Series yellow groupings
 const GL_SERIES_GROUPS = [
@@ -3170,7 +3149,7 @@ function glBuildRow(gu){
   // Era
   const ec=document.createElement('div');ec.className='gl-cell '+scoreCell('era',gu,an);
   const ea=eraArrow(gu,an);const ev=GL_ERA[gu.name]||'?';
-  ec.innerHTML=`<span class="arr">${ea}</span><span class="val">${ev.slice(0,4)}</span>`;
+  ec.innerHTML=`<span class="arr">${ea}</span><span class="val">${ev}</span>`;
   row.appendChild(ec);
 
   // Pilot
@@ -3323,93 +3302,6 @@ function glShowEnd(){
   document.getElementById('glEndName').textContent=an.name;
   const tries=glState.guesses.length;
   document.getElementById('glEndTries').textContent=tries===1?'First try! 🎯':`Solved in ${tries} guess${tries===1?'':'es'}`;
-  glRenderSubmitPanel();
-  glFetchLeaderboard();
-}
-
-/* ── LEADERBOARD ─────────────────────────────────────────────── */
-
-function glRenderSubmitPanel(){
-  const name=getSavedName();
-  if(name){
-    document.getElementById('glSpFirst').classList.add('hide');
-    document.getElementById('glSpKnown').classList.remove('hide');
-    document.getElementById('glSpKnownMsg').textContent='✓ Submitted as "'+name+'"';
-    glAutoSubmit(name);
-  } else {
-    document.getElementById('glSpFirst').classList.remove('hide');
-    document.getElementById('glSpKnown').classList.add('hide');
-    document.getElementById('glSubmitMsg').textContent='';
-    document.getElementById('glSubmitBtn').disabled=false;
-  }
-}
-
-async function glAutoSubmit(name){
-  if(!SCRIPT_URL||SCRIPT_URL==='YOUR_APPS_SCRIPT_URL_HERE') return;
-  const tries=glState.guesses.length;
-  const p=new URLSearchParams({action:'gundamle',name,date:glState.todayKey,tries,solved:glState.solved?'1':'0'});
-  try{
-    await fetch(SCRIPT_URL+'?'+p,{redirect:'follow'});
-    glFetchLeaderboard();
-  }catch(e){}
-}
-
-async function glSubmitScore(){
-  const inp=document.getElementById('glSubmitName');
-  const name=inp.value.trim();
-  if(!name){const msg=document.getElementById('glSubmitMsg');msg.className='submit-msg err';msg.textContent='Enter a name first.';return;}
-  if(!SCRIPT_URL||SCRIPT_URL==='YOUR_APPS_SCRIPT_URL_HERE'){
-    const msg=document.getElementById('glSubmitMsg');msg.className='submit-msg err';msg.textContent='No leaderboard URL.';return;
-  }
-  document.getElementById('glSubmitBtn').disabled=true;
-  const msg=document.getElementById('glSubmitMsg');msg.className='submit-msg';msg.textContent='Submitting…';
-  const tries=glState.guesses.length;
-  const p=new URLSearchParams({action:'gundamle',name,date:glState.todayKey,tries,solved:glState.solved?'1':'0'});
-  try{
-    const res=await fetch(SCRIPT_URL+'?'+p,{redirect:'follow'});
-    await res.text(); // consume body
-    setSavedName(name);
-    glRenderSubmitPanel();
-    glFetchLeaderboard();
-  }catch(ex){
-    msg.className='submit-msg err';msg.textContent='Submit failed.';
-    document.getElementById('glSubmitBtn').disabled=false;
-  }
-}
-
-async function glFetchLeaderboard(){
-  const statusEl=document.getElementById('glLbStatus');
-  const bodyEl=document.getElementById('glLbBody');
-  if(!SCRIPT_URL||SCRIPT_URL==='YOUR_APPS_SCRIPT_URL_HERE'){bodyEl.innerHTML='<div class="lb-empty">No leaderboard URL.</div>';return;}
-  if(statusEl)statusEl.textContent='Loading…';
-  try{
-    const res=await fetch(SCRIPT_URL+'?action=gundamleGet&date='+glState.todayKey,{redirect:'follow'});
-    const text=await res.text();
-    // Strip any BOM or non-JSON prefix
-    const jsonStart=text.indexOf('{');
-    const data=JSON.parse(jsonStart>=0?text.slice(jsonStart):text);
-    glRenderLeaderboard(data.rows||[]);
-    const d=new Date(),p2=n=>String(n).padStart(2,'0');
-    if(statusEl)statusEl.textContent='Updated '+p2(d.getHours())+':'+p2(d.getMinutes());
-  }catch(ex){
-    if(bodyEl)bodyEl.innerHTML='<div class="lb-empty">Could not load board.</div>';
-    if(statusEl)statusEl.textContent='Offline';
-  }
-}
-
-function glRenderLeaderboard(rows){
-  const el=document.getElementById('glLbBody');
-  const solved=rows.filter(r=>r.solved==='1'||r.solved===1||r.solved===true);
-  if(!solved.length){el.innerHTML='<div class="lb-empty">No scores yet — be the first!</div>';return;}
-  solved.sort((a,b)=>Number(a.tries)-Number(b.tries));
-  let html='<table class="lb-table"><thead><tr><th></th><th>Name</th><th class="num">Tries</th></tr></thead><tbody>';
-  solved.slice(0,8).forEach((r,i)=>{
-    const cls=i===0?' class="gold"':'';
-    const rank=i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1);
-    html+=`<tr${cls}><td class="rank">${rank}</td><td class="pname">${escapeHtml(String(r.name))}</td><td class="num">${r.tries}</td></tr>`;
-  });
-  html+='</tbody></table>';
-  el.innerHTML=html;
 }
 
 /* ── INIT ────────────────────────────────────────────────────── */
@@ -3429,8 +3321,6 @@ function glOpen(){
     document.getElementById('glEndName').textContent=an.name;
     const tries=glState.guesses.length;
     document.getElementById('glEndTries').textContent=tries===1?'First try! 🎯':`Solved in ${tries} guess${tries===1?'':'es'}`;
-    glRenderSubmitPanel();
-    glFetchLeaderboard();
   } else {
     document.getElementById('glGame').style.display='';
     document.getElementById('glEnd').classList.add('hide');
@@ -3440,7 +3330,6 @@ function glOpen(){
 // Wire Gundamle buttons
 window.glOpen = glOpen; // expose globally for seg tab handler
 document.getElementById('gundamleBack').onclick=()=>{
-  // Reset mode seg to previous non-gundamle tab
   document.querySelectorAll('#modeSeg button').forEach(b=>{b.classList.toggle('on',b.dataset.mode==='mc');});
   quizMode='mc';
   $('countField').classList.remove('hide');
@@ -3450,8 +3339,6 @@ document.getElementById('gundamleBack').onclick=()=>{
 document.getElementById('glSubmit').onclick=glSubmitGuess;
 document.getElementById('glHintBtn').onclick=()=>{glShowHintImage();document.getElementById('glHintBtn').classList.add('hide');};
 document.getElementById('glHintReveal').onclick=e=>{document.getElementById('glHintImg').classList.add('revealed');e.currentTarget.style.display='none';};
-document.getElementById('glSubmitBtn').onclick=glSubmitScore;
-document.getElementById('glChangeName').onclick=()=>{localStorage.removeItem('gundamPlayerName');glRenderSubmitPanel();};
 
 setInterval(updateCountdown,1000);
 updateCountdown();
