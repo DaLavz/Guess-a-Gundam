@@ -921,7 +921,7 @@ const PILOT_DATA={
 /* ═══════════════════════════════════════════════════════
    LEADERBOARD  — paste your Apps Script URL below
    ═══════════════════════════════════════════════════════ */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxm-DB9z8-flRur1GRG4Io1-AfOZ1hlSNvNPgB925RQ3yNJ3H-GQfVEBZPOWyrtvIqG/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxAfQIHH8f7Ch562lntX92e88KC9TgsOha2NwRT_wgvaNEGvOjX_cydkPdKjejCGfRT/exec";
 
 // Stats are already tracked in localStorage via stats.mc / stats.type etc.
 // recordBest is a no-op now — we just read stats directly when submitting.
@@ -949,18 +949,8 @@ async function autoSubmit(){
   if(!name) return;
   if(!SCRIPT_URL || SCRIPT_URL === "YOUR_APPS_SCRIPT_URL_HERE") return;
   try{
-    await fetch(SCRIPT_URL + "?action=submit", {
-      method:"POST",
-      redirect: 'follow',
-      body: JSON.stringify({
-        name,
-        mc:       stats.mc       || 0,
-        type:     stats.type     || 0,
-        zoom:     stats.zoomBest || 0,
-        impostor: stats.artstyle || 0,
-        pilot:    stats.pilot    || 0,
-      }),
-    });
+    const p=new URLSearchParams({action:'submit',name,mc:stats.mc||0,type:stats.type||0,zoom:stats.zoomBest||0,impostor:stats.artstyle||0,pilot:stats.pilot||0});
+    await fetch(SCRIPT_URL+'?'+p, {redirect:'follow'});
     fetchLeaderboard();
   } catch(ex){ /* silent */ }
 }
@@ -982,18 +972,8 @@ async function submitScore(){
   $("submitMsg").className="submit-msg";
   $("submitMsg").textContent="Submitting...";
   try{
-    await fetch(SCRIPT_URL + "?action=submit", {
-      method:"POST",
-      redirect: 'follow',
-      body: JSON.stringify({
-        name,
-        mc:       stats.mc       || 0,
-        type:     stats.type     || 0,
-        zoom:     stats.zoomBest || 0,
-        impostor: stats.artstyle || 0,
-        pilot:    stats.pilot    || 0,
-      }),
-    });
+    const p=new URLSearchParams({action:'submit',name,mc:stats.mc||0,type:stats.type||0,zoom:stats.zoomBest||0,impostor:stats.artstyle||0,pilot:stats.pilot||0});
+    await fetch(SCRIPT_URL+'?'+p, {redirect:'follow'});
     setSavedName(name);
     renderSubmitPanel();
     fetchLeaderboard();
