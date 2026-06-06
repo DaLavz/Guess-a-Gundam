@@ -790,12 +790,12 @@
       <div class="start-section">
         <span class="start-section-label">Analysis Mode</span>
         <div class="seg" id="modeSeg">
+          <button data-mode="gundamle">✦ Gundamle</button>
           <button data-mode="mc" class="on">Multiple<br>Choice</button>
           <button data-mode="type">Type<br>Answer</button>
           <button data-mode="zoom">Zoom<br>Recon</button>
           <button data-mode="artstyle">Impostor<br>Hunt</button>
           <button data-mode="pilot">Pilot<br>Guess</button>
-          <button data-mode="gundamle">✦ Gundamle</button>
         </div>
       </div>
 
@@ -2845,7 +2845,7 @@ function updateCountdown(){
 /* ── STATE ───────────────────────────────────────────────────── */
 
 let glState={todayKey:'',answer:null,guesses:[],solved:false,hintShown:false,selectedUnit:null};
-const GL_STORAGE_KEY='gundamleState';
+const GL_STORAGE_KEY='gundamleState_v2';
 
 function glSave(){
   try{localStorage.setItem(GL_STORAGE_KEY,JSON.stringify({todayKey:glState.todayKey,guesses:glState.guesses,solved:glState.solved,hintShown:glState.hintShown}));}catch(e){}
@@ -3234,6 +3234,7 @@ function glOpen(){
 }
 
 // Wire Gundamle buttons
+window.glOpen = glOpen; // expose globally for seg tab handler
 document.getElementById('gundamleBack').onclick=()=>{
   // Reset mode seg to previous non-gundamle tab
   document.querySelectorAll('#modeSeg button').forEach(b=>{b.classList.toggle('on',b.dataset.mode==='mc');});
