@@ -512,7 +512,7 @@
       "gundam lfrith"
     ],
     "series": "The Witch from Mercury",
-    "pilot": "Prospera Mercury"
+    "pilot": "Elnora Samaya"
   },
   {
     "name": "RX-105 Xi Gundam",
@@ -944,7 +944,7 @@
       "flauros"
     ],
     "series": "Iron-Blooded Orphans",
-    "pilot": "Dante Mogro"
+    "pilot": "Norba Shino"
   },
   {
     "name": "ASW-G-29 Gundam Astaroth",
@@ -953,7 +953,7 @@
       "astaroth"
     ],
     "series": "Iron-Blooded Orphans",
-    "pilot": "Norba Shino"
+    "pilot": "Argi Mirage"
   },
   {
     "name": "GX-9900-DV Gundam X Divider",
@@ -1047,7 +1047,7 @@
       "schwarzette"
     ],
     "series": "The Witch from Mercury",
-    "pilot": "Shaddiq Zenelli"
+    "pilot": "Lauda Neis"
   },
   {
     "name": "EDM-GA-01 Gundam Lfrith Ur",
@@ -1056,7 +1056,7 @@
       "lfrith ur"
     ],
     "series": "The Witch from Mercury",
-    "pilot": "Ericht Samaya"
+    "pilot": "Sophie Pulone"
   },
   {
     "name": "EDM-GA-02 Gundam Lfrith Thorn",
@@ -1065,7 +1065,7 @@
       "lfrith thorn"
     ],
     "series": "The Witch from Mercury",
-    "pilot": "Norea du Noc"
+    "pilot": "Norea Du Noc"
   },
   {
     "name": "AGE-1 Gundam AGE-1 Normal",
@@ -1209,7 +1209,7 @@
       "tryon3"
     ],
     "series": "Build Fighters Try",
-    "pilot": "Fumina Hoshino"
+    "pilot": "Minato Sakai"
   },
   {
     "name": "GN-0000DVR Gundam 00 Diver",
@@ -1241,7 +1241,7 @@
       "gundam seltsam"
     ],
     "series": "Build Divers",
-    "pilot": "Ogre"
+    "pilot": "Tsukasa Shiba"
   },
   {
     "name": "PFF-X7 Core Gundam",
@@ -1280,7 +1280,7 @@
       "jupitive"
     ],
     "series": "Build Divers Re:RISE",
-    "pilot": "Parviz"
+    "pilot": "Kazami Torimachi"
   },
   {
     "name": "PFF-X7II/U7 Uraven Gundam",
@@ -1289,7 +1289,7 @@
       "uraven"
     ],
     "series": "Build Divers Re:RISE",
-    "pilot": "Kazami"
+    "pilot": "Kazami Torimachi"
   },
   {
     "name": "ZGMF-X19AK Gundam Justice Knight",
@@ -1298,7 +1298,7 @@
       "justice knight"
     ],
     "series": "Build Divers Re:RISE",
-    "pilot": "May"
+    "pilot": "Kazami Torimachi"
   },
   {
     "name": "AGP-X1/E3 Alus Earthree Gundam",
@@ -1384,7 +1384,7 @@
       "gundam vual"
     ],
     "series": "Iron-Blooded Orphans",
-    "pilot": "Iok Kujan"
+    "pilot": "Rosario Leone"
   },
   {
     "name": "ASW-G-71 Gundam Dantalion",
@@ -1394,7 +1394,7 @@
       "gundam dantalion"
     ],
     "series": "Iron-Blooded Orphans",
-    "pilot": "Hush Middy"
+    "pilot": "Zaza Fossil"
   },
   {
     "name": "GN-000 0 Gundam",
@@ -1445,7 +1445,7 @@
       "gundam lfrith jiu"
     ],
     "series": "The Witch from Mercury",
-    "pilot": "Lauda Neis"
+    "pilot": "Prospera Mercury"
   },
   {
     "name": "YG-111 Gundam G-Self",
@@ -1512,7 +1512,7 @@
       "veetwo"
     ],
     "series": "Build Divers Re:RISE",
-    "pilot": "Hinata Mukai"
+    "pilot": "Hiroto Kuga"
   },
   {
     "name": "PFF-X7RANIMA Gundam Anima［Rize］",
@@ -1532,7 +1532,7 @@
       "marsfour"
     ],
     "series": "Build Divers Re:RISE",
-    "pilot": "Kazami"
+    "pilot": "Hiroto Kuga"
   },
   {
     "name": "PFF-X7M1 Mercuone Gundam",
@@ -1542,7 +1542,7 @@
       "mercuone"
     ],
     "series": "Build Divers Re:RISE",
-    "pilot": "May"
+    "pilot": "Hiroto Kuga"
   },
   {
     "name": "PFF-X7IIS6 Saturnix Gundam",
@@ -1552,7 +1552,7 @@
       "saturnix"
     ],
     "series": "Build Divers Re:RISE",
-    "pilot": "Kazami"
+    "pilot": "Kazami Torimachi"
   },
   {
     "name": "PFF-X7IIN8 Nepteight Gundam",
@@ -1562,7 +1562,7 @@
       "nepteight"
     ],
     "series": "Build Divers Re:RISE",
-    "pilot": "May"
+    "pilot": "Parviz"
   },
   {
     "name": "PFF-X7IIBUILD DiVERS ReRising Gundam",
@@ -1584,7 +1584,7 @@
       "age 2 magnum"
     ],
     "series": "Build Divers",
-    "pilot": "Sarah"
+    "pilot": "Aya Fujisawa"
   },
   {
     "name": "RX-78GP02R Gundam GP-Rase-Two",
@@ -1596,7 +1596,7 @@
       "gundam gp rase two"
     ],
     "series": "Build Divers",
-    "pilot": "Nanami Ota"
+    "pilot": "Yukio Hidaka"
   },
   {
     "name": "AC-01 Miss Sazabi",
@@ -1615,7 +1615,7 @@
       "build strike gundam"
     ],
     "series": "Build Fighters",
-    "pilot": "Sei Iori & Reiji"
+    "pilot": "Reiji"
   },
   {
     "name": "GAT-X105BFP Build Strike Gundam Full Package",
@@ -1625,7 +1625,7 @@
       "build strike gundam full package"
     ],
     "series": "Build Fighters",
-    "pilot": "Sei Iori & Reiji"
+    "pilot": "Reiji"
   },
   {
     "name": "GX-9999 Gundam X Maoh",
@@ -1635,7 +1635,7 @@
       "x maoh"
     ],
     "series": "Build Fighters",
-    "pilot": "Mao Yasaka"
+    "pilot": "Nils Nielsen"
   },
   {
     "name": "PPGN-001 Gundam Amazing Exia",
@@ -1700,7 +1700,7 @@
       "gundam crossbone maoh"
     ],
     "series": "Build Fighters",
-    "pilot": "Nils Nielsen"
+    "pilot": "Meijin Kawaguchi"
   },
   {
     "name": "GPB-X80 Beginning Gundam",
@@ -1709,7 +1709,7 @@
       "beginning gundam"
     ],
     "series": "Builders Beginning G",
-    "pilot": "Haru Irei"
+    "pilot": "Sei Iori"
   },
   {
     "name": "GPB-X80-30F Beginning 30 Gundam",
@@ -1720,7 +1720,7 @@
       "beginning 30 gundam"
     ],
     "series": "Builders Beginning G",
-    "pilot": "Haru Irei"
+    "pilot": "Sei Iori"
   },
   {
     "name": "GAT-X105BST Star Build Strike Gundam",
@@ -1731,7 +1731,7 @@
       "star build strike gundam"
     ],
     "series": "Build Fighters",
-    "pilot": "Sei Iori & Reiji"
+    "pilot": "Reiji"
   },
   {
     "name": "GAT-X105BGC Build Strike Galaxy Cosmos",
@@ -1742,7 +1742,7 @@
       "build strike galaxy"
     ],
     "series": "Build Fighters",
-    "pilot": "Sei Iori"
+    "pilot": "Reiji"
   },
   {
     "name": "KMK-B01 Kamiki Burning Gundam",
