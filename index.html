@@ -921,7 +921,7 @@ const PILOT_DATA={
 /* ═══════════════════════════════════════════════════════
    LEADERBOARD  — paste your Apps Script URL below
    ═══════════════════════════════════════════════════════ */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwCCpTNx6vpfSHlUubyK5p8z-uJLkchHBClkn31pKpXpdE9XHJIGUl9V0UMQimE4JcVkg/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxm-DB9z8-flRur1GRG4Io1-AfOZ1hlSNvNPgB925RQ3yNJ3H-GQfVEBZPOWyrtvIqG/exec";
 
 // Stats are already tracked in localStorage via stats.mc / stats.type etc.
 // recordBest is a no-op now — we just read stats directly when submitting.
@@ -951,6 +951,7 @@ async function autoSubmit(){
   try{
     await fetch(SCRIPT_URL + "?action=submit", {
       method:"POST",
+      redirect: 'follow',
       body: JSON.stringify({
         name,
         mc:       stats.mc       || 0,
@@ -983,6 +984,7 @@ async function submitScore(){
   try{
     await fetch(SCRIPT_URL + "?action=submit", {
       method:"POST",
+      redirect: 'follow',
       body: JSON.stringify({
         name,
         mc:       stats.mc       || 0,
@@ -1010,8 +1012,9 @@ async function fetchLeaderboard(){
   }
   $("lbStatus").textContent="Loading...";
   try{
-    const res  = await fetch(SCRIPT_URL + "?action=get");
-    const data = await res.json();
+    const res  = await fetch(SCRIPT_URL + "?action=get", { redirect: 'follow' });
+    const text = await res.text();
+    const data = JSON.parse(text);
     renderLeaderboard(data.rows || []);
     const d=new Date(), p=n=>String(n).padStart(2,"0");
     $("lbStatus").textContent="Updated "+p(d.getHours())+":"+p(d.getMinutes())+":"+p(d.getSeconds());
