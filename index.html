@@ -1158,7 +1158,7 @@ const $=id=>document.getElementById(id);
    isSeriesSearch=true adds series group headers.
    extraContent(unit) optionally returns a DOM node appended per row.
    ────────────────────────────────────────────────────────────────*/
-function renderSuggestList(box, units, onSelect, {isSeriesSearch=false, extraContent=null}={}){
+function renderSuggestList(box, units, onSelect, {isSeriesSearch=false, extraContent=null, showImages=false}={}){
   box.innerHTML='';
   if(!units.length) return;
   let lastSeries=null; let firstHeader=true;
@@ -1174,9 +1174,11 @@ function renderSuggestList(box, units, onSelect, {isSeriesSearch=false, extraCon
       }
     }
     const b=document.createElement('button');
-    if(u.img){const img=document.createElement('img');img.src=u.img;img.alt='';b.appendChild(img);}
+    if(showImages&&u.img){const img=document.createElement('img');img.src=u.img;img.alt='';b.appendChild(img);}
     const span=document.createElement('span');span.textContent=u.name;b.appendChild(span);
     if(extraContent){const ex=extraContent(u);if(ex)b.appendChild(ex);}
+    // Use mousedown instead of click to fire before blur on mobile
+    b.onmousedown=e=>{e.preventDefault();onSelect(u);};
     b.onclick=()=>onSelect(u);
     box.appendChild(b);
   });
@@ -1964,11 +1966,11 @@ function setupTypeahead(inp,sugBox){
     "wfm":"The Witch from Mercury","witch":"The Witch from Mercury","mercury":"The Witch from Mercury",
     "hathaway":"Hathaway's Flash","flash":"Hathaway's Flash",
     "gquuuuuux":"Gundam GQuuuuuuX","gquux":"Gundam GQuuuuuuX",
-    "bf":"Build Fighters","build fighters":"Build Fighters",
+    "bf":"Build Fighters","build fighters":"Build Fighters","build":"Build",
     "bft":"Build Fighters Try","try":"Build Fighters Try",
-    "bbg":"Builders Beginning G","beginning":"Builders Beginning G",
+    "bbg":"Builders Beginning G","beginning":"Builders Beginning G","builders":"Builders Beginning G",
     "bd":"Build Divers","divers":"Build Divers",
-    "rerise":"Build Divers Re:RISE","re rise":"Build Divers Re:RISE","rerise":"Build Divers Re:RISE",
+    "rerise":"Build Divers Re:RISE","re rise":"Build Divers Re:RISE",
     "bm":"Build Metaverse","metaverse":"Build Metaverse",
   };
 
@@ -2009,7 +2011,7 @@ function setupTypeahead(inp,sugBox){
     activeIdx=-1;
     renderSuggestList(sugBox, matches, (m)=>{
       inp.value=m.name; sugBox.innerHTML=""; activeIdx=-1; inp.focus();
-    }, {isSeriesSearch: isSeriesMode});
+    }, {isSeriesSearch: isSeriesMode, showImages: false});
   }
 
   inp.oninput=()=>renderSuggestions(getMatches(inp.value));
@@ -2342,7 +2344,7 @@ function setupColorEditor(){
       const tk=document.createElement("span");tk.style.cssText=`font-size:9px;margin-left:2px;color:${hasCustom?"var(--green)":"var(--txt-dim)"}`;
       tk.textContent=hasCustom?"✓":"·";
       sw.appendChild(s1);sw.appendChild(s2);sw.appendChild(tk);
-      b.appendChild(sw);b.onclick=()=>loadUnit(u);sugBox.appendChild(b);
+      b.appendChild(sw);b.onmousedown=e=>{e.preventDefault();loadUnit(u);};b.onclick=()=>loadUnit(u);sugBox.appendChild(b);
     });
   }
 
@@ -2352,7 +2354,11 @@ function setupColorEditor(){
     "seed":"Gundam SEED","destiny":"SEED Destiny","freedom":"SEED FREEDOM",
     "00":"Gundam 00","age":"Gundam AGE","rg":"Reconguista in G","ibo":"Iron-Blooded Orphans",
     "wfm":"The Witch from Mercury","hathaway":"Hathaway's Flash","gquuuuuux":"Gundam GQuuuuuuX",
-    "bf":"Build Fighters","bft":"Build Fighters Try","bd":"Build Divers","rerise":"Build Divers Re:RISE","bm":"Build Metaverse",
+    "bf":"Build Fighters","build fighters":"Build Fighters","build":"Build",
+    "bft":"Build Fighters Try","try":"Build Fighters Try",
+    "bbg":"Builders Beginning G","beginning":"Builders Beginning G","builders":"Builders Beginning G",
+    "bd":"Build Divers","divers":"Build Divers",
+    "rerise":"Build Divers Re:RISE","bm":"Build Metaverse","metaverse":"Build Metaverse",
   };
   let ceIsSeriesMode=false;
   inp.oninput=()=>{
@@ -2391,7 +2397,7 @@ function setupColorEditor(){
       const tk=document.createElement("span");tk.style.cssText=`font-size:9px;margin-left:2px;color:${hasCustom?"var(--green)":"var(--txt-dim)"}`;
       tk.textContent=hasCustom?"✓":"·";
       sw.appendChild(s1);sw.appendChild(s2);sw.appendChild(tk);
-      b.appendChild(sw);b.onclick=()=>loadUnit(u);sugBox.appendChild(b);
+      b.appendChild(sw);b.onmousedown=e=>{e.preventDefault();loadUnit(u);};b.onclick=()=>loadUnit(u);sugBox.appendChild(b);
     });
   };
 
@@ -2932,9 +2938,9 @@ const GL_SERIES_ALIASES={
   "wfm":"The Witch from Mercury","witch":"The Witch from Mercury","mercury":"The Witch from Mercury",
   "hathaway":"Hathaway's Flash","flash":"Hathaway's Flash",
   "gquuuuuux":"Gundam GQuuuuuuX","gquux":"Gundam GQuuuuuuX",
-  "bf":"Build Fighters","build fighters":"Build Fighters",
+  "bf":"Build Fighters","build fighters":"Build Fighters","build":"Build",
   "bft":"Build Fighters Try","try":"Build Fighters Try",
-  "bbg":"Builders Beginning G","beginning":"Builders Beginning G",
+  "bbg":"Builders Beginning G","beginning":"Builders Beginning G","builders":"Builders Beginning G",
   "bd":"Build Divers","divers":"Build Divers",
   "rerise":"Build Divers Re:RISE","re rise":"Build Divers Re:RISE",
   "bm":"Build Metaverse","metaverse":"Build Metaverse",
@@ -3229,6 +3235,7 @@ function glSetupSearch(){
       const b=document.createElement('button');b.dataset.idx=i;
       if(m.img){const img=document.createElement('img');img.src=m.img;img.alt='';b.appendChild(img);}
       const span=document.createElement('span');span.textContent=m.name;b.appendChild(span);
+      b.onmousedown=e=>{e.preventDefault();selectUnit(m);};
       b.onclick=()=>selectUnit(m);
       sugBox.appendChild(b);
     });
