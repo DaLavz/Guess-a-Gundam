@@ -475,6 +475,178 @@
     font-family:"Share Tech Mono",monospace;
     font-size:10px;letter-spacing:3px;margin:8px 0 16px;text-transform:uppercase;
   }
+
+  /* ── GUNDAMLE BUTTON ─────────────────────────────── */
+  .btn-gundamle{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    width:100%;padding:16px 18px;
+    border:1px solid rgba(99,210,255,.45);
+    background:linear-gradient(135deg,rgba(30,80,140,.55) 0%,rgba(10,30,80,.4) 50%,rgba(99,210,255,.12) 100%);
+    color:#7ee8ff;
+    letter-spacing:3px;text-transform:uppercase;font-weight:700;font-size:16px;
+    clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);
+    font-family:"Barlow Condensed",sans-serif;
+    position:relative;overflow:hidden;cursor:pointer;
+    transition:.2s;
+    text-shadow:0 0 14px rgba(99,210,255,.8);
+    box-shadow:0 0 18px rgba(99,210,255,.12), inset 0 1px 0 rgba(99,210,255,.15);
+  }
+  .btn-gundamle::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(105deg,transparent 40%,rgba(99,210,255,.18) 50%,transparent 60%);
+    animation:glint 3.5s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes glint{0%,100%{transform:translateX(-120%)}60%,70%{transform:translateX(120%)}}
+  .btn-gundamle:hover{
+    background:linear-gradient(135deg,rgba(40,100,180,.65) 0%,rgba(20,50,120,.5) 50%,rgba(99,210,255,.2) 100%);
+    box-shadow:0 0 28px rgba(99,210,255,.3),inset 0 1px 0 rgba(99,210,255,.2);
+    color:#aaf0ff;
+  }
+  .btn-gundamle .gl-star{font-size:18px;filter:drop-shadow(0 0 6px #7ee8ff);}
+
+  /* ── GUNDAMLE SCREEN ─────────────────────────────── */
+  #gundamle .gl-header{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:14px;
+  }
+  #gundamle .gl-title{
+    font-family:"Teko",sans-serif;font-size:28px;font-weight:700;
+    color:#7ee8ff;letter-spacing:4px;text-transform:uppercase;
+    text-shadow:0 0 16px rgba(99,210,255,.5);
+  }
+  .gl-timer{
+    font-family:"Share Tech Mono",monospace;font-size:10px;
+    color:var(--txt-dim);letter-spacing:1px;text-align:right;line-height:1.6;
+  }
+  .gl-timer b{color:#7ee8ff;}
+
+  /* Search bar */
+  .gl-search-wrap{position:relative;margin-bottom:8px;}
+  .gl-search-wrap input{
+    width:100%;background:#090a0e;
+    border:1px solid rgba(99,210,255,.3);color:var(--txt);
+    padding:12px 14px;font-family:"Share Tech Mono",monospace;font-size:14px;outline:none;
+  }
+  .gl-search-wrap input:focus{border-color:rgba(99,210,255,.6);box-shadow:0 0 0 1px rgba(99,210,255,.2);}
+  .gl-suggest{display:flex;flex-direction:column;gap:3px;margin-bottom:10px;max-height:200px;overflow-y:auto;}
+  .gl-suggest:empty{margin:0;}
+  .gl-suggest button{
+    text-align:left;padding:8px 13px;border:1px solid var(--line-bright);
+    background:var(--panel-2);color:var(--txt);
+    font-family:"Share Tech Mono",monospace;font-size:12px;transition:.1s;cursor:pointer;
+    display:flex;align-items:center;gap:10px;
+  }
+  .gl-suggest button:hover,.gl-suggest button.active{border-color:rgba(99,210,255,.4);color:#7ee8ff;background:var(--panel-3);}
+  .gl-suggest button img{width:32px;height:32px;object-fit:contain;flex-shrink:0;background:#06070a;}
+
+  /* Preview */
+  .gl-preview{
+    display:flex;align-items:center;gap:12px;
+    border:1px solid rgba(99,210,255,.25);background:rgba(99,210,255,.05);
+    padding:10px 12px;margin-bottom:10px;
+  }
+  .gl-preview img{width:52px;height:52px;object-fit:contain;background:#06070a;flex-shrink:0;}
+  .gl-preview-name{font-family:"Teko",sans-serif;font-size:18px;color:var(--txt);letter-spacing:1px;}
+
+  /* Submit */
+  .gl-submit{
+    width:100%;padding:13px 18px;
+    border:1px solid rgba(99,210,255,.4);
+    background:linear-gradient(180deg,rgba(99,210,255,.14),rgba(99,210,255,.04));
+    color:#7ee8ff;font-family:"Barlow Condensed",sans-serif;
+    font-size:15px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+    cursor:pointer;transition:.15s;margin-bottom:14px;
+    clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);
+  }
+  .gl-submit:hover{background:rgba(99,210,255,.22);}
+  .gl-submit:disabled{opacity:.35;cursor:default;}
+
+  /* Hint btn */
+  .gl-hint-btn{
+    width:100%;padding:10px 18px;margin-bottom:14px;
+    border:1px solid rgba(240,180,41,.3);
+    background:rgba(240,180,41,.07);
+    color:var(--amber);font-family:"Barlow Condensed",sans-serif;
+    font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+    cursor:pointer;transition:.15s;
+    clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);
+  }
+  .gl-hint-btn:hover{background:rgba(240,180,41,.15);}
+
+  /* Hint image */
+  .gl-hint-img-wrap{
+    position:relative;margin-bottom:14px;
+    border:1px solid rgba(240,180,41,.3);overflow:hidden;
+  }
+  .gl-hint-img-wrap img{
+    width:100%;display:block;
+    filter:blur(14px) brightness(.7);
+    transition:filter .4s;
+  }
+  .gl-hint-img-wrap img.revealed{filter:none;}
+  .gl-hint-reveal-btn{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    background:rgba(0,0,0,.35);cursor:pointer;
+    font-family:"Share Tech Mono",monospace;font-size:11px;
+    color:var(--amber);letter-spacing:2px;
+    transition:.15s;border:none;width:100%;
+  }
+  .gl-hint-reveal-btn:hover{background:rgba(0,0,0,.15);}
+
+  /* Guess grid */
+  .gl-guesses{display:flex;flex-direction:column;gap:6px;margin-top:14px;}
+  .gl-guess-row{
+    display:grid;
+    grid-template-columns:56px 1fr 80px 54px 56px 56px 56px 80px;
+    gap:3px;
+  }
+  .gl-guess-row.header{
+    grid-template-columns:56px 1fr 80px 54px 56px 56px 56px 80px;
+    margin-bottom:2px;
+  }
+  .gl-guess-row.header .gl-cell{
+    background:transparent;border-color:transparent;
+    color:var(--txt-dim);font-size:8px;letter-spacing:1px;text-transform:uppercase;
+    padding:3px 4px;justify-content:center;
+  }
+  .gl-cell{
+    display:flex;align-items:center;justify-content:center;
+    padding:5px 4px;border:1px solid var(--line-bright);
+    background:var(--panel-2);
+    font-family:"Share Tech Mono",monospace;font-size:10px;
+    color:var(--txt);text-align:center;min-height:44px;
+    position:relative;transition:background .3s,border-color .3s;
+    line-height:1.2;
+  }
+  .gl-cell.green{background:rgba(78,201,122,.22);border-color:var(--green);color:var(--green);}
+  .gl-cell.yellow{background:rgba(240,180,41,.18);border-color:var(--amber);color:var(--amber);}
+  .gl-cell.red{background:rgba(217,58,58,.14);border-color:var(--red);color:var(--red);}
+  .gl-cell.img-cell{padding:2px;}
+  .gl-cell.img-cell img{width:48px;height:42px;object-fit:contain;display:block;}
+  .gl-cell .arr{font-size:14px;display:block;}
+  .gl-cell .val{font-size:9px;display:block;line-height:1.2;}
+  .gl-cell .color-pair{display:flex;gap:3px;align-items:center;}
+  .gl-cell .csq{width:16px;height:16px;border-radius:2px;border:1px solid rgba(255,255,255,.15);flex-shrink:0;}
+
+  /* End screen */
+  .gl-end{display:flex;flex-direction:column;align-items:center;padding:16px 0;}
+  .gl-end-img{width:120px;height:120px;object-fit:contain;border:1px solid rgba(99,210,255,.3);margin-bottom:12px;}
+  .gl-end-name{font-family:"Teko",sans-serif;font-size:26px;color:#7ee8ff;letter-spacing:3px;text-align:center;margin-bottom:4px;}
+  .gl-end-tries{font-family:"Share Tech Mono",monospace;font-size:12px;color:var(--txt-dim);letter-spacing:2px;text-align:center;margin-bottom:14px;}
+
+  /* Leaderboard inside gundamle */
+  .gl-lb{margin-top:16px;}
+  .gl-lb .lb-table th:last-child{text-align:right;}
+
+  @media(max-width:420px){
+    .gl-guess-row,.gl-guess-row.header{
+      grid-template-columns:44px 1fr 70px 44px 46px 46px 46px 68px;
+    }
+    .gl-cell{font-size:9px;min-height:40px;padding:4px 2px;}
+    .gl-cell.img-cell img{width:38px;height:34px;}
+    .gl-cell .csq{width:13px;height:13px;}
+  }
 </style>
 </head>
 <body>
@@ -526,6 +698,8 @@
       </div>
 
       <button class="btn" id="startBtn">▶ Begin Analysis</button>
+      <div class="spacer"></div>
+      <button class="btn-gundamle" id="gundamleBtn"><span class="gl-star">✦</span> Gundamle <span class="gl-star">✦</span></button>
       <div class="spacer"></div>
       <button class="btn ghost" id="manageBtn">⚙ Manage Roster (<span id="rosterCount">0</span> units)</button>
       <div class="spacer"></div>
@@ -650,6 +824,69 @@
       <button class="btn" id="againBtn">↻ Run Again</button>
       <div class="spacer"></div>
       <button class="btn ghost" id="backBtn">◀ Main Menu</button>
+    </section>
+
+    <!-- GUNDAMLE SECTION -->
+    <section id="gundamle" class="hide">
+      <button class="menu-back" id="gundamleBack">◀ Menu</button>
+      <div class="gl-header">
+        <div class="gl-title">✦ Gundamle</div>
+        <div class="gl-timer" id="glTimer">Next in<br><b id="glCountdown">--:--:--</b></div>
+      </div>
+
+      <!-- active game area -->
+      <div id="glGame">
+        <div class="gl-search-wrap">
+          <input id="glInput" placeholder="Type a Gundam name…" autocomplete="off">
+        </div>
+        <div id="glSuggest" class="gl-suggest"></div>
+        <div id="glPreview" class="gl-preview" style="display:none;">
+          <img id="glPreviewImg" src="" alt="">
+          <div class="gl-preview-name" id="glPreviewName"></div>
+        </div>
+        <button class="gl-submit" id="glSubmit">Submit Guess</button>
+        <button class="gl-hint-btn hide" id="glHintBtn">💡 Reveal Hint (blurred image)</button>
+        <div id="glHintWrap" class="gl-hint-img-wrap hide">
+          <img id="glHintImg" src="" alt="hint">
+          <button class="gl-hint-reveal-btn" id="glHintReveal">TAP TO UNBLUR</button>
+        </div>
+
+        <!-- guess rows injected here -->
+        <div id="glGuesses" class="gl-guesses"></div>
+      </div>
+
+      <!-- end screen (hidden until solved) -->
+      <div id="glEnd" class="gl-end hide">
+        <img id="glEndImg" class="gl-end-img" src="" alt="">
+        <div class="gl-end-name" id="glEndName"></div>
+        <div class="gl-end-tries" id="glEndTries"></div>
+        <div style="margin-top:4px;margin-bottom:16px;">
+          <!-- Gundamle leaderboard submit -->
+          <div class="submit-panel" id="glSubmitPanel" style="margin-top:0;">
+            <div id="glSpFirst">
+              <span class="sp-title">Submit to Gundamle Board</span>
+              <div class="submit-row">
+                <input id="glSubmitName" placeholder="your name…" maxlength="24" autocomplete="off">
+                <button class="submit-btn" id="glSubmitBtn">Submit</button>
+              </div>
+              <div class="submit-msg" id="glSubmitMsg"></div>
+            </div>
+            <div id="glSpKnown" class="hide">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                <span class="sp-title" style="margin-bottom:0;">Score Submitted</span>
+                <button id="glChangeName" style="background:none;border:none;color:var(--txt-dim);font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;cursor:pointer;text-decoration:underline;">change name</button>
+              </div>
+              <div class="submit-msg ok" id="glSpKnownMsg"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Gundamle leaderboard -->
+        <div class="gl-lb" style="width:100%;">
+          <span class="label">Today's Gundamle Board</span>
+          <div class="lb-status" id="glLbStatus">—</div>
+          <div id="glLbBody"><div class="lb-empty">Loading…</div></div>
+        </div>
+      </div>
     </section>
 
     <!-- MANAGE SECTION -->
@@ -943,7 +1180,7 @@ const PILOT_DATA={
 /* ═══════════════════════════════════════════════════════
    LEADERBOARD  — paste your Apps Script URL below
    ═══════════════════════════════════════════════════════ */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxAfQIHH8f7Ch562lntX92e88KC9TgsOha2NwRT_wgvaNEGvOjX_cydkPdKjejCGfRT/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx6exWRMN9hTuzLGarc0l5ioCk6sJPy-5YTMVX1J2vSzhBqGUqM78_MIu99WPYlSADY/exec";
 
 // Stats are already tracked in localStorage via stats.mc / stats.type etc.
 // recordBest is a no-op now — we just read stats directly when submitting.
@@ -1256,7 +1493,7 @@ function setupEventListeners(){
 }
 
 function showSection(id){
-  ["start","quiz","zoom","artstyle","results","manage"].forEach(x=>$(x).classList.add("hide"));
+  ["start","quiz","zoom","artstyle","results","manage","gundamle"].forEach(x=>$(x).classList.add("hide"));
   $(id).classList.remove("hide");window.scrollTo(0,0);
   // Reset submit panel when leaving results
   if(id!=="results"){const sm=$("submitMsg");const sb=$("submitBtn");if(sm)sm.textContent="";if(sb)sb.disabled=false;}
@@ -1716,6 +1953,1184 @@ setInterval(()=>{
   const d=new Date();const p=n=>String(n).padStart(2,"0");
   $("clock").textContent=d.getFullYear()+"."+p(d.getMonth()+1)+"."+p(d.getDate())+" "+p(d.getHours())+":"+p(d.getMinutes())+":"+p(d.getSeconds());
 },1000);
+
+/* ═══════════════════════════════════════════════════════════════════
+   GUNDAMLE
+   ═══════════════════════════════════════════════════════════════════ */
+(function(){
+
+/* ── GUNDAMLE DATA ──────────────────────────────────────────────── */
+
+// Release years (real-world anime/OVA premiere year)
+const GL_YEAR = {
+  // Universal Century
+  "RX-78-2 Gundam":1979,"RX-178 Gundam Mk-II":1985,"MSZ-006 Zeta Gundam":1985,
+  "MSZ-010 ZZ Gundam":1986,"RX-93 Nu Gundam":1988,"RX-93-ν2 Hi-Nu Gundam":1988,
+  "F91 Gundam F91":1991,"XM-X1 Crossbone Gundam X-1":1994,
+  "LM312V04 Victory Gundam":1993,"V-Dash Gundam":1993,"LM314V21 V2 Gundam":1993,
+  "LM314V23/24 V2 Assault Buster Gundam":1993,
+  "RX-0 Unicorn Gundam (Unicorn Mode)":2010,"RX-0 Unicorn Gundam (Destroy Mode)":2010,
+  "RX-0 Full Armor Unicorn Gundam":2014,"RX-0 Unicorn Gundam Phenex":2018,
+  "RX-0 Unicorn Gundam Banshee":2011,"RX-0 Unicorn Gundam Banshee Norn":2013,
+  "RX-9 Narrative Gundam":2018,"RX-78NT-1 Gundam NT-1":1991,
+  "RX-79 Gundam Ground Type":1989,
+  "RX-78GP01 Gundam GP01 Zephyranthes":1983,"RX-78GP01-Fb Gundam GP01 Full Vernian":1983,
+  "RX-78GP02A Gundam GP02A Physalis":1983,"RX-78GP03 Gundam GP03 Dendrobium":1983,
+  "FA-78 Full Armor Gundam (Thunderbolt)":2015,"RX-78AL Atlas Gundam":2016,
+  "MRX-009 Psycho Gundam":1985,"MRX-010 Psycho Gundam Mk-II":1986,
+  "MRX-012 Psycho Gundam Mk-III":1992,
+  // Turn A
+  "WD-M01 Turn A Gundam":1999,"CONCEPT-X 6-1-2 Turn X":1999,
+  // G Gundam
+  "GF13-017NJ Shining Gundam":1994,"GF13-017NJII God Gundam":1994,
+  "GF13-001NHII Master Gundam":1994,"JDG-00X Devil Gundam":1994,
+  // Wing
+  "XXXG-01W Wing Gundam":1995,"XXXG-00W0 Wing Gundam Zero":1995,
+  "XXXG-01D Gundam Deathscythe":1995,"XXXG-01H Gundam Heavyarms":1995,
+  "XXXG-01S Shenlong Gundam":1995,"XXXG-01SR Sandrock Gundam":1995,
+  "OZ-13MS Gundam Epyon":1995,
+  // After War X
+  "GX-9900 Gundam X":1996,"GX-9900-DV Gundam X Divider":1996,
+  "GX-9901-DX Gundam Double X":1996,"GW-9800 Gundam Airmaster":1996,
+  "GT-9600 Gundam Leopard":1996,"NRX-0013 Gundam Virsago":1996,
+  "NRX-0015 Gundam Ashtaron":1996,
+  // SEED
+  "GAT-X105 Strike Gundam":2002,"ZGMF-X10A Freedom Gundam":2002,
+  "ZGMF-X09A Justice Gundam":2003,"GAT-X303 Aegis Gundam":2002,
+  "GAT-X102 Duel Gundam":2002,"GAT-X103 Buster Gundam":2002,
+  "GAT-X207 Blitz Gundam":2002,"ZGMF-X13A Providence Gundam":2003,
+  "MBF-P02 Gundam Astray Red Frame":2003,"MBF-P03 Gundam Astray Blue Frame":2003,
+  "MBF-P01-Re2 Gundam Astray Gold Frame":2003,"MBF-P04 Gundam Astray Green Frame":2004,
+  "MBF-P05LM Gundam Astray Mirage Frame":2006,
+  "GAT-X131 Calamity Gundam":2003,"GAT-X252 Forbidden Gundam":2003,
+  "GAT-X370 Raider Gundam":2003,"GSX-401FW Stargazer Gundam":2006,
+  "ZGMF-X11A Regenerate Gundam":2004,"GAT-X105E Strike Noir Gundam":2006,
+  // SEED Destiny
+  "ZGMF-X56S Impulse Gundam":2004,"ZGMF-X42S Destiny Gundam":2004,
+  "ZGMF-X20A Strike Freedom Gundam":2004,"ZGMF-X19A Infinite Justice Gundam":2005,
+  "ZGMF-X666S Legend Gundam":2005,"GFAS-X1 Destroy Gundam":2004,
+  // SEED FREEDOM
+  "STTS-909 Rising Freedom Gundam":2024,"ZGMF/A-262PD-P Mighty Strike Freedom Gundam":2024,
+  "STTS-808 Immortal Justice Gundam":2024,"ZGMF-1027M Duel Blitz Gundam":2024,
+  "ZGMF-103HD Lightning Buster Gundam":2024,
+  // 00
+  "GN-001 Gundam Exia":2007,"GN-002 Gundam Dynames":2007,"GN-003 Gundam Kyrios":2007,
+  "GN-004 Gundam Nadleeh":2007,"GN-005 Gundam Virtue":2007,
+  "GN-0000 00 Gundam":2008,"GN-0000+GNR-010 00 Raiser":2008,
+  "GNW-001 Gundam Throne Eins":2007,"GNW-002 Gundam Throne Zwei":2007,
+  "GNW-003 Gundam Throne Drei":2007,"GNW-20000 Arche Gundam":2008,
+  "CB-0000G/C Reborns Gundam":2009,"GN-006 Cherudim Gundam":2008,
+  "GN-007 Arios Gundam":2008,"GN-008 Seravee Gundam":2008,
+  "GN-008GNHW3G Seravee Gundam GNHW3G":2009,
+  "CB-002 Raphael Gundam":2010,"GN-010 Gundam Zabanya":2010,
+  "GN-011 Gundam Harute":2010,"GNT-0000 00 Qan[T]":2010,
+  "GN-000 0 Gundam":2008,"GNY-001 Gundam Astraea":2009,
+  "GNY-001F Gundam Astraea Type F":2009,
+  // AGE
+  "AGE-1 Gundam AGE-1 Normal":2011,"AGE-1T Gundam AGE-1 Titus":2011,
+  "AGE-1S Gundam AGE-1 Spallow":2011,"AGE-2 Gundam AGE-2 Normal":2012,
+  "AGE-2DB Gundam AGE-2 Double Bullet":2012,"AGE-2DH Gundam AGE-2 Dark Hound":2012,
+  "AGE-3 Gundam AGE-3 Normal":2012,"AGE-3O Gundam AGE-3 Orbital":2012,
+  "AGE-FX Gundam AGE-FX":2012,"xvm-fzc Gundam Legilis":2012,
+  // Reconguista
+  "YG-111 Gundam G-Self":2014,"VGMM-Gf10 Gundam G-Lucifer":2014,"MSAM-033 Gundam G-Arcane":2014,
+  // IBO
+  "ASW-G-08 Gundam Barbatos":2015,"ASW-G-08 Gundam Barbatos Lupus":2016,
+  "ASW-G-08 Gundam Barbatos Lupus Rex":2016,"ASW-G-01 Gundam Bael":2016,
+  "ASW-G-11 Gundam Gusion Rebake":2015,"ASW-G-29 Gundam Vidar":2016,
+  "ASW-G-64 Gundam Flauros":2016,"ASW-G-29 Gundam Astaroth":2016,
+  "ASW-G-47 Gundam Vual":2016,"ASW-G-71 Gundam Dantalion":2017,
+  "ASW-G-66 Gundam Kimaris":2015,
+  // Hathaway
+  "RX-105 Xi Gundam":2021,"RX-104FF Penelope":2021,
+  "RX-94 Mass Production Nu Gundam":2021,"TX-ff104 Alyzeus":2021,
+  // WfM
+  "XVX-016 Gundam Aerial":2022,"XVX-016RN Gundam Aerial Rebuild":2022,
+  "X-EX01 Gundam Calibarn":2023,"FP/A-77 Gundam Pharact":2022,
+  "MDX-0003 Gundam Schwarzette":2023,"MD-0031 Gundam Lfrith":2022,
+  "AVP-03 Gundam Lfrith Anavata":2023,"XGF-01 Gundam Lfrith Jiu":2023,
+  "EDM-GA-01 Gundam Lfrith Ur":2023,"EDM-GA-02 Gundam Lfrith Thorn":2022,
+  // GQuuuuuuX
+  "GQuuuuuuX":2025,"GFreD":2025,"Red Gundam":2025,"White Gundam":2025,"01 Gundam":2025,
+  // Build Fighters
+  "GAT-X105B Build Strike Gundam":2013,"GAT-X105BFP Build Strike Gundam Full Package":2013,
+  "GAT-X105BST Star Build Strike Gundam":2013,"GAT-X105BGC Build Strike Galaxy Cosmos":2013,
+  "PPGN-001 Gundam Amazing Exia":2013,"PPGN-001 Gundam Exia Dark Matter":2013,
+  "GX-9999 Gundam X Maoh":2013,"Sengoku Astray Gundam":2013,
+  "XXXG-01Wf Wing Gundam Fenice":2013,"XXXG-01Wfr Gundam Fenice Rinascita":2014,
+  "XM-X9999 Crossbone Gundam Maoh":2013,"AC-01 Miss Sazabi":2013,
+  // Build Fighters Try
+  "JMF-1336R Build Burning Gundam":2014,"JMF-1337T Try Burning Gundam":2014,
+  "LGZ-91 Lightning Gundam":2014,"KUMA-PP Gundam Tryon 3":2014,
+  "KMK-B01 Kamiki Burning Gundam":2014,
+  // Builders Beginning G
+  "GPB-X80 Beginning Gundam":2010,"GPB-X80-30F Beginning 30 Gundam":2010,
+  // Build Divers
+  "GN-0000DVR Gundam 00 Diver":2018,"GN-0000DVR/S Gundam 00 Sky":2018,
+  "GN-1001N Seltsam":2018,"AGE-IIMG Gundam AGE-2 Magnum":2018,
+  "RX-78GP02R Gundam GP-Rase-Two":2018,
+  // Build Divers Re:RISE
+  "PFF-X7 Core Gundam":2019,"PFF-X7II Core Gundam II":2020,
+  "PFF-X7/E3 Earthree Gundam":2019,"PFF-X7/J5 Jupitive Gundam":2019,
+  "PFF-X7II/U7 Uraven Gundam":2020,"ZGMF-X19AK Gundam Justice Knight":2020,
+  "AGP-X1/E3 Alus Earthree Gundam":2020,"PFF-X7V2 Veetwo Gundam":2020,
+  "PFF-X7RANIMA Gundam Anima\u3010Rize\u3011":2020,"PFF-X7M4 Marsfour Gundam":2020,
+  "PFF-X7M1 Mercuone Gundam":2020,"PFF-X7IIS6 Saturnix Gundam":2020,
+  "PFF-X7IIN8 Nepteight Gundam":2020,"PFF-X7IIBUILD DiVERS ReRising Gundam":2020,
+  // Build Metaverse
+  "ASW-G-08A Gundam Amazing Barbatos Lupus":2023,"GAT-X105BEG Build Strike Exceed Galaxy":2023,
+  "GN-0000DVRII Gundam 00 Diver Arc":2023,"PFF-X7II+P9 Plutine Gundam":2023,
+  "RX-78-l\u0101-III Lah Gundam":2023,"SBG-E01 Shin Burning Gundam":2023,
+  "TYP-G12CMR Typhoeus Gundam Chimera":2023,
+};
+
+// Role: MC=main character, Side=ally/support, Villain=antagonist
+const GL_ROLE = {
+  "RX-78-2 Gundam":"MC","RX-178 Gundam Mk-II":"MC","MSZ-006 Zeta Gundam":"MC",
+  "MSZ-010 ZZ Gundam":"MC","RX-93 Nu Gundam":"MC","RX-93-ν2 Hi-Nu Gundam":"MC",
+  "F91 Gundam F91":"MC","XM-X1 Crossbone Gundam X-1":"MC",
+  "LM312V04 Victory Gundam":"MC","V-Dash Gundam":"MC","LM314V21 V2 Gundam":"MC",
+  "LM314V23/24 V2 Assault Buster Gundam":"MC",
+  "RX-0 Unicorn Gundam (Unicorn Mode)":"MC","RX-0 Unicorn Gundam (Destroy Mode)":"MC",
+  "RX-0 Full Armor Unicorn Gundam":"MC","RX-0 Unicorn Gundam Phenex":"Side",
+  "RX-0 Unicorn Gundam Banshee":"Villain","RX-0 Unicorn Gundam Banshee Norn":"Side",
+  "RX-9 Narrative Gundam":"MC","RX-78NT-1 Gundam NT-1":"Side",
+  "RX-79 Gundam Ground Type":"MC",
+  "RX-78GP01 Gundam GP01 Zephyranthes":"MC","RX-78GP01-Fb Gundam GP01 Full Vernian":"MC",
+  "RX-78GP02A Gundam GP02A Physalis":"Villain","RX-78GP03 Gundam GP03 Dendrobium":"MC",
+  "FA-78 Full Armor Gundam (Thunderbolt)":"MC","RX-78AL Atlas Gundam":"MC",
+  "MRX-009 Psycho Gundam":"Villain","MRX-010 Psycho Gundam Mk-II":"Villain",
+  "MRX-012 Psycho Gundam Mk-III":"Villain",
+  "WD-M01 Turn A Gundam":"MC","CONCEPT-X 6-1-2 Turn X":"Villain",
+  "GF13-017NJ Shining Gundam":"MC","GF13-017NJII God Gundam":"MC",
+  "GF13-001NHII Master Gundam":"Villain","JDG-00X Devil Gundam":"Villain",
+  "XXXG-01W Wing Gundam":"MC","XXXG-00W0 Wing Gundam Zero":"MC",
+  "XXXG-01D Gundam Deathscythe":"Side","XXXG-01H Gundam Heavyarms":"Side",
+  "XXXG-01S Shenlong Gundam":"Side","XXXG-01SR Sandrock Gundam":"Side",
+  "OZ-13MS Gundam Epyon":"Villain",
+  "GX-9900 Gundam X":"MC","GX-9900-DV Gundam X Divider":"MC","GX-9901-DX Gundam Double X":"MC",
+  "GW-9800 Gundam Airmaster":"Side","GT-9600 Gundam Leopard":"Side",
+  "NRX-0013 Gundam Virsago":"Villain","NRX-0015 Gundam Ashtaron":"Villain",
+  "GAT-X105 Strike Gundam":"MC","ZGMF-X10A Freedom Gundam":"MC",
+  "ZGMF-X09A Justice Gundam":"Side","GAT-X303 Aegis Gundam":"Villain",
+  "GAT-X102 Duel Gundam":"Villain","GAT-X103 Buster Gundam":"Villain",
+  "GAT-X207 Blitz Gundam":"Villain","ZGMF-X13A Providence Gundam":"Villain",
+  "MBF-P02 Gundam Astray Red Frame":"Side","MBF-P03 Gundam Astray Blue Frame":"Side",
+  "MBF-P01-Re2 Gundam Astray Gold Frame":"Villain","MBF-P04 Gundam Astray Green Frame":"Side",
+  "MBF-P05LM Gundam Astray Mirage Frame":"Side",
+  "GAT-X131 Calamity Gundam":"Villain","GAT-X252 Forbidden Gundam":"Villain",
+  "GAT-X370 Raider Gundam":"Villain","GSX-401FW Stargazer Gundam":"Side",
+  "ZGMF-X11A Regenerate Gundam":"Villain","GAT-X105E Strike Noir Gundam":"Villain",
+  "ZGMF-X56S Impulse Gundam":"MC","ZGMF-X42S Destiny Gundam":"MC",
+  "ZGMF-X20A Strike Freedom Gundam":"MC","ZGMF-X19A Infinite Justice Gundam":"Side",
+  "ZGMF-X666S Legend Gundam":"Villain","GFAS-X1 Destroy Gundam":"Villain",
+  "STTS-909 Rising Freedom Gundam":"MC","ZGMF/A-262PD-P Mighty Strike Freedom Gundam":"MC",
+  "STTS-808 Immortal Justice Gundam":"Side","ZGMF-1027M Duel Blitz Gundam":"Side",
+  "ZGMF-103HD Lightning Buster Gundam":"Side",
+  "GN-001 Gundam Exia":"MC","GN-002 Gundam Dynames":"Side","GN-003 Gundam Kyrios":"Side",
+  "GN-004 Gundam Nadleeh":"Side","GN-005 Gundam Virtue":"Side",
+  "GN-0000 00 Gundam":"MC","GN-0000+GNR-010 00 Raiser":"MC",
+  "GNW-001 Gundam Throne Eins":"Villain","GNW-002 Gundam Throne Zwei":"Villain",
+  "GNW-003 Gundam Throne Drei":"Villain","GNW-20000 Arche Gundam":"Villain",
+  "CB-0000G/C Reborns Gundam":"Villain","GN-006 Cherudim Gundam":"Side",
+  "GN-007 Arios Gundam":"Side","GN-008 Seravee Gundam":"Side",
+  "GN-008GNHW3G Seravee Gundam GNHW3G":"Side",
+  "CB-002 Raphael Gundam":"Side","GN-010 Gundam Zabanya":"Side",
+  "GN-011 Gundam Harute":"Side","GNT-0000 00 Qan[T]":"MC",
+  "GN-000 0 Gundam":"Villain","GNY-001 Gundam Astraea":"Side",
+  "GNY-001F Gundam Astraea Type F":"Side",
+  "AGE-1 Gundam AGE-1 Normal":"MC","AGE-1T Gundam AGE-1 Titus":"MC",
+  "AGE-1S Gundam AGE-1 Spallow":"MC","AGE-2 Gundam AGE-2 Normal":"MC",
+  "AGE-2DB Gundam AGE-2 Double Bullet":"MC","AGE-2DH Gundam AGE-2 Dark Hound":"Side",
+  "AGE-3 Gundam AGE-3 Normal":"MC","AGE-3O Gundam AGE-3 Orbital":"MC",
+  "AGE-FX Gundam AGE-FX":"MC","xvm-fzc Gundam Legilis":"Villain",
+  "YG-111 Gundam G-Self":"MC","VGMM-Gf10 Gundam G-Lucifer":"Villain","MSAM-033 Gundam G-Arcane":"Side",
+  "ASW-G-08 Gundam Barbatos":"MC","ASW-G-08 Gundam Barbatos Lupus":"MC",
+  "ASW-G-08 Gundam Barbatos Lupus Rex":"MC","ASW-G-01 Gundam Bael":"Villain",
+  "ASW-G-11 Gundam Gusion Rebake":"Side","ASW-G-29 Gundam Vidar":"Side",
+  "ASW-G-64 Gundam Flauros":"Side","ASW-G-29 Gundam Astaroth":"Side",
+  "ASW-G-47 Gundam Vual":"Villain","ASW-G-71 Gundam Dantalion":"Side",
+  "ASW-G-66 Gundam Kimaris":"Villain",
+  "RX-105 Xi Gundam":"MC","RX-104FF Penelope":"Villain",
+  "RX-94 Mass Production Nu Gundam":"Side","TX-ff104 Alyzeus":"Side",
+  "XVX-016 Gundam Aerial":"MC","XVX-016RN Gundam Aerial Rebuild":"MC",
+  "X-EX01 Gundam Calibarn":"MC","FP/A-77 Gundam Pharact":"Villain",
+  "MDX-0003 Gundam Schwarzette":"Villain","MD-0031 Gundam Lfrith":"Side",
+  "AVP-03 Gundam Lfrith Anavata":"Side","XGF-01 Gundam Lfrith Jiu":"Villain",
+  "EDM-GA-01 Gundam Lfrith Ur":"MC","EDM-GA-02 Gundam Lfrith Thorn":"Villain",
+  "GQuuuuuuX":"MC","GFreD":"MC","Red Gundam":"Villain","White Gundam":"Side","01 Gundam":"Side",
+  "GAT-X105B Build Strike Gundam":"MC","GAT-X105BFP Build Strike Gundam Full Package":"MC",
+  "GAT-X105BST Star Build Strike Gundam":"MC","GAT-X105BGC Build Strike Galaxy Cosmos":"MC",
+  "PPGN-001 Gundam Amazing Exia":"Side","PPGN-001 Gundam Exia Dark Matter":"Villain",
+  "GX-9999 Gundam X Maoh":"Side","Sengoku Astray Gundam":"Side",
+  "XXXG-01Wf Wing Gundam Fenice":"Side","XXXG-01Wfr Gundam Fenice Rinascita":"Side",
+  "XM-X9999 Crossbone Gundam Maoh":"Side","AC-01 Miss Sazabi":"Side",
+  "JMF-1336R Build Burning Gundam":"MC","JMF-1337T Try Burning Gundam":"MC",
+  "LGZ-91 Lightning Gundam":"Side","KUMA-PP Gundam Tryon 3":"Side",
+  "KMK-B01 Kamiki Burning Gundam":"MC",
+  "GPB-X80 Beginning Gundam":"MC","GPB-X80-30F Beginning 30 Gundam":"MC",
+  "GN-0000DVR Gundam 00 Diver":"MC","GN-0000DVR/S Gundam 00 Sky":"MC",
+  "GN-1001N Seltsam":"Villain","AGE-IIMG Gundam AGE-2 Magnum":"Side",
+  "RX-78GP02R Gundam GP-Rase-Two":"Side",
+  "PFF-X7 Core Gundam":"MC","PFF-X7II Core Gundam II":"MC",
+  "PFF-X7/E3 Earthree Gundam":"MC","PFF-X7/J5 Jupitive Gundam":"Side",
+  "PFF-X7II/U7 Uraven Gundam":"Side","ZGMF-X19AK Gundam Justice Knight":"Side",
+  "AGP-X1/E3 Alus Earthree Gundam":"Villain","PFF-X7V2 Veetwo Gundam":"Side",
+  "PFF-X7RANIMA Gundam Anima\u3010Rize\u3011":"Side","PFF-X7M4 Marsfour Gundam":"Side",
+  "PFF-X7M1 Mercuone Gundam":"Side","PFF-X7IIS6 Saturnix Gundam":"Side",
+  "PFF-X7IIN8 Nepteight Gundam":"Side","PFF-X7IIBUILD DiVERS ReRising Gundam":"MC",
+  "ASW-G-08A Gundam Amazing Barbatos Lupus":"Side","GAT-X105BEG Build Strike Exceed Galaxy":"MC",
+  "GN-0000DVRII Gundam 00 Diver Arc":"MC","PFF-X7II+P9 Plutine Gundam":"MC",
+  "RX-78-l\u0101-III Lah Gundam":"MC","SBG-E01 Shin Burning Gundam":"Side",
+  "TYP-G12CMR Typhoeus Gundam Chimera":"Villain",
+};
+
+// Series position: early / mid / late
+const GL_ERA = {
+  "RX-78-2 Gundam":"Early","RX-178 Gundam Mk-II":"Early","MSZ-006 Zeta Gundam":"Mid",
+  "MSZ-010 ZZ Gundam":"Mid","RX-93 Nu Gundam":"Late","RX-93-ν2 Hi-Nu Gundam":"Late",
+  "F91 Gundam F91":"Early","XM-X1 Crossbone Gundam X-1":"Mid",
+  "LM312V04 Victory Gundam":"Early","V-Dash Gundam":"Mid","LM314V21 V2 Gundam":"Mid",
+  "LM314V23/24 V2 Assault Buster Gundam":"Late",
+  "RX-0 Unicorn Gundam (Unicorn Mode)":"Early","RX-0 Unicorn Gundam (Destroy Mode)":"Late",
+  "RX-0 Full Armor Unicorn Gundam":"Late","RX-0 Unicorn Gundam Phenex":"Late",
+  "RX-0 Unicorn Gundam Banshee":"Mid","RX-0 Unicorn Gundam Banshee Norn":"Late",
+  "RX-9 Narrative Gundam":"Early","RX-78NT-1 Gundam NT-1":"Early",
+  "RX-79 Gundam Ground Type":"Early",
+  "RX-78GP01 Gundam GP01 Zephyranthes":"Early","RX-78GP01-Fb Gundam GP01 Full Vernian":"Mid",
+  "RX-78GP02A Gundam GP02A Physalis":"Early","RX-78GP03 Gundam GP03 Dendrobium":"Late",
+  "FA-78 Full Armor Gundam (Thunderbolt)":"Early","RX-78AL Atlas Gundam":"Late",
+  "MRX-009 Psycho Gundam":"Early","MRX-010 Psycho Gundam Mk-II":"Early",
+  "MRX-012 Psycho Gundam Mk-III":"Mid",
+  "WD-M01 Turn A Gundam":"Early","CONCEPT-X 6-1-2 Turn X":"Late",
+  "GF13-017NJ Shining Gundam":"Early","GF13-017NJII God Gundam":"Late",
+  "GF13-001NHII Master Gundam":"Mid","JDG-00X Devil Gundam":"Late",
+  "XXXG-01W Wing Gundam":"Early","XXXG-00W0 Wing Gundam Zero":"Late",
+  "XXXG-01D Gundam Deathscythe":"Early","XXXG-01H Gundam Heavyarms":"Early",
+  "XXXG-01S Shenlong Gundam":"Early","XXXG-01SR Sandrock Gundam":"Early",
+  "OZ-13MS Gundam Epyon":"Late",
+  "GX-9900 Gundam X":"Early","GX-9900-DV Gundam X Divider":"Mid","GX-9901-DX Gundam Double X":"Late",
+  "GW-9800 Gundam Airmaster":"Early","GT-9600 Gundam Leopard":"Early",
+  "NRX-0013 Gundam Virsago":"Early","NRX-0015 Gundam Ashtaron":"Mid",
+  "GAT-X105 Strike Gundam":"Early","ZGMF-X10A Freedom Gundam":"Late",
+  "ZGMF-X09A Justice Gundam":"Late","GAT-X303 Aegis Gundam":"Mid",
+  "GAT-X102 Duel Gundam":"Early","GAT-X103 Buster Gundam":"Early",
+  "GAT-X207 Blitz Gundam":"Early","ZGMF-X13A Providence Gundam":"Late",
+  "MBF-P02 Gundam Astray Red Frame":"Early","MBF-P03 Gundam Astray Blue Frame":"Early",
+  "MBF-P01-Re2 Gundam Astray Gold Frame":"Early","MBF-P04 Gundam Astray Green Frame":"Early",
+  "MBF-P05LM Gundam Astray Mirage Frame":"Late",
+  "GAT-X131 Calamity Gundam":"Mid","GAT-X252 Forbidden Gundam":"Mid",
+  "GAT-X370 Raider Gundam":"Mid","GSX-401FW Stargazer Gundam":"Early",
+  "ZGMF-X11A Regenerate Gundam":"Late","GAT-X105E Strike Noir Gundam":"Early",
+  "ZGMF-X56S Impulse Gundam":"Early","ZGMF-X42S Destiny Gundam":"Late",
+  "ZGMF-X20A Strike Freedom Gundam":"Mid","ZGMF-X19A Infinite Justice Gundam":"Late",
+  "ZGMF-X666S Legend Gundam":"Late","GFAS-X1 Destroy Gundam":"Mid",
+  "STTS-909 Rising Freedom Gundam":"Early","ZGMF/A-262PD-P Mighty Strike Freedom Gundam":"Late",
+  "STTS-808 Immortal Justice Gundam":"Mid","ZGMF-1027M Duel Blitz Gundam":"Early",
+  "ZGMF-103HD Lightning Buster Gundam":"Early",
+  "GN-001 Gundam Exia":"Early","GN-002 Gundam Dynames":"Early","GN-003 Gundam Kyrios":"Early",
+  "GN-004 Gundam Nadleeh":"Mid","GN-005 Gundam Virtue":"Early",
+  "GN-0000 00 Gundam":"Early","GN-0000+GNR-010 00 Raiser":"Late",
+  "GNW-001 Gundam Throne Eins":"Mid","GNW-002 Gundam Throne Zwei":"Mid",
+  "GNW-003 Gundam Throne Drei":"Mid","GNW-20000 Arche Gundam":"Late",
+  "CB-0000G/C Reborns Gundam":"Late","GN-006 Cherudim Gundam":"Early",
+  "GN-007 Arios Gundam":"Early","GN-008 Seravee Gundam":"Early",
+  "GN-008GNHW3G Seravee Gundam GNHW3G":"Late",
+  "CB-002 Raphael Gundam":"Late","GN-010 Gundam Zabanya":"Late",
+  "GN-011 Gundam Harute":"Late","GNT-0000 00 Qan[T]":"Late",
+  "GN-000 0 Gundam":"Early","GNY-001 Gundam Astraea":"Early",
+  "GNY-001F Gundam Astraea Type F":"Mid",
+  "AGE-1 Gundam AGE-1 Normal":"Early","AGE-1T Gundam AGE-1 Titus":"Early",
+  "AGE-1S Gundam AGE-1 Spallow":"Mid","AGE-2 Gundam AGE-2 Normal":"Mid",
+  "AGE-2DB Gundam AGE-2 Double Bullet":"Mid","AGE-2DH Gundam AGE-2 Dark Hound":"Late",
+  "AGE-3 Gundam AGE-3 Normal":"Late","AGE-3O Gundam AGE-3 Orbital":"Late",
+  "AGE-FX Gundam AGE-FX":"Late","xvm-fzc Gundam Legilis":"Late",
+  "YG-111 Gundam G-Self":"Early","VGMM-Gf10 Gundam G-Lucifer":"Late","MSAM-033 Gundam G-Arcane":"Early",
+  "ASW-G-08 Gundam Barbatos":"Early","ASW-G-08 Gundam Barbatos Lupus":"Mid",
+  "ASW-G-08 Gundam Barbatos Lupus Rex":"Late","ASW-G-01 Gundam Bael":"Late",
+  "ASW-G-11 Gundam Gusion Rebake":"Early","ASW-G-29 Gundam Vidar":"Mid",
+  "ASW-G-64 Gundam Flauros":"Mid","ASW-G-29 Gundam Astaroth":"Early",
+  "ASW-G-47 Gundam Vual":"Mid","ASW-G-71 Gundam Dantalion":"Late",
+  "ASW-G-66 Gundam Kimaris":"Early",
+  "RX-105 Xi Gundam":"Early","RX-104FF Penelope":"Early",
+  "RX-94 Mass Production Nu Gundam":"Early","TX-ff104 Alyzeus":"Mid",
+  "XVX-016 Gundam Aerial":"Early","XVX-016RN Gundam Aerial Rebuild":"Late",
+  "X-EX01 Gundam Calibarn":"Late","FP/A-77 Gundam Pharact":"Early",
+  "MDX-0003 Gundam Schwarzette":"Mid","MD-0031 Gundam Lfrith":"Early",
+  "AVP-03 Gundam Lfrith Anavata":"Late","XGF-01 Gundam Lfrith Jiu":"Late",
+  "EDM-GA-01 Gundam Lfrith Ur":"Late","EDM-GA-02 Gundam Lfrith Thorn":"Mid",
+  "GQuuuuuuX":"Early","GFreD":"Early","Red Gundam":"Early","White Gundam":"Early","01 Gundam":"Early",
+  "GAT-X105B Build Strike Gundam":"Early","GAT-X105BFP Build Strike Gundam Full Package":"Mid",
+  "GAT-X105BST Star Build Strike Gundam":"Late","GAT-X105BGC Build Strike Galaxy Cosmos":"Late",
+  "PPGN-001 Gundam Amazing Exia":"Early","PPGN-001 Gundam Exia Dark Matter":"Late",
+  "GX-9999 Gundam X Maoh":"Early","Sengoku Astray Gundam":"Early",
+  "XXXG-01Wf Wing Gundam Fenice":"Early","XXXG-01Wfr Gundam Fenice Rinascita":"Late",
+  "XM-X9999 Crossbone Gundam Maoh":"Mid","AC-01 Miss Sazabi":"Late",
+  "JMF-1336R Build Burning Gundam":"Early","JMF-1337T Try Burning Gundam":"Mid",
+  "LGZ-91 Lightning Gundam":"Early","KUMA-PP Gundam Tryon 3":"Mid",
+  "KMK-B01 Kamiki Burning Gundam":"Late",
+  "GPB-X80 Beginning Gundam":"Early","GPB-X80-30F Beginning 30 Gundam":"Late",
+  "GN-0000DVR Gundam 00 Diver":"Early","GN-0000DVR/S Gundam 00 Sky":"Late",
+  "GN-1001N Seltsam":"Mid","AGE-IIMG Gundam AGE-2 Magnum":"Mid",
+  "RX-78GP02R Gundam GP-Rase-Two":"Late",
+  "PFF-X7 Core Gundam":"Early","PFF-X7II Core Gundam II":"Late",
+  "PFF-X7/E3 Earthree Gundam":"Early","PFF-X7/J5 Jupitive Gundam":"Early",
+  "PFF-X7II/U7 Uraven Gundam":"Mid","ZGMF-X19AK Gundam Justice Knight":"Mid",
+  "AGP-X1/E3 Alus Earthree Gundam":"Late","PFF-X7V2 Veetwo Gundam":"Late",
+  "PFF-X7RANIMA Gundam Anima\u3010Rize\u3011":"Late","PFF-X7M4 Marsfour Gundam":"Late",
+  "PFF-X7M1 Mercuone Gundam":"Late","PFF-X7IIS6 Saturnix Gundam":"Late",
+  "PFF-X7IIN8 Nepteight Gundam":"Late","PFF-X7IIBUILD DiVERS ReRising Gundam":"Late",
+  "ASW-G-08A Gundam Amazing Barbatos Lupus":"Mid","GAT-X105BEG Build Strike Exceed Galaxy":"Late",
+  "GN-0000DVRII Gundam 00 Diver Arc":"Mid","PFF-X7II+P9 Plutine Gundam":"Early",
+  "RX-78-l\u0101-III Lah Gundam":"Early","SBG-E01 Shin Burning Gundam":"Mid",
+  "TYP-G12CMR Typhoeus Gundam Chimera":"Late",
+};
+
+// Primary colors: [color1hex, color2hex, colorName1, colorName2]
+const GL_COLORS = {
+  "RX-78-2 Gundam":["#f0f0f0","#2255aa","White","Blue"],
+  "RX-178 Gundam Mk-II":["#f0f0f0","#222266","White","Dark Blue"],
+  "MSZ-006 Zeta Gundam":["#f0f0f0","#334499","White","Blue"],
+  "MSZ-010 ZZ Gundam":["#f0f0f0","#1144bb","White","Blue"],
+  "RX-93 Nu Gundam":["#f0f0f0","#334488","White","Blue"],
+  "RX-93-ν2 Hi-Nu Gundam":["#f0f0f0","#1a3d9c","White","Blue"],
+  "F91 Gundam F91":["#f0f0f0","#cc2222","White","Red"],
+  "XM-X1 Crossbone Gundam X-1":["#f0f0f0","#cc2222","White","Red"],
+  "LM312V04 Victory Gundam":["#f0f0f0","#3355bb","White","Blue"],
+  "V-Dash Gundam":["#f0f0f0","#3355bb","White","Blue"],
+  "LM314V21 V2 Gundam":["#f0f0f0","#3355bb","White","Blue"],
+  "LM314V23/24 V2 Assault Buster Gundam":["#f0f0f0","#3355bb","White","Blue"],
+  "RX-0 Unicorn Gundam (Unicorn Mode)":["#f0f0f0","#cccccc","White","Silver"],
+  "RX-0 Unicorn Gundam (Destroy Mode)":["#f0f0f0","#cc2222","White","Red"],
+  "RX-0 Full Armor Unicorn Gundam":["#f0f0f0","#cc2222","White","Red"],
+  "RX-0 Unicorn Gundam Phenex":["#d4aa00","#cc8800","Gold","Orange"],
+  "RX-0 Unicorn Gundam Banshee":["#111111","#d4aa00","Black","Gold"],
+  "RX-0 Unicorn Gundam Banshee Norn":["#111111","#d4aa00","Black","Gold"],
+  "RX-9 Narrative Gundam":["#f0f0f0","#cc2222","White","Red"],
+  "RX-78NT-1 Gundam NT-1":["#f0f0f0","#2255aa","White","Blue"],
+  "RX-79 Gundam Ground Type":["#8b9e6a","#556b2f","Olive","Green"],
+  "RX-78GP01 Gundam GP01 Zephyranthes":["#f0f0f0","#2255aa","White","Blue"],
+  "RX-78GP01-Fb Gundam GP01 Full Vernian":["#f0f0f0","#2255aa","White","Blue"],
+  "RX-78GP02A Gundam GP02A Physalis":["#f0f0f0","#cc3300","White","Red"],
+  "RX-78GP03 Gundam GP03 Dendrobium":["#f0f0f0","#2255aa","White","Blue"],
+  "FA-78 Full Armor Gundam (Thunderbolt)":["#f0f0f0","#2255aa","White","Blue"],
+  "RX-78AL Atlas Gundam":["#f0f0f0","#3366cc","White","Blue"],
+  "MRX-009 Psycho Gundam":["#cc2222","#111133","Red","Dark Blue"],
+  "MRX-010 Psycho Gundam Mk-II":["#aa1111","#111133","Red","Dark Blue"],
+  "MRX-012 Psycho Gundam Mk-III":["#880000","#111133","Dark Red","Dark Blue"],
+  "WD-M01 Turn A Gundam":["#f0f0f0","#ddddcc","White","Cream"],
+  "CONCEPT-X 6-1-2 Turn X":["#cccccc","#111111","Silver","Black"],
+  "GF13-017NJ Shining Gundam":["#f0f0f0","#cc2222","White","Red"],
+  "GF13-017NJII God Gundam":["#cc2222","#f0f0f0","Red","White"],
+  "GF13-001NHII Master Gundam":["#111111","#880000","Black","Dark Red"],
+  "JDG-00X Devil Gundam":["#555555","#cc2222","Grey","Red"],
+  "XXXG-01W Wing Gundam":["#f0f0f0","#333333","White","Dark Grey"],
+  "XXXG-00W0 Wing Gundam Zero":["#f0f0f0","#333333","White","Dark Grey"],
+  "XXXG-01D Gundam Deathscythe":["#111111","#222222","Black","Dark Grey"],
+  "XXXG-01H Gundam Heavyarms":["#555555","#f0f0f0","Grey","White"],
+  "XXXG-01S Shenlong Gundam":["#cc2222","#333333","Red","Dark"],
+  "XXXG-01SR Sandrock Gundam":["#f0f0f0","#cc8800","White","Orange"],
+  "OZ-13MS Gundam Epyon":["#cc2222","#111111","Red","Black"],
+  "GX-9900 Gundam X":["#f0f0f0","#333366","White","Navy"],
+  "GX-9900-DV Gundam X Divider":["#f0f0f0","#333366","White","Navy"],
+  "GX-9901-DX Gundam Double X":["#f0f0f0","#333366","White","Navy"],
+  "GW-9800 Gundam Airmaster":["#f0f0f0","#44aa44","White","Green"],
+  "GT-9600 Gundam Leopard":["#ccaa44","#333333","Yellow","Dark"],
+  "NRX-0013 Gundam Virsago":["#660000","#111111","Dark Red","Black"],
+  "NRX-0015 Gundam Ashtaron":["#550055","#111111","Purple","Black"],
+  "GAT-X105 Strike Gundam":["#f0f0f0","#cc2222","White","Red"],
+  "ZGMF-X10A Freedom Gundam":["#f0f0f0","#2244aa","White","Blue"],
+  "ZGMF-X09A Justice Gundam":["#cc0000","#f0f0f0","Red","White"],
+  "GAT-X303 Aegis Gundam":["#cc2222","#f0f0f0","Red","White"],
+  "GAT-X102 Duel Gundam":["#3355aa","#f0f0f0","Blue","White"],
+  "GAT-X103 Buster Gundam":["#447722","#f0f0f0","Green","White"],
+  "GAT-X207 Blitz Gundam":["#111111","#3344aa","Black","Blue"],
+  "ZGMF-X13A Providence Gundam":["#660066","#f0f0f0","Purple","White"],
+  "MBF-P02 Gundam Astray Red Frame":["#cc2222","#f0f0f0","Red","White"],
+  "MBF-P03 Gundam Astray Blue Frame":["#2244aa","#f0f0f0","Blue","White"],
+  "MBF-P01-Re2 Gundam Astray Gold Frame":["#cc9900","#111111","Gold","Black"],
+  "MBF-P04 Gundam Astray Green Frame":["#226622","#f0f0f0","Green","White"],
+  "MBF-P05LM Gundam Astray Mirage Frame":["#cc4400","#f0f0f0","Orange","White"],
+  "GAT-X131 Calamity Gundam":["#880000","#333333","Dark Red","Grey"],
+  "GAT-X252 Forbidden Gundam":["#115511","#111111","Dark Green","Black"],
+  "GAT-X370 Raider Gundam":["#3333aa","#111111","Blue","Black"],
+  "GSX-401FW Stargazer Gundam":["#f0f0f0","#cccccc","White","Silver"],
+  "ZGMF-X11A Regenerate Gundam":["#660066","#f0f0f0","Purple","White"],
+  "GAT-X105E Strike Noir Gundam":["#111111","#666666","Black","Grey"],
+  "ZGMF-X56S Impulse Gundam":["#f0f0f0","#cc2222","White","Red"],
+  "ZGMF-X42S Destiny Gundam":["#555588","#f0f0f0","Blue-Grey","White"],
+  "ZGMF-X20A Strike Freedom Gundam":["#f0f0f0","#d4aa00","White","Gold"],
+  "ZGMF-X19A Infinite Justice Gundam":["#cc0000","#f0f0f0","Red","White"],
+  "ZGMF-X666S Legend Gundam":["#660066","#f0f0f0","Purple","White"],
+  "GFAS-X1 Destroy Gundam":["#888800","#cc6600","Yellow","Orange"],
+  "STTS-909 Rising Freedom Gundam":["#f0f0f0","#2244cc","White","Blue"],
+  "ZGMF/A-262PD-P Mighty Strike Freedom Gundam":["#f0f0f0","#d4aa00","White","Gold"],
+  "STTS-808 Immortal Justice Gundam":["#cc0000","#f0f0f0","Red","White"],
+  "ZGMF-1027M Duel Blitz Gundam":["#3355aa","#111111","Blue","Black"],
+  "ZGMF-103HD Lightning Buster Gundam":["#224422","#f0f0f0","Dark Green","White"],
+  "GN-001 Gundam Exia":["#2244bb","#f0f0f0","Blue","White"],
+  "GN-002 Gundam Dynames":["#226622","#f0f0f0","Green","White"],
+  "GN-003 Gundam Kyrios":["#886600","#f0f0f0","Brown","White"],
+  "GN-004 Gundam Nadleeh":["#f0f0f0","#cc9900","White","Gold"],
+  "GN-005 Gundam Virtue":["#226622","#f0f0f0","Green","White"],
+  "GN-0000 00 Gundam":["#2244bb","#f0f0f0","Blue","White"],
+  "GN-0000+GNR-010 00 Raiser":["#2244bb","#f0f0f0","Blue","White"],
+  "GNW-001 Gundam Throne Eins":["#cc3300","#f0f0f0","Orange-Red","White"],
+  "GNW-002 Gundam Throne Zwei":["#cc3300","#f0f0f0","Orange-Red","White"],
+  "GNW-003 Gundam Throne Drei":["#cc3300","#f0f0f0","Orange-Red","White"],
+  "GNW-20000 Arche Gundam":["#cc3300","#111111","Orange-Red","Black"],
+  "CB-0000G/C Reborns Gundam":["#f0f0f0","#2244cc","White","Blue"],
+  "GN-006 Cherudim Gundam":["#226622","#f0f0f0","Green","White"],
+  "GN-007 Arios Gundam":["#886600","#f0f0f0","Brown","White"],
+  "GN-008 Seravee Gundam":["#226622","#f0f0f0","Dark Green","White"],
+  "GN-008GNHW3G Seravee Gundam GNHW3G":["#226622","#f0f0f0","Dark Green","White"],
+  "CB-002 Raphael Gundam":["#226622","#f0f0f0","Dark Green","White"],
+  "GN-010 Gundam Zabanya":["#226622","#f0f0f0","Green","White"],
+  "GN-011 Gundam Harute":["#886600","#f0f0f0","Brown","White"],
+  "GNT-0000 00 Qan[T]":["#2244bb","#f0f0f0","Blue","White"],
+  "GN-000 0 Gundam":["#f0f0f0","#cccccc","White","Silver"],
+  "GNY-001 Gundam Astraea":["#cc6600","#f0f0f0","Orange","White"],
+  "GNY-001F Gundam Astraea Type F":["#cc6600","#f0f0f0","Orange","White"],
+  "AGE-1 Gundam AGE-1 Normal":["#f0f0f0","#cc2222","White","Red"],
+  "AGE-1T Gundam AGE-1 Titus":["#cc2222","#cc6600","Red","Orange"],
+  "AGE-1S Gundam AGE-1 Spallow":["#f0f0f0","#cc2222","White","Red"],
+  "AGE-2 Gundam AGE-2 Normal":["#f0f0f0","#cc2222","White","Red"],
+  "AGE-2DB Gundam AGE-2 Double Bullet":["#f0f0f0","#cc2222","White","Red"],
+  "AGE-2DH Gundam AGE-2 Dark Hound":["#111111","#cc6600","Black","Orange"],
+  "AGE-3 Gundam AGE-3 Normal":["#f0f0f0","#cc2222","White","Red"],
+  "AGE-3O Gundam AGE-3 Orbital":["#f0f0f0","#cc6600","White","Orange"],
+  "AGE-FX Gundam AGE-FX":["#f0f0f0","#22aacc","White","Cyan"],
+  "xvm-fzc Gundam Legilis":["#550055","#f0f0f0","Purple","White"],
+  "YG-111 Gundam G-Self":["#f0f0f0","#cc2222","White","Red"],
+  "VGMM-Gf10 Gundam G-Lucifer":["#f0f0f0","#cc6600","White","Orange"],
+  "MSAM-033 Gundam G-Arcane":["#f0f0f0","#445599","White","Blue"],
+  "ASW-G-08 Gundam Barbatos":["#cc6600","#f0f0f0","Orange","White"],
+  "ASW-G-08 Gundam Barbatos Lupus":["#cc6600","#f0f0f0","Orange","White"],
+  "ASW-G-08 Gundam Barbatos Lupus Rex":["#111111","#cc5500","Black","Dark Orange"],
+  "ASW-G-01 Gundam Bael":["#f0f0f0","#ccaa44","White","Gold"],
+  "ASW-G-11 Gundam Gusion Rebake":["#cc6600","#f0f0f0","Orange","White"],
+  "ASW-G-29 Gundam Vidar":["#330066","#f0f0f0","Dark Purple","White"],
+  "ASW-G-64 Gundam Flauros":["#cc3300","#f0f0f0","Red-Orange","White"],
+  "ASW-G-29 Gundam Astaroth":["#555555","#cc2222","Grey","Red"],
+  "ASW-G-47 Gundam Vual":["#006633","#f0f0f0","Green","White"],
+  "ASW-G-71 Gundam Dantalion":["#2255aa","#f0f0f0","Blue","White"],
+  "ASW-G-66 Gundam Kimaris":["#f0f0f0","#cc4400","White","Orange"],
+  "RX-105 Xi Gundam":["#f0f0f0","#2255aa","White","Blue"],
+  "RX-104FF Penelope":["#f0f0f0","#cc4400","White","Orange"],
+  "RX-94 Mass Production Nu Gundam":["#f0f0f0","#2255aa","White","Blue"],
+  "TX-ff104 Alyzeus":["#cc9900","#f0f0f0","Gold","White"],
+  "XVX-016 Gundam Aerial":["#f0f0f0","#22aacc","White","Cyan"],
+  "XVX-016RN Gundam Aerial Rebuild":["#f0f0f0","#22aacc","White","Cyan"],
+  "X-EX01 Gundam Calibarn":["#cc2222","#111111","Red","Black"],
+  "FP/A-77 Gundam Pharact":["#f0f0f0","#888888","White","Grey"],
+  "MDX-0003 Gundam Schwarzette":["#111111","#4444cc","Black","Blue"],
+  "MD-0031 Gundam Lfrith":["#f0f0f0","#22aacc","White","Cyan"],
+  "AVP-03 Gundam Lfrith Anavata":["#f0f0f0","#22aacc","White","Cyan"],
+  "XGF-01 Gundam Lfrith Jiu":["#f0f0f0","#22aacc","White","Cyan"],
+  "EDM-GA-01 Gundam Lfrith Ur":["#f0f0f0","#22aacc","White","Cyan"],
+  "EDM-GA-02 Gundam Lfrith Thorn":["#f0f0f0","#22aacc","White","Cyan"],
+  "GQuuuuuuX":["#333333","#cc4400","Dark","Orange"],
+  "GFreD":["#cc4400","#f0f0f0","Orange","White"],
+  "Red Gundam":["#cc2222","#f0f0f0","Red","White"],
+  "White Gundam":["#f0f0f0","#dddddd","White","Light Grey"],
+  "01 Gundam":["#f0f0f0","#2255aa","White","Blue"],
+  "GAT-X105B Build Strike Gundam":["#cc2222","#f0f0f0","Red","White"],
+  "GAT-X105BFP Build Strike Gundam Full Package":["#cc2222","#f0f0f0","Red","White"],
+  "GAT-X105BST Star Build Strike Gundam":["#cc2222","#f0f0f0","Red","White"],
+  "GAT-X105BGC Build Strike Galaxy Cosmos":["#2244cc","#f0f0f0","Blue","White"],
+  "PPGN-001 Gundam Amazing Exia":["#2244bb","#f0f0f0","Blue","White"],
+  "PPGN-001 Gundam Exia Dark Matter":["#111111","#9900aa","Black","Purple"],
+  "GX-9999 Gundam X Maoh":["#550055","#f0f0f0","Purple","White"],
+  "Sengoku Astray Gundam":["#cc2222","#cc8800","Red","Gold"],
+  "XXXG-01Wf Wing Gundam Fenice":["#cc2222","#f0f0f0","Red","White"],
+  "XXXG-01Wfr Gundam Fenice Rinascita":["#cc2222","#f0f0f0","Red","White"],
+  "XM-X9999 Crossbone Gundam Maoh":["#880000","#f0f0f0","Dark Red","White"],
+  "AC-01 Miss Sazabi":["#cc0022","#111111","Deep Red","Black"],
+  "JMF-1336R Build Burning Gundam":["#cc2222","#f0f0f0","Red","White"],
+  "JMF-1337T Try Burning Gundam":["#cc2222","#f0f0f0","Red","White"],
+  "LGZ-91 Lightning Gundam":["#f0f0f0","#cc8800","White","Yellow"],
+  "KUMA-PP Gundam Tryon 3":["#cc2222","#f0f0f0","Red","White"],
+  "KMK-B01 Kamiki Burning Gundam":["#cc2222","#f0f0f0","Red","White"],
+  "GPB-X80 Beginning Gundam":["#f0f0f0","#cc2222","White","Red"],
+  "GPB-X80-30F Beginning 30 Gundam":["#f0f0f0","#cc2222","White","Red"],
+  "GN-0000DVR Gundam 00 Diver":["#2244bb","#f0f0f0","Blue","White"],
+  "GN-0000DVR/S Gundam 00 Sky":["#2244bb","#88ddff","Blue","Light Blue"],
+  "GN-1001N Seltsam":["#111111","#880044","Black","Dark Purple"],
+  "AGE-IIMG Gundam AGE-2 Magnum":["#cc2222","#f0f0f0","Red","White"],
+  "RX-78GP02R Gundam GP-Rase-Two":["#f0f0f0","#cc3300","White","Red"],
+  "PFF-X7 Core Gundam":["#f0f0f0","#cc2222","White","Red"],
+  "PFF-X7II Core Gundam II":["#f0f0f0","#cc2222","White","Red"],
+  "PFF-X7/E3 Earthree Gundam":["#f0f0f0","#3399cc","White","Blue"],
+  "PFF-X7/J5 Jupitive Gundam":["#cc6600","#f0f0f0","Orange","White"],
+  "PFF-X7II/U7 Uraven Gundam":["#440066","#f0f0f0","Purple","White"],
+  "ZGMF-X19AK Gundam Justice Knight":["#cc0000","#f0f0f0","Red","White"],
+  "AGP-X1/E3 Alus Earthree Gundam":["#335577","#f0f0f0","Steel Blue","White"],
+  "PFF-X7V2 Veetwo Gundam":["#2244bb","#f0f0f0","Blue","White"],
+  "PFF-X7RANIMA Gundam Anima\u3010Rize\u3011":["#cc6600","#f0f0f0","Orange","White"],
+  "PFF-X7M4 Marsfour Gundam":["#cc2222","#f0f0f0","Red","White"],
+  "PFF-X7M1 Mercuone Gundam":["#007744","#f0f0f0","Green","White"],
+  "PFF-X7IIS6 Saturnix Gundam":["#cc6600","#f0f0f0","Orange","White"],
+  "PFF-X7IIN8 Nepteight Gundam":["#226699","#f0f0f0","Blue","White"],
+  "PFF-X7IIBUILD DiVERS ReRising Gundam":["#2244bb","#cc2222","Blue","Red"],
+  "ASW-G-08A Gundam Amazing Barbatos Lupus":["#cc4400","#f0f0f0","Orange","White"],
+  "GAT-X105BEG Build Strike Exceed Galaxy":["#2255cc","#f0f0f0","Blue","White"],
+  "GN-0000DVRII Gundam 00 Diver Arc":["#2244bb","#cc2222","Blue","Red"],
+  "PFF-X7II+P9 Plutine Gundam":["#f0f0f0","#aaccff","White","Light Blue"],
+  "RX-78-l\u0101-III Lah Gundam":["#cc2222","#f0f0f0","Red","White"],
+  "SBG-E01 Shin Burning Gundam":["#cc2222","#111111","Red","Black"],
+  "TYP-G12CMR Typhoeus Gundam Chimera":["#111111","#cc2222","Black","Red"],
+};
+
+// Series groupings for yellow (close but not exact)
+const GL_SERIES_GROUPS = [
+  ["Gundam SEED","SEED Destiny","SEED FREEDOM"],
+  ["Build Fighters","Build Fighters Try","Build Divers","Build Divers Re:RISE","Build Metaverse","Builders Beginning G"],
+];
+
+/* ── DAILY PICK ENGINE ──────────────────────────────────────────── */
+
+function getTodayKey(){
+  // Use UTC date shifted by +21h so "day" flips at 21:00 UTC (= 23:00 Brussels in winter, local 9pm)
+  const now = new Date();
+  // Shift: subtract 21 hours offset → the "Gundamle day" starts at 21:00 UTC
+  const shifted = new Date(now.getTime() - (21 * 60 * 60 * 1000));
+  const y = shifted.getUTCFullYear();
+  const m = String(shifted.getUTCMonth()+1).padStart(2,'0');
+  const d = String(shifted.getUTCDate()).padStart(2,'0');
+  return `${y}-${m}-${d}`;
+}
+
+function seededRandom(seed){
+  // Simple LCG seeded by a number
+  let s = seed;
+  return function(){
+    s = (s * 1664525 + 1013904223) & 0xffffffff;
+    return (s >>> 0) / 4294967296;
+  };
+}
+
+function dateToSeed(key){
+  // Convert "YYYY-MM-DD" to number
+  return parseInt(key.replace(/-/g,''), 10);
+}
+
+function getEligibleUnits(rosterArr){
+  // Only units with images and with enough data
+  return rosterArr.filter(u => u.img && u.img.trim() !== '');
+}
+
+// 10-day exclusion window: store last 10 picks by date key
+function getRecentPicks(){
+  try{ return JSON.parse(localStorage.getItem('gundamleHistory')) || {}; }catch(e){ return {}; }
+}
+function saveRecentPick(dateKey, unitName){
+  const hist = getRecentPicks();
+  hist[dateKey] = unitName;
+  // Prune old entries beyond 15 days
+  const keys = Object.keys(hist).sort();
+  while(keys.length > 15){ delete hist[keys.shift()]; keys.shift(); }
+  try{ localStorage.setItem('gundamleHistory', JSON.stringify(hist)); }catch(e){}
+}
+
+function getDailyUnit(rosterArr){
+  const key = getTodayKey();
+  const eligible = getEligibleUnits(rosterArr);
+  if(!eligible.length) return null;
+
+  const hist = getRecentPicks();
+  // Build set of recently used names (last 10 days)
+  const recentNames = new Set(Object.values(hist));
+  let pool = eligible.filter(u => !recentNames.has(u.name));
+  if(!pool.length) pool = eligible; // fallback: use all if exhausted
+
+  const rng = seededRandom(dateToSeed(key));
+  const idx = Math.floor(rng() * pool.length);
+  return pool[idx];
+}
+
+/* ── COUNTDOWN TIMER ────────────────────────────────────────────── */
+
+function updateCountdown(){
+  const el = document.getElementById('glCountdown');
+  if(!el) return;
+  const now = new Date();
+  // Next reset is at 21:00 UTC today or tomorrow
+  const next = new Date();
+  next.setUTCHours(21, 0, 0, 0);
+  if(next <= now) next.setUTCDate(next.getUTCDate() + 1);
+  const diff = next - now;
+  const h = String(Math.floor(diff / 3600000)).padStart(2,'0');
+  const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+  const s = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
+  el.textContent = `${h}:${m}:${s}`;
+}
+
+/* ── STATE ──────────────────────────────────────────────────────── */
+
+let glState = {
+  todayKey: '',
+  answer: null,       // roster unit object
+  guesses: [],        // array of unit names guessed
+  solved: false,
+  hintShown: false,
+  selectedUnit: null, // unit currently typed in search
+};
+
+const GL_STORAGE_KEY = 'gundamleState';
+
+function glSave(){
+  try{
+    localStorage.setItem(GL_STORAGE_KEY, JSON.stringify({
+      todayKey: glState.todayKey,
+      guesses: glState.guesses,
+      solved: glState.solved,
+      hintShown: glState.hintShown,
+    }));
+  }catch(e){}
+}
+
+function glLoad(rosterArr){
+  const key = getTodayKey();
+  glState.todayKey = key;
+  glState.answer = getDailyUnit(rosterArr);
+  glState.guesses = [];
+  glState.solved = false;
+  glState.hintShown = false;
+  glState.selectedUnit = null;
+
+  try{
+    const saved = JSON.parse(localStorage.getItem(GL_STORAGE_KEY));
+    if(saved && saved.todayKey === key){
+      glState.guesses = saved.guesses || [];
+      glState.solved = saved.solved || false;
+      glState.hintShown = saved.hintShown || false;
+    }
+  }catch(e){}
+}
+
+/* ── SCORING LOGIC ──────────────────────────────────────────────── */
+
+const ERA_ORDER = {Early:0, Mid:1, Late:2};
+
+function scoreCell(category, guessedUnit, answerUnit){
+  // Returns 'green' | 'yellow' | 'red' and optional arrow direction/count
+  const gn = guessedUnit.name;
+  const an = answerUnit.name;
+
+  if(category === 'image') return gn === an ? 'green' : 'red';
+
+  if(category === 'name'){
+    if(gn === an) return 'green';
+    // Same token overlap
+    const gt = sigTokens(gn);
+    const at = new Set(sigTokens(an));
+    if(gt.some(t => at.has(t))) return 'yellow';
+    return 'red';
+  }
+
+  if(category === 'series'){
+    const gs = guessedUnit.series || '';
+    const as = answerUnit.series || '';
+    if(gs === as) return 'green';
+    // Check group
+    for(const grp of GL_SERIES_GROUPS){
+      if(grp.includes(gs) && grp.includes(as)) return 'yellow';
+    }
+    return 'red';
+  }
+
+  if(category === 'year'){
+    const gy = GL_YEAR[gn] || 0;
+    const ay = GL_YEAR[an] || 0;
+    if(gy === ay) return 'green';
+    const diff = Math.abs(gy - ay);
+    if(diff <= 5) return 'yellow';
+    return 'red';
+  }
+
+  if(category === 'role'){
+    const gr = GL_ROLE[gn] || '';
+    const ar = GL_ROLE[an] || '';
+    if(gr === ar) return 'green';
+    return 'red';
+  }
+
+  if(category === 'colors'){
+    const gc = GL_COLORS[gn] || [];
+    const ac = GL_COLORS[an] || [];
+    if(gc[0]===ac[0] && gc[1]===ac[1]) return 'green';
+    if(gc.length && ac.length && (gc[0]===ac[0]||gc[0]===ac[1]||gc[1]===ac[0]||gc[1]===ac[1])) return 'yellow';
+    // Close color match by name
+    if(gc.length>2 && ac.length>2){
+      const gNames=[gc[2],gc[3]];const aNames=[ac[2],ac[3]];
+      if(gNames.some(n=>aNames.includes(n))) return 'yellow';
+    }
+    return 'red';
+  }
+
+  if(category === 'era'){
+    const ge = GL_ERA[gn] || '';
+    const ae = GL_ERA[an] || '';
+    if(ge === ae) return 'green';
+    if(ge && ae && Math.abs(ERA_ORDER[ge] - ERA_ORDER[ae]) === 1) return 'yellow';
+    return 'red';
+  }
+
+  if(category === 'pilot'){
+    const gp = PILOT_DATA[gn] || '';
+    const ap = PILOT_DATA[an] || '';
+    if(!gp || !ap) return 'red';
+    if(gp === ap) return 'green';
+    return 'red';
+  }
+
+  return 'red';
+}
+
+function getYearArrow(guessedUnit, answerUnit){
+  const gy = GL_YEAR[guessedUnit.name] || 0;
+  const ay = GL_YEAR[answerUnit.name] || 0;
+  if(!gy || !ay || gy === ay) return '';
+  const diff = ay - gy;
+  const absDiff = Math.abs(diff);
+  const dir = diff > 0 ? '▲' : '▼';
+  if(absDiff >= 30) return dir+dir+dir;
+  if(absDiff >= 15) return dir+dir;
+  return dir;
+}
+
+function getEraArrow(guessedUnit, answerUnit){
+  const ge = ERA_ORDER[GL_ERA[guessedUnit.name]];
+  const ae = ERA_ORDER[GL_ERA[answerUnit.name]];
+  if(ge === undefined || ae === undefined || ge === ae) return '';
+  return ae > ge ? '▲' : '▼';
+}
+
+/* ── RENDER ─────────────────────────────────────────────────────── */
+
+function glRenderAll(){
+  const container = document.getElementById('glGuesses');
+  container.innerHTML = '';
+
+  // Header row
+  const header = document.createElement('div');
+  header.className = 'gl-guess-row header';
+  ['Image','Name','Series','Year','Role','Colors','Era','Pilot'].forEach(label => {
+    const c = document.createElement('div');
+    c.className = 'gl-cell';
+    c.textContent = label;
+    header.appendChild(c);
+  });
+  container.appendChild(header);
+
+  // Guess rows
+  glState.guesses.forEach(guessName => {
+    const guessUnit = roster.find(u => u.name === guessName);
+    if(!guessUnit) return;
+    container.appendChild(glBuildRow(guessUnit));
+  });
+}
+
+function glBuildRow(guessUnit){
+  const row = document.createElement('div');
+  row.className = 'gl-guess-row';
+  const an = glState.answer;
+
+  // Image cell
+  const imgCell = document.createElement('div');
+  imgCell.className = 'gl-cell img-cell ' + (guessUnit.name === an.name ? 'green' : 'red');
+  if(guessUnit.img){
+    const img = document.createElement('img');
+    img.src = guessUnit.img;
+    img.alt = guessUnit.name;
+    imgCell.appendChild(img);
+  } else {
+    imgCell.textContent = '?';
+  }
+  row.appendChild(imgCell);
+
+  // Name cell
+  const nameResult = scoreCell('name', guessUnit, an);
+  const nameCell = document.createElement('div');
+  nameCell.className = 'gl-cell ' + nameResult;
+  nameCell.style.fontSize = '9px';
+  nameCell.style.wordBreak = 'break-word';
+  nameCell.style.lineHeight = '1.2';
+  // Display shortened name
+  const shortName = guessUnit.name.replace(/^[A-Z0-9\-\/\.+\[\]]+\s/,'').trim();
+  nameCell.textContent = shortName.length > 18 ? shortName.slice(0,17)+'…' : shortName;
+  row.appendChild(nameCell);
+
+  // Series cell
+  const seriesResult = scoreCell('series', guessUnit, an);
+  const seriesCell = document.createElement('div');
+  seriesCell.className = 'gl-cell ' + seriesResult;
+  seriesCell.style.fontSize = '8px';
+  const shortSeries = (guessUnit.series||'?').replace(/^(Gundam |SEED |Build |Builders )/,'').trim();
+  seriesCell.textContent = shortSeries.length > 10 ? shortSeries.slice(0,9)+'…' : shortSeries;
+  row.appendChild(seriesCell);
+
+  // Year cell
+  const yearResult = scoreCell('year', guessUnit, an);
+  const yearCell = document.createElement('div');
+  yearCell.className = 'gl-cell ' + yearResult;
+  const yearArrow = getYearArrow(guessUnit, an);
+  const yr = GL_YEAR[guessUnit.name] || '?';
+  yearCell.innerHTML = `<span class="arr">${yearArrow}</span><span class="val">${yr}</span>`;
+  row.appendChild(yearCell);
+
+  // Role cell
+  const roleResult = scoreCell('role', guessUnit, an);
+  const roleCell = document.createElement('div');
+  roleCell.className = 'gl-cell ' + roleResult;
+  roleCell.style.fontSize = '9px';
+  roleCell.textContent = GL_ROLE[guessUnit.name] || '?';
+  row.appendChild(roleCell);
+
+  // Colors cell
+  const colorsResult = scoreCell('colors', guessUnit, an);
+  const colorsCell = document.createElement('div');
+  colorsCell.className = 'gl-cell ' + colorsResult;
+  const cols = GL_COLORS[guessUnit.name] || ['#444','#444'];
+  const pair = document.createElement('div');
+  pair.className = 'color-pair';
+  [cols[0], cols[1]].forEach(hex => {
+    const sq = document.createElement('div');
+    sq.className = 'csq';
+    sq.style.background = hex;
+    pair.appendChild(sq);
+  });
+  colorsCell.appendChild(pair);
+  row.appendChild(colorsCell);
+
+  // Era cell
+  const eraResult = scoreCell('era', guessUnit, an);
+  const eraCell = document.createElement('div');
+  eraCell.className = 'gl-cell ' + eraResult;
+  const eraArrow = getEraArrow(guessUnit, an);
+  const eraVal = GL_ERA[guessUnit.name] || '?';
+  eraCell.innerHTML = `<span class="arr">${eraArrow}</span><span class="val">${eraVal.slice(0,4)}</span>`;
+  row.appendChild(eraCell);
+
+  // Pilot cell
+  const pilotResult = scoreCell('pilot', guessUnit, an);
+  const pilotCell = document.createElement('div');
+  pilotCell.className = 'gl-cell ' + pilotResult;
+  pilotCell.style.fontSize = '8px';
+  const pName = PILOT_DATA[guessUnit.name] || '?';
+  const shortPilot = pName.split(' ')[0];
+  pilotCell.textContent = shortPilot.length > 9 ? shortPilot.slice(0,8)+'…' : shortPilot;
+  row.appendChild(pilotCell);
+
+  return row;
+}
+
+/* ── AUTOCOMPLETE ───────────────────────────────────────────────── */
+
+function glSetupSearch(){
+  const inp = document.getElementById('glInput');
+  const sugBox = document.getElementById('glSuggest');
+  const preview = document.getElementById('glPreview');
+  const previewImg = document.getElementById('glPreviewImg');
+  const previewName = document.getElementById('glPreviewName');
+  let activeIdx = -1;
+
+  function getMatches(val){
+    if(!val.trim()) return [];
+    const v = val.toLowerCase();
+    const scored = [];
+    for(const u of roster){
+      const nm = u.name.toLowerCase();
+      let sc = 0;
+      if(nm.includes(v)) sc = 3;
+      else if(nm.split(/\s+/).some(w=>w.startsWith(v))) sc = 2;
+      else if((u.alt||[]).some(a=>a.includes(v))) sc = 1;
+      if(sc > 0) scored.push({unit:u, sc});
+    }
+    scored.sort((a,b)=>b.sc-a.sc);
+    return scored.slice(0,8).map(s=>s.unit);
+  }
+
+  function selectUnit(u){
+    inp.value = u.name;
+    sugBox.innerHTML = '';
+    glState.selectedUnit = u;
+    if(u.img){
+      previewImg.src = u.img;
+      previewName.textContent = u.name;
+      preview.style.display = 'flex';
+    } else {
+      preview.style.display = 'none';
+    }
+  }
+
+  function renderSuggestions(matches){
+    sugBox.innerHTML = '';
+    activeIdx = -1;
+    matches.forEach((m,i) => {
+      const b = document.createElement('button');
+      b.dataset.idx = i;
+      if(m.img){
+        const img = document.createElement('img');
+        img.src = m.img; img.alt = '';
+        b.appendChild(img);
+      }
+      const span = document.createElement('span');
+      span.textContent = m.name;
+      b.appendChild(span);
+      b.onclick = () => selectUnit(m);
+      sugBox.appendChild(b);
+    });
+  }
+
+  inp.oninput = () => {
+    glState.selectedUnit = null;
+    preview.style.display = 'none';
+    renderSuggestions(getMatches(inp.value));
+  };
+
+  inp.onkeydown = e => {
+    const btns = [...sugBox.querySelectorAll('button')];
+    if(!btns.length) return;
+    if(e.key === 'ArrowDown'){
+      e.preventDefault();
+      activeIdx = Math.min(activeIdx+1, btns.length-1);
+    } else if(e.key === 'ArrowUp'){
+      e.preventDefault();
+      activeIdx = Math.max(activeIdx-1, -1);
+    } else if(e.key === 'Enter'){
+      if(activeIdx >= 0){
+        const matches = getMatches(inp.value);
+        if(matches[activeIdx]) selectUnit(matches[activeIdx]);
+      }
+      return;
+    } else return;
+    btns.forEach((b,i) => b.classList.toggle('active', i===activeIdx));
+  };
+}
+
+/* ── SUBMIT GUESS ───────────────────────────────────────────────── */
+
+function glSubmitGuess(){
+  const u = glState.selectedUnit;
+  if(!u) return;
+  if(glState.solved) return;
+  if(glState.guesses.includes(u.name)){
+    // already guessed — flash input
+    document.getElementById('glInput').style.borderColor = 'var(--amber)';
+    setTimeout(()=>{ document.getElementById('glInput').style.borderColor=''; }, 600);
+    return;
+  }
+
+  glState.guesses.push(u.name);
+  if(u.name === glState.answer.name){
+    glState.solved = true;
+    saveRecentPick(glState.todayKey, glState.answer.name);
+  }
+  glSave();
+
+  // Clear search
+  document.getElementById('glInput').value = '';
+  document.getElementById('glSuggest').innerHTML = '';
+  document.getElementById('glPreview').style.display = 'none';
+  glState.selectedUnit = null;
+
+  glRenderAll();
+  glUpdateHint();
+
+  if(glState.solved) glShowEnd();
+}
+
+/* ── HINT ───────────────────────────────────────────────────────── */
+
+function glUpdateHint(){
+  const hintBtn = document.getElementById('glHintBtn');
+  if(glState.solved || glState.guesses.length < 5){
+    hintBtn.classList.add('hide');
+  } else {
+    hintBtn.classList.remove('hide');
+    if(glState.hintShown) glShowHintImage();
+  }
+}
+
+function glShowHintImage(){
+  const wrap = document.getElementById('glHintWrap');
+  const img = document.getElementById('glHintImg');
+  if(!glState.answer || !glState.answer.img) return;
+  img.src = glState.answer.img;
+  wrap.classList.remove('hide');
+  glState.hintShown = true;
+  glSave();
+}
+
+/* ── END SCREEN ─────────────────────────────────────────────────── */
+
+function glShowEnd(){
+  document.getElementById('glGame').style.display = 'none';
+  const endDiv = document.getElementById('glEnd');
+  endDiv.classList.remove('hide');
+  const an = glState.answer;
+  const endImg = document.getElementById('glEndImg');
+  if(an.img) endImg.src = an.img;
+  document.getElementById('glEndName').textContent = an.name;
+  const tries = glState.guesses.length;
+  document.getElementById('glEndTries').textContent =
+    tries === 1 ? 'First try! 🎯' : `Solved in ${tries} ${tries===1?'guess':'guesses'}`;
+
+  glRenderSubmitPanel();
+  glFetchLeaderboard();
+}
+
+/* ── GUNDAMLE LEADERBOARD (same Google Apps Script, different action) ── */
+
+function glRenderSubmitPanel(){
+  const name = getSavedName();
+  if(name){
+    document.getElementById('glSpFirst').classList.add('hide');
+    document.getElementById('glSpKnown').classList.remove('hide');
+    document.getElementById('glSpKnownMsg').textContent = '✓ Submitted as "' + name + '"';
+    glAutoSubmit(name);
+  } else {
+    document.getElementById('glSpFirst').classList.remove('hide');
+    document.getElementById('glSpKnown').classList.add('hide');
+    document.getElementById('glSubmitMsg').textContent = '';
+    document.getElementById('glSubmitBtn').disabled = false;
+  }
+}
+
+async function glAutoSubmit(name){
+  if(!SCRIPT_URL || SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') return;
+  const tries = glState.guesses.length;
+  const p = new URLSearchParams({action:'gundamle', name, date:glState.todayKey, tries, solved:glState.solved?'1':'0'});
+  try{ await fetch(SCRIPT_URL+'?'+p, {redirect:'follow'}); }catch(e){}
+}
+
+async function glSubmitScore(){
+  const inp = document.getElementById('glSubmitName');
+  const name = inp.value.trim();
+  if(!name){
+    document.getElementById('glSubmitMsg').className='submit-msg err';
+    document.getElementById('glSubmitMsg').textContent='Enter a name first.';
+    return;
+  }
+  if(!SCRIPT_URL || SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE'){
+    document.getElementById('glSubmitMsg').className='submit-msg err';
+    document.getElementById('glSubmitMsg').textContent='No leaderboard URL configured.';
+    return;
+  }
+  document.getElementById('glSubmitBtn').disabled = true;
+  document.getElementById('glSubmitMsg').className='submit-msg';
+  document.getElementById('glSubmitMsg').textContent='Submitting…';
+  const tries = glState.guesses.length;
+  const p = new URLSearchParams({action:'gundamle', name, date:glState.todayKey, tries, solved:glState.solved?'1':'0'});
+  try{
+    await fetch(SCRIPT_URL+'?'+p, {redirect:'follow'});
+    setSavedName(name);
+    glRenderSubmitPanel();
+    glFetchLeaderboard();
+  }catch(ex){
+    document.getElementById('glSubmitMsg').className='submit-msg err';
+    document.getElementById('glSubmitMsg').textContent='Submit failed.';
+    document.getElementById('glSubmitBtn').disabled = false;
+  }
+}
+
+async function glFetchLeaderboard(){
+  if(!SCRIPT_URL || SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE'){
+    document.getElementById('glLbBody').innerHTML='<div class="lb-empty">No leaderboard URL.</div>';
+    return;
+  }
+  document.getElementById('glLbStatus').textContent='Loading…';
+  try{
+    const res = await fetch(SCRIPT_URL+'?action=gundamleGet&date='+glState.todayKey, {redirect:'follow'});
+    const text = await res.text();
+    const data = JSON.parse(text);
+    glRenderLeaderboard(data.rows || []);
+    const d=new Date(),p2=n=>String(n).padStart(2,'0');
+    document.getElementById('glLbStatus').textContent='Updated '+p2(d.getHours())+':'+p2(d.getMinutes());
+  }catch(ex){
+    document.getElementById('glLbBody').innerHTML='<div class="lb-empty">Could not load.</div>';
+    document.getElementById('glLbStatus').textContent='Offline';
+  }
+}
+
+function glRenderLeaderboard(rows){
+  const el = document.getElementById('glLbBody');
+  if(!rows.length){ el.innerHTML='<div class="lb-empty">No scores yet — be the first!</div>'; return; }
+  // rows expected: {name, tries, solved}; sort by tries asc
+  const sorted = [...rows].filter(r=>r.solved==='1'||r.solved===1||r.solved===true).sort((a,b)=>Number(a.tries)-Number(b.tries));
+  let html='<table class="lb-table"><thead><tr><th></th><th>Name</th><th class="num">Tries</th></tr></thead><tbody>';
+  sorted.slice(0,8).forEach((r,i)=>{
+    const cls = i===0?' class="gold"':'';
+    const rank = i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1);
+    html+=`<tr${cls}><td class="rank">${rank}</td><td class="pname">${escapeHtml(String(r.name))}</td><td class="num">${r.tries}</td></tr>`;
+  });
+  html+='</tbody></table>';
+  el.innerHTML = html;
+}
+
+/* ── INIT ───────────────────────────────────────────────────────── */
+
+function glOpen(){
+  glLoad(roster);
+  if(!glState.answer){ alert('No units available for Gundamle.'); return; }
+  showSection('gundamle');
+  glSetupSearch();
+  glRenderAll();
+  glUpdateHint();
+
+  // If already solved from today, show end screen directly
+  if(glState.solved){
+    document.getElementById('glGame').style.display = 'none';
+    document.getElementById('glEnd').classList.remove('hide');
+    const an = glState.answer;
+    if(an.img) document.getElementById('glEndImg').src = an.img;
+    document.getElementById('glEndName').textContent = an.name;
+    const tries = glState.guesses.length;
+    document.getElementById('glEndTries').textContent =
+      tries === 1 ? 'First try! 🎯' : `Solved in ${tries} ${tries===1?'guess':'guesses'}`;
+    glRenderSubmitPanel();
+    glFetchLeaderboard();
+  } else {
+    document.getElementById('glGame').style.display = '';
+    document.getElementById('glEnd').classList.add('hide');
+    // also show already-made guesses
+  }
+}
+
+// Wire buttons
+document.getElementById('gundamleBtn').onclick = glOpen;
+document.getElementById('gundamleBack').onclick = () => showSection('start');
+document.getElementById('glSubmit').onclick = glSubmitGuess;
+document.getElementById('glInput').addEventListener('keydown', e => {
+  if(e.key === 'Enter'){
+    // If a unit is selected, submit; else try to auto-select first suggestion
+    if(glState.selectedUnit){ glSubmitGuess(); return; }
+    const first = document.querySelector('#glSuggest button');
+    if(first) first.click();
+  }
+});
+document.getElementById('glHintBtn').onclick = () => {
+  glShowHintImage();
+  document.getElementById('glHintBtn').classList.add('hide');
+};
+document.getElementById('glHintReveal').onclick = e => {
+  const img = document.getElementById('glHintImg');
+  img.classList.add('revealed');
+  e.currentTarget.style.display = 'none';
+};
+document.getElementById('glSubmitBtn').onclick = glSubmitScore;
+document.getElementById('glChangeName').onclick = () => {
+  localStorage.removeItem('gundamPlayerName');
+  glRenderSubmitPanel();
+};
+
+// Countdown timer (runs globally)
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+})();
+/* ═══════════════════════════════════════════════════════════════════ */
 
 /* ═══════════════════════════════════════════════════════════════════
    STARFIELD + SPARK SYSTEM  (single shared canvas #bgCanvas)
