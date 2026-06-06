@@ -334,7 +334,7 @@
   .gl-guess-row,
   .gl-guess-row.header{
     display:grid;
-    grid-template-columns:64px 1fr 90px 62px 64px 64px 64px 90px;
+    grid-template-columns:64px 1fr 96px 68px 72px 64px 72px 96px;
     gap:4px;
   }
   .gl-guess-row.header .gl-cell{
@@ -344,12 +344,14 @@
   }
   .gl-cell{
     display:flex;align-items:center;justify-content:center;
-    padding:6px 5px;border:1px solid var(--line-bright);
+    flex-wrap:wrap;
+    padding:7px 5px;border:1px solid var(--line-bright);
     background:var(--panel-2);
-    font-family:"Share Tech Mono",monospace;font-size:11px;
-    color:var(--txt);text-align:center;min-height:52px;
+    font-family:"Share Tech Mono",monospace;font-size:13px;font-weight:700;
+    color:var(--txt);text-align:center;min-height:52px;height:auto;
+    overflow:visible;word-break:break-word;
     position:relative;transition:background .3s,border-color .3s;
-    line-height:1.25;cursor:default;
+    line-height:1.3;cursor:default;
   }
   .gl-cell.clickable{cursor:zoom-in;}
   .gl-cell.green{background:rgba(78,201,122,.22);border-color:var(--green);color:var(--green);}
@@ -357,10 +359,10 @@
   .gl-cell.red{background:rgba(217,58,58,.14);border-color:var(--red);color:var(--red);}
   .gl-cell.img-cell{padding:3px;cursor:zoom-in;}
   .gl-cell.img-cell img{width:56px;height:48px;object-fit:contain;display:block;}
-  .gl-cell .arr{font-size:15px;display:block;}
-  .gl-cell .val{font-size:10px;display:block;line-height:1.2;}
+  .gl-cell .arr{font-size:17px;display:block;font-weight:700;}
+  .gl-cell .val{font-size:12px;display:block;line-height:1.2;font-weight:700;}
   .gl-cell .color-pair{display:flex;gap:4px;align-items:center;}
-  .gl-cell .csq{width:18px;height:18px;border-radius:2px;border:1px solid rgba(255,255,255,.15);flex-shrink:0;}
+  .gl-cell .csq{width:20px;height:20px;border-radius:2px;border:1px solid rgba(255,255,255,.2);flex-shrink:0;}
 
   /* Gundamle preview — full scanner style */
   .gl-preview-scanner{
@@ -390,9 +392,9 @@
     .gl-guess-row,.gl-guess-row.header{
       grid-template-columns:44px 1fr 70px 44px 46px 46px 46px 68px;
     }
-    .gl-cell{font-size:9px;min-height:40px;padding:4px 2px;}
+    .gl-cell{font-size:10px;min-height:40px;padding:4px 2px;font-weight:700;}
     .gl-cell.img-cell img{width:38px;height:34px;}
-    .gl-cell .csq{width:13px;height:13px;}
+    .gl-cell .csq{width:14px;height:14px;}
   }
 
   /* ── FIELD / INPUT ─────────────────────────────── */
@@ -1598,15 +1600,18 @@ function renderManageList(query=""){
       ctrl.appendChild(inp);ctrl.appendChild(dlbtn);
       // Color swatches row
       const colRow=document.createElement("div");colRow.className="roster-colors";
+      const hasCustom=!!(item.colors&&item.colors[0]);
       const c=item.colors||(typeof GL_COLORS!=="undefined"&&GL_COLORS[item.name])||null;
       if(c&&c[0]&&c[1]){
-        const sq1=document.createElement("div");sq1.className="roster-csq";sq1.style.background=c[0];
-        const sq2=document.createElement("div");sq2.className="roster-csq";sq2.style.background=c[1];
+        const sq1=document.createElement("div");sq1.className="roster-csq";sq1.style.background=c[0];sq1.title=c[0];
+        const sq2=document.createElement("div");sq2.className="roster-csq";sq2.style.background=c[1];sq2.title=c[1];
         const lbl=document.createElement("span");lbl.className="roster-color-label";
-        lbl.textContent=(c[2]||c[0])+" / "+(c[3]||c[1]);
+        lbl.textContent=c[0]+" / "+c[1]+(hasCustom?" ✓":"");
+        lbl.style.color=hasCustom?"var(--green)":"var(--txt-dim)";
         colRow.appendChild(sq1);colRow.appendChild(sq2);colRow.appendChild(lbl);
       } else {
-        const lbl=document.createElement("span");lbl.className="roster-color-label";lbl.textContent="No colors set";
+        const lbl=document.createElement("span");lbl.className="roster-color-label";
+        lbl.textContent="No colors set";lbl.style.color="var(--red)";
         colRow.appendChild(lbl);
       }
       mid.appendChild(top);mid.appendChild(ctrl);mid.appendChild(colRow);
@@ -2176,12 +2181,16 @@ function setupColorEditor(){
     $("ceUnitImg").src=unit.img||"";
     $("ceUnitName").textContent=unit.name;
     const c=getUnitColors(unit);
+    const hasCustom=!!(unit.colors&&unit.colors[0]);
     $("ceHex1").value=c[0]||"#444444";
     $("ceHex2").value=c[1]||"#888888";
     syncPreview($("ceHex1"),$("cePreview1"),$("cePicker1"));
     syncPreview($("ceHex2"),$("cePreview2"),$("cePicker2"));
+    // Show source indicator
+    const msg=$("ceSavedMsg");
+    msg.style.color=hasCustom?"var(--green)":"var(--amber)";
+    msg.textContent=hasCustom?"✓ Custom colors saved — edit below to change.":"⚠ Using hardcoded default — save below to override.";
     display.classList.add("visible");
-    $("ceSavedMsg").textContent="";
     sugBox.innerHTML="";inp.value="";
   }
 
@@ -2191,6 +2200,16 @@ function setupColorEditor(){
       const b=document.createElement("button");
       if(u.img){const img=document.createElement("img");img.src=u.img;img.alt="";b.appendChild(img);}
       const span=document.createElement("span");span.textContent=u.name;b.appendChild(span);
+      // Show existing colors as small swatches
+      const c=getUnitColors(u);
+      const hasCustom=!!(u.colors&&u.colors[0]);
+      const swatchWrap=document.createElement("span");swatchWrap.style.cssText="display:flex;gap:3px;align-items:center;margin-left:auto;flex-shrink:0;";
+      const s1=document.createElement("span");s1.style.cssText=`width:12px;height:12px;border-radius:2px;background:${c[0]};border:1px solid rgba(255,255,255,.15);display:inline-block;`;
+      const s2=document.createElement("span");s2.style.cssText=`width:12px;height:12px;border-radius:2px;background:${c[1]};border:1px solid rgba(255,255,255,.15);display:inline-block;`;
+      const tick=document.createElement("span");tick.style.cssText=`font-size:9px;margin-left:2px;color:${hasCustom?"var(--green)":"var(--txt-dim)"}`;
+      tick.textContent=hasCustom?"✓":"·";
+      swatchWrap.appendChild(s1);swatchWrap.appendChild(s2);swatchWrap.appendChild(tick);
+      b.appendChild(swatchWrap);
       b.onclick=()=>loadUnit(u);
       sugBox.appendChild(b);
     });
@@ -2957,14 +2976,14 @@ function glBuildRow(gu){
 
   // Name
   const nc=document.createElement('div');nc.className='gl-cell '+scoreCell('name',gu,an);
-  nc.style.cssText='font-size:9px;word-break:break-word;line-height:1.2;';
+  nc.style.cssText='font-size:12px;font-weight:700;word-break:break-word;line-height:1.2;';
   const sn=gu.name.replace(/^[A-Z0-9\-\/\.+\[\]]+\s/,'').trim();
   nc.textContent=sn.length>20?sn.slice(0,19)+'…':sn;
   row.appendChild(nc);
 
   // Series
   const sc2=document.createElement('div');sc2.className='gl-cell '+scoreCell('series',gu,an);
-  sc2.style.fontSize='8px';
+  sc2.style.cssText='font-size:11px;font-weight:700;';
   const ss=(gu.series||'?').replace(/^(Gundam |SEED |Build |Builders )/,'').trim();
   sc2.textContent=ss.length>11?ss.slice(0,10)+'…':ss;
   row.appendChild(sc2);
@@ -2977,7 +2996,7 @@ function glBuildRow(gu){
 
   // Role
   const rc=document.createElement('div');rc.className='gl-cell '+scoreCell('role',gu,an);
-  rc.style.fontSize='9px';rc.textContent=GL_ROLE[gu.name]||'?';
+  rc.style.cssText='font-size:12px;font-weight:700;';rc.textContent=GL_ROLE[gu.name]||'?';
   row.appendChild(rc);
 
   // Colors
@@ -2996,7 +3015,7 @@ function glBuildRow(gu){
 
   // Pilot
   const pc=document.createElement('div');pc.className='gl-cell '+scoreCell('pilot',gu,an);
-  pc.style.fontSize='8px';
+  pc.style.cssText='font-size:11px;font-weight:700;';
   const pn=getPilot(gu)||'?';
   const pShort=pn.split(' ')[0];
   pc.textContent=pShort.length>9?pShort.slice(0,8)+'…':pShort;
