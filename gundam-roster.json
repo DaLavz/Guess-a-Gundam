@@ -142,17 +142,17 @@
     "pilot": "Domon Kasshu"
   },
   {
-    "name": "Master Gundam",
+    "name": "GF13-001NHII Master Gundam",
     "img": "images/master-gundam.webp",
     "alt": [
-      "master",
-      "master gundam"
+      "master gundam",
+      "master"
     ],
     "series": "G Gundam",
     "pilot": "Master Asia"
   },
   {
-    "name": "Devil Gundam",
+    "name": "JDG-00X Devil Gundam",
     "img": "images/devil-gundam.webp",
     "alt": [
       "devil gundam",
@@ -397,7 +397,7 @@
     "pilot": "Setsuna F. Seiei"
   },
   {
-    "name": "00 Raiser",
+    "name": "GN-0000+GNR-010 00 Raiser",
     "img": "images/00-raiser.webp",
     "alt": [
       "00 raiser",
@@ -417,7 +417,7 @@
     "pilot": "Johann Trinity"
   },
   {
-    "name": "Reborns Gundam",
+    "name": "CB-0000G/C Reborns Gundam",
     "img": "images/reborns-gundam.webp",
     "alt": [
       "reborns",
@@ -436,10 +436,11 @@
     "pilot": "Mikazuki Augus"
   },
   {
-    "name": "Gundam Barbatos Lupus Rex",
+    "name": "ASW-G-08 Gundam Barbatos Lupus Rex",
     "img": "images/gundam-barbatos-lupus-rex.webp",
     "alt": [
       "lupus rex",
+      "barbatos lupus rex",
       "barbatos lupus"
     ],
     "series": "Iron-Blooded Orphans",
@@ -464,18 +465,18 @@
     "pilot": "Gaelio Bauduin"
   },
   {
-    "name": "Turn A Gundam",
+    "name": "WD-M01 ∀ Gundam",
     "img": "images/turn-a-gundam.webp",
     "alt": [
       "turn a",
-      "∀ gundam",
-      "turn a gundam"
+      "turn a gundam",
+      "∀ gundam"
     ],
     "series": "Turn A Gundam",
     "pilot": "Loran Cehack"
   },
   {
-    "name": "Turn X",
+    "name": "CONCEPT-X 6-1-2 Turn X",
     "img": "images/turn-x.webp",
     "alt": [
       "turn x"
@@ -504,10 +505,11 @@
     "pilot": "Suletta Mercury"
   },
   {
-    "name": "Gundam Lfrith",
+    "name": "MD-0031 Gundam Lfrith",
     "img": "images/gundam-lfrith.webp",
     "alt": [
-      "lfrith"
+      "lfrith",
+      "gundam lfrith"
     ],
     "series": "The Witch from Mercury",
     "pilot": "Prospera Mercury"
@@ -742,7 +744,7 @@
     "pilot": "Usso Ewin"
   },
   {
-    "name": "V2 Assault Buster Gundam",
+    "name": "LM314V23/24 V2 Assault Buster Gundam",
     "img": "images/v2-assault-buster-gundam.webp",
     "alt": [
       "v2 assault buster",
@@ -926,10 +928,11 @@
     "pilot": "Akihiro Altland"
   },
   {
-    "name": "Gundam Vidar",
+    "name": "ASW-G-29 Gundam Vidar",
     "img": "images/gundam-vidar.webp",
     "alt": [
-      "vidar"
+      "vidar",
+      "gundam vidar"
     ],
     "series": "Iron-Blooded Orphans",
     "pilot": "Gaelio Bauduin"
@@ -1168,25 +1171,27 @@
     "pilot": "Zeheart Galette"
   },
   {
-    "name": "Build Burning Gundam",
+    "name": "JMF-1336R Build Burning Gundam",
     "img": "images/build-burning-gundam.webp",
     "alt": [
-      "build burning"
+      "build burning",
+      "build burning gundam"
     ],
     "series": "Build Fighters Try",
     "pilot": "Sekai Kamiki"
   },
   {
-    "name": "Try Burning Gundam",
+    "name": "JMF-1337T Try Burning Gundam",
     "img": "images/try-burning-gundam.webp",
     "alt": [
-      "try burning"
+      "try burning",
+      "try burning gundam"
     ],
     "series": "Build Fighters Try",
     "pilot": "Sekai Kamiki"
   },
   {
-    "name": "Lightning Gundam",
+    "name": "LGZ-91 Lightning Gundam",
     "img": "images/lightning-gundam.webp",
     "alt": [
       "lightning gundam",
@@ -1196,7 +1201,7 @@
     "pilot": "Yuuma Kousaka"
   },
   {
-    "name": "Gundam Tryon 3",
+    "name": "KUMA-PP Gundam Tryon 3",
     "img": "images/gundam-tryon-3.webp",
     "alt": [
       "tryon 3",
@@ -1207,30 +1212,33 @@
     "pilot": "Fumina Hoshino"
   },
   {
-    "name": "Gundam 00 Diver",
+    "name": "GN-0000DVR Gundam 00 Diver",
     "img": "images/gundam-00-diver.webp",
     "alt": [
       "00 diver",
-      "oo diver"
+      "oo diver",
+      "gundam 00 diver"
     ],
     "series": "Build Divers",
     "pilot": "Riku Mikami"
   },
   {
-    "name": "Gundam 00 Sky",
+    "name": "GN-0000DVR/S Gundam 00 Sky",
     "img": "images/gundam-00-sky.webp",
     "alt": [
       "00 sky",
-      "oo sky"
+      "oo sky",
+      "gundam 00 sky"
     ],
     "series": "Build Divers",
     "pilot": "Riku Mikami"
   },
   {
-    "name": "Gundam Seltsam",
+    "name": "GN-1001N Seltsam",
     "img": "images/gundam-seltsam.webp",
     "alt": [
-      "seltsam"
+      "seltsam",
+      "gundam seltsam"
     ],
     "series": "Build Divers",
     "pilot": "Ogre"
