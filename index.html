@@ -3184,8 +3184,6 @@ function glBuildRow(gu){
   return row;
 }
 
-/* ── AUTOCOMPLETE (unified with setupTypeahead) ─────────────── */
-
 function glSetupSearch(){
   const inp=document.getElementById('glInput');
   const sugBox=document.getElementById('glSuggest');
@@ -3193,8 +3191,25 @@ function glSetupSearch(){
   const previewImg=document.getElementById('glPreviewImg');
   const previewName=document.getElementById('glPreviewName');
   let activeIdx=-1;
-
   let glIsSeriesMode=false;
+  let suppressInput=false; // prevents oninput from firing after selectUnit
+
+  function selectUnit(u){
+    suppressInput=true;
+    inp.value=u.name;
+    sugBox.innerHTML='';
+    activeIdx=-1;
+    glState.selectedUnit=u;
+    if(u.img){
+      previewImg.src=u.img;
+      previewName.textContent=u.name;
+      scanner.classList.add('visible');
+    } else {
+      scanner.classList.remove('visible');
+    }
+    // Reset flag after browser has processed the input event
+    requestAnimationFrame(()=>{suppressInput=false;});
+  }
 
   function getMatches(raw){
     const val=raw.toLowerCase().trim();
@@ -3242,7 +3257,9 @@ function glSetupSearch(){
   }
 
   inp.oninput=()=>{
-    glState.selectedUnit=null;scanner.classList.remove('visible');
+    if(suppressInput) return;
+    glState.selectedUnit=null;
+    scanner.classList.remove('visible');
     renderSuggestions(getMatches(inp.value));
   };
 
@@ -3253,7 +3270,7 @@ function glSetupSearch(){
     else if(e.key==='Enter'){
       if(glState.selectedUnit){glSubmitGuess();return;}
       if(activeIdx>=0){const matches=getMatches(inp.value);if(matches[activeIdx])selectUnit(matches[activeIdx]);}
-      else if(btns.length){btns[0].click();}
+      else if(btns.length){const firstBtn=sugBox.querySelector('button');if(firstBtn)firstBtn.onmousedown({preventDefault:()=>{}});}
       return;
     } else return;
     btns.forEach((b,i)=>b.classList.toggle('active',i===activeIdx));
