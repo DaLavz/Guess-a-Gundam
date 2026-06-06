@@ -254,7 +254,7 @@
     padding:12px 14px;font-family:"Share Tech Mono",monospace;font-size:14px;outline:none;
   }
   .ce-search-wrap input:focus{border-color:var(--primary-dim);}
-  .ce-suggest{display:flex;flex-direction:column;gap:3px;margin-bottom:12px;max-height:220px;overflow-y:auto;}
+  .ce-suggest{display:flex;flex-direction:column;gap:3px;margin-bottom:12px;max-height:420px;overflow-y:auto;}
   .ce-suggest:empty{display:none;}
   .ce-suggest button{
     text-align:left;padding:8px 12px;border:1px solid var(--line-bright);
@@ -264,6 +264,16 @@
   }
   .ce-suggest button:hover{border-color:var(--primary-dim);color:var(--primary);}
   .ce-suggest button img{width:36px;height:36px;object-fit:contain;background:#06070a;flex-shrink:0;}
+  /* Series header inside suggest dropdowns */
+  .suggest-series-header{
+    padding:5px 12px 3px;
+    font-family:"Share Tech Mono",monospace;font-size:9px;letter-spacing:3px;
+    text-transform:uppercase;color:var(--primary);
+    border-left:2px solid var(--primary);
+    background:var(--panel-3);
+    margin-top:4px;pointer-events:none;
+  }
+  .suggest-series-header.first{margin-top:0;}
 
   .ce-unit-display{
     border:1px solid var(--line-bright);background:var(--panel-3);
@@ -278,28 +288,35 @@
     font-family:"Teko",sans-serif;font-size:22px;font-weight:700;
     color:var(--txt);letter-spacing:2px;margin-bottom:16px;
   }
-  .ce-color-row{display:flex;gap:12px;align-items:flex-end;margin-bottom:12px;}
-  .ce-color-field{flex:1;}
+  .ce-color-row{display:flex;gap:14px;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;}
+  .ce-color-field{flex:1;min-width:140px;}
   .ce-color-field label{
     display:block;font-family:"Share Tech Mono",monospace;font-size:10px;
-    color:var(--txt-dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;
+    color:var(--txt-dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;
   }
-  .ce-color-inp-wrap{display:flex;align-items:center;gap:8px;}
+  /* Selected color display */
+  .ce-selected-wrap{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
   .ce-color-preview{
-    width:36px;height:36px;border-radius:3px;border:1px solid var(--line-bright);
-    flex-shrink:0;cursor:pointer;
+    width:44px;height:44px;border-radius:3px;border:1px solid var(--line-bright);flex-shrink:0;
   }
-  .ce-color-inp-wrap input[type=text]{
-    flex:1;background:#090a0e;border:1px solid var(--line-bright);color:var(--txt);
-    padding:10px 12px;font-family:"Share Tech Mono",monospace;font-size:13px;outline:none;
+  .ce-selected-name{
+    font-family:"Share Tech Mono",monospace;font-size:13px;font-weight:700;
+    color:var(--txt);letter-spacing:1px;
   }
-  .ce-color-inp-wrap input[type=text]:focus{border-color:var(--primary-dim);}
-  .ce-color-inp-wrap input[type=color]{
-    width:36px;height:36px;padding:2px;border:1px solid var(--line-bright);
-    background:#090a0e;cursor:pointer;flex-shrink:0;
+  .ce-selected-hex{font-family:"Share Tech Mono",monospace;font-size:10px;color:var(--txt-dim);}
+  /* Palette grid */
+  .ce-palette{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:5px;
   }
+  .ce-swatch{
+    width:100%;aspect-ratio:1;border-radius:3px;border:2px solid transparent;
+    cursor:pointer;transition:.1s;position:relative;
+  }
+  .ce-swatch:hover{transform:scale(1.12);z-index:1;}
+  .ce-swatch.selected{border-color:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.4);}
+  .ce-swatch title{}
   .ce-save-btn{
-    width:100%;padding:13px 18px;margin-top:4px;
+    width:100%;padding:13px 18px;margin-top:8px;
     border:1px solid var(--primary-dim);
     background:linear-gradient(180deg,rgba(232,100,10,.14),rgba(232,100,10,.04));
     color:var(--primary);font-family:"Barlow Condensed",sans-serif;
@@ -308,6 +325,8 @@
     clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);
   }
   .ce-save-btn:hover{background:rgba(232,100,10,.22);}
+  /* old inp-wrap — hide if still rendered */
+  .ce-color-inp-wrap{display:none;}
   .ce-saved-msg{
     font-family:"Share Tech Mono",monospace;font-size:11px;
     color:var(--green);letter-spacing:1px;margin-top:8px;min-height:16px;
@@ -388,13 +407,40 @@
     z-index:4;
   }
 
-  @media(max-width:500px){
-    .gl-guess-row,.gl-guess-row.header{
-      grid-template-columns:44px 1fr 70px 44px 46px 46px 46px 68px;
+  @media(max-width:600px){
+    /* Gundamle grid splits into 2 rows of 4 on mobile */
+    .gl-guess-row,
+    .gl-guess-row.header{
+      grid-template-columns:48px 1fr 72px 56px;
+      grid-template-rows:auto auto;
     }
-    .gl-cell{font-size:10px;min-height:40px;padding:4px 2px;font-weight:700;}
-    .gl-cell.img-cell img{width:38px;height:34px;}
-    .gl-cell .csq{width:14px;height:14px;}
+    /* top row: image, name, series, year */
+    .gl-cell:nth-child(1){ grid-column:1; grid-row:1; }
+    .gl-cell:nth-child(2){ grid-column:2; grid-row:1; }
+    .gl-cell:nth-child(3){ grid-column:3; grid-row:1; }
+    .gl-cell:nth-child(4){ grid-column:4; grid-row:1; }
+    /* bottom row: role, colors, era, pilot — each takes 1 of 4 cols */
+    .gl-cell:nth-child(5){ grid-column:1; grid-row:2; }
+    .gl-cell:nth-child(6){ grid-column:2; grid-row:2; }
+    .gl-cell:nth-child(7){ grid-column:3; grid-row:2; }
+    .gl-cell:nth-child(8){ grid-column:4; grid-row:2; }
+    /* header row stays single row, just hide bottom */
+    .gl-guess-row.header .gl-cell:nth-child(n+5){ display:none; }
+    .gl-cell{font-size:11px;min-height:40px;padding:5px 3px;font-weight:700;word-break:break-word;}
+    .gl-cell.img-cell img{width:40px;height:36px;}
+    .gl-cell .csq{width:15px;height:15px;}
+    .gl-cell .arr{font-size:14px;}
+    .gl-cell .val{font-size:11px;}
+
+    /* Leaderboard: make it scrollable horizontally as last resort,
+       but first try to compress columns */
+    .lb-table{font-size:11px;}
+    .lb-table th{font-size:9px;padding:5px 4px;letter-spacing:0;}
+    .lb-table td{padding:5px 4px;font-size:11px;}
+    .lb-table td.pname{max-width:70px;font-size:11px;}
+    .lb-table td.rank{font-size:15px;width:22px;}
+    /* Wrap leaderboard in scrollable container */
+    #lbBody, #glLbBody{overflow-x:auto;-webkit-overflow-scrolling:touch;}
   }
 
   /* ── FIELD / INPUT ─────────────────────────────── */
@@ -405,99 +451,53 @@
   }
   input:focus,textarea:focus,select:focus{border-color:var(--primary-dim);box-shadow:0 0 0 1px rgba(232,100,10,.25);}
 
-/* ── SCANNER FRAME ─────────────────────────────── */
-  .scanner {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 4/3;
-    background: #06070a;
-    border: 1px solid var(--line-bright);
-    overflow: hidden;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* ── SCANNER FRAME ─────────────────────────────── */
+  .scanner{
+    position:relative;width:100%;aspect-ratio:4/3;background:#06070a;
+    border:1px solid var(--line-bright);overflow:hidden;margin-bottom:10px;
+    display:flex;align-items:center;justify-content:center;
   }
 
   /* Corner brackets - angular feel */
-  .scanner::before,
-  .scanner::after {
-    content: "";
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    z-index: 3;
+  .scanner::before,.scanner::after{
+    content:"";position:absolute;width:22px;height:22px;z-index:3;
   }
-  .scanner::before {
-    top: 10px;
-    left: 10px;
-    border-top: 2px solid var(--primary);
-    border-left: 2px solid var(--primary);
-  }
-  .scanner::after {
-    bottom: 10px;
-    right: 10px;
-    border-bottom: 2px solid var(--primary);
-    border-right: 2px solid var(--primary);
-  }
-  .scanner .corner-br {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    width: 22px;
-    height: 22px;
-    border-bottom: 2px solid var(--primary);
-    border-left: 2px solid var(--primary);
-    z-index: 3;
-  }
-  .scanner .corner-tl {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 22px;
-    height: 22px;
-    border-top: 2px solid var(--primary);
-    border-right: 2px solid var(--primary);
-    z-index: 3;
-  }
+  .scanner::before{top:10px;left:10px;border-top:2px solid var(--primary);border-left:2px solid var(--primary);}
+  .scanner::after{bottom:10px;right:10px;border-bottom:2px solid var(--primary);border-right:2px solid var(--primary);}
+  .scanner .corner-br{position:absolute;bottom:10px;left:10px;width:22px;height:22px;border-bottom:2px solid var(--primary);border-left:2px solid var(--primary);z-index:3;}
+  .scanner .corner-tl{position:absolute;top:10px;right:10px;width:22px;height:22px;border-top:2px solid var(--primary);border-right:2px solid var(--primary);z-index:3;}
 
-  /* Core Image display adjustment */
-  .scanner img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Keeps your Gundam dimensions clean without stretching */
-    display: block;
-  }
-  .scanner.clickable {
-    cursor: zoom-in;
-  }
+  .scanner img{width:100%;height:100%;object-fit:contain;display:block;}
+  .scanner.clickable{cursor:zoom-in;}
+  /* Spyglass hint */
+  .spy-hint{position:absolute;bottom:12px;right:12px;z-index:4;
+    background:rgba(9,10,14,.72);border:1px solid var(--primary-dim);
+    color:var(--primary);font-size:15px;width:28px;height:28px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:2px;pointer-events:none;opacity:.7;}
+  /* Manager thumbnail lightbox hint */
+  .thmbwrap .thmb-zoom{position:absolute;bottom:3px;right:3px;
+    background:rgba(9,10,14,.8);color:var(--primary);font-size:11px;
+    width:18px;height:18px;display:flex;align-items:center;justify-content:center;
+    border-radius:1px;pointer-events:none;opacity:0;transition:.15s;z-index:2;}
+  .thmbwrap:hover .thmb-zoom{opacity:1;}
+  .scanner .ph{color:var(--txt-dim);font-family:"Share Tech Mono",monospace;font-size:11px;text-align:center;padding:24px;line-height:1.7;}
 
-  /* Scanline laser beam overlay */
-  .scanline {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 1px;
-    z-index: 2;
-    background: linear-gradient(90deg, transparent 0%, var(--primary) 30%, rgba(232,100,10,.9) 50%, var(--primary) 70%, transparent 100%);
-    opacity: .45;
-    animation: scan 4s linear infinite;
+  /* scan beam */
+  .scanline{
+    position:absolute;left:0;right:0;height:1px;z-index:2;
+    background:linear-gradient(90deg,transparent 0%,var(--primary) 30%,rgba(232,100,10,.9) 50%,var(--primary) 70%,transparent 100%);
+    opacity:.45;animation:scan 4s linear infinite;
   }
-  @keyframes scan {
-    0% { top: 0; }
-    100% { top: 100%; }
-  }
+  @keyframes scan{0%{top:0;}100%{top:100%;}}
 
-  /* Subtle tactical grid background on scanner */
-  .scan-grid {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
+  /* Subtle grid overlay on scanner */
+  .scan-grid{
+    position:absolute;inset:0;z-index:1;pointer-events:none;
     background-image:
-      linear-gradient(rgba(232,100,10,.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(232,100,10,.04) 1px, transparent 1px);
-    background-size: 40px 40px;
+      linear-gradient(rgba(232,100,10,.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(232,100,10,.04) 1px,transparent 1px);
+    background-size:40px 40px;
   }
 
   /* ── BACK BUTTON (in-quiz) ─────────────────────── */
@@ -685,12 +685,14 @@
   .lb-table td{padding:7px 8px;border-bottom:1px solid var(--line);color:var(--txt-mid);vertical-align:middle;}
   .lb-table td.num{text-align:right;color:var(--txt);}
   .lb-table td.rank{color:var(--primary);font-family:"Teko",sans-serif;font-size:18px;width:28px;}
-  .lb-table td.pname{color:var(--txt);font-size:13px;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .lb-table td.pname{color:var(--txt);font-size:13px;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   .lb-table tr:first-child td{padding-top:10px;}
   .lb-table .gold td{color:var(--amber)!important;}
   .lb-table .gold td.pname{color:var(--amber)!important;}
   .lb-empty{font-family:"Share Tech Mono",monospace;font-size:11px;color:var(--txt-dim);text-align:center;padding:18px 0;letter-spacing:1px;}
   .lb-status{font-family:"Share Tech Mono",monospace;font-size:10px;color:var(--txt-dim);letter-spacing:1px;text-align:right;margin-bottom:6px;}
+  /* Leaderboard scroll wrapper */
+  #lbBody, #glLbBody{overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;}
 
   /* Submit score panel */
   .submit-panel{margin-top:18px;border:1px solid var(--primary-dim);background:linear-gradient(180deg,rgba(232,100,10,.08),transparent);padding:16px;}
@@ -738,7 +740,7 @@
     padding:12px 14px;font-family:"Share Tech Mono",monospace;font-size:14px;outline:none;
   }
   .gl-search-wrap input:focus{border-color:rgba(99,210,255,.6);box-shadow:0 0 0 1px rgba(99,210,255,.2);}
-  .gl-suggest{display:flex;flex-direction:column;gap:3px;margin-bottom:10px;max-height:200px;overflow-y:auto;}
+  .gl-suggest{display:flex;flex-direction:column;gap:3px;margin-bottom:10px;max-height:420px;overflow-y:auto;}
   .gl-suggest:empty{margin:0;}
   .gl-suggest button{
     text-align:left;padding:8px 13px;border:1px solid var(--line-bright);
@@ -803,7 +805,8 @@
   /* Leaderboard inside gundamle */
   .gl-lb{margin-top:16px;width:100%;}
   .gl-lb .lb-table th:last-child{text-align:right;}
-  .gl-guesses{display:flex;flex-direction:column;gap:6px;margin-top:14px;}
+  .gl-guesses{display:flex;flex-direction:column;gap:6px;margin-top:14px;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  section{overflow-x:hidden;}
 </style>
 </head>
 <body>
@@ -1114,19 +1117,25 @@
         <div class="ce-color-row">
           <div class="ce-color-field">
             <label>Primary Color</label>
-            <div class="ce-color-inp-wrap">
+            <div class="ce-selected-wrap">
               <div class="ce-color-preview" id="cePreview1"></div>
-              <input type="text" id="ceHex1" placeholder="#rrggbb" maxlength="7">
-              <input type="color" id="cePicker1">
+              <div>
+                <div class="ce-selected-name" id="ceName1">—</div>
+                <div class="ce-selected-hex" id="ceHex1">—</div>
+              </div>
             </div>
+            <div class="ce-palette" id="cePalette1"></div>
           </div>
           <div class="ce-color-field">
             <label>Secondary Color</label>
-            <div class="ce-color-inp-wrap">
+            <div class="ce-selected-wrap">
               <div class="ce-color-preview" id="cePreview2"></div>
-              <input type="text" id="ceHex2" placeholder="#rrggbb" maxlength="7">
-              <input type="color" id="cePicker2">
+              <div>
+                <div class="ce-selected-name" id="ceName2">—</div>
+                <div class="ce-selected-hex" id="ceHex2">—</div>
+              </div>
             </div>
+            <div class="ce-palette" id="cePalette2"></div>
           </div>
         </div>
         <button class="ce-save-btn" id="ceSaveBtn">💾 Save Colors</button>
@@ -1143,6 +1152,35 @@
 <script>
 let roster = [];
 const $=id=>document.getElementById(id);
+
+/* ── SHARED SUGGEST RENDERER ─────────────────────────────────────
+   Renders units into a suggest box with optional series headers.
+   isSeriesSearch=true adds series group headers.
+   extraContent(unit) optionally returns a DOM node appended per row.
+   ────────────────────────────────────────────────────────────────*/
+function renderSuggestList(box, units, onSelect, {isSeriesSearch=false, extraContent=null}={}){
+  box.innerHTML='';
+  if(!units.length) return;
+  let lastSeries=null; let firstHeader=true;
+  units.forEach(u=>{
+    if(isSeriesSearch){
+      const series=u.series||'Other';
+      if(series!==lastSeries){
+        const hdr=document.createElement('div');
+        hdr.className='suggest-series-header'+(firstHeader?' first':'');
+        hdr.textContent=series;
+        box.appendChild(hdr);
+        lastSeries=series; firstHeader=false;
+      }
+    }
+    const b=document.createElement('button');
+    if(u.img){const img=document.createElement('img');img.src=u.img;img.alt='';b.appendChild(img);}
+    const span=document.createElement('span');span.textContent=u.name;b.appendChild(span);
+    if(extraContent){const ex=extraContent(u);if(ex)b.appendChild(ex);}
+    b.onclick=()=>onSelect(u);
+    box.appendChild(b);
+  });
+}
 const seriesList=["Universal Century","G Gundam","Gundam Wing","After War Gundam X","Turn A Gundam","Gundam SEED","SEED Destiny","SEED FREEDOM","Gundam 00","Gundam AGE","Reconguista in G","Iron-Blooded Orphans","The Witch from Mercury","Hathaway's Flash","Gundam GQuuuuuuX","Build Fighters","Build Fighters Try","Builders Beginning G","Build Divers","Build Divers Re:RISE","Other / Custom"];
 
 let quizMode="mc";
@@ -1936,44 +1974,42 @@ function setupTypeahead(inp,sugBox){
 
   let activeIdx=-1;
 
+  let isSeriesMode=false;
+
   function getMatches(raw){
     const val=raw.toLowerCase().trim();
-    if(!val) return [];
-    // Check if it matches a series alias
+    if(!val){isSeriesMode=false;return [];}
     const seriesMatch=SERIES_ALIASES[val];
     if(seriesMatch){
-      return roster.filter(x=>x.series&&x.series.toLowerCase().includes(seriesMatch.toLowerCase())).slice(0,8);
+      isSeriesMode=true;
+      // Return ALL units from that series, sorted by series then name
+      return roster.filter(x=>x.series&&x.series.toLowerCase().includes(seriesMatch.toLowerCase()))
+        .sort((a,b)=>(a.series||'').localeCompare(b.series||'')||a.name.localeCompare(b.name));
     }
-    // Score each unit: exact name contains > word boundary match > alt match
+    isSeriesMode=false;
     const scored=[];
     for(const x of roster){
       const nm=x.name.toLowerCase();
-      let score=0;
-      if(nm.includes(val)) score=3;
-      else if(nm.split(/\s+/).some(w=>w.startsWith(val))) score=2;
-      else if((x.alt||[]).some(a=>a.includes(val))) score=1;
-      // Also partial series alias
+      let sc=0;
+      if(nm.includes(val)) sc=3;
+      else if(nm.split(/\s+/).some(w=>w.startsWith(val))) sc=2;
+      else if((x.alt||[]).some(a=>a.includes(val))) sc=1;
       else{
         for(const [alias,series] of Object.entries(SERIES_ALIASES)){
-          if(alias.startsWith(val)&&x.series&&x.series.toLowerCase().includes(series.toLowerCase())){score=1;break;}
+          if(alias.startsWith(val)&&x.series&&x.series.toLowerCase().includes(series.toLowerCase())){sc=1;break;}
         }
       }
-      if(score>0) scored.push({unit:x,score});
+      if(sc>0) scored.push({unit:x,sc});
     }
-    scored.sort((a,b)=>b.score-a.score);
-    return scored.map(s=>s.unit).slice(0,8);
+    scored.sort((a,b)=>b.sc-a.sc);
+    return scored.map(s=>s.unit);
   }
 
   function renderSuggestions(matches){
-    sugBox.innerHTML="";
     activeIdx=-1;
-    matches.forEach((m,i)=>{
-      const b=document.createElement("button");
-      b.textContent=m.name;
-      b.dataset.idx=i;
-      b.onclick=()=>{inp.value=m.name;sugBox.innerHTML="";activeIdx=-1;inp.focus();};
-      sugBox.appendChild(b);
-    });
+    renderSuggestList(sugBox, matches, (m)=>{
+      inp.value=m.name; sugBox.innerHTML=""; activeIdx=-1; inp.focus();
+    }, {isSeriesSearch: isSeriesMode});
   }
 
   inp.oninput=()=>renderSuggestions(getMatches(inp.value));
@@ -2198,12 +2234,46 @@ setInterval(()=>{
 },1000);
 
 /* ══════════════════════════════════════════════════════════════════
+   COLOR PALETTE
+   ══════════════════════════════════════════════════════════════════ */
+const GL_PALETTE = [
+  {name:"White",       hex:"#e8e8e8"},
+  {name:"Silver",      hex:"#aaaaaa"},
+  {name:"Light Grey",  hex:"#888888"},
+  {name:"Grey",        hex:"#666666"},
+  {name:"Dark Grey",   hex:"#444444"},
+  {name:"Black",       hex:"#111111"},
+  {name:"Red",         hex:"#cc2222"},
+  {name:"Dark Red",    hex:"#880000"},
+  {name:"Pink",        hex:"#cc5577"},
+  {name:"Orange",      hex:"#cc6600"},
+  {name:"Dark Orange", hex:"#994400"},
+  {name:"Yellow",      hex:"#ccaa00"},
+  {name:"Gold",        hex:"#d4aa00"},
+  {name:"Cream",       hex:"#ddddcc"},
+  {name:"Light Green", hex:"#66cc66"},
+  {name:"Green",       hex:"#228822"},
+  {name:"Dark Green",  hex:"#115511"},
+  {name:"Olive",       hex:"#6b7a2f"},
+  {name:"Cyan",        hex:"#22aacc"},
+  {name:"Light Blue",  hex:"#88ccff"},
+  {name:"Blue",        hex:"#2255aa"},
+  {name:"Dark Blue",   hex:"#112266"},
+  {name:"Navy",        hex:"#1a2a5a"},
+  {name:"Purple",      hex:"#882299"},
+  {name:"Dark Purple", hex:"#440055"},
+  {name:"Brown",       hex:"#886600"},
+];
+const GL_PALETTE_MAP={};
+GL_PALETTE.forEach(c=>{GL_PALETTE_MAP[c.name]=c.hex;});
+
+/* ══════════════════════════════════════════════════════════════════
    COLOR EDITOR
    ══════════════════════════════════════════════════════════════════ */
 function getUnitColors(unit){
   if(unit.colors&&unit.colors[0]) return unit.colors;
   if(typeof GL_COLORS!=="undefined"&&GL_COLORS[unit.name]) return GL_COLORS[unit.name];
-  return ["#444444","#888888","Dark","Grey"];
+  return ["#444444","#888888","Dark Grey","Grey"];
 }
 
 function setupColorEditor(){
@@ -2211,16 +2281,28 @@ function setupColorEditor(){
   const sugBox=$("ceSuggest");
   const display=$("ceUnitDisplay");
   let ceUnit=null;
+  let ceSelected={1:null,2:null};
 
-  function hexValid(h){return /^#[0-9a-fA-F]{6}$/.test(h);}
-  function syncPreview(hexEl,previewEl,pickerEl){
-    const v=hexEl.value.trim();
-    if(hexValid(v)){previewEl.style.background=v;pickerEl.value=v;}
+  function buildPalette(el,slot){
+    el.innerHTML="";
+    GL_PALETTE.forEach(c=>{
+      const sw=document.createElement("div");
+      sw.className="ce-swatch";sw.style.background=c.hex;sw.title=c.name;
+      sw.onclick=()=>selectColor(slot,c.name,c.hex);
+      el.appendChild(sw);
+    });
   }
-  $("ceHex1").oninput=()=>syncPreview($("ceHex1"),$("cePreview1"),$("cePicker1"));
-  $("ceHex2").oninput=()=>syncPreview($("ceHex2"),$("cePreview2"),$("cePicker2"));
-  $("cePicker1").oninput=()=>{$("ceHex1").value=$("cePicker1").value;syncPreview($("ceHex1"),$("cePreview1"),$("cePicker1"));};
-  $("cePicker2").oninput=()=>{$("ceHex2").value=$("cePicker2").value;syncPreview($("ceHex2"),$("cePreview2"),$("cePicker2"));};
+
+  function selectColor(slot,name,hex){
+    ceSelected[slot]=name;
+    $("cePreview"+slot).style.background=hex;
+    $("ceName"+slot).textContent=name;
+    $("ceHex"+slot).textContent=hex;
+    const pal=$("cePalette"+slot);
+    [...pal.querySelectorAll(".ce-swatch")].forEach((sw,i)=>{
+      sw.classList.toggle("selected",GL_PALETTE[i].name===name);
+    });
+  }
 
   function loadUnit(unit){
     ceUnit=unit;
@@ -2228,14 +2310,20 @@ function setupColorEditor(){
     $("ceUnitName").textContent=unit.name;
     const c=getUnitColors(unit);
     const hasCustom=!!(unit.colors&&unit.colors[0]);
-    $("ceHex1").value=c[0]||"#444444";
-    $("ceHex2").value=c[1]||"#888888";
-    syncPreview($("ceHex1"),$("cePreview1"),$("cePicker1"));
-    syncPreview($("ceHex2"),$("cePreview2"),$("cePicker2"));
-    // Show source indicator
+    buildPalette($("cePalette1"),1);
+    buildPalette($("cePalette2"),2);
+    // Resolve stored value to palette entry
+    // c = [hex1,hex2,name1,name2] (GL_COLORS) or [hex1,hex2,name1,name2] (saved)
+    const c1=c[2]||c[0];const c2=c[3]||c[1];
+    const p1=GL_PALETTE.find(p=>p.name===c1||p.hex.toLowerCase()===c1.toLowerCase());
+    const p2=GL_PALETTE.find(p=>p.name===c2||p.hex.toLowerCase()===c2.toLowerCase());
+    if(p1) selectColor(1,p1.name,p1.hex);
+    else{$("cePreview1").style.background=c[0]||"#444";$("ceName1").textContent="Unknown";$("ceHex1").textContent=c[0]||"";}
+    if(p2) selectColor(2,p2.name,p2.hex);
+    else{$("cePreview2").style.background=c[1]||"#888";$("ceName2").textContent="Unknown";$("ceHex2").textContent=c[1]||"";}
     const msg=$("ceSavedMsg");
     msg.style.color=hasCustom?"var(--green)":"var(--amber)";
-    msg.textContent=hasCustom?"✓ Custom colors saved — edit below to change.":"⚠ Using hardcoded default — save below to override.";
+    msg.textContent=hasCustom?"✓ Custom colors — tap swatches to change.":"⚠ Default colors — pick and save to override.";
     display.classList.add("visible");
     sugBox.innerHTML="";inp.value="";
   }
@@ -2246,58 +2334,76 @@ function setupColorEditor(){
       const b=document.createElement("button");
       if(u.img){const img=document.createElement("img");img.src=u.img;img.alt="";b.appendChild(img);}
       const span=document.createElement("span");span.textContent=u.name;b.appendChild(span);
-      // Show existing colors as small swatches
       const c=getUnitColors(u);
       const hasCustom=!!(u.colors&&u.colors[0]);
-      const swatchWrap=document.createElement("span");swatchWrap.style.cssText="display:flex;gap:3px;align-items:center;margin-left:auto;flex-shrink:0;";
+      const sw=document.createElement("span");sw.style.cssText="display:flex;gap:3px;align-items:center;margin-left:auto;flex-shrink:0;";
       const s1=document.createElement("span");s1.style.cssText=`width:12px;height:12px;border-radius:2px;background:${c[0]};border:1px solid rgba(255,255,255,.15);display:inline-block;`;
       const s2=document.createElement("span");s2.style.cssText=`width:12px;height:12px;border-radius:2px;background:${c[1]};border:1px solid rgba(255,255,255,.15);display:inline-block;`;
-      const tick=document.createElement("span");tick.style.cssText=`font-size:9px;margin-left:2px;color:${hasCustom?"var(--green)":"var(--txt-dim)"}`;
-      tick.textContent=hasCustom?"✓":"·";
-      swatchWrap.appendChild(s1);swatchWrap.appendChild(s2);swatchWrap.appendChild(tick);
-      b.appendChild(swatchWrap);
-      b.onclick=()=>loadUnit(u);
-      sugBox.appendChild(b);
+      const tk=document.createElement("span");tk.style.cssText=`font-size:9px;margin-left:2px;color:${hasCustom?"var(--green)":"var(--txt-dim)"}`;
+      tk.textContent=hasCustom?"✓":"·";
+      sw.appendChild(s1);sw.appendChild(s2);sw.appendChild(tk);
+      b.appendChild(sw);b.onclick=()=>loadUnit(u);sugBox.appendChild(b);
     });
   }
 
+  const CE_ALIASES={
+    "uc":"Universal Century","zeta":"Universal Century","zz":"Universal Century","unicorn":"Universal Century","thunderbolt":"Universal Century",
+    "gg":"G Gundam","wing":"Gundam Wing","x":"After War Gundam X","turn a":"Turn A Gundam",
+    "seed":"Gundam SEED","destiny":"SEED Destiny","freedom":"SEED FREEDOM",
+    "00":"Gundam 00","age":"Gundam AGE","rg":"Reconguista in G","ibo":"Iron-Blooded Orphans",
+    "wfm":"The Witch from Mercury","hathaway":"Hathaway's Flash","gquuuuuux":"Gundam GQuuuuuuX",
+    "bf":"Build Fighters","bft":"Build Fighters Try","bd":"Build Divers","rerise":"Build Divers Re:RISE","bm":"Build Metaverse",
+  };
+  let ceIsSeriesMode=false;
   inp.oninput=()=>{
-    const val=inp.value.toLowerCase().trim();
-    if(!val){sugBox.innerHTML="";return;}
-    // Reuse SERIES_ALIASES for series search
-    const SERIES_ALIASES={
-      "uc":"Universal Century","zeta":"Universal Century","zz":"Universal Century","unicorn":"Universal Century","thunderbolt":"Universal Century",
-      "gg":"G Gundam","wing":"Gundam Wing","x":"After War Gundam X","turn a":"Turn A Gundam",
-      "seed":"Gundam SEED","destiny":"SEED Destiny","freedom":"SEED FREEDOM",
-      "00":"Gundam 00","age":"Gundam AGE","rg":"Reconguista in G","ibo":"Iron-Blooded Orphans",
-      "wfm":"The Witch from Mercury","hathaway":"Hathaway's Flash","gquuuuuux":"Gundam GQuuuuuuX",
-      "bf":"Build Fighters","bft":"Build Fighters Try","bd":"Build Divers","rerise":"Build Divers Re:RISE","bm":"Build Metaverse",
-    };
-    const seriesMatch=SERIES_ALIASES[val];
-    let results;
-    if(seriesMatch){
-      results=roster.filter(u=>u.series&&u.series.toLowerCase().includes(seriesMatch.toLowerCase()));
+    const val=inp.value.toLowerCase().trim();if(!val){sugBox.innerHTML="";ceIsSeriesMode=false;return;}
+    const sm=CE_ALIASES[val];
+    let res,isSeries=false;
+    if(sm){
+      res=roster.filter(u=>u.series&&u.series.toLowerCase().includes(sm.toLowerCase()))
+        .sort((a,b)=>(a.series||'').localeCompare(b.series||'')||a.name.localeCompare(b.name));
+      isSeries=true;
     } else {
-      results=roster.filter(u=>u.name.toLowerCase().includes(val)||(u.series||"").toLowerCase().includes(val));
+      res=roster.filter(u=>u.name.toLowerCase().includes(val)||(u.series||"").toLowerCase().includes(val));
     }
-    renderSuggestions(results.slice(0,10));
+    ceIsSeriesMode=isSeries;
+    // Build suggestion list with swatches
+    sugBox.innerHTML="";
+    let lastS=null;let fHdr=true;
+    res.forEach(u=>{
+      if(isSeries){
+        const s=u.series||'Other';
+        if(s!==lastS){
+          const hdr=document.createElement('div');
+          hdr.className='suggest-series-header'+(fHdr?' first':'');
+          hdr.textContent=s;sugBox.appendChild(hdr);
+          lastS=s;fHdr=false;
+        }
+      }
+      const b=document.createElement("button");
+      if(u.img){const img=document.createElement("img");img.src=u.img;img.alt="";b.appendChild(img);}
+      const span=document.createElement("span");span.textContent=u.name;b.appendChild(span);
+      const c=getUnitColors(u);
+      const hasCustom=!!(u.colors&&u.colors[0]);
+      const sw=document.createElement("span");sw.style.cssText="display:flex;gap:3px;align-items:center;margin-left:auto;flex-shrink:0;";
+      const s1=document.createElement("span");s1.style.cssText=`width:12px;height:12px;border-radius:2px;background:${c[0]};border:1px solid rgba(255,255,255,.15);display:inline-block;`;
+      const s2=document.createElement("span");s2.style.cssText=`width:12px;height:12px;border-radius:2px;background:${c[1]};border:1px solid rgba(255,255,255,.15);display:inline-block;`;
+      const tk=document.createElement("span");tk.style.cssText=`font-size:9px;margin-left:2px;color:${hasCustom?"var(--green)":"var(--txt-dim)"}`;
+      tk.textContent=hasCustom?"✓":"·";
+      sw.appendChild(s1);sw.appendChild(s2);sw.appendChild(tk);
+      b.appendChild(sw);b.onclick=()=>loadUnit(u);sugBox.appendChild(b);
+    });
   };
 
   $("ceSaveBtn").onclick=()=>{
-    if(!ceUnit) return;
-    const h1=$("ceHex1").value.trim();
-    const h2=$("ceHex2").value.trim();
-    if(!hexValid(h1)||!hexValid(h2)){$("ceSavedMsg").textContent="⚠ Enter valid hex codes (e.g. #ff0000)";$("ceSavedMsg").style.color="var(--red)";return;}
+    if(!ceUnit)return;
+    const n1=ceSelected[1],n2=ceSelected[2];
+    if(!n1||!n2){$("ceSavedMsg").style.color="var(--red)";$("ceSavedMsg").textContent="⚠ Select both colors first.";return;}
+    const h1=GL_PALETTE_MAP[n1],h2=GL_PALETTE_MAP[n2];
     const idx=roster.findIndex(u=>u.name===ceUnit.name);
-    if(idx>=0){
-      roster[idx].colors=[h1,h2];
-      if(typeof GL_COLORS!=="undefined") GL_COLORS[ceUnit.name]=[h1,h2,h1,h2];
-      ceUnit=roster[idx];
-    }
-    $("ceSavedMsg").textContent="✓ Colors saved for "+ceUnit.name;
+    if(idx>=0){roster[idx].colors=[h1,h2,n1,n2];if(typeof GL_COLORS!=="undefined")GL_COLORS[ceUnit.name]=[h1,h2,n1,n2];ceUnit=roster[idx];}
     $("ceSavedMsg").style.color="var(--green)";
-    syncPreview($("ceHex1"),$("cePreview1"),$("cePicker1"));
-    syncPreview($("ceHex2"),$("cePreview2"),$("cePicker2"));
+    $("ceSavedMsg").textContent="✓ Saved: "+n1+" / "+n2;
   };
 }
 
@@ -2852,30 +2958,11 @@ function seededRandom(seed){
 
 function dateToSeed(key){return parseInt(key.replace(/-/g,''),10);}
 
-function getEligibleUnits(rosterArr){
-  // Only units with images; sort alphabetically for stable ordering
-  return rosterArr.filter(u=>u.img&&u.img.trim()!=='').slice().sort((a,b)=>a.name.localeCompare(b.name));
-}
-
-function getRecentPicks(){
-  try{return JSON.parse(localStorage.getItem('gundamleHistory'))||{};}catch(e){return {};}
-}
-function saveRecentPick(dateKey,unitName){
-  const hist=getRecentPicks();
-  hist[dateKey]=unitName;
-  const keys=Object.keys(hist).sort();
-  while(keys.length>15){delete hist[keys.shift()];}
-  try{localStorage.setItem('gundamleHistory',JSON.stringify(hist));}catch(e){}
-}
 
 function getDailyUnit(rosterArr){
   const key=getTodayKey();
-  const eligible=getEligibleUnits(rosterArr);
-  if(!eligible.length) return null;
-  const hist=getRecentPicks();
-  const recentNames=new Set(Object.values(hist));
-  let pool=eligible.filter(u=>!recentNames.has(u.name));
-  if(!pool.length) pool=eligible;
+  const pool=rosterArr.filter(u=>u.img&&u.img.trim()!=='').slice().sort((a,b)=>a.name.localeCompare(b.name));
+  if(!pool.length) return null;
   const rng=seededRandom(dateToSeed(key));
   return pool[Math.floor(rng()*pool.length)];
 }
@@ -2910,7 +2997,7 @@ function updateCountdown(){
 /* ── STATE ───────────────────────────────────────────────────── */
 
 let glState={todayKey:'',answer:null,guesses:[],solved:false,hintShown:false,selectedUnit:null};
-const GL_STORAGE_KEY='gundamleState_v2';
+const GL_STORAGE_KEY='gundamleState_v3';
 
 function glSave(){
   try{localStorage.setItem(GL_STORAGE_KEY,JSON.stringify({todayKey:glState.todayKey,guesses:glState.guesses,solved:glState.solved,hintShown:glState.hintShown}));}catch(e){}
@@ -2931,7 +3018,34 @@ const ERA_ORDER={Early:0,Mid:1,Late:2};
 
 function getUnitColors2(unit){
   if(unit.colors&&unit.colors[0]) return unit.colors;
-  return GL_COLORS[unit.name]||["#444","#888","Dark","Grey"];
+  return GL_COLORS[unit.name]||["#444","#888","Dark Grey","Grey"];
+}
+
+// Extract canonical color names from a colors array
+function colorNames(c){
+  // c = [hex1, hex2, name1, name2]  or  [hex1, hex2]
+  const n1 = c[2] || null;
+  const n2 = c[3] || null;
+  return [n1, n2];
+}
+
+function scoreColors(gu, au){
+  const gc = getUnitColors2(gu);
+  const ac = getUnitColors2(au);
+  const [gn1, gn2] = colorNames(gc);
+  const [an1, an2] = colorNames(ac);
+  // If both have named colors, compare names (normalised)
+  if(gn1 && gn2 && an1 && an2){
+    const gSet = new Set([gn1, gn2]);
+    const aSet = new Set([an1, an2]);
+    if(gn1 === an1 && gn2 === an2) return 'green';
+    if([...gSet].some(n => aSet.has(n))) return 'yellow';
+    return 'red';
+  }
+  // Fallback: compare hex
+  if(gc[0]===ac[0] && gc[1]===ac[1]) return 'green';
+  if(gc[0]===ac[0]||gc[0]===ac[1]||gc[1]===ac[0]||gc[1]===ac[1]) return 'yellow';
+  return 'red';
 }
 
 function scoreCell(cat,gu,au){
@@ -2955,13 +3069,7 @@ function scoreCell(cat,gu,au){
     return 'red';
   }
   if(cat==='role'){const gr=GL_ROLE[gu.name]||'',ar=GL_ROLE[au.name]||'';return gr&&gr===ar?'green':'red';}
-  if(cat==='colors'){
-    const gc=getUnitColors2(gu),ac=getUnitColors2(au);
-    if(gc[0]===ac[0]&&gc[1]===ac[1]) return 'green';
-    if(gc[0]===ac[0]||gc[0]===ac[1]||gc[1]===ac[0]||gc[1]===ac[1]) return 'yellow';
-    if(gc.length>2&&ac.length>2){const gn=[gc[2],gc[3]],an=[ac[2],ac[3]];if(gn.some(n=>an.includes(n))) return 'yellow';}
-    return 'red';
-  }
+  if(cat==='colors') return scoreColors(gu,au);
   if(cat==='era'){
     const ge=GL_ERA[gu.name]||'',ae=GL_ERA[au.name]||'';
     if(!ge||!ae) return 'red';
@@ -3080,11 +3188,18 @@ function glSetupSearch(){
   const previewName=document.getElementById('glPreviewName');
   let activeIdx=-1;
 
+  let glIsSeriesMode=false;
+
   function getMatches(raw){
     const val=raw.toLowerCase().trim();
-    if(!val) return [];
+    if(!val){glIsSeriesMode=false;return [];}
     const seriesMatch=GL_SERIES_ALIASES[val];
-    if(seriesMatch) return roster.filter(x=>x.series&&x.series.toLowerCase().includes(seriesMatch.toLowerCase())).slice(0,8);
+    if(seriesMatch){
+      glIsSeriesMode=true;
+      return roster.filter(x=>x.series&&x.series.toLowerCase().includes(seriesMatch.toLowerCase()))
+        .sort((a,b)=>(a.series||'').localeCompare(b.series||'')||a.name.localeCompare(b.name));
+    }
+    glIsSeriesMode=false;
     const scored=[];
     for(const x of roster){
       const nm=x.name.toLowerCase();let sc=0;
@@ -3095,25 +3210,22 @@ function glSetupSearch(){
       if(sc>0) scored.push({unit:x,sc});
     }
     scored.sort((a,b)=>b.sc-a.sc);
-    return scored.slice(0,8).map(s=>s.unit);
-  }
-
-  function selectUnit(u){
-    inp.value=u.name;
-    sugBox.innerHTML='';
-    glState.selectedUnit=u;
-    if(u.img){
-      previewImg.src=u.img;
-      previewName.textContent=u.name;
-      scanner.classList.add('visible');
-    } else {
-      scanner.classList.remove('visible');
-    }
+    return scored.map(s=>s.unit);
   }
 
   function renderSuggestions(matches){
     sugBox.innerHTML='';activeIdx=-1;
+    let lastSeries=null;let firstHdr=true;
     matches.forEach((m,i)=>{
+      if(glIsSeriesMode){
+        const s=m.series||'Other';
+        if(s!==lastSeries){
+          const hdr=document.createElement('div');
+          hdr.className='suggest-series-header'+(firstHdr?' first':'');
+          hdr.textContent=s;sugBox.appendChild(hdr);
+          lastSeries=s;firstHdr=false;
+        }
+      }
       const b=document.createElement('button');b.dataset.idx=i;
       if(m.img){const img=document.createElement('img');img.src=m.img;img.alt='';b.appendChild(img);}
       const span=document.createElement('span');span.textContent=m.name;b.appendChild(span);
@@ -3150,7 +3262,7 @@ function glSubmitGuess(){
     inp.style.borderColor='var(--amber)';setTimeout(()=>{inp.style.borderColor='';},600);return;
   }
   glState.guesses.push(u.name);
-  if(u.name===glState.answer.name){glState.solved=true;saveRecentPick(glState.todayKey,glState.answer.name);}
+  if(u.name===glState.answer.name){glState.solved=true;}
   glSave();
   document.getElementById('glInput').value='';
   document.getElementById('glSuggest').innerHTML='';
@@ -3212,7 +3324,10 @@ async function glAutoSubmit(name){
   if(!SCRIPT_URL||SCRIPT_URL==='YOUR_APPS_SCRIPT_URL_HERE') return;
   const tries=glState.guesses.length;
   const p=new URLSearchParams({action:'gundamle',name,date:glState.todayKey,tries,solved:glState.solved?'1':'0'});
-  try{await fetch(SCRIPT_URL+'?'+p,{redirect:'follow'});}catch(e){}
+  try{
+    await fetch(SCRIPT_URL+'?'+p,{redirect:'follow'});
+    glFetchLeaderboard();
+  }catch(e){}
 }
 
 async function glSubmitScore(){
