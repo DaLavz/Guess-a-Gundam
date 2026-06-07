@@ -1061,6 +1061,8 @@
         <img id="glEndImg" class="gl-end-img" src="" alt="" style="cursor:zoom-in;" onclick="openLightbox(null,this.src)">
         <div class="gl-end-name" id="glEndName"></div>
         <div class="gl-end-tries" id="glEndTries"></div>
+        <button id="glShowHistory" class="gl-hint-btn" style="margin-top:8px;width:100%;display:none;">📋 Show My Guesses</button>
+        <div id="glHistoryTable" class="hide" style="width:100%;margin-top:10px;overflow-x:auto;"></div>
       </div>
     </section>
 
@@ -1350,6 +1352,10 @@ const PILOT_DATA={
   "ASW-G-47 Gundam Vual":"Rosario Leone",
   "ASW-G-64 Gundam Flauros":"Norba Shino",
   "ASW-G-66 Gundam Kimaris":"Gaelio Bauduin",
+  "ASW-G-32 Gundam Asmoday":"Renzie Dablisco",
+  "ASW-G-35 Gundam Marchosias":"Unknown",
+  "ASW-G-61 Gundam Zagan":"Lond Bron",
+  "Gundam Hajiroboshi":"Wistario Afam",
   "ASW-G-71 Gundam Dantalion":"Zaza Fossil",
   "ASW-G-29 Gundam Vidar":"Gaelio Bauduin",
   // ── The Witch from Mercury ──────────────────────────────────────────
@@ -2573,6 +2579,10 @@ const GL_COLORS = {
   "ASW-G-47 Gundam Vual":["#006633","#e8e8e8","Green","White"],
   "ASW-G-71 Gundam Dantalion":["#2255aa","#e8e8e8","Blue","White"],
   "ASW-G-66 Gundam Kimaris":["#e8e8e8","#cc4400","White","Orange"],
+  "ASW-G-32 Gundam Asmoday":["#2244aa","#e8e8e8","Blue","White"],
+  "ASW-G-35 Gundam Marchosias":["#e8e8e8","#cc3300","White","Red"],
+  "ASW-G-61 Gundam Zagan":["#440066","#e8e8e8","Dark Purple","White"],
+  "Gundam Hajiroboshi":["#e8e8e8","#445577","White","Blue-Grey"],
   "RX-105 Xi Gundam":["#e8e8e8","#2255aa","White","Blue"],
   "RX-104FF Penelope":["#e8e8e8","#cc4400","White","Orange"],
   "RX-94 Mass Production Nu Gundam":["#e8e8e8","#2255aa","White","Blue"],
@@ -2713,6 +2723,8 @@ const GL_YEAR = {
   "ASW-G-64 Gundam Flauros":2016,"ASW-G-29 Gundam Astaroth":2016,
   "ASW-G-47 Gundam Vual":2016,"ASW-G-71 Gundam Dantalion":2017,
   "ASW-G-66 Gundam Kimaris":2015,
+  "ASW-G-32 Gundam Asmoday":2016,"ASW-G-35 Gundam Marchosias":2016,
+  "ASW-G-61 Gundam Zagan":2016,"Gundam Hajiroboshi":2016,
   "RX-105 Xi Gundam":2021,"RX-104FF Penelope":2021,
   "RX-94 Mass Production Nu Gundam":2021,"TX-ff104 Alyzeus":2026,
   "XVX-016 Gundam Aerial":2022,"XVX-016RN Gundam Aerial Rebuild":2022,
@@ -2813,6 +2825,8 @@ const GL_ROLE = {
   "ASW-G-64 Gundam Flauros":"Side","ASW-G-29 Gundam Astaroth":"Side",
   "ASW-G-47 Gundam Vual":"Villain","ASW-G-71 Gundam Dantalion":"Side",
   "ASW-G-66 Gundam Kimaris":"Villain",
+  "ASW-G-32 Gundam Asmoday":"Side","ASW-G-35 Gundam Marchosias":"Side",
+  "ASW-G-61 Gundam Zagan":"Villain","Gundam Hajiroboshi":"MC",
   "RX-105 Xi Gundam":"MC","RX-104FF Penelope":"Villain",
   "RX-94 Mass Production Nu Gundam":"Side","TX-ff104 Alyzeus":"Villain",
   "XVX-016 Gundam Aerial":"MC","XVX-016RN Gundam Aerial Rebuild":"MC",
@@ -2913,6 +2927,8 @@ const GL_ERA = {
   "ASW-G-64 Gundam Flauros":"Mid","ASW-G-29 Gundam Astaroth":"Early",
   "ASW-G-47 Gundam Vual":"Mid","ASW-G-71 Gundam Dantalion":"Late",
   "ASW-G-66 Gundam Kimaris":"Early",
+  "ASW-G-32 Gundam Asmoday":"Mid","ASW-G-35 Gundam Marchosias":"Early",
+  "ASW-G-61 Gundam Zagan":"Mid","Gundam Hajiroboshi":"Early",
   "RX-105 Xi Gundam":"Early","RX-104FF Penelope":"Early",
   "RX-94 Mass Production Nu Gundam":"Early","TX-ff104 Alyzeus":"Late",
   "XVX-016 Gundam Aerial":"Early","XVX-016RN Gundam Aerial Rebuild":"Late",
@@ -3359,6 +3375,22 @@ function glShowHintImage(){
   glState.hintShown=true;glSave();
 }
 
+// Build the full guess history grid for the end screen
+function glBuildFullGrid(){
+  const wrap=document.createElement('div');
+  wrap.style.cssText='display:flex;flex-direction:column;gap:6px;';
+  // Header
+  const hdr=document.createElement('div');hdr.className='gl-guess-row header';
+  ['Image','Name','Series','Year','Role','Colors','Era','Pilot'].forEach(lbl=>{
+    const c=document.createElement('div');c.className='gl-cell';c.textContent=lbl;hdr.appendChild(c);
+  });
+  wrap.appendChild(hdr);
+  glState.guesses.forEach(name=>{
+    const u=roster.find(x=>x.name===name);if(u)wrap.appendChild(glBuildRow(u));
+  });
+  return wrap;
+}
+
 /* ── END SCREEN ─────────────────────────────────────────────── */
 
 function glShowEnd(){
@@ -3369,6 +3401,23 @@ function glShowEnd(){
   document.getElementById('glEndName').textContent=an.name;
   const tries=glState.guesses.length;
   document.getElementById('glEndTries').textContent=tries===1?'First try! 🎯':`Solved in ${tries} guess${tries===1?'':'es'}`;
+
+  // Show history button only if there were multiple guesses
+  const histBtn=document.getElementById('glShowHistory');
+  const histTable=document.getElementById('glHistoryTable');
+  if(tries > 1){
+    histBtn.style.display='';
+    histBtn.textContent='📋 Show My Guesses ('+tries+')';
+    // Pre-build the table (hidden until toggled)
+    histTable.innerHTML='';
+    histTable.appendChild(glBuildFullGrid());
+    histBtn.onclick=()=>{
+      const open=histTable.classList.toggle('hide');
+      histBtn.textContent=(open?'📋 Show':'🔼 Hide')+' My Guesses ('+tries+')';
+    };
+  } else {
+    histBtn.style.display='none';
+  }
 }
 
 /* ── INIT ────────────────────────────────────────────────────── */
@@ -3388,6 +3437,9 @@ function glOpen(){
     document.getElementById('glEndName').textContent=an.name;
     const tries=glState.guesses.length;
     document.getElementById('glEndTries').textContent=tries===1?'First try! 🎯':`Solved in ${tries} guess${tries===1?'':'es'}`;
+    const hb=document.getElementById('glShowHistory');
+    const ht=document.getElementById('glHistoryTable');
+    if(tries>1){hb.style.display='';hb.textContent='📋 Show My Guesses ('+tries+')';ht.innerHTML='';ht.appendChild(glBuildFullGrid());hb.onclick=()=>{const o=ht.classList.toggle('hide');hb.textContent=(o?'📋 Show':'🔼 Hide')+' My Guesses ('+tries+')';};}else{hb.style.display='none';}
   } else {
     document.getElementById('glGame').style.display='';
     document.getElementById('glEnd').classList.add('hide');
