@@ -960,6 +960,17 @@
       <div class="verdict" id="zVerdict"></div>
       <div class="reveal hide" id="zReveal"></div>
       <button class="btn hide" id="zNext">Next ▶</button>
+
+      <!-- FAIL SCREEN -->
+      <div id="zFail" class="hide" style="margin-top:18px;text-align:center;">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:4px;color:var(--red);margin-bottom:8px;text-transform:uppercase;">— Target Lost —</div>
+        <div style="font-family:'Teko',sans-serif;font-size:52px;font-weight:700;color:var(--red);line-height:1;text-shadow:0 0 24px rgba(217,58,58,.4);">FAILED</div>
+        <div id="zFailStreak" style="font-family:'Share Tech Mono',monospace;font-size:13px;color:var(--txt-dim);letter-spacing:2px;margin:10px 0 20px;"></div>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+          <button class="btn" id="zFailAgain" style="flex:1;max-width:200px;">▶ Try Again</button>
+          <button class="btn ghost" id="zFailMenu" style="flex:1;max-width:200px;">◀ Menu</button>
+        </div>
+      </div>
     </section>
 
     <!-- ARTSTYLE SECTION -->
@@ -1143,11 +1154,8 @@
 let roster = [];
 const $=id=>document.getElementById(id);
 
-/* ── SHARED SUGGEST RENDERER ─────────────────────────────────────
-   Renders units into a suggest box with optional series headers.
-   isSeriesSearch=true adds series group headers.
-   extraContent(unit) optionally returns a DOM node appended per row.
-   ────────────────────────────────────────────────────────────────*/
+// SHARED SUGGEST RENDERER: renders units into a suggest box with optional series headers.
+// isSeriesSearch=true adds series group headers; showImages=true shows thumbnails.
 function renderSuggestList(box, units, onSelect, {isSeriesSearch=false, extraContent=null, showImages=false}={}){
   box.innerHTML='';
   if(!units.length) return;
@@ -1361,11 +1369,11 @@ const PILOT_DATA={
   "RX-104FF Penelope":"Lane Aim",
   "TX-ff104 Alyzeus":"Gawain Browne",
   // ── Gundam GQuuuuuuX ────────────────────────────────────────────────
-  "GQuuuuuuX":"GQuuuuuuX",
-  "GFreD":"Fred",
-  "Red Gundam":"Red",
-  "White Gundam":"White",
-  "01 Gundam":"01",
+  "GQuuuuuuX":"Amate Yuzuriha",
+  "GFreD":"Nyaan",
+  "Red Gundam":"Shuji Ito",
+  "White Gundam":"Char Aznable",
+  "01 Gundam":"Amuro Ray",
   // ── Build Fighters ──────────────────────────────────────────────────
   "AC-01 Miss Sazabi":"Aila Jyrkiäinen",
   "GAT-X105B Build Strike Gundam":"Sei Iori & Reiji",
@@ -1600,12 +1608,12 @@ function getSanitizedFilename(name){return name.toLowerCase().replace(/[^a-z0-9]
 
 async function downloadTargetImage(url,defaultName){
   if(!url)return;
+  // Use the actual filename from the url path, not a sanitized version of the name
+  const existingFilename=url.split('/').pop()||getSanitizedFilename(defaultName)+".jpg";
   try{
     const response=await fetch(url);if(!response.ok)throw new Error("Network error");
     const blob=await response.blob();const objectUrl=URL.createObjectURL(blob);
-    let ext="jpg";
-    if(blob.type==="image/png")ext="png";else if(blob.type==="image/webp")ext="webp";else if(blob.type==="image/gif")ext="gif";
-    const link=document.createElement("a");link.href=objectUrl;link.download=`${getSanitizedFilename(defaultName)}.${ext}`;
+    const link=document.createElement("a");link.href=objectUrl;link.download=existingFilename;
     document.body.appendChild(link);link.click();document.body.removeChild(link);URL.revokeObjectURL(objectUrl);
   }catch(error){
     const fallbackLink=document.createElement("a");fallbackLink.href=url;fallbackLink.target="_blank";
@@ -1623,9 +1631,9 @@ async function downloadAllImagesAsZip(){
     const item=unitsWithImages[i];btn.textContent=`Downloading (${i+1}/${unitsWithImages.length})...`;
     try{
       const response=await fetch(item.img);if(!response.ok)throw new Error("404");
-      const blob=await response.blob();let ext="jpg";
-      if(blob.type==="image/png")ext="png";else if(blob.type==="image/webp")ext="webp";else if(blob.type==="image/gif")ext="gif";
-      imgFolder.file(`${getSanitizedFilename(item.name)}.${ext}`,blob);successfulDownloads++;
+      const blob=await response.blob();
+      const existingFilename=item.img.split('/').pop()||getSanitizedFilename(item.name)+".jpg";
+      imgFolder.file(existingFilename,blob);successfulDownloads++;
     }catch(err){console.warn(`Skipping ${item.name}`,err);}
   }
   if(successfulDownloads===0){alert("All downloads failed. Check CORS.");btn.disabled=false;btn.textContent=originalText;return;}
@@ -1790,6 +1798,7 @@ function startQuiz(){
   }
   showSection(quizMode==="zoom"?"zoom":"quiz");
   score=0;curIdx=0;misidentified=[];zoomStreak=0;updateZoomStreak();
+  if($('zFail')) $('zFail').classList.add('hide');
   let pools=[...roster];
   for(let i=pools.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pools[i],pools[j]]=[pools[j],pools[i]];}
   let c=pools.length;
@@ -1957,7 +1966,7 @@ function setupTypeahead(inp,sugBox){
     "wfm":"The Witch from Mercury","witch":"The Witch from Mercury","mercury":"The Witch from Mercury",
     "hathaway":"Hathaway's Flash","flash":"Hathaway's Flash",
     "gquuuuuux":"Gundam GQuuuuuuX","gquux":"Gundam GQuuuuuuX",
-    "bf":"Build Fighters","build fighters":"Build Fighters","build":"Build",
+    "bf":"Build Fighters","build fighters":"Build Fighters","fighters":"=Build Fighters","build":"Build",
     "bft":"Build Fighters Try","try":"Build Fighters Try",
     "bbg":"Builders Beginning G","beginning":"Builders Beginning G","builders":"Builders Beginning G",
     "bd":"Build Divers","divers":"Build Divers",
@@ -1976,7 +1985,7 @@ function setupTypeahead(inp,sugBox){
     if(seriesMatch){
       isSeriesMode=true;
       // Return ALL units from that series, sorted by series then name
-      return roster.filter(x=>x.series&&x.series.toLowerCase().includes(seriesMatch.toLowerCase()))
+      return roster.filter(x=>x.series&&(seriesMatch.startsWith("=")?x.series===seriesMatch.slice(1):x.series.toLowerCase().includes(seriesMatch.toLowerCase())))
         .sort((a,b)=>(a.series||'').localeCompare(b.series||'')||a.name.localeCompare(b.name));
     }
     isSeriesMode=false;
@@ -2101,7 +2110,16 @@ function handleZoomAnswer(){
       $("zImg").style.transform="scale(1) translate(0,0)";
       $("zInput").disabled=true;$("zSuggest").innerHTML="";$("zSubmit").classList.add("hide");
       $("zVerdict").className="verdict no";$("zVerdict").textContent="✕ TARGET LOST";
-      zoomStreak=0;updateZoomStreak();misidentified.push(item);showZoomReveal();
+      misidentified.push(item);
+      // End the session immediately on wrong answer
+      const peakStreak=zoomStreak;
+      zoomStreak=0;updateZoomStreak();recordZoomStreak();
+      // Show the answer briefly then go to fail screen
+      $("zReveal").innerHTML='<span style="color:var(--red);font-size:11px;letter-spacing:2px;display:block;margin-bottom:6px;">IDENTIFICATION FAILED</span>'+escapeHtml(item.name)+(item.series?`<small>Series: ${escapeHtml(item.series)}</small>`:'');
+      $("zReveal").classList.remove("hide");
+      $("zEntry").classList.add("hide");
+      $("zNext").classList.add("hide");
+      setTimeout(()=>showZoomFail(peakStreak), 1800);
     }
   }
 }
@@ -2114,6 +2132,28 @@ function showZoomReveal(){
 }
 
 $("zNext").onclick=()=>{curIdx++;if(curIdx<sessionUnits.length){setupZoomQuestion();}else{showZoomEnd();}};
+
+/* ZOOM FAIL SCREEN */
+function showZoomFail(peakStreak){
+  autoSubmit();
+  // Hide game elements, show fail screen
+  $('zReveal').classList.add('hide');
+  $('zVerdict').textContent='';
+  $('zFail').classList.remove('hide');
+  $('zFailStreak').textContent = peakStreak > 0
+    ? `Peak streak: ${peakStreak} unit${peakStreak===1?'':'s'}`
+    : 'Streak: 0';
+}
+
+$('zFailAgain').onclick=()=>{
+  $('zFail').classList.add('hide');
+  startQuiz();
+};
+$('zFailMenu').onclick=()=>{
+  $('zFail').classList.add('hide');
+  zoomStreak=0;updateZoomStreak();
+  showSection('start');
+};
 
 /* ZOOM END SCREEN */
 function showZoomEnd(){
@@ -2258,7 +2298,7 @@ const GL_PALETTE = [
   {name:"Brown",       hex:"#886600"},
 ];
 const GL_PALETTE_MAP={};
-GL_PALETTE.forEach(c=>{GL_PALETTE_MAP[c.name]=c.hex;});
+GL_PALETTE.forEach(p=>{GL_PALETTE_MAP[p.name]=p.hex;});
 
 /* ══════════════════════════════════════════════════════════════════
    COLOR EDITOR
@@ -2345,7 +2385,7 @@ function setupColorEditor(){
     "seed":"Gundam SEED","destiny":"SEED Destiny","freedom":"SEED FREEDOM",
     "00":"Gundam 00","age":"Gundam AGE","rg":"Reconguista in G","ibo":"Iron-Blooded Orphans",
     "wfm":"The Witch from Mercury","hathaway":"Hathaway's Flash","gquuuuuux":"Gundam GQuuuuuuX",
-    "bf":"Build Fighters","build fighters":"Build Fighters","build":"Build",
+    "bf":"Build Fighters","build fighters":"Build Fighters","fighters":"=Build Fighters","build":"Build",
     "bft":"Build Fighters Try","try":"Build Fighters Try",
     "bbg":"Builders Beginning G","beginning":"Builders Beginning G","builders":"Builders Beginning G",
     "bd":"Build Divers","divers":"Build Divers",
@@ -2357,7 +2397,7 @@ function setupColorEditor(){
     const sm=CE_ALIASES[val];
     let res,isSeries=false;
     if(sm){
-      res=roster.filter(u=>u.series&&u.series.toLowerCase().includes(sm.toLowerCase()))
+      res=roster.filter(u=>u.series&&(sm.startsWith("=")?u.series===sm.slice(1):u.series.toLowerCase().includes(sm.toLowerCase())))
         .sort((a,b)=>(a.series||'').localeCompare(b.series||'')||a.name.localeCompare(b.name));
       isSeries=true;
     } else {
@@ -2931,7 +2971,7 @@ const GL_SERIES_ALIASES={
   "wfm":"The Witch from Mercury","witch":"The Witch from Mercury","mercury":"The Witch from Mercury",
   "hathaway":"Hathaway's Flash","flash":"Hathaway's Flash",
   "gquuuuuux":"Gundam GQuuuuuuX","gquux":"Gundam GQuuuuuuX",
-  "bf":"Build Fighters","build fighters":"Build Fighters","build":"Build",
+  "bf":"Build Fighters","build fighters":"Build Fighters","fighters":"=Build Fighters","build":"Build",
   "bft":"Build Fighters Try","try":"Build Fighters Try",
   "bbg":"Builders Beginning G","beginning":"Builders Beginning G","builders":"Builders Beginning G",
   "bd":"Build Divers","divers":"Build Divers",
@@ -3223,7 +3263,7 @@ function glSetupSearch(){
     const seriesMatch=GL_SERIES_ALIASES[val];
     if(seriesMatch){
       glIsSeriesMode=true;
-      return roster.filter(x=>x.series&&x.series.toLowerCase().includes(seriesMatch.toLowerCase()))
+      return roster.filter(x=>x.series&&(seriesMatch.startsWith("=")?x.series===seriesMatch.slice(1):x.series.toLowerCase().includes(seriesMatch.toLowerCase())))
         .sort((a,b)=>(a.series||'').localeCompare(b.series||'')||a.name.localeCompare(b.name));
     }
     glIsSeriesMode=false;
