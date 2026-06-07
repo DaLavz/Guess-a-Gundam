@@ -1940,7 +1940,14 @@
       "asmoday",
       "gundam asmoday"
     ],
-    "series": "Iron-Blooded Orphans"
+    "series": "Iron-Blooded Orphans",
+    "pilot": "Renzie Dablisco",
+    "colors": [
+      "#2244aa",
+      "#e8e8e8",
+      "Blue",
+      "White"
+    ]
   },
   {
     "name": "ASW-G-35 Gundam Marchosias",
@@ -1948,7 +1955,14 @@
     "alt": [
       "marchosias. gundam marchosias"
     ],
-    "series": "Iron-Blooded Orphans"
+    "series": "Iron-Blooded Orphans",
+    "pilot": "Unknown",
+    "colors": [
+      "#e8e8e8",
+      "#cc3300",
+      "White",
+      "Red"
+    ]
   },
   {
     "name": "ASW-G-61 Gundam Zagan",
@@ -1957,7 +1971,14 @@
       "zagan",
       "gundam zagan"
     ],
-    "series": "Iron-Blooded Orphans"
+    "series": "Iron-Blooded Orphans",
+    "pilot": "Lond Bron",
+    "colors": [
+      "#440066",
+      "#e8e8e8",
+      "Dark Purple",
+      "White"
+    ]
   },
   {
     "name": "Gundam Hajiroboshi",
@@ -1966,6 +1987,13 @@
       "hajiroboshi",
       "gundam hajiroboshi"
     ],
-    "series": "Iron-Blooded Orphans"
+    "series": "Iron-Blooded Orphans",
+    "pilot": "Wistario Afam",
+    "colors": [
+      "#e8e8e8",
+      "#445577",
+      "White",
+      "Blue-Grey"
+    ]
   }
 ]
