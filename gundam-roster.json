@@ -143,7 +143,7 @@
   },
   {
     "name": "GF13-001NHII Master Gundam",
-    "img": "images/master-gundam.webp",
+    "img": "images/gf13-001nhii-master-gundam.webp",
     "alt": [
       "master gundam",
       "master"
@@ -153,7 +153,7 @@
   },
   {
     "name": "JDG-00X Devil Gundam",
-    "img": "images/devil-gundam.webp",
+    "img": "images/jdg-00x-devil-gundam.webp",
     "alt": [
       "devil gundam",
       "dark gundam"
@@ -398,7 +398,7 @@
   },
   {
     "name": "GN-0000+GNR-010 00 Raiser",
-    "img": "images/00-raiser.webp",
+    "img": "images/gn-0000-gnr-010-00-raiser.webp",
     "alt": [
       "00 raiser",
       "oo raiser"
@@ -418,7 +418,7 @@
   },
   {
     "name": "CB-0000G/C Reborns Gundam",
-    "img": "images/reborns-gundam.webp",
+    "img": "images/cb-0000g-c-reborns-gundam.webp",
     "alt": [
       "reborns",
       "reborns gundam"
@@ -437,7 +437,7 @@
   },
   {
     "name": "ASW-G-08 Gundam Barbatos Lupus Rex",
-    "img": "images/gundam-barbatos-lupus-rex.webp",
+    "img": "images/asw-g-08-gundam-barbatos-lupus-rex.webp",
     "alt": [
       "lupus rex",
       "barbatos lupus rex",
@@ -466,7 +466,7 @@
   },
   {
     "name": "WD-M01 Turn A Gundam",
-    "img": "images/turn-a-gundam.webp",
+    "img": "images/wd-m01-turn-a-gundam.webp",
     "alt": [
       "turn a",
       "turn a gundam",
@@ -477,7 +477,7 @@
   },
   {
     "name": "CONCEPT-X 6-1-2 Turn X",
-    "img": "images/turn-x.webp",
+    "img": "images/concept-x-6-1-2-turn-x.webp",
     "alt": [
       "turn x"
     ],
@@ -506,7 +506,7 @@
   },
   {
     "name": "MD-0031 Gundam Lfrith",
-    "img": "images/gundam-lfrith.webp",
+    "img": "images/md-0031-gundam-lfrith.webp",
     "alt": [
       "lfrith",
       "gundam lfrith"
@@ -528,7 +528,7 @@
   },
   {
     "name": "TX-ff104 Alyzeus",
-    "img": "images/TX-ff104 Alyzeus.webp",
+    "img": "images/tx-ff104-alyzeus.webp",
     "alt": [
       "alyzeus",
       "TX ff104",
@@ -539,7 +539,7 @@
   },
   {
     "name": "RX-94 Mass Production Nu Gundam",
-    "img": "images/RX-94 Mass Production Type Nu Gundam.webp",
+    "img": "images/rx-94-mass-production-nu-gundam.webp",
     "alt": [
       "mp nu",
       "mass production nu gundam",
@@ -745,7 +745,7 @@
   },
   {
     "name": "LM314V23/24 V2 Assault Buster Gundam",
-    "img": "images/v2-assault-buster-gundam.webp",
+    "img": "images/lm314v23-24-v2-assault-buster-gundam.webp",
     "alt": [
       "v2 assault buster",
       "assault buster"
@@ -929,7 +929,7 @@
   },
   {
     "name": "ASW-G-29 Gundam Vidar",
-    "img": "images/gundam-vidar.webp",
+    "img": "images/asw-g-29-gundam-vidar.webp",
     "alt": [
       "vidar",
       "gundam vidar"
@@ -1172,7 +1172,7 @@
   },
   {
     "name": "JMF-1336R Build Burning Gundam",
-    "img": "images/build-burning-gundam.webp",
+    "img": "images/jmf-1336r-build-burning-gundam.webp",
     "alt": [
       "build burning",
       "build burning gundam"
@@ -1182,7 +1182,7 @@
   },
   {
     "name": "JMF-1337T Try Burning Gundam",
-    "img": "images/try-burning-gundam.webp",
+    "img": "images/jmf-1337t-try-burning-gundam.webp",
     "alt": [
       "try burning",
       "try burning gundam"
@@ -1192,7 +1192,7 @@
   },
   {
     "name": "LGZ-91 Lightning Gundam",
-    "img": "images/lightning-gundam.webp",
+    "img": "images/lgz-91-lightning-gundam.webp",
     "alt": [
       "lightning gundam",
       "lightning"
@@ -1202,7 +1202,7 @@
   },
   {
     "name": "KUMA-PP Gundam Tryon 3",
-    "img": "images/gundam-tryon-3.webp",
+    "img": "images/kuma-pp-gundam-tryon-3.webp",
     "alt": [
       "tryon 3",
       "tryon",
@@ -1213,7 +1213,7 @@
   },
   {
     "name": "GN-0000DVR Gundam 00 Diver",
-    "img": "images/gundam-00-diver.webp",
+    "img": "images/gn-0000dvr-gundam-00-diver.webp",
     "alt": [
       "00 diver",
       "oo diver",
@@ -1224,7 +1224,7 @@
   },
   {
     "name": "GN-0000DVR/S Gundam 00 Sky",
-    "img": "images/gundam-00-sky.webp",
+    "img": "images/gn-0000dvr-s-gundam-00-sky.webp",
     "alt": [
       "00 sky",
       "oo sky",
@@ -1235,7 +1235,7 @@
   },
   {
     "name": "GN-1001N Seltsam",
-    "img": "images/gundam-seltsam.webp",
+    "img": "images/gn-1001n-seltsam.webp",
     "alt": [
       "seltsam",
       "gundam seltsam"
@@ -1266,7 +1266,7 @@
   },
   {
     "name": "PFF-X7/E3 Earthree Gundam",
-    "img": "images/earthree-gundam.webp",
+    "img": "images/pff-x7-e3-earthree-gundam.webp",
     "alt": [
       "earthree"
     ],
@@ -1275,7 +1275,7 @@
   },
   {
     "name": "PFF-X7/J5 Jupitive Gundam",
-    "img": "images/jupitive-gundam.webp",
+    "img": "images/pff-x7-j5-jupitive-gundam.webp",
     "alt": [
       "jupitive"
     ],
@@ -1284,7 +1284,7 @@
   },
   {
     "name": "PFF-X7II/U7 Uraven Gundam",
-    "img": "images/uraven-gundam.webp",
+    "img": "images/pff-x7ii-u7-uraven-gundam.webp",
     "alt": [
       "uraven"
     ],
@@ -1293,7 +1293,7 @@
   },
   {
     "name": "ZGMF-X19AK Gundam Justice Knight",
-    "img": "images/gundam-justice-knight.webp",
+    "img": "images/zgmf-x19ak-gundam-justice-knight.webp",
     "alt": [
       "justice knight"
     ],
@@ -1302,7 +1302,7 @@
   },
   {
     "name": "AGP-X1/E3 Alus Earthree Gundam",
-    "img": "images/alus-earthree-gundam.webp",
+    "img": "images/agp-x1-e3-alus-earthree-gundam.webp",
     "alt": [
       "alus earthree",
       "alus"
@@ -1312,7 +1312,7 @@
   },
   {
     "name": "RX-0 Unicorn Gundam Phenex",
-    "img": "images/RX-0 Unicorn Gundam Phenex.webp",
+    "img": "images/rx-0-unicorn-gundam-phenex.webp",
     "alt": [
       "phenex",
       "gundam phenex"
@@ -1322,7 +1322,7 @@
   },
   {
     "name": "RX-9 Narrative Gundam",
-    "img": "images/RX-9 Narrative Gundam.webp",
+    "img": "images/rx-9-narrative-gundam.webp",
     "alt": [
       "narrative",
       "narrative gundam"
@@ -1332,7 +1332,7 @@
   },
   {
     "name": "RX-78NT-1 Gundam NT-1",
-    "img": "images/RX-78NT-1 Gundam NT-1.webp",
+    "img": "images/rx-78nt-1-gundam-nt-1.webp",
     "alt": [
       "nt",
       "nt",
@@ -1344,7 +1344,7 @@
   },
   {
     "name": "RX-79 Gundam Ground Type",
-    "img": "images/RX-79 Gundam Ground Type.webp",
+    "img": "images/rx-79-gundam-ground-type.webp",
     "alt": [
       "ground type",
       "gundam ground type"
@@ -1354,7 +1354,7 @@
   },
   {
     "name": "MBF-P05LM Gundam Astray Mirage Frame",
-    "img": "images/MBF-P05LM Gundam Astray Mirage Frame.webp",
+    "img": "images/mbf-p05lm-gundam-astray-mirage-frame.webp",
     "alt": [
       "astray mirage",
       "mirage frame",
@@ -1366,7 +1366,7 @@
   },
   {
     "name": "MBF-P04 Gundam Astray Green Frame",
-    "img": "images/MBF-P04 Gundam Astray Green Frame.webp",
+    "img": "images/mbf-p04-gundam-astray-green-frame.webp",
     "alt": [
       "green frame",
       "astray green",
@@ -1378,7 +1378,7 @@
   },
   {
     "name": "ASW-G-47 Gundam Vual",
-    "img": "images/ASW-G-47 Gundam Vual.webp",
+    "img": "images/asw-g-47-gundam-vual.webp",
     "alt": [
       "vual",
       "gundam vual"
@@ -1388,7 +1388,7 @@
   },
   {
     "name": "ASW-G-71 Gundam Dantalion",
-    "img": "images/ASW-G-71 Gundam Dantalion.webp",
+    "img": "images/asw-g-71-gundam-dantalion.webp",
     "alt": [
       "dantalion",
       "gundam dantalion"
@@ -1398,7 +1398,7 @@
   },
   {
     "name": "GN-000 0 Gundam",
-    "img": "images/GN-000 0 Gundam.webp",
+    "img": "images/gn-000-0-gundam.webp",
     "alt": [
       "0 gundam"
     ],
@@ -1407,7 +1407,7 @@
   },
   {
     "name": "GNW-20000 Arche Gundam",
-    "img": "images/GNW-20000 Arche Gundam.webp",
+    "img": "images/gnw-20000-arche-gundam.webp",
     "alt": [
       "arche gundam",
       "arche"
@@ -1417,7 +1417,7 @@
   },
   {
     "name": "GN-004 Gundam Nadleeh",
-    "img": "images/GN-004 Gundam Nadleeh.webp",
+    "img": "images/gn-004-gundam-nadleeh.webp",
     "alt": [
       "nadleeh",
       "gundam nadleeh"
@@ -1427,7 +1427,7 @@
   },
   {
     "name": "AVP-03 Gundam Lfrith Anavata",
-    "img": "images/AVP-03 Gundam Lfrith Anavata.webp",
+    "img": "images/avp-03-gundam-lfrith-anavata.webp",
     "alt": [
       "lfrith anavata",
       "anavata",
@@ -1438,7 +1438,7 @@
   },
   {
     "name": "XGF-01 Gundam Lfrith Jiu",
-    "img": "images/XGF-01 Gundam Lfrith Jiu.webp",
+    "img": "images/xgf-01-gundam-lfrith-jiu.webp",
     "alt": [
       "jiu",
       "lfrith jiu",
@@ -1449,7 +1449,7 @@
   },
   {
     "name": "YG-111 Gundam G-Self",
-    "img": "images/YG-111 Gundam G-Self.webp",
+    "img": "images/yg-111-gundam-g-self.webp",
     "alt": [
       "g-self",
       "g self",
@@ -1460,7 +1460,7 @@
   },
   {
     "name": "VGMM-Gf10 Gundam G-Lucifer",
-    "img": "images/VGMM-Gf10 Gundam G-Lucifer.webp",
+    "img": "images/vgmm-gf10-gundam-g-lucifer.webp",
     "alt": [
       "g-lucifer",
       "glucifer",
@@ -1472,7 +1472,7 @@
   },
   {
     "name": "MSAM-033 Gundam G-Arcane",
-    "img": "images/MSAM-033 Gundam G-Arcane.webp",
+    "img": "images/msam-033-gundam-g-arcane.webp",
     "alt": [
       "garcane",
       "g-arcane",
@@ -1484,7 +1484,7 @@
   },
   {
     "name": "RX-0 Unicorn Gundam Banshee",
-    "img": "images/rx-0-banshee.webp",
+    "img": "images/rx-0-unicorn-gundam-banshee.webp",
     "alt": [
       "banshee",
       "unicorn banshee",
@@ -1495,7 +1495,7 @@
   },
   {
     "name": "RX-0 Unicorn Gundam Banshee Norn",
-    "img": "images/RX-0 Unicorn Gundam Banshee Norn.webp",
+    "img": "images/rx-0-unicorn-gundam-banshee-norn.webp",
     "alt": [
       "banshee norn",
       "gundam banshee norn",
@@ -1506,7 +1506,7 @@
   },
   {
     "name": "PFF-X7V2 Veetwo Gundam",
-    "img": "images/PFF-X7V2 Veetwo Gundam.webp",
+    "img": "images/pff-x7v2-veetwo-gundam.webp",
     "alt": [
       "veetwo gundam",
       "veetwo"
@@ -1516,7 +1516,7 @@
   },
   {
     "name": "PFF-X7RANIMA Gundam Anima［Rize］",
-    "img": "images/PFF-X7RANIMA Gundam Anima［Rize］.webp",
+    "img": "images/pff-x7ranima-gundam-anima-rize.webp",
     "alt": [
       "gundam anima",
       "anima"
@@ -1526,7 +1526,7 @@
   },
   {
     "name": "PFF-X7M4 Marsfour Gundam",
-    "img": "images/PFF-X7M4 Marsfour Gundam.webp",
+    "img": "images/pff-x7m4-marsfour-gundam.webp",
     "alt": [
       "marsfour gundam",
       "marsfour"
@@ -1536,7 +1536,7 @@
   },
   {
     "name": "PFF-X7M1 Mercuone Gundam",
-    "img": "images/PFF-X7M1 Mercuone Gundam.webp",
+    "img": "images/pff-x7m1-mercuone-gundam.webp",
     "alt": [
       "mercuone gundam",
       "mercuone"
@@ -1546,7 +1546,7 @@
   },
   {
     "name": "PFF-X7IIS6 Saturnix Gundam",
-    "img": "images/PFF-X7IIS6 Saturnix Gundam.webp",
+    "img": "images/pff-x7iis6-saturnix-gundam.webp",
     "alt": [
       "saturnix gundam",
       "saturnix"
@@ -1556,7 +1556,7 @@
   },
   {
     "name": "PFF-X7IIN8 Nepteight Gundam",
-    "img": "images/PFF-X7IIN8 Nepteight Gundam.webp",
+    "img": "images/pff-x7iin8-nepteight-gundam.webp",
     "alt": [
       "nepteight gundam",
       "nepteight"
@@ -1566,7 +1566,7 @@
   },
   {
     "name": "PFF-X7IIBUILD DiVERS ReRising Gundam",
-    "img": "images/PFF-X7IIBUILD DiVERS ReRising Gundam.webp",
+    "img": "images/pff-x7iibuild-divers-rerising-gundam.webp",
     "alt": [
       "rerising gundam",
       "rerise gundam",
@@ -1577,7 +1577,7 @@
   },
   {
     "name": "AGE-IIMG Gundam AGE-2 Magnum",
-    "img": "images/gundam-ageii-magnum.webp",
+    "img": "images/age-iimg-gundam-age-2-magnum.webp",
     "alt": [
       "age-2 magnum",
       "magnum",
@@ -1588,7 +1588,7 @@
   },
   {
     "name": "RX-78GP02R Gundam GP-Rase-Two",
-    "img": "images/RX-78GP02R Gundam GP-Rase-Two.webp",
+    "img": "images/rx-78gp02r-gundam-gp-rase-two.webp",
     "alt": [
       "rase two",
       "gp rase two",
@@ -1600,7 +1600,7 @@
   },
   {
     "name": "AC-01 Miss Sazabi",
-    "img": "images/AC-01 Miss Sazabi.webp",
+    "img": "images/ac-01-miss-sazabi.webp",
     "alt": [
       "miss sazabi"
     ],
@@ -1609,7 +1609,7 @@
   },
   {
     "name": "GAT-X105B Build Strike Gundam",
-    "img": "images/GAT-X105B Build Strike Gundam.webp",
+    "img": "images/gat-x105b-build-strike-gundam.webp",
     "alt": [
       "build strike",
       "build strike gundam"
@@ -1619,7 +1619,7 @@
   },
   {
     "name": "GAT-X105BFP Build Strike Gundam Full Package",
-    "img": "images/GAT-X105BFP Build Strike Gundam Full Package.webp",
+    "img": "images/gat-x105bfp-build-strike-gundam-full-package.webp",
     "alt": [
       "build strike full package",
       "build strike gundam full package"
@@ -1629,7 +1629,7 @@
   },
   {
     "name": "GX-9999 Gundam X Maoh",
-    "img": "images/GX-9999 Gundam X Maoh.webp",
+    "img": "images/gx-9999-gundam-x-maoh.webp",
     "alt": [
       "gundam x maoh",
       "x maoh"
@@ -1639,7 +1639,7 @@
   },
   {
     "name": "PPGN-001 Gundam Amazing Exia",
-    "img": "images/PPGN-001 Gundam Amazing Exia.webp",
+    "img": "images/ppgn-001-gundam-amazing-exia.webp",
     "alt": [
       "amazing exia",
       "gundam amazing exia"
@@ -1649,7 +1649,7 @@
   },
   {
     "name": "PPGN-001 Gundam Exia Dark Matter",
-    "img": "images/PPGN-001 Gundam Exia Dark Matter.webp",
+    "img": "images/ppgn-001-gundam-exia-dark-matter.webp",
     "alt": [
       "exia dark matter",
       "gundam exia dark matter",
@@ -1660,7 +1660,7 @@
   },
   {
     "name": "Sengoku Astray Gundam",
-    "img": "images/Sengoku Astray Gundam.webp",
+    "img": "images/sengoku-astray-gundam.webp",
     "alt": [
       "gundam sengoku",
       "sengoku astray",
@@ -1672,7 +1672,7 @@
   },
   {
     "name": "XXXG-01Wf Wing Gundam Fenice",
-    "img": "images/XXXG-01Wf Wing Gundam Fenice.webp",
+    "img": "images/xxxg-01wf-wing-gundam-fenice.webp",
     "alt": [
       "gundam fenice",
       "fenice",
@@ -1684,7 +1684,7 @@
   },
   {
     "name": "XXXG-01Wfr Gundam Fenice Rinascita",
-    "img": "images/XXXG-01Wfr Gundam Fenice Rinascita.webp",
+    "img": "images/xxxg-01wfr-gundam-fenice-rinascita.webp",
     "alt": [
       "fenice rinascita",
       "gundam fenice rinascita"
@@ -1694,7 +1694,7 @@
   },
   {
     "name": "XM-X9999 Crossbone Gundam Maoh",
-    "img": "images/XM-X9999 Crossbone Gundam Maoh.webp",
+    "img": "images/xm-x9999-crossbone-gundam-maoh.webp",
     "alt": [
       "crossbone maoh",
       "gundam crossbone maoh"
@@ -1704,7 +1704,7 @@
   },
   {
     "name": "GPB-X80 Beginning Gundam",
-    "img": "images/GPB-X80 Beginning Gundam.webp",
+    "img": "images/gpb-x80-beginning-gundam.webp",
     "alt": [
       "beginning gundam"
     ],
@@ -1713,7 +1713,7 @@
   },
   {
     "name": "GPB-X80-30F Beginning 30 Gundam",
-    "img": "images/GPB-X80-30F Beginning 30 Gundam.webp",
+    "img": "images/gpb-x80-30f-beginning-30-gundam.webp",
     "alt": [
       "30 gundam",
       "beginning 30",
@@ -1724,7 +1724,7 @@
   },
   {
     "name": "GAT-X105BST Star Build Strike Gundam",
-    "img": "images/GAT-X105BST Star Build Strike Gundam.webp",
+    "img": "images/gat-x105bst-star-build-strike-gundam.webp",
     "alt": [
       "star build strike",
       "star build",
@@ -1735,7 +1735,7 @@
   },
   {
     "name": "GAT-X105BGC Build Strike Galaxy Cosmos",
-    "img": "images/GAT-X105BGC Build Strike Galaxy Cosmos.webp",
+    "img": "images/gat-x105bgc-build-strike-galaxy-cosmos.webp",
     "alt": [
       "galaxy cosmos",
       "strike galaxy cosmos",
@@ -1746,7 +1746,7 @@
   },
   {
     "name": "KMK-B01 Kamiki Burning Gundam",
-    "img": "images/KMK-B01 Kamiki Burning Gundam.webp",
+    "img": "images/kmk-b01-kamiki-burning-gundam.webp",
     "alt": [
       "kamiki gundam",
       "kamiki burning",
@@ -1757,7 +1757,7 @@
   },
   {
     "name": "ASW-G-08A Gundam Amazing Barbatos Lupus",
-    "img": "images/ASW-G-08A Gundam Amazing Barbatos Lupus.webp",
+    "img": "images/asw-g-08a-gundam-amazing-barbatos-lupus.webp",
     "alt": [
       "amazing barbatos",
       "amazing lupus",
@@ -1769,7 +1769,7 @@
   },
   {
     "name": "GAT-X105BEG Build Strike Exceed Galaxy",
-    "img": "images/GAT-X105BEG Build Strike Exceed Galaxy.webp",
+    "img": "images/gat-x105beg-build-strike-exceed-galaxy.webp",
     "alt": [
       "exceed galaxy",
       "strike exceed",
@@ -1780,7 +1780,7 @@
   },
   {
     "name": "GN-0000DVRII Gundam 00 Diver Arc",
-    "img": "images/GN-0000DVRII Gundam 00 Diver Arc.webp",
+    "img": "images/gn-0000dvrii-gundam-00-diver-arc.webp",
     "alt": [
       "gundam 00 diver arc",
       "diver arc",
@@ -1791,7 +1791,7 @@
   },
   {
     "name": "PFF-X7II+P9 Plutine Gundam",
-    "img": "images/PFF-X7II+P9 Plutine Gundam.webp",
+    "img": "images/pff-x7ii-p9-plutine-gundam.webp",
     "alt": [
       "plutine",
       "plutine gundam"
@@ -1801,7 +1801,7 @@
   },
   {
     "name": "RX-78-lā-III Lah Gundam",
-    "img": "images/RX-78-lā-III Lah Gundam.webp",
+    "img": "images/rx-78-l-iii-lah-gundam.webp",
     "alt": [
       "lah",
       "lah gundam"
@@ -1811,7 +1811,7 @@
   },
   {
     "name": "SBG-E01 Shin Burning Gundam",
-    "img": "images/SBG-E01 Shin Burning Gundam.webp",
+    "img": "images/sbg-e01-shin-burning-gundam.webp",
     "alt": [
       "shin burning",
       "shin burning gundam"
@@ -1821,7 +1821,7 @@
   },
   {
     "name": "TYP-G12CMR Typhoeus Gundam Chimera",
-    "img": "images/TYP-G12CMR Typhoeus Gundam Chimera.webp",
+    "img": "images/typ-g12cmr-typhoeus-gundam-chimera.webp",
     "alt": [
       "typhoeus gundam chimera",
       "gundam chimera"
@@ -1831,7 +1831,7 @@
   },
   {
     "name": "GFAS-X1 Destroy Gundam",
-    "img": "images/GFAS-X1 Destroy Gundam.webp",
+    "img": "images/gfas-x1-destroy-gundam.webp",
     "alt": [
       "destroy gundam"
     ],
@@ -1840,7 +1840,7 @@
   },
   {
     "name": "MRX-009 Psycho Gundam",
-    "img": "images/MRX-009 Psycho Gundam.webp",
+    "img": "images/mrx-009-psycho-gundam.webp",
     "alt": [
       "psycho gundam"
     ],
@@ -1849,7 +1849,7 @@
   },
   {
     "name": "MRX-010 Psycho Gundam Mk-II",
-    "img": "images/MRX-010 Psycho Gundam Mk-II.webp",
+    "img": "images/mrx-010-psycho-gundam-mk-ii.webp",
     "alt": [
       "psycho gundam 2",
       "psycho gundam mkii",
@@ -1861,7 +1861,7 @@
   },
   {
     "name": "MRX-012 Psycho Gundam Mk-III",
-    "img": "images/MRX-012 Psycho Gundam Mk-III.webp",
+    "img": "images/mrx-012-psycho-gundam-mk-iii.webp",
     "alt": [
       "psycho gundam mk-iii",
       "psycho mk3",
@@ -1872,7 +1872,7 @@
   },
   {
     "name": "GN-008GNHW3G Seravee Gundam GNHW3G",
-    "img": "images/GN-008GNHW3G Seravee Gundam GNHW3G.webp",
+    "img": "images/gn-008gnhw3g-seravee-gundam-gnhw3g.webp",
     "alt": [
       "seravee gnhw3g",
       "gundam gnhw3g",
@@ -1883,7 +1883,7 @@
   },
   {
     "name": "RX-93-ν2 Hi-Nu Gundam",
-    "img": "images/RX-93-ν2 Hi-Nu Gundam.webp",
+    "img": "images/rx-93-2-hi-nu-gundam.webp",
     "alt": [
       "hi-nu gundam",
       "hinu gundam",
@@ -1895,7 +1895,7 @@
   },
   {
     "name": "ZGMF-X11A Regenerate Gundam",
-    "img": "images/ZGMF-X11A Regenerate Gundam.webp",
+    "img": "images/zgmf-x11a-regenerate-gundam.webp",
     "alt": [
       "regenerate",
       "regenerate gundam"
@@ -1905,7 +1905,7 @@
   },
   {
     "name": "GAT-X105E Strike Noir Gundam",
-    "img": "images/GAT-X105E Strike Noir Gundam.webp",
+    "img": "images/gat-x105e-strike-noir-gundam.webp",
     "alt": [
       "strike noir",
       "strike noir gundam"
@@ -1915,7 +1915,7 @@
   },
   {
     "name": "GNY-001F Gundam Astraea Type F",
-    "img": "images/GNY-001F Gundam Astraea Type F.webp",
+    "img": "images/gny-001f-gundam-astraea-type-f.webp",
     "alt": [
       "gundam astraea f",
       "astraea type f",
@@ -1926,7 +1926,7 @@
   },
   {
     "name": "GNY-001 Gundam Astraea",
-    "img": "images/GNY-001 Gundam Astraea.webp",
+    "img": "images/gny-001-gundam-astraea.webp",
     "alt": [
       "gundam astraea"
     ],
