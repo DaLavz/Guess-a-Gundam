@@ -1932,5 +1932,40 @@
     ],
     "series": "Gundam 00",
     "pilot": "Grave Violento"
+  },
+  {
+    "name": "ASW-G-32 Gundam Asmoday",
+    "img": "images/ASW-G-32 Gundam Asmoday.webp",
+    "alt": [
+      "asmoday",
+      "gundam asmoday"
+    ],
+    "series": "Iron-Blooded Orphans"
+  },
+  {
+    "name": "ASW-G-35 Gundam Marchosias",
+    "img": "images/ASW-G-35 Gundam Marchosias.webp",
+    "alt": [
+      "marchosias. gundam marchosias"
+    ],
+    "series": "Iron-Blooded Orphans"
+  },
+  {
+    "name": "ASW-G-61 Gundam Zagan",
+    "img": "images/ASW-G-61 Gundam Zagan.webp",
+    "alt": [
+      "zagan",
+      "gundam zagan"
+    ],
+    "series": "Iron-Blooded Orphans"
+  },
+  {
+    "name": "Gundam Hajiroboshi",
+    "img": "images/Gundam Hajiroboshi.webp",
+    "alt": [
+      "hajiroboshi",
+      "gundam hajiroboshi"
+    ],
+    "series": "Iron-Blooded Orphans"
   }
 ]
