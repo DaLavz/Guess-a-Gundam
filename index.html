@@ -816,12 +816,12 @@
     color:var(--amber);font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;
     letter-spacing:1.5px;padding:3px 11px;cursor:pointer;white-space:nowrap;
     text-transform:uppercase;flex-shrink:0;
-    box-shadow:0 0 8px rgba(240,180,41,.18);transition:box-shadow .2s,background .2s;
+    box-shadow:0 0 5px rgba(240,180,41,.12);transition:box-shadow .2s,background .2s;
   }
   .stb-achieve-btn::after{
     content:'';position:absolute;inset:0;pointer-events:none;
-    background:linear-gradient(90deg,transparent 0%,rgba(255,225,100,.5) 50%,transparent 100%);
-    background-size:200% 100%;animation:achBtnGlitter 2.2s infinite linear;
+    background:linear-gradient(90deg,transparent 20%,rgba(255,225,100,.22) 50%,transparent 80%);
+    background-size:200% 100%;animation:achBtnGlitter 3.5s infinite linear;
   }
   .stb-achieve-btn:hover{background:rgba(240,180,41,.15);box-shadow:0 0 16px rgba(240,180,41,.32);}
   @keyframes achBtnGlitter{
@@ -871,13 +871,13 @@
   .ach-card{
     background:var(--panel-3);border:1px solid var(--line);border-radius:4px;
     padding:10px 12px;display:flex;align-items:flex-start;gap:10px;
-    opacity:.4;filter:grayscale(50%);transition:opacity .25s;
+    opacity:.58;filter:grayscale(15%);transition:opacity .25s;
   }
   .ach-card.done{opacity:1;filter:none;border-color:rgba(240,180,41,.4);box-shadow:0 0 10px rgba(240,180,41,.08);}
   .ach-ico{font-size:22px;line-height:1;flex-shrink:0;margin-top:1px;}
   .ach-info{flex:1;min-width:0;}
-  .ach-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--txt);margin-bottom:1px;}
-  .ach-desc{font-size:13px;color:var(--txt-mid);line-height:1.3;}
+  .ach-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:#e6e9f0;margin-bottom:1px;}
+  .ach-desc{font-size:13px;color:#9ba5b8;line-height:1.3;}
   .ach-bar-wrap{margin-top:5px;height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;}
   .ach-bar{height:100%;background:var(--amber);border-radius:3px;}
   .ach-date{font-size:9px;color:var(--amber);font-family:'Share Tech Mono',monospace;margin-top:3px;letter-spacing:1px;}
@@ -922,7 +922,6 @@
       <div class="stb-dot"></div>
       MS-ID SYS
     </div>
-    <div class="stb-block" style="margin-left:12px;color:var(--txt-mid);font-size:9px;">FEDERATION DATABASE v2.4</div>
     <div class="stb-right" id="clock">──</div>
   </div>
 
@@ -2362,7 +2361,7 @@ function escapeHtml(str){if(!str)return'';return str.replace(/&/g,"&amp;").repla
 
 setInterval(()=>{
   const d=new Date();const p=n=>String(n).padStart(2,"0");
-  $("clock").textContent=d.getFullYear()+"."+p(d.getMonth()+1)+"."+p(d.getDate())+" "+p(d.getHours())+":"+p(d.getMinutes())+":"+p(d.getSeconds());
+  $("clock").textContent=p(d.getHours())+":"+p(d.getMinutes())+":"+p(d.getSeconds());
 },1000);
 
 /* ══════════════════════════════════════════════════════════════════
