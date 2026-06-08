@@ -808,6 +808,75 @@
   .gl-lb .lb-table th:last-child{text-align:right;}
   .gl-guesses{display:flex;flex-direction:column;gap:6px;margin-top:14px;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
   section{overflow-x:hidden;}
+
+  /* ── ACHIEVEMENTS ───────────────────────────────────────────── */
+  .stb-achieve-btn{
+    background:none;border:1px solid var(--primary-dim);border-radius:3px;
+    color:var(--txt-mid);font-family:'Share Tech Mono',monospace;font-size:9px;
+    letter-spacing:1px;padding:3px 8px;cursor:pointer;white-space:nowrap;
+    transition:border-color .2s,color .2s;text-transform:uppercase;flex-shrink:0;
+  }
+  .stb-achieve-btn:hover{border-color:var(--amber);color:var(--amber);}
+  #achieveToastWrap{
+    position:fixed;top:16px;right:16px;z-index:10000;
+    display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:300px;
+  }
+  .achieve-toast{
+    background:var(--panel);border:1px solid var(--amber);border-radius:4px;
+    padding:10px 14px;box-shadow:0 4px 24px rgba(0,0,0,.7),0 0 12px rgba(240,180,41,.15);
+    display:flex;flex-direction:column;gap:6px;
+    animation:achToastIn .35s ease-out forwards;pointer-events:none;
+  }
+  .achieve-toast.out{animation:achToastOut .4s ease-in forwards;}
+  .ach-toast-hd{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--amber);text-transform:uppercase;}
+  .ach-toast-bd{display:flex;align-items:center;gap:10px;}
+  .ach-toast-ico{font-size:22px;line-height:1;flex-shrink:0;}
+  .ach-toast-title{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--txt);line-height:1.2;}
+  @keyframes achToastIn{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);}}
+  @keyframes achToastOut{from{opacity:1;transform:translateX(0);}to{opacity:0;transform:translateX(30px);}}
+  #achievePanel{
+    display:none;position:fixed;inset:0;z-index:9998;
+    background:rgba(0,0,0,.88);overflow-y:auto;padding:16px;
+  }
+  #achievePanel.open{display:flex;flex-direction:column;align-items:center;}
+  .ach-inner{
+    width:100%;max-width:720px;background:var(--panel);
+    border:1px solid var(--primary-dim);border-radius:6px;padding:20px 20px 32px;margin:auto 0;
+  }
+  .ach-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+  .ach-ttl{font-family:'Teko',sans-serif;font-size:30px;letter-spacing:3px;color:var(--amber);}
+  .ach-close{
+    background:none;border:1px solid var(--line-bright);border-radius:3px;
+    color:var(--txt-dim);font-family:'Share Tech Mono',monospace;font-size:10px;
+    letter-spacing:1px;padding:4px 10px;cursor:pointer;
+  }
+  .ach-close:hover{border-color:var(--txt);color:var(--txt);}
+  .ach-summary{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--txt-mid);letter-spacing:1px;margin-bottom:4px;}
+  .ach-cat-ttl{
+    font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;
+    color:var(--txt-dim);text-transform:uppercase;
+    border-bottom:1px solid var(--line);padding-bottom:6px;margin:20px 0 10px;
+  }
+  .ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;}
+  .ach-card{
+    background:var(--panel-3);border:1px solid var(--line);border-radius:4px;
+    padding:10px 12px;display:flex;align-items:flex-start;gap:10px;
+    opacity:.4;filter:grayscale(50%);transition:opacity .25s;
+  }
+  .ach-card.done{opacity:1;filter:none;border-color:rgba(240,180,41,.4);box-shadow:0 0 10px rgba(240,180,41,.08);}
+  .ach-ico{font-size:22px;line-height:1;flex-shrink:0;margin-top:1px;}
+  .ach-info{flex:1;min-width:0;}
+  .ach-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--txt);margin-bottom:1px;}
+  .ach-desc{font-size:11px;color:var(--txt-dim);line-height:1.3;}
+  .ach-bar-wrap{margin-top:5px;height:3px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;}
+  .ach-bar{height:100%;background:var(--amber);border-radius:2px;}
+  .ach-date{font-size:9px;color:var(--amber);font-family:'Share Tech Mono',monospace;margin-top:3px;letter-spacing:1px;}
+  @media(max-width:500px){
+    .ach-grid{grid-template-columns:1fr;}
+    .ach-inner{padding:14px 12px 24px;}
+    #achieveToastWrap{top:8px;right:8px;max-width:calc(100vw - 16px);}
+  }
+
 </style>
 </head>
 <body>
@@ -838,6 +907,7 @@
 
 <div class="shell">
   <div class="shell-top-bar">
+    <button class="stb-achieve-btn" onclick="openAchievementsPanel()">🏆 Achievements</button>
     <div class="stb-block accent">
       <div class="stb-dot"></div>
       MS-ID SYS
@@ -1152,6 +1222,14 @@
 <button id="floatBack" class="float-back hide">◀ Done</button>
 <button id="floatTop" class="float-top hide" title="Back to top">▲</button>
 
+<!-- Achievement toast container -->
+<div id="achieveToastWrap"></div>
+
+<!-- Achievement panel -->
+<div id="achievePanel">
+  <div id="achievePanelContent" style="width:100%"></div>
+</div>
+
 <script>
 let roster = [];
 const $=id=>document.getElementById(id);
@@ -1202,7 +1280,7 @@ function saveStats(){try{localStorage.setItem("gundamStats",JSON.stringify(stats
 let stats=loadStats();
 ["mc","type","artstyle","pilot","zoomBest"].forEach(k=>{if(typeof stats[k]!=="number")stats[k]=0;});
 function addPoint(mode){stats[mode]=(stats[mode]||0)+1;saveStats();updateModeStat();}
-function recordZoomStreak(){if(zoomStreak>(stats.zoomBest||0)){stats.zoomBest=zoomStreak;saveStats();updateModeStat();}}
+function recordZoomStreak(){if(zoomStreak>(stats.zoomBest||0)){stats.zoomBest=zoomStreak;saveStats();updateModeStat();}checkZoomAchievements(zoomStreak);}
 function updateModeStat(){
   const el=$("modeStat");if(!el)return;
   let label,val;
@@ -1562,7 +1640,7 @@ function rankRelated(correct,others){
   return[...shuffleArr(family),...shuffleArr(sameSeries)];
 }
 
-function initApp(){buildSeriesDropdown();updateRosterUI();setupEventListeners();updateModeStat();fetchLeaderboard();}
+function initApp(){buildSeriesDropdown();updateRosterUI();setupEventListeners();updateModeStat();fetchLeaderboard();buildAchievements();}
 
 function dedupeRoster(arr){
   const seen=new Set(),out=[];
@@ -1945,7 +2023,7 @@ function handleMCAnswer(btn,isCorrect){
   document.querySelectorAll("#choices .choice").forEach(b=>b.disabled=true);
   if(isCorrect){
     btn.classList.add("correct");$("verdict").className="verdict ok";$("verdict").textContent="✓ SIGNATURE VERIFIED";
-    score++;addPoint(quizMode==="pilot"?"pilot":"mc");
+    score++;addPoint(quizMode==="pilot"?"pilot":"mc");if(quizMode!=="pilot")recordSeenUnit(sessionUnits[curIdx].name);
   }else{
     btn.classList.add("wrong");$("verdict").className="verdict no";$("verdict").textContent="✕ WARNING: IDENTIFICATION ERROR";
     misidentified.push(sessionUnits[curIdx]);
@@ -2049,7 +2127,7 @@ function handleTypeAnswer(){
   const normalizedCorrect=item.name.toLowerCase();
   let isCorrect=(ans===normalizedCorrect);
   if(!isCorrect&&item.alt&&Array.isArray(item.alt)){isCorrect=item.alt.includes(ans);}
-  if(isCorrect){$("verdict").className="verdict ok";$("verdict").textContent="✓ SIGNATURE VERIFIED";score++;addPoint("type");}
+  if(isCorrect){$("verdict").className="verdict ok";$("verdict").textContent="✓ SIGNATURE VERIFIED";score++;addPoint("type");recordSeenUnit(item.name);checkTypeAchievements();}
   else{$("verdict").className="verdict no";$("verdict").textContent="✕ WARNING: IDENTIFICATION ERROR";misidentified.push(item);}
   showQuizReveal();
 }
@@ -2141,6 +2219,7 @@ $("zNext").onclick=()=>{curIdx++;if(curIdx<sessionUnits.length){setupZoomQuestio
 
 /* ZOOM FAIL SCREEN */
 function showZoomFail(peakStreak){
+  recordModeCompletion('zoom', sessionUnits.length);
   autoSubmit();
   // Hide game elements, show fail screen
   $('zReveal').classList.add('hide');
@@ -2164,6 +2243,7 @@ $('zFailMenu').onclick=()=>{
 /* ZOOM END SCREEN */
 function showZoomEnd(){
   recordZoomStreak();
+  recordModeCompletion('zoom', sessionUnits.length);
   autoSubmit();
   showSection('results');
   const didWin=(zoomStreak>=3);
@@ -2215,6 +2295,8 @@ function showResults(){
   }else{mBox.classList.add("hide");}
   // Launch sparks on a win (>=60% or artstyle >=3/5)
   if(didWin && window.launchSparks) window.launchSparks();
+  if(quizMode==='artstyle') checkArtstyleAchievements(score);
+  recordModeCompletion(quizMode, sessionUnits.length);
   autoSubmit();
   renderSubmitPanel();
 }
@@ -3394,6 +3476,7 @@ function glBuildFullGrid(){
 /* ── END SCREEN ─────────────────────────────────────────────── */
 
 function glShowEnd(){
+  checkGundamleAchievements(glState.guesses.length);
   document.getElementById('glGame').style.display='none';
   const endDiv=document.getElementById('glEnd');endDiv.classList.remove('hide');
   const an=glState.answer;
@@ -3463,6 +3546,227 @@ setInterval(updateCountdown,1000);
 updateCountdown();
 
 })();
+/* ══════════════════════════════════════════════════════════════════
+   ACHIEVEMENT SYSTEM
+   ══════════════════════════════════════════════════════════════════ */
+
+const ACH_KEY      = 'gundamAchievements';
+const ACH_SEEN_KEY = 'gundamSeenUnits';
+const ACH_COMP_KEY = 'gundamModeComp';
+
+let achData  = {};   // { id: { date:'YYYY-MM-DD' } }
+let seenUnits= new Set(); // unit names found in MC or Type
+let modeComp = {};   // { mc_5:true, zoom_10:true, ... }
+let ACH_DEFS = {};   // built after roster loads
+
+function loadAchData(){try{achData=JSON.parse(localStorage.getItem(ACH_KEY))||{};}catch(e){achData={};}}
+function saveAchData(){try{localStorage.setItem(ACH_KEY,JSON.stringify(achData));}catch(e){}}
+function loadAchSeen(){
+  try{const a=JSON.parse(localStorage.getItem(ACH_SEEN_KEY));seenUnits=new Set(Array.isArray(a)?a:[]);}
+  catch(e){seenUnits=new Set();}
+}
+function saveAchSeen(){try{localStorage.setItem(ACH_SEEN_KEY,JSON.stringify([...seenUnits]));}catch(e){}}
+function loadAchComp(){try{modeComp=JSON.parse(localStorage.getItem(ACH_COMP_KEY))||{};}catch(e){modeComp={};}}
+function saveAchComp(){try{localStorage.setItem(ACH_COMP_KEY,JSON.stringify(modeComp));}catch(e){}}
+
+function seriesSlug(s){return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
+
+function buildAchievements(){
+  const counts={};
+  roster.forEach(u=>{if(u.series)counts[u.series]=(counts[u.series]||0)+1;});
+  const eligibleSeries=Object.entries(counts).filter(([,c])=>c>=5).map(([s])=>s).sort();
+
+  ACH_DEFS={
+    // Gundamle
+    gl_5:        {title:'Quick Analysis',      desc:'Solve Gundamle in 5 guesses or fewer',                          icon:'✦', cat:'gundamle'},
+    gl_3:        {title:'Expert Targeting',    desc:'Solve Gundamle in 3 guesses or fewer',                          icon:'✦', cat:'gundamle'},
+    gl_2:        {title:'Ace Identifier',      desc:'Solve Gundamle in 2 guesses or fewer',                          icon:'✦', cat:'gundamle'},
+    // Zoom
+    zoom_10:     {title:'Target Lock',         desc:'Reach a Zoom Recon streak of 10',                               icon:'🔭', cat:'zoom'},
+    zoom_20:     {title:'Sharpshooter',        desc:'Reach a Zoom Recon streak of 20',                               icon:'🔭', cat:'zoom'},
+    zoom_30:     {title:'Red Comet',           desc:'Reach a Zoom Recon streak of 30',                               icon:'🔭', cat:'zoom'},
+    // Type Answer
+    type_10:     {title:'Ten Down',            desc:'Correctly name 10 Gundams in Type Answer mode',                 icon:'⌨️', cat:'type'},
+    // Find All
+    mc_all:      {title:'Complete Analysis',   desc:`Find all ${roster.length} Gundams in MC or Type Answer mode`,  icon:'📋', cat:'findall', progress:true, total:roster.length},
+    // Artstyle (Impostor Hunt)
+    artstyle_win:    {title:'Anomaly Detected',      desc:'Score 3 or more in a single Impostor Hunt game',      icon:'👁️', cat:'artstyle'},
+    artstyle_perfect:{title:'Perfect Calibration',   desc:'Identify all 5 impostors in a single Impostor Hunt game', icon:'👁️', cat:'artstyle'},
+    artstyle_total:  {title:'Series Veteran',        desc:'Find 30 impostors total across all Impostor Hunt games',   icon:'👁️', cat:'artstyle'},
+    // Cross-mode
+    allmode_5:   {title:'Multi-Role Operator', desc:'Complete a game in MC, Type, Zoom and Pilot with at least 5 units',          icon:'🎖️', cat:'crossmode'},
+    allmode_10:  {title:'Veteran Analyst',     desc:'Complete a game in MC, Type, Zoom and Pilot with at least 10 units',         icon:'🎖️', cat:'crossmode'},
+    allmode_50:  {title:'Federation Champion', desc:'Complete a game in MC, Type, Zoom and Pilot with at least 50 units',         icon:'🎖️', cat:'crossmode'},
+  };
+
+  // Series achievements (5+ units each)
+  eligibleSeries.forEach(series=>{
+    const id='mc_series_'+seriesSlug(series);
+    const count=counts[series];
+    ACH_DEFS[id]={
+      title:series, desc:`Find all ${count} units from ${series} in MC or Type Answer mode`,
+      icon:'📡', cat:'series', progress:true, total:count, series:series,
+    };
+  });
+
+  loadAchData(); loadAchSeen(); loadAchComp();
+  retroCheckAchievements();
+}
+
+function checkArtstyleAchievements(sessionScore){
+  if(!ACH_DEFS) return;
+  if(sessionScore>=3) unlockAchievement('artstyle_win');
+  if(sessionScore>=5) unlockAchievement('artstyle_perfect');
+  if((stats.artstyle||0)>=30) unlockAchievement('artstyle_total');
+}
+function retroCheckAchievements(){
+  // Zoom — already stored in stats
+  const zb=stats.zoomBest||0;
+  if(zb>=10)unlockAchievement('zoom_10',false);
+  if(zb>=20)unlockAchievement('zoom_20',false);
+  if(zb>=30)unlockAchievement('zoom_30',false);
+  // Type total
+  if((stats.type||0)>=10)unlockAchievement('type_10',false);
+  // Artstyle total
+  if((stats.artstyle||0)>=30)unlockAchievement('artstyle_total',false);
+}
+
+function unlockAchievement(id, toast=true){
+  if(!ACH_DEFS[id]||achData[id]) return;
+  achData[id]={date:new Date().toISOString().slice(0,10)};
+  saveAchData();
+  if(toast) showAchievementToast(ACH_DEFS[id]);
+}
+
+/* ── TOAST ──────────────────────────────────────────────────────── */
+const achToastQ=[];
+let achToastBusy=false;
+
+function showAchievementToast(def){
+  achToastQ.push(def);
+  if(!achToastBusy) processAchToastQ();
+}
+function processAchToastQ(){
+  if(!achToastQ.length){achToastBusy=false;return;}
+  achToastBusy=true;
+  const def=achToastQ.shift();
+  const wrap=document.getElementById('achieveToastWrap');
+  const el=document.createElement('div');
+  el.className='achieve-toast';
+  el.innerHTML=`<div class="ach-toast-hd">Achievement Unlocked!</div>
+<div class="ach-toast-bd"><div class="ach-toast-ico">${def.icon}</div><div class="ach-toast-title">${def.title}</div></div>`;
+  wrap.appendChild(el);
+  setTimeout(()=>{
+    el.classList.add('out');
+    setTimeout(()=>{el.remove();processAchToastQ();},420);
+  },3500);
+}
+
+/* ── TRACKERS ───────────────────────────────────────────────────── */
+function recordSeenUnit(unitName){
+  if(!ACH_DEFS||seenUnits.has(unitName)) return;
+  seenUnits.add(unitName);
+  saveAchSeen();
+  checkFindAllAchievements();
+}
+function checkFindAllAchievements(){
+  if(seenUnits.size>=roster.length) unlockAchievement('mc_all');
+  Object.entries(ACH_DEFS).forEach(([id,def])=>{
+    if(def.cat!=='series'||achData[id]) return;
+    const names=roster.filter(u=>u.series===def.series).map(u=>u.name);
+    if(names.every(n=>seenUnits.has(n))) unlockAchievement(id);
+  });
+}
+function checkZoomAchievements(streak){
+  if(!ACH_DEFS) return;
+  if(streak>=10) unlockAchievement('zoom_10');
+  if(streak>=20) unlockAchievement('zoom_20');
+  if(streak>=30) unlockAchievement('zoom_30');
+}
+function checkTypeAchievements(){
+  if(!ACH_DEFS) return;
+  if((stats.type||0)>=10) unlockAchievement('type_10');
+}
+function checkGundamleAchievements(guessCount){
+  if(!ACH_DEFS) return;
+  if(guessCount<=5) unlockAchievement('gl_5');
+  if(guessCount<=3) unlockAchievement('gl_3');
+  if(guessCount<=2) unlockAchievement('gl_2');
+}
+function recordModeCompletion(mode, unitCount){
+  if(!ACH_DEFS) return;
+  // artstyle is fixed 5-round format; counts toward all thresholds once played
+  const effective=(mode==='artstyle')?Infinity:unitCount;
+  [5,10,50].forEach(t=>{
+    if(effective>=t){
+      const k=mode+'_'+t;
+      if(!modeComp[k]){modeComp[k]=true;saveAchComp();}
+    }
+  });
+  [5,10,50].forEach(t=>{
+    const id='allmode_'+t;
+    if(achData[id]) return;
+    const allDone=['mc','type','zoom','pilot'].every(m=>modeComp[m+'_'+t]);
+    if(allDone) unlockAchievement(id);
+  });
+}
+
+/* ── PANEL ──────────────────────────────────────────────────────── */
+function openAchievementsPanel(){
+  renderAchievementsPanel();
+  document.getElementById('achievePanel').classList.add('open');
+}
+function closeAchievementsPanel(){
+  document.getElementById('achievePanel').classList.remove('open');
+}
+function getAchProgress(def){
+  if(!def.progress) return null;
+  if(def.cat==='findall') return {cur:seenUnits.size, tot:def.total};
+  if(def.cat==='series'){
+    const names=roster.filter(u=>u.series===def.series).map(u=>u.name);
+    return {cur:names.filter(n=>seenUnits.has(n)).length, tot:def.total};
+  }
+  return null;
+}
+function renderAchievementsPanel(){
+  if(!ACH_DEFS||!Object.keys(ACH_DEFS).length) return;
+  const total=Object.keys(ACH_DEFS).length;
+  const unlocked=Object.keys(achData).filter(id=>ACH_DEFS[id]).length;
+  const CATS=[
+    {key:'gundamle',  label:'✦ Gundamle'},
+    {key:'artstyle',  label:'👁️ Impostor Hunt'},
+    {key:'zoom',      label:'🔭 Zoom Recon'},
+    {key:'type',      label:'⌨️ Type Answer'},
+    {key:'findall',   label:'📋 Find All'},
+    {key:'series',    label:'📡 Series Mastery'},
+    {key:'crossmode', label:'🎖️ Cross-Mode'},
+  ];
+  let html=`<div class="ach-inner">
+<div class="ach-hdr"><div class="ach-ttl">🏆 Achievements</div>
+<button class="ach-close" onclick="closeAchievementsPanel()">✕ CLOSE</button></div>
+<div class="ach-summary">${unlocked} / ${total} unlocked</div>`;
+  CATS.forEach(cat=>{
+    const defs=Object.entries(ACH_DEFS).filter(([,d])=>d.cat===cat.key);
+    if(!defs.length) return;
+    html+=`<div class="ach-cat-ttl">${cat.label}</div><div class="ach-grid">`;
+    defs.forEach(([id,def])=>{
+      const done=!!achData[id];
+      const prog=getAchProgress(def);
+      const pct=prog?Math.min(100,Math.round(prog.cur/prog.tot*100)):0;
+      const dateStr=done?`<div class="ach-date">✓ ${achData[id].date}</div>`:'';
+      const progHtml=prog&&!done?`<div class="ach-bar-wrap"><div class="ach-bar" style="width:${pct}%"></div></div>
+<div class="ach-date">${prog.cur} / ${prog.tot}</div>`:'';
+      html+=`<div class="ach-card${done?' done':''}">
+<div class="ach-ico">${def.icon}</div>
+<div class="ach-info"><div class="ach-name">${def.title}</div>
+<div class="ach-desc">${def.desc}</div>${dateStr}${progHtml}</div></div>`;
+    });
+    html+='</div>';
+  });
+  html+='</div>';
+  document.getElementById('achievePanelContent').innerHTML=html;
+}
+
 /* ══════════════════════════════════════════════════════════════════ */
 
 
