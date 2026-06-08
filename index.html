@@ -881,13 +881,16 @@
   .ach-bar-wrap{margin-top:5px;height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;}
   .ach-bar{height:100%;background:var(--amber);border-radius:3px;}
   .ach-date{font-size:9px;color:var(--amber);font-family:'Share Tech Mono',monospace;margin-top:3px;letter-spacing:
-  .ach-mode-tags{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap;}
+  .ach-mode-tags{display:flex;gap:6px;margin-top:8px;}
   .ach-mode-tag{
-    font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1.5px;
-    padding:2px 7px;border-radius:2px;border:1px solid var(--line-bright);
+    font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1.5px;
+    padding:5px 12px;border-radius:3px;border:1px solid var(--line-bright);
     color:var(--txt-dim);text-transform:uppercase;
+    min-width:38px;text-align:center;
   }
-  .ach-mode-tag.done{border-color:var(--amber);color:var(--amber);background:rgba(240,180,41,.1);}
+  .ach-mode-tag.done{
+    border-color:var(--amber);background:var(--amber);color:#111318;font-weight:700;
+  }
   @media(max-width:500px){
     .ach-grid{grid-template-columns:1fr;}
     .ach-inner{padding:14px 12px 24px;}
@@ -3808,7 +3811,7 @@ function renderAchievementsPanel(){
       if(!done){
         if(def.cat==='crossmode'){
           const thr=parseInt(id.replace('allmode_',''));
-          const tags=[['mc','MC'],['type','TYPE'],['pilot','PILOT']].map(([m,lbl])=>{
+          const tags=[['mc','MC'],['type','TA'],['pilot','PG']].map(([m,lbl])=>{
             const ok=modeComp[m+'_'+thr];
             return `<span class="ach-mode-tag${ok?' done':''}">${lbl}</span>`;
           }).join('');
