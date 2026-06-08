@@ -1,0 +1,462 @@
+{
+  "Aida Surugan": {
+    "img": "images/pilots/aida-surugan.webp",
+    "series": "Reconguista in G"
+  },
+  "Aila Jyrkiäinen": {
+    "img": "images/pilots/aila-jyrkiainen.webp",
+    "series": "Build Fighters"
+  },
+  "Akihiro Altland": {
+    "img": "images/pilots/akihiro-altland.webp",
+    "series": "Iron-Blooded Orphans"
+  },
+  "Ali Al-Saachez": {
+    "img": "images/pilots/ali-al-saachez.webp",
+    "series": "Gundam 00"
+  },
+  "Allelujah Haptism": {
+    "img": "images/pilots/allelujah-haptism.webp",
+    "series": "Gundam 00"
+  },
+  "Alus": {
+    "img": "images/pilots/alus.webp",
+    "series": "Build Divers Re:RISE"
+  },
+  "Amate Yuzuriha": {
+    "img": "images/pilots/amate-yuzuriha.webp",
+    "series": "Gundam GQuuuuuuX"
+  },
+  "Amuro Ray": {
+    "img": "images/pilots/amuro-ray.webp",
+    "series": "Universal Century"
+  },
+  "Anavel Gato": {
+    "img": "images/pilots/anavel-gato.webp",
+    "series": "Universal Century"
+  },
+  "Argi Mirage": {
+    "img": "images/pilots/argi-mirage.webp",
+    "series": "Iron-Blooded Orphans"
+  },
+  "Asemu Asuno": {
+    "img": "images/pilots/asemu-asuno.webp",
+    "series": "Gundam AGE"
+  },
+  "Athrun Zala": {
+    "img": "images/pilots/athrun-zala.webp",
+    "series": "Gundam SEED"
+  },
+  "Aya Fujisawa": {
+    "img": "images/pilots/aya-fujisawa.webp",
+    "series": "Build Divers"
+  },
+  "Banagher Links": {
+    "img": "images/pilots/banagher-links.webp",
+    "series": "Universal Century"
+  },
+  "Bellri Zenam": {
+    "img": "images/pilots/bellri-zenam.webp",
+    "series": "Reconguista in G"
+  },
+  "Chang Wufei": {
+    "img": "images/pilots/chang-wufei.webp",
+    "series": "Gundam Wing"
+  },
+  "Char Aznable": {
+    "img": "images/pilots/char-aznable.webp",
+    "series": "Gundam GQuuuuuuX"
+  },
+  "Christina Mackenzie": {
+    "img": "images/pilots/christina-mackenzie.webp",
+    "series": "Universal Century"
+  },
+  "Clotho Buer": {
+    "img": "images/pilots/clotho-buer.webp",
+    "series": "Gundam SEED"
+  },
+  "Dearka Elsman": {
+    "img": "images/pilots/dearka-elsman.webp",
+    "series": "Gundam SEED"
+  },
+  "Domon Kasshu": {
+    "img": "images/pilots/domon-kasshu.webp",
+    "series": "G Gundam"
+  },
+  "Duo Maxwell": {
+    "img": "images/pilots/duo-maxwell.webp",
+    "series": "Gundam Wing"
+  },
+  "EFSF Pilot": {
+    "img": "images/pilots/efsf-pilot.webp",
+    "series": "Hathaway's Flash"
+  },
+  "Elan Ceres": {
+    "img": "images/pilots/elan-ceres.webp",
+    "series": "The Witch from Mercury"
+  },
+  "Elnora Samaya": {
+    "img": "images/pilots/elnora-samaya.webp",
+    "series": "The Witch from Mercury"
+  },
+  "Ericht Samaya": {
+    "img": "images/pilots/ericht-samaya.webp",
+    "series": "The Witch from Mercury"
+  },
+  "Flit Asuno": {
+    "img": "images/pilots/flit-asuno.webp",
+    "series": "Gundam AGE"
+  },
+  "Fon Spaak": {
+    "img": "images/pilots/fon-spaak.webp",
+    "series": "Gundam 00"
+  },
+  "Four Murasame": {
+    "img": "images/pilots/four-murasame.webp",
+    "series": "Universal Century"
+  },
+  "Gaelio Bauduin": {
+    "img": "images/pilots/gaelio-bauduin.webp",
+    "series": "Iron-Blooded Orphans"
+  },
+  "Gai Murakumo": {
+    "img": "images/pilots/gai-murakumo.webp",
+    "series": "Gundam SEED"
+  },
+  "Garrod Ran": {
+    "img": "images/pilots/garrod-ran.webp",
+    "series": "After War Gundam X"
+  },
+  "Gawain Browne": {
+    "img": "images/pilots/gawain-browne.webp",
+    "series": "Hathaway's Flash"
+  },
+  "Grave Violento": {
+    "img": "images/pilots/grave-violento.webp",
+    "series": "Gundam 00"
+  },
+  "Gym Ghingham": {
+    "img": "images/pilots/gym-ghingham.webp",
+    "series": "Turn A Gundam"
+  },
+  "Hathaway Noa": {
+    "img": "images/pilots/hathaway-noa.webp",
+    "series": "Hathaway's Flash"
+  },
+  "Heero Yuy": {
+    "img": "images/pilots/heero-yuy.webp",
+    "series": "Gundam Wing"
+  },
+  "Hiroto Kuga": {
+    "img": "images/pilots/hiroto-kuga.webp",
+    "series": "Build Divers Re:RISE"
+  },
+  "Io Fleming": {
+    "img": "images/pilots/io-fleming.webp",
+    "series": "Universal Century"
+  },
+  "Johann Trinity": {
+    "img": "images/pilots/johann-trinity.webp",
+    "series": "Gundam 00"
+  },
+  "Jona Basta": {
+    "img": "images/pilots/jona-basta.webp",
+    "series": "Universal Century"
+  },
+  "Judau Ashta": {
+    "img": "images/pilots/judau-ashta.webp",
+    "series": "Universal Century"
+  },
+  "Kamille Bidan": {
+    "img": "images/pilots/kamille-bidan.webp",
+    "series": "Universal Century"
+  },
+  "Kazami Torimachi": {
+    "img": "images/pilots/kazami-torimachi.webp",
+    "series": "Build Divers Re:RISE"
+  },
+  "Kio Asuno": {
+    "img": "images/pilots/kio-asuno.webp",
+    "series": "Gundam AGE"
+  },
+  "Kira Yamato": {
+    "img": "images/pilots/kira-yamato.webp",
+    "series": "Gundam SEED"
+  },
+  "Kou Uraki": {
+    "img": "images/pilots/kou-uraki.webp",
+    "series": "Universal Century"
+  },
+  "Lane Aim": {
+    "img": "images/pilots/lane-aim.webp",
+    "series": "Hathaway's Flash"
+  },
+  "Lauda Neis": {
+    "img": "images/pilots/lauda-neis.webp",
+    "series": "The Witch from Mercury"
+  },
+  "Lockon Stratos": {
+    "img": "images/pilots/lockon-stratos.webp",
+    "series": "Gundam 00"
+  },
+  "Lond Bron": {
+    "img": "images/pilots/lond-bron.webp",
+    "series": "Iron-Blooded Orphans"
+  },
+  "Loran Cehack": {
+    "img": "images/pilots/loran-cehack.webp",
+    "series": "Turn A Gundam"
+  },
+  "Lowe Guele": {
+    "img": "images/pilots/lowe-guele.webp",
+    "series": "Gundam SEED"
+  },
+  "Marida Cruz": {
+    "img": "images/pilots/marida-cruz.webp",
+    "series": "Universal Century"
+  },
+  "Mask / Luin Lee": {
+    "img": "images/pilots/mask-luin-lee.webp",
+    "series": "Reconguista in G"
+  },
+  "Master Asia": {
+    "img": "images/pilots/master-asia.webp",
+    "series": "G Gundam"
+  },
+  "McGillis Fareed": {
+    "img": "images/pilots/mcgillis-fareed.webp",
+    "series": "Iron-Blooded Orphans"
+  },
+  "Meijin Kawaguchi": {
+    "img": "images/pilots/meijin-kawaguchi.webp",
+    "series": "Build Fighters"
+  },
+  "Michael Trinity": {
+    "img": "images/pilots/michael-trinity.webp",
+    "series": "Gundam 00"
+  },
+  "Mikazuki Augus": {
+    "img": "images/pilots/mikazuki-augus.webp",
+    "series": "Iron-Blooded Orphans"
+  },
+  "Minato Sakai": {
+    "img": "images/pilots/minato-sakai.webp",
+    "series": "Build Fighters Try"
+  },
+  "Nena Trinity": {
+    "img": "images/pilots/nena-trinity.webp",
+    "series": "Gundam 00"
+  },
+  "Nicol Amalfi": {
+    "img": "images/pilots/nicol-amalfi.webp",
+    "series": "Gundam SEED"
+  },
+  "Nils Nielsen": {
+    "img": "images/pilots/nils-nielsen.webp",
+    "series": "Build Fighters"
+  },
+  "Norba Shino": {
+    "img": "images/pilots/norba-shino.webp",
+    "series": "Iron-Blooded Orphans"
+  },
+  "Norea Du Noc": {
+    "img": "images/pilots/norea-du-noc.webp",
+    "series": "The Witch from Mercury"
+  },
+  "Nyaan": {
+    "img": "images/pilots/nyaan.webp",
+    "series": "Gundam GQuuuuuuX"
+  },
+  "Olba Frost": {
+    "img": "images/pilots/olba-frost.webp",
+    "series": "After War Gundam X"
+  },
+  "Orga Sabnak": {
+    "img": "images/pilots/orga-sabnak.webp",
+    "series": "Gundam SEED"
+  },
+  "Parviz": {
+    "img": "images/pilots/parviz.webp",
+    "series": "Build Divers Re:RISE"
+  },
+  "Prospera Mercury": {
+    "img": "images/pilots/prospera-mercury.webp",
+    "series": "The Witch from Mercury"
+  },
+  "Purus Twelve": {
+    "img": "images/pilots/purus-twelve.webp",
+    "series": "Universal Century"
+  },
+  "Quatre Raberba Winner": {
+    "img": "images/pilots/quatre-raberba-winner.webp",
+    "series": "Gundam Wing"
+  },
+  "Rain Mikamura": {
+    "img": "images/pilots/rain-mikamura.webp",
+    "series": "G Gundam"
+  },
+  "Rau Le Creuset": {
+    "img": "images/pilots/rau-le-creuset.webp",
+    "series": "Gundam SEED"
+  },
+  "Reiji": {
+    "img": "images/pilots/reiji.webp",
+    "series": "Build Fighters"
+  },
+  "Renzie Dablisco": {
+    "img": "images/pilots/renzie-dablisco.webp",
+    "series": "Iron-Blooded Orphans"
+  },
+  "Rey Za Burrel": {
+    "img": "images/pilots/rey-za-burrel.webp",
+    "series": "SEED Destiny"
+  },
+  "Ribbons Almark": {
+    "img": "images/pilots/ribbons-almark.webp",
+    "series": "Gundam 00"
+  },
+  "Ricardo Fellini": {
+    "img": "images/pilots/ricardo-fellini.webp",
+    "series": "Build Fighters"
+  },
+  "Riku Mikami": {
+    "img": "images/pilots/riku-mikami.webp",
+    "series": "Build Divers"
+  },
+  "Rio Hojo": {
+    "img": "images/pilots/rio-hojo.webp",
+    "series": "Build Metaverse"
+  },
+  "Rita Bernal": {
+    "img": "images/pilots/rita-bernal.webp",
+    "series": "Universal Century"
+  },
+  "Roabea Roy": {
+    "img": "images/pilots/roabea-roy.webp",
+    "series": "After War Gundam X"
+  },
+  "Rondo Ghina Sahaku": {
+    "img": "images/pilots/rondo-ghina-sahaku.webp",
+    "series": "Gundam SEED"
+  },
+  "Rondo Mina Sahaku": {
+    "img": "images/pilots/rondo-mina-sahaku.webp",
+    "series": "Gundam SEED"
+  },
+  "Rosammy Baddam": {
+    "img": "images/pilots/rosammy-baddam.webp",
+    "series": "Universal Century"
+  },
+  "Rosario Leone": {
+    "img": "images/pilots/rosario-leone.webp",
+    "series": "Iron-Blooded Orphans"
+  },
+  "Seabook Arno": {
+    "img": "images/pilots/seabook-arno.webp",
+    "series": "Universal Century"
+  },
+  "Sei Iori": {
+    "img": "images/pilots/sei-iori.webp",
+    "series": "Builders Beginning G"
+  },
+  "Sekai Kamiki": {
+    "img": "images/pilots/sekai-kamiki.webp",
+    "series": "Build Fighters Try"
+  },
+  "Setsuna F. Seiei": {
+    "img": "images/pilots/setsuna-f-seiei.webp",
+    "series": "Gundam 00"
+  },
+  "Shagia Frost": {
+    "img": "images/pilots/shagia-frost.webp",
+    "series": "After War Gundam X"
+  },
+  "Shani Andras": {
+    "img": "images/pilots/shani-andras.webp",
+    "series": "Gundam SEED"
+  },
+  "Shinn Asuka": {
+    "img": "images/pilots/shinn-asuka.webp",
+    "series": "SEED Destiny"
+  },
+  "Shiro Amada": {
+    "img": "images/pilots/shiro-amada.webp",
+    "series": "Universal Century"
+  },
+  "Shuji Ito": {
+    "img": "images/pilots/shuji-ito.webp",
+    "series": "Gundam GQuuuuuuX"
+  },
+  "Sophie Pulone": {
+    "img": "images/pilots/sophie-pulone.webp",
+    "series": "The Witch from Mercury"
+  },
+  "Stella Loussier": {
+    "img": "images/pilots/stella-loussier.webp",
+    "series": "SEED Destiny"
+  },
+  "Suletta Mercury": {
+    "img": "images/pilots/suletta-mercury.webp",
+    "series": "The Witch from Mercury"
+  },
+  "Sven Cal Bayang": {
+    "img": "images/pilots/sven-cal-bayang.webp",
+    "series": "Gundam SEED"
+  },
+  "Tieria Erde": {
+    "img": "images/pilots/tieria-erde.webp",
+    "series": "Gundam 00"
+  },
+  "Tobia Arronax": {
+    "img": "images/pilots/tobia-arronax.webp",
+    "series": "Universal Century"
+  },
+  "Trowa Barton": {
+    "img": "images/pilots/trowa-barton.webp",
+    "series": "Gundam Wing"
+  },
+  "Tsukasa Shiba": {
+    "img": "images/pilots/tsukasa-shiba.webp",
+    "series": "Build Divers"
+  },
+  "Unknown": {
+    "img": "images/pilots/unknown.webp",
+    "series": "Iron-Blooded Orphans"
+  },
+  "Usso Ewin": {
+    "img": "images/pilots/usso-ewin.webp",
+    "series": "Universal Century"
+  },
+  "Wistario Afam": {
+    "img": "images/pilots/wistario-afam.webp",
+    "series": "Iron-Blooded Orphans"
+  },
+  "Witz Sou": {
+    "img": "images/pilots/witz-sou.webp",
+    "series": "After War Gundam X"
+  },
+  "Yukio Hidaka": {
+    "img": "images/pilots/yukio-hidaka.webp",
+    "series": "Build Divers"
+  },
+  "Yuuma Kousaka": {
+    "img": "images/pilots/yuuma-kousaka.webp",
+    "series": "Build Fighters Try"
+  },
+  "Yzak Joule": {
+    "img": "images/pilots/yzak-joule.webp",
+    "series": "Gundam SEED"
+  },
+  "Zaza Fossil": {
+    "img": "images/pilots/zaza-fossil.webp",
+    "series": "Iron-Blooded Orphans"
+  },
+  "Zechs Merquise": {
+    "img": "images/pilots/zechs-merquise.webp",
+    "series": "Gundam Wing"
+  },
+  "Zeheart Galette": {
+    "img": "images/pilots/zeheart-galette.webp",
+    "series": "Gundam AGE"
+  }
+}
