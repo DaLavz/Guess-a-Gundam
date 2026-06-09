@@ -121,14 +121,15 @@
     pointer-events:none;
     z-index:10000;
     opacity:0;
-    transition:opacity .45s ease;
   }
   #introVfin.vfin-parked{
     position:absolute !important;
     top:0 !important;
     left:0 !important;
     width:100% !important;
+    opacity:1 !important;
     z-index:0;
+    transition:none !important;
   }
   /* title + shell hidden until intro done */
   #introTarget{
@@ -1555,17 +1556,23 @@
           sweepScan(()=>{
 
             /* ── 4: Measure positions ──
-               srcRect: actual fin area of the PNG
-               - PNG has transparent padding; fins span ~88% of width, start ~8% from top */
+               The introVfin SVG viewBox is 680×160. The fins span x:118–562, base at y:148.
+               So the SVG rendered height = svgWidth * (160/680).
+               We want the BASE of the SVG (y=148/160 ≈ 92.5% down) to align with
+               the fin base in the photo (~52% down from image top).
+               srcTop = finBaseY - svgHeight * 0.925
+               The fins span ~88% of image width, centred (6% margin each side). */
             const headRect = document.getElementById('introHeadWrap').getBoundingClientRect();
+            const svgW   = headRect.width * 0.88;
+            const svgH   = svgW * (160 / 680);          /* maintain viewBox aspect */
+            const finBaseY = headRect.top + headRect.height * 0.52; /* fin base in photo */
             const srcRect = {
-              width : headRect.width * 0.88,
-              left  : headRect.left  + headRect.width * 0.06,
-              top   : headRect.top   + headRect.height * 0.08
+              width  : svgW,
+              left   : headRect.left + headRect.width * 0.06,
+              top    : finBaseY - svgH * 0.925            /* align SVG base with fin base */
             };
 
-            /* dstRect: anchor div is in normal flow even though parent opacity:0
-               getBoundingClientRect() returns real coordinates regardless of opacity */
+            /* dstRect: measure anchor — works fine even with parent opacity:0 */
             const anchorRect = anchor.getBoundingClientRect();
             const dstRect = {
               width : anchorRect.width,
@@ -1574,7 +1581,7 @@
             };
 
             /* ── 5: Snap vfin to srcRect, fade it in ── */
-            introVfin.style.cssText = `position:fixed;pointer-events:none;z-index:10000;opacity:0;width:${srcRect.width}px;left:${srcRect.left}px;top:${srcRect.top}px;transition:opacity .3s ease;`;
+            introVfin.style.cssText = `position:fixed;pointer-events:none;z-index:10000;width:${srcRect.width}px;left:${srcRect.left}px;top:${srcRect.top}px;opacity:0;transition:opacity .35s ease;`;
             void introVfin.offsetWidth;
             introVfin.style.opacity='1';
 
@@ -1590,11 +1597,10 @@
             setTimeout(()=>{
               flyVfin(srcRect, dstRect, 950, ()=>{
 
-                /* ── 8: Park vfin — re-parent it into titleVfinWrap ── */
-                /* Remove all inline styles first */
-                introVfin.removeAttribute('style');
+                /* ── 8: Park vfin — re-parent into titleVfinWrap, stays visible ── */
+                /* Set final inline state before class takes over — opacity:1 must persist */
+                introVfin.style.cssText = 'opacity:1;';
                 introVfin.classList.add('vfin-parked');
-                /* Move into the title container so it scrolls with content */
                 vfinWrap.insertBefore(introVfin, vfinWrap.firstChild);
 
                 /* ── 9: Reveal introTarget (title bg / layout) ── */
@@ -1632,7 +1638,7 @@
     headImg.onload=run;
     headImg.onerror=()=>{
       overlay.style.display='none';
-      introVfin.removeAttribute('style');
+      introVfin.style.cssText='opacity:1;';
       introVfin.classList.add('vfin-parked');
       vfinWrap.insertBefore(introVfin, vfinWrap.firstChild);
       target.style.opacity='1';
