@@ -97,8 +97,7 @@
     pointer-events:none;
   }
   #introOverlay.done{
-    opacity:0;
-    transition:opacity .5s ease;
+    opacity:0;transition:opacity .4s ease;
     pointer-events:none;
   }
   #introHeadWrap{
@@ -111,23 +110,21 @@
     opacity:0;transform:scale(0.88);
     transition:opacity .55s ease,transform .55s ease;
   }
-  #introHeadImg.ih-show{opacity:1;transform:scale(1);}
-  #introHeadImg.ih-out{opacity:0;transform:scale(1.04);transition:opacity .7s ease,transform .7s ease;}
   #introEyeCanvas{
     position:absolute;top:0;left:0;
     width:100%;height:100%;
     pointer-events:none;z-index:2;
   }
-  /* SVG vfin that lives above the head image */
+  /* Flying V-fin — fixed positioned so JS can move it from head → title */
   #introVfin{
-    position:absolute;
-    top:-2%;left:50%;
-    transform:translateX(-50%);
-    width:100%;
-    z-index:3;pointer-events:none;
-    opacity:0;transition:opacity .5s ease;
+    position:fixed;
+    pointer-events:none;
+    z-index:10000;
+    opacity:0;
+    transform-origin:center top;
+    transition:opacity .45s ease;
   }
-  #introVfin.iv-show{opacity:1;}
+  #introVfin.iv-show{ opacity:1; }
   /* title + shell hidden until intro done */
   #introTarget{
     opacity:0;transform:translateY(8px);
@@ -1005,47 +1002,56 @@
   <div id="introHeadWrap">
     <img id="introHeadImg" src="images/gundam-menu.webp" alt=""/>
     <canvas id="introEyeCanvas"></canvas>
-    <!-- SVG V-fin — fades in over image V-fin, then stays -->
-    <svg id="introVfin" viewBox="0 0 280 175" xmlns="http://www.w3.org/2000/svg">
-      <style>.ivg{fill:#e8a800}.ivd{fill:#8a5500}.ivh{fill:#ffe070}</style>
-      <!-- outer left fin -->
-      <polygon class="ivg" points="140,103  126,103  18,12"/>
-      <polygon class="ivd" points="140,103  18,12   128,90"/>
-      <polygon class="ivh" points="126,103  18,12   26,22" opacity=".5"/>
-      <!-- outer right fin -->
-      <polygon class="ivg" points="140,103  154,103  262,12"/>
-      <polygon class="ivd" points="140,103  262,12  152,90"/>
-      <polygon class="ivh" points="154,103  262,12  254,22" opacity=".5"/>
-      <!-- inner left sub-fin -->
-      <polygon class="ivg" points="140,103  132,103  100,48"/>
-      <polygon class="ivd" points="140,103  100,48  132,90"/>
-      <!-- inner right sub-fin -->
-      <polygon class="ivg" points="140,103  148,103  180,48"/>
-      <polygon class="ivd" points="140,103  180,48  148,90"/>
-      <!-- base bar -->
-      <rect class="ivg" x="118" y="100" width="44" height="7" rx="1"/>
-      <rect class="ivh" x="118" y="100" width="44" height="3" rx="1" opacity=".4"/>
-      <!-- green sensor gem -->
-      <polygon points="140,110 128,126 152,126" fill="#1a3a20" stroke="#2a5a30" stroke-width=".5"/>
-      <polygon points="140,113 131,125 149,125" fill="#4ec97a" opacity=".9"/>
-      <polygon points="140,115 134,124 146,124" fill="#c0ffcc" opacity=".4"/>
-    </svg>
   </div>
 </div>
+<!-- V-fin lives outside overlay so it can fly to title position -->
+<svg id="introVfin" viewBox="0 0 280 175" xmlns="http://www.w3.org/2000/svg">
+  <style>.ivg{fill:#e8a800}.ivd{fill:#8a5500}.ivh{fill:#ffe070}</style>
+  <!-- outer left fin -->
+  <polygon class="ivg" points="140,103  126,103  18,12"/>
+  <polygon class="ivd" points="140,103  18,12   128,90"/>
+  <polygon class="ivh" points="126,103  18,12   26,22" opacity=".5"/>
+  <!-- outer right fin -->
+  <polygon class="ivg" points="140,103  154,103  262,12"/>
+  <polygon class="ivd" points="140,103  262,12  152,90"/>
+  <polygon class="ivh" points="154,103  262,12  254,22" opacity=".5"/>
+  <!-- inner left sub-fin -->
+  <polygon class="ivg" points="140,103  132,103  100,48"/>
+  <polygon class="ivd" points="140,103  100,48  132,90"/>
+  <!-- inner right sub-fin -->
+  <polygon class="ivg" points="140,103  148,103  180,48"/>
+  <polygon class="ivd" points="140,103  180,48  148,90"/>
+  <!-- base bar -->
+  <rect class="ivg" x="118" y="100" width="44" height="7" rx="1"/>
+  <rect class="ivh" x="118" y="100" width="44" height="3" rx="1" opacity=".4"/>
+  <!-- green sensor gem -->
+  <polygon points="140,110 128,126 152,126" fill="#1a3a20" stroke="#2a5a30" stroke-width=".5"/>
+  <polygon points="140,113 131,125 149,125" fill="#4ec97a" opacity=".9"/>
+  <polygon points="140,115 134,124 146,124" fill="#c0ffcc" opacity=".4"/>
+</svg>
 
 <!-- TITLE + SHELL wrapped so they fade in after intro -->
 <div id="introTarget">
 <div style="position:relative;width:100%;max-width:860px;display:flex;flex-direction:column;align-items:center;">
-  <svg style="position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:0;" viewBox="0 0 680 160" role="img" aria-hidden="true">
+  <svg id="titleVfin" style="position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:0;" viewBox="0 0 680 160" role="img" aria-hidden="true">
     <style>.vfg{fill:#e8a800}.vfd{fill:#8a5500}.vfh{fill:#ffe070}</style>
-    <polygon class="vfg" points="330,150  312,150  192,6"/>
-    <polygon class="vfd" points="330,150  192,6    322,134"/>
-    <polygon class="vfh" points="312,150  192,6    200,18" opacity="0.5"/>
-    <polygon class="vfg" points="350,150  368,150  488,6"/>
-    <polygon class="vfd" points="350,150  488,6    358,134"/>
-    <polygon class="vfh" points="368,150  488,6    480,18" opacity="0.5"/>
-    <rect class="vfg" x="308" y="148" width="64" height="8" rx="1"/>
-    <rect class="vfh" x="308" y="148" width="64" height="3" rx="1" opacity="0.45"/>
+    <!-- outer left fin -->
+    <polygon class="vfg" points="340,148  318,148  118,8"/>
+    <polygon class="vfd" points="340,148  118,8    322,128"/>
+    <polygon class="vfh" points="318,148  118,8    128,20"  opacity=".5"/>
+    <!-- outer right fin -->
+    <polygon class="vfg" points="340,148  362,148  562,8"/>
+    <polygon class="vfd" points="340,148  562,8    358,128"/>
+    <polygon class="vfh" points="362,148  562,8    552,20"  opacity=".5"/>
+    <!-- inner left sub-fin -->
+    <polygon class="vfg" points="340,148  326,148  242,50"/>
+    <polygon class="vfd" points="340,148  242,50   326,130"/>
+    <!-- inner right sub-fin -->
+    <polygon class="vfg" points="340,148  354,148  438,50"/>
+    <polygon class="vfd" points="340,148  438,50   354,130"/>
+    <!-- base bar -->
+    <rect class="vfg" x="308" y="145" width="64" height="8" rx="1"/>
+    <rect class="vfh" x="308" y="145" width="64" height="3" rx="1" opacity=".4"/>
   </svg>
   <div class="page-title" style="position:relative;z-index:1;">GUESS A <span>GUNDAM</span></div>
 </div>
@@ -1383,22 +1389,22 @@
   const eyeCanvas = document.getElementById('introEyeCanvas');
   const introVfin = document.getElementById('introVfin');
   const target    = document.getElementById('introTarget');
+  const titleVfin = document.getElementById('titleVfin');
   const ectx      = eyeCanvas.getContext('2d');
-  let W=0, H=0, eyeAlpha=0;
-  let rafId=null;
+  let W=0, H=0, eyeAlpha=0, rafId=null;
 
   function setup(){
-    W = headImg.offsetWidth  || headImg.naturalWidth  || 280;
-    H = headImg.offsetHeight || headImg.naturalHeight || 300;
+    W = headImg.offsetWidth  || 280;
+    H = headImg.offsetHeight || 300;
     eyeCanvas.width  = W;
     eyeCanvas.height = H;
   }
 
-  /* Eye positions as fractions of image — tuned to Nu Gundam head */
-  /* left eye ~28-46% x, 47-56% y  |  right eye ~54-72% x, 47-56% y */
+  /* Eye positions — tighter, lower, closer to actual eye slots on Nu Gundam */
+  /* left eye: ~32-44% x, 50-57% y | right eye: ~56-68% x, 50-57% y */
   const EYES = [
-    {x1:.28, y1:.47, x2:.46, y2:.56},
-    {x1:.54, y1:.47, x2:.72, y2:.56}
+    {x1:.32, y1:.50, x2:.44, y2:.57},
+    {x1:.56, y1:.50, x2:.68, y2:.57}
   ];
 
   function drawEyes(alpha){
@@ -1406,23 +1412,22 @@
       const ex=e.x1*W, ey=e.y1*H;
       const ew=(e.x2-e.x1)*W, eh=(e.y2-e.y1)*H;
       const cx=ex+ew/2, cy=ey+eh/2;
-      const rad=Math.max(ew,eh)*.7;
-      /* bloom */
-      const bloom=ectx.createRadialGradient(cx,cy,0,cx,cy,rad*1.5);
-      bloom.addColorStop(0,`rgba(78,201,122,${(alpha*.4).toFixed(2)})`);
+      /* tight bloom — radius = ~1x eye width only */
+      const bloom=ectx.createRadialGradient(cx,cy,0,cx,cy,ew*.9);
+      bloom.addColorStop(0,`rgba(78,201,122,${(alpha*.45).toFixed(2)})`);
       bloom.addColorStop(1,'rgba(78,201,122,0)');
       ectx.fillStyle=bloom;
       ectx.beginPath();
-      ectx.ellipse(cx,cy,rad*1.5,rad*.85,0,0,Math.PI*2);
+      ectx.ellipse(cx,cy,ew*.9,eh*.8,0,0,Math.PI*2);
       ectx.fill();
-      /* core */
-      const core=ectx.createRadialGradient(cx,cy,0,cx,cy,rad*.6);
+      /* bright core matching eye shape */
+      const core=ectx.createRadialGradient(cx,cy,0,cx,cy,ew*.45);
       core.addColorStop(0,`rgba(200,255,210,${alpha.toFixed(2)})`);
-      core.addColorStop(.5,`rgba(78,201,122,${(alpha*.9).toFixed(2)})`);
-      core.addColorStop(1,`rgba(30,100,60,${(alpha*.25).toFixed(2)})`);
+      core.addColorStop(.5,`rgba(78,201,122,${(alpha*.85).toFixed(2)})`);
+      core.addColorStop(1,`rgba(20,80,40,${(alpha*.2).toFixed(2)})`);
       ectx.fillStyle=core;
       ectx.beginPath();
-      ectx.ellipse(cx,cy,ew*.5,eh*.48,0,0,Math.PI*2);
+      ectx.ellipse(cx,cy,ew*.42,eh*.38,0,0,Math.PI*2);
       ectx.fill();
     });
   }
@@ -1431,10 +1436,8 @@
     const pulses=3, start=performance.now();
     function frame(now){
       const p=Math.min((now-start)/duration,1);
-      const cyc=p*pulses*Math.PI*2;
-      eyeAlpha=0.5+0.5*Math.sin(cyc-Math.PI/2);
-      ectx.clearRect(0,0,W,H);
-      drawEyes(eyeAlpha);
+      eyeAlpha=0.5+0.5*Math.sin(p*pulses*Math.PI*2-Math.PI/2);
+      ectx.clearRect(0,0,W,H); drawEyes(eyeAlpha);
       if(p<1){ rafId=requestAnimationFrame(frame); }
       else{ eyeAlpha=0.88; ectx.clearRect(0,0,W,H); drawEyes(eyeAlpha); if(cb)cb(); }
     }
@@ -1442,50 +1445,84 @@
   }
 
   function sweepScan(cb){
-    const dur=640, start=performance.now();
+    const dur=620, start=performance.now();
     function frame(now){
       const p=Math.min((now-start)/dur,1);
-      ectx.clearRect(0,0,W,H);
-      drawEyes(eyeAlpha);
-      const sx=-W*.15+p*(W*1.3), bw=W*.2;
+      ectx.clearRect(0,0,W,H); drawEyes(eyeAlpha);
+      const sx=-W*.15+p*(W*1.3), bw=W*.18;
       const sg=ectx.createLinearGradient(sx-bw/2,0,sx+bw/2,0);
       sg.addColorStop(0,'rgba(160,240,255,0)');
-      sg.addColorStop(.3,'rgba(160,240,255,.6)');
-      sg.addColorStop(.5,'rgba(220,250,255,.8)');
-      sg.addColorStop(.7,'rgba(160,240,255,.6)');
+      sg.addColorStop(.3,'rgba(160,240,255,.55)');
+      sg.addColorStop(.5,'rgba(220,250,255,.75)');
+      sg.addColorStop(.7,'rgba(160,240,255,.55)');
       sg.addColorStop(1,'rgba(160,240,255,0)');
-      ectx.fillStyle=sg;
-      ectx.fillRect(sx-bw/2,0,bw,H);
+      ectx.fillStyle=sg; ectx.fillRect(sx-bw/2,0,bw,H);
       if(p<1){ rafId=requestAnimationFrame(frame); }
       else{ ectx.clearRect(0,0,W,H); drawEyes(eyeAlpha); if(cb)cb(); }
     }
     rafId=requestAnimationFrame(frame);
   }
 
-  function fadeEyesOut(dur, cb){
+  function fadeEyesOut(dur){
     const start=performance.now(), startA=eyeAlpha;
     function frame(now){
       const p=Math.min((now-start)/dur,1);
       eyeAlpha=startA*(1-p);
       ectx.clearRect(0,0,W,H);
       if(eyeAlpha>.01) drawEyes(eyeAlpha);
-      if(p<1){ rafId=requestAnimationFrame(frame); }
-      else{ ectx.clearRect(0,0,W,H); if(cb)cb(); }
+      if(p<1) rafId=requestAnimationFrame(frame);
+      else ectx.clearRect(0,0,W,H);
     }
     rafId=requestAnimationFrame(frame);
+  }
+
+  /* Animate the fixed introVfin from its current position to the title vfin position */
+  function flyVfinToTitle(cb){
+    /* Source: where headWrap is now (vfin sits at top of head image) */
+    const headRect = document.getElementById('introHeadWrap').getBoundingClientRect();
+    /* the vfin covers roughly the top 40% of the head image width, centred */
+    const srcW  = headRect.width;
+    const srcX  = headRect.left;
+    const srcY  = headRect.top - headRect.height * 0.05; /* slightly above head top */
+
+    /* Destination: titleVfin element */
+    const titleRect = titleVfin.getBoundingClientRect();
+    const dstW  = titleRect.width;
+    const dstX  = titleRect.left;
+    const dstY  = titleRect.top;
+
+    /* Place introVfin at source */
+    introVfin.style.transition = 'none';
+    introVfin.style.width  = srcW + 'px';
+    introVfin.style.left   = srcX + 'px';
+    introVfin.style.top    = srcY + 'px';
+    introVfin.style.opacity = '1';
+
+    /* Force reflow then animate to destination */
+    void introVfin.offsetWidth;
+    const dur = 650;
+    introVfin.style.transition = `top ${dur}ms cubic-bezier(.25,.8,.25,1), left ${dur}ms cubic-bezier(.25,.8,.25,1), width ${dur}ms cubic-bezier(.25,.8,.25,1)`;
+    introVfin.style.width  = dstW + 'px';
+    introVfin.style.left   = dstX + 'px';
+    introVfin.style.top    = dstY + 'px';
+
+    setTimeout(()=>{ if(cb) cb(); }, dur + 50);
   }
 
   function run(){
     if(rafId) cancelAnimationFrame(rafId);
     setup();
     ectx.clearRect(0,0,W,H);
+    /* hide title vfin — introVfin will become it */
+    titleVfin.style.opacity = '0';
+    introVfin.style.opacity = '0';
+    introVfin.style.transition = 'none';
+    target.classList.remove('it-show');
     headImg.style.opacity='0';
     headImg.style.transform='scale(0.88)';
     headImg.style.transition='opacity .55s ease,transform .55s ease';
-    introVfin.classList.remove('iv-show');
-    target.classList.remove('it-show');
 
-    /* 1 — head materialises */
+    /* 1 — head fades in */
     setTimeout(()=>{
       headImg.style.opacity='1';
       headImg.style.transform='scale(1)';
@@ -1495,33 +1532,47 @@
     setTimeout(()=>pulseEyes(1100,()=>{
       /* 3 — scan sweep */
       sweepScan(()=>{
-        /* 4 — SVG vfin fades in over image vfin */
+
+        /* 4 — place SVG vfin over head's vfin area and fade in */
+        const headRect = document.getElementById('introHeadWrap').getBoundingClientRect();
+        introVfin.style.transition = 'none';
+        introVfin.style.width = headRect.width + 'px';
+        introVfin.style.left  = headRect.left + 'px';
+        introVfin.style.top   = (headRect.top - headRect.height * 0.05) + 'px';
+        introVfin.style.transition = 'opacity .35s ease';
         introVfin.classList.add('iv-show');
 
-        /* 5 — head image fades out, eyes fade with it */
+        /* 5 — head fades out simultaneously */
         setTimeout(()=>{
-          headImg.style.transition='opacity .72s ease,transform .72s ease';
+          headImg.style.transition='opacity .65s ease,transform .65s ease';
           headImg.style.opacity='0';
-          headImg.style.transform='scale(1.04)';
-          fadeEyesOut(720);
-        },320);
+          headImg.style.transform='scale(1.03)';
+          fadeEyesOut(650);
+        }, 200);
 
-        /* 6 — title + shell reveal */
+        /* 6 — vfin flies to title position */
         setTimeout(()=>{
-          target.classList.add('it-show');
-        },680);
+          flyVfinToTitle(()=>{
+            /* 7 — reveal title (vfin is now in place) */
+            target.classList.add('it-show');
+            /* show permanent title vfin, hide flying one */
+            titleVfin.style.transition = 'opacity .3s ease';
+            titleVfin.style.opacity = '1';
+            setTimeout(()=>{
+              introVfin.style.opacity = '0';
+            }, 320);
+            /* 8 — dissolve overlay */
+            overlay.classList.add('done');
+            setTimeout(()=>{ overlay.style.display='none'; }, 420);
+          });
+        }, 500);
 
-        /* 7 — kill overlay entirely */
-        setTimeout(()=>{
-          overlay.classList.add('done');
-          setTimeout(()=>{ overlay.style.display='none'; },520);
-        },1050);
       });
     }), 820);
   }
 
   if(headImg.complete && headImg.naturalWidth){ run(); }
-  else { headImg.onload=run; headImg.onerror=()=>{ overlay.style.display='none'; target.classList.add('it-show'); }; }
+  else{ headImg.onload=run; headImg.onerror=()=>{ overlay.style.display='none'; titleVfin.style.opacity='1'; target.classList.add('it-show'); }; }
 })();
 /* ─────────────────────────────────────────────────────────────────── */
 
