@@ -1936,64 +1936,113 @@ function showSection(id){
 
 /* ── SPACE COLONY BACKGROUND ── */
 (function initColonies(){
-  // Config: [imgFile, size range min, size range max]
-  const imgs = ["images/space-colony-1.png","images/space-colony-2.png"];
-  const driftAnims = ["colony-drift-a","colony-drift-b","colony-drift-c"];
-  const colonies = [
-    // Each colony: pick image, random size, random screen position, random drift
-    { img:0, minSize:120, maxSize:190 },  // small-ish, feels distant
-    { img:1, minSize:200, maxSize:290 },  // medium
-    { img:0, minSize:80,  maxSize:140 },  // tiny, very distant
-    { img:1, minSize:160, maxSize:240 },  // medium-large
+  const imgs      = ["images/space-colony-1.png","images/space-colony-2.png"];
+  const driftAnims= ["colony-drift-a","colony-drift-b","colony-drift-c"];
+
+  // Size buckets (px) — min/max per colony slot
+  const sizeBuckets = [
+    { minSize:80,  maxSize:160 },  // tiny — feels very distant
+    { minSize:160, maxSize:280 },  // small-medium
+    { minSize:240, maxSize:360 },  // medium-large
+    { minSize:100, maxSize:200 },  // another small one for variety
   ];
 
-  const rng = (a,b)=>a+Math.random()*(b-a);
+  const rng = (a,b) => a + Math.random() * (b - a);
+  const pick = arr  => arr[Math.floor(Math.random() * arr.length)];
 
-  // Keep colonies away from the center (where the UI lives)
-  // Place them in the screen margins: edges and corners
-  const zones = [
-    // top-left corner region
-    ()=>({ left: rng(1,18)+'vw',  top: rng(3,22)+'vh' }),
-    // top-right corner region
-    ()=>({ right: rng(1,18)+'vw', top: rng(3,22)+'vh' }),
-    // bottom-left corner region
-    ()=>({ left: rng(1,18)+'vw',  bottom: rng(3,18)+'vh' }),
-    // bottom-right corner region
-    ()=>({ right: rng(1,18)+'vw', bottom: rng(3,18)+'vh' }),
-  ];
-  // Shuffle zones so position assignment is random
-  for(let i=zones.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[zones[i],zones[j]]=[zones[j],zones[i]];}
+  /* ── Free random placement in the screen margins ──
+     Divides the screen into an 8-segment ring around the centre:
+     top-strip, bottom-strip, left-strip, right-strip, + 4 corner pockets.
+     Each call picks one segment at random, then places inside it.       */
+  function randomMarginPos(sizePx){
+    // How far in from each edge the UI panel reaches (rough safe margins)
+    const hMargin = 22;  // % from left or right where UI lives
+    const vMargin = 15;  // % from top or bottom
 
-  colonies.forEach((cfg,i)=>{
-    const el = document.createElement("img");
-    el.className = "space-colony";
-    el.src = imgs[cfg.img];
-    el.alt = "";
-    el.setAttribute("aria-hidden","true");
+    const segments = [
+      // top-left pocket
+      () => ({ left: rng(1, hMargin-2)+'vw',  top: rng(2, vMargin-1)+'vh' }),
+      // top-center strip (above title)
+      () => ({ left: rng(hMargin, 100-hMargin)+'vw', top: rng(1, 9)+'vh' }),
+      // top-right pocket
+      () => ({ right: rng(1, hMargin-2)+'vw', top: rng(2, vMargin-1)+'vh' }),
+      // right strip (mid-height)
+      () => ({ right: rng(1, 8)+'vw',         top: rng(vMargin, 100-vMargin)+'vh' }),
+      // bottom-right pocket
+      () => ({ right: rng(1, hMargin-2)+'vw', bottom: rng(2, vMargin-1)+'vh' }),
+      // bottom-center strip
+      () => ({ left: rng(hMargin, 100-hMargin)+'vw', bottom: rng(1, 9)+'vh' }),
+      // bottom-left pocket
+      () => ({ left: rng(1, hMargin-2)+'vw',  bottom: rng(2, vMargin-1)+'vh' }),
+      // left strip (mid-height)
+      () => ({ left: rng(1, 8)+'vw',          top: rng(vMargin, 100-vMargin)+'vh' }),
+    ];
+    return pick(segments)();
+  }
 
-    const size = Math.round(rng(cfg.minSize, cfg.maxSize));
-    el.style.width = size+"px";
+  /* ── Apply a fresh random position + drift to an element ── */
+  function reposition(el, sizePx, animate){
+    // Clear old position properties
+    ['left','right','top','bottom'].forEach(p => el.style[p] = '');
 
-    // Apply zone position
-    const pos = zones[i]();
+    const pos = randomMarginPos(sizePx);
     Object.assign(el.style, pos);
 
-    // Random drift animation
-    const anim = driftAnims[Math.floor(Math.random()*driftAnims.length)];
-    const dur  = rng(28,52).toFixed(1)+"s";
-    const delay= rng(0,8).toFixed(1)+"s";
+    // New drift animation
+    const anim  = pick(driftAnims);
+    const dur   = rng(28, 55).toFixed(1)+'s';
+    const delay = animate ? '0s' : rng(0, 8).toFixed(1)+'s';
+    el.style.animation = 'none';               // force reflow
+    void el.offsetWidth;
     el.style.animation = `${anim} ${dur} ${delay} ease-in-out infinite`;
+  }
 
-    // Slightly randomise base opacity (further = dimmer)
-    const baseOpacity = rng(0.30, 0.55);
-    el.style.setProperty("--colony-opacity", baseOpacity);
+  /* ── Schedule random relocations for one colony element ── */
+  function scheduleRelocation(el, sizePx){
+    // Random interval: 18–55 seconds
+    const wait = rng(18000, 55000);
+    setTimeout(()=>{
+      // Only relocate if still visible (user might be in a game)
+      el.classList.remove("visible");
+      setTimeout(()=>{
+        reposition(el, sizePx, true);
+        // Fade back in only if on start screen
+        if(!document.getElementById("start").classList.contains("hide")){
+          el.classList.add("visible");
+        }
+        scheduleRelocation(el, sizePx);  // schedule the next one
+      }, 1600); // wait for fade-out transition to finish
+    }, wait);
+  }
+
+  /* ── Create the 4 colony elements ── */
+  // Shuffle size buckets for variety each page load
+  const shuffled = [...sizeBuckets].sort(() => Math.random() - 0.5);
+
+  shuffled.forEach((bucket, i) => {
+    const el  = document.createElement("img");
+    el.className = "space-colony";
+    el.src    = imgs[i % 2];          // alternate between the two images
+    el.alt    = "";
+    el.setAttribute("aria-hidden","true");
+
+    const sizePx = Math.round(rng(bucket.minSize, bucket.maxSize));
+    el.style.width = sizePx + "px";
+
+    reposition(el, sizePx, false);
+
+    // Opacity: smaller = dimmer (feels further away)
+    const opacity = 0.28 + (sizePx / bucket.maxSize) * 0.28;
+    el.style.setProperty("--colony-opacity", opacity.toFixed(2));
 
     document.body.appendChild(el);
+
+    // Stagger relocation timers so they don't all disappear at once
+    setTimeout(()=> scheduleRelocation(el, sizePx), i * rng(4000, 9000));
   });
 
-  // Show immediately if we're already on start section (page load)
+  // Show immediately if already on start screen
   if(!document.getElementById("start").classList.contains("hide")){
-    // slight delay so CSS transition fires properly
     setTimeout(()=>{
       document.querySelectorAll(".space-colony").forEach(el=>el.classList.add("visible"));
     }, 200);
