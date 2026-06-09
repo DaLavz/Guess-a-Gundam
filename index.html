@@ -88,6 +88,53 @@
     box-shadow:0 0 16px var(--primary);
   }
 
+  /* ── INTRO ANIMATION ─────────────────────────── */
+  #introOverlay{
+    position:fixed;inset:0;z-index:9999;
+    background:#0d0e12;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    pointer-events:none;
+  }
+  #introOverlay.done{
+    opacity:0;
+    transition:opacity .5s ease;
+    pointer-events:none;
+  }
+  #introHeadWrap{
+    position:relative;
+    width:min(280px,72vw);
+    flex-shrink:0;
+  }
+  #introHeadImg{
+    width:100%;height:auto;display:block;
+    opacity:0;transform:scale(0.88);
+    transition:opacity .55s ease,transform .55s ease;
+  }
+  #introHeadImg.ih-show{opacity:1;transform:scale(1);}
+  #introHeadImg.ih-out{opacity:0;transform:scale(1.04);transition:opacity .7s ease,transform .7s ease;}
+  #introEyeCanvas{
+    position:absolute;top:0;left:0;
+    width:100%;height:100%;
+    pointer-events:none;z-index:2;
+  }
+  /* SVG vfin that lives above the head image */
+  #introVfin{
+    position:absolute;
+    top:-2%;left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    z-index:3;pointer-events:none;
+    opacity:0;transition:opacity .5s ease;
+  }
+  #introVfin.iv-show{opacity:1;}
+  /* title + shell hidden until intro done */
+  #introTarget{
+    opacity:0;transform:translateY(8px);
+    transition:opacity .7s ease,transform .7s ease;
+  }
+  #introTarget.it-show{opacity:1;transform:translateY(0);}
+
   /* ── SHELL ────────────────────────────────────── */
   .shell{
     position:relative;
@@ -953,6 +1000,41 @@
   <div style="position:absolute;top:16px;right:20px;color:var(--txt-dim);font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;">✕ CLOSE</div>
 </div>
 
+<!-- INTRO OVERLAY -->
+<div id="introOverlay" aria-hidden="true">
+  <div id="introHeadWrap">
+    <img id="introHeadImg" src="images/gundam-menu.webp" alt=""/>
+    <canvas id="introEyeCanvas"></canvas>
+    <!-- SVG V-fin — fades in over image V-fin, then stays -->
+    <svg id="introVfin" viewBox="0 0 280 175" xmlns="http://www.w3.org/2000/svg">
+      <style>.ivg{fill:#e8a800}.ivd{fill:#8a5500}.ivh{fill:#ffe070}</style>
+      <!-- outer left fin -->
+      <polygon class="ivg" points="140,103  126,103  18,12"/>
+      <polygon class="ivd" points="140,103  18,12   128,90"/>
+      <polygon class="ivh" points="126,103  18,12   26,22" opacity=".5"/>
+      <!-- outer right fin -->
+      <polygon class="ivg" points="140,103  154,103  262,12"/>
+      <polygon class="ivd" points="140,103  262,12  152,90"/>
+      <polygon class="ivh" points="154,103  262,12  254,22" opacity=".5"/>
+      <!-- inner left sub-fin -->
+      <polygon class="ivg" points="140,103  132,103  100,48"/>
+      <polygon class="ivd" points="140,103  100,48  132,90"/>
+      <!-- inner right sub-fin -->
+      <polygon class="ivg" points="140,103  148,103  180,48"/>
+      <polygon class="ivd" points="140,103  180,48  148,90"/>
+      <!-- base bar -->
+      <rect class="ivg" x="118" y="100" width="44" height="7" rx="1"/>
+      <rect class="ivh" x="118" y="100" width="44" height="3" rx="1" opacity=".4"/>
+      <!-- green sensor gem -->
+      <polygon points="140,110 128,126 152,126" fill="#1a3a20" stroke="#2a5a30" stroke-width=".5"/>
+      <polygon points="140,113 131,125 149,125" fill="#4ec97a" opacity=".9"/>
+      <polygon points="140,115 134,124 146,124" fill="#c0ffcc" opacity=".4"/>
+    </svg>
+  </div>
+</div>
+
+<!-- TITLE + SHELL wrapped so they fade in after intro -->
+<div id="introTarget">
 <div style="position:relative;width:100%;max-width:860px;display:flex;flex-direction:column;align-items:center;">
   <svg style="position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:0;" viewBox="0 0 680 160" role="img" aria-hidden="true">
     <style>.vfg{fill:#e8a800}.vfd{fill:#8a5500}.vfh{fill:#ffe070}</style>
@@ -1280,6 +1362,7 @@
 
   </div><!-- /body -->
 </div><!-- /shell -->
+</div><!-- /introTarget -->
 
 <button id="floatBack" class="float-back hide">◀ Done</button>
 <button id="floatTop" class="float-top hide" title="Back to top">▲</button>
@@ -1293,6 +1376,155 @@
 </div>
 
 <script>
+/* ── INTRO ANIMATION ─────────────────────────────────────────────── */
+(function(){
+  const overlay   = document.getElementById('introOverlay');
+  const headImg   = document.getElementById('introHeadImg');
+  const eyeCanvas = document.getElementById('introEyeCanvas');
+  const introVfin = document.getElementById('introVfin');
+  const target    = document.getElementById('introTarget');
+  const ectx      = eyeCanvas.getContext('2d');
+  let W=0, H=0, eyeAlpha=0;
+  let rafId=null;
+
+  function setup(){
+    W = headImg.offsetWidth  || headImg.naturalWidth  || 280;
+    H = headImg.offsetHeight || headImg.naturalHeight || 300;
+    eyeCanvas.width  = W;
+    eyeCanvas.height = H;
+  }
+
+  /* Eye positions as fractions of image — tuned to Nu Gundam head */
+  /* left eye ~28-46% x, 47-56% y  |  right eye ~54-72% x, 47-56% y */
+  const EYES = [
+    {x1:.28, y1:.47, x2:.46, y2:.56},
+    {x1:.54, y1:.47, x2:.72, y2:.56}
+  ];
+
+  function drawEyes(alpha){
+    EYES.forEach(e=>{
+      const ex=e.x1*W, ey=e.y1*H;
+      const ew=(e.x2-e.x1)*W, eh=(e.y2-e.y1)*H;
+      const cx=ex+ew/2, cy=ey+eh/2;
+      const rad=Math.max(ew,eh)*.7;
+      /* bloom */
+      const bloom=ectx.createRadialGradient(cx,cy,0,cx,cy,rad*1.5);
+      bloom.addColorStop(0,`rgba(78,201,122,${(alpha*.4).toFixed(2)})`);
+      bloom.addColorStop(1,'rgba(78,201,122,0)');
+      ectx.fillStyle=bloom;
+      ectx.beginPath();
+      ectx.ellipse(cx,cy,rad*1.5,rad*.85,0,0,Math.PI*2);
+      ectx.fill();
+      /* core */
+      const core=ectx.createRadialGradient(cx,cy,0,cx,cy,rad*.6);
+      core.addColorStop(0,`rgba(200,255,210,${alpha.toFixed(2)})`);
+      core.addColorStop(.5,`rgba(78,201,122,${(alpha*.9).toFixed(2)})`);
+      core.addColorStop(1,`rgba(30,100,60,${(alpha*.25).toFixed(2)})`);
+      ectx.fillStyle=core;
+      ectx.beginPath();
+      ectx.ellipse(cx,cy,ew*.5,eh*.48,0,0,Math.PI*2);
+      ectx.fill();
+    });
+  }
+
+  function pulseEyes(duration, cb){
+    const pulses=3, start=performance.now();
+    function frame(now){
+      const p=Math.min((now-start)/duration,1);
+      const cyc=p*pulses*Math.PI*2;
+      eyeAlpha=0.5+0.5*Math.sin(cyc-Math.PI/2);
+      ectx.clearRect(0,0,W,H);
+      drawEyes(eyeAlpha);
+      if(p<1){ rafId=requestAnimationFrame(frame); }
+      else{ eyeAlpha=0.88; ectx.clearRect(0,0,W,H); drawEyes(eyeAlpha); if(cb)cb(); }
+    }
+    rafId=requestAnimationFrame(frame);
+  }
+
+  function sweepScan(cb){
+    const dur=640, start=performance.now();
+    function frame(now){
+      const p=Math.min((now-start)/dur,1);
+      ectx.clearRect(0,0,W,H);
+      drawEyes(eyeAlpha);
+      const sx=-W*.15+p*(W*1.3), bw=W*.2;
+      const sg=ectx.createLinearGradient(sx-bw/2,0,sx+bw/2,0);
+      sg.addColorStop(0,'rgba(160,240,255,0)');
+      sg.addColorStop(.3,'rgba(160,240,255,.6)');
+      sg.addColorStop(.5,'rgba(220,250,255,.8)');
+      sg.addColorStop(.7,'rgba(160,240,255,.6)');
+      sg.addColorStop(1,'rgba(160,240,255,0)');
+      ectx.fillStyle=sg;
+      ectx.fillRect(sx-bw/2,0,bw,H);
+      if(p<1){ rafId=requestAnimationFrame(frame); }
+      else{ ectx.clearRect(0,0,W,H); drawEyes(eyeAlpha); if(cb)cb(); }
+    }
+    rafId=requestAnimationFrame(frame);
+  }
+
+  function fadeEyesOut(dur, cb){
+    const start=performance.now(), startA=eyeAlpha;
+    function frame(now){
+      const p=Math.min((now-start)/dur,1);
+      eyeAlpha=startA*(1-p);
+      ectx.clearRect(0,0,W,H);
+      if(eyeAlpha>.01) drawEyes(eyeAlpha);
+      if(p<1){ rafId=requestAnimationFrame(frame); }
+      else{ ectx.clearRect(0,0,W,H); if(cb)cb(); }
+    }
+    rafId=requestAnimationFrame(frame);
+  }
+
+  function run(){
+    if(rafId) cancelAnimationFrame(rafId);
+    setup();
+    ectx.clearRect(0,0,W,H);
+    headImg.style.opacity='0';
+    headImg.style.transform='scale(0.88)';
+    headImg.style.transition='opacity .55s ease,transform .55s ease';
+    introVfin.classList.remove('iv-show');
+    target.classList.remove('it-show');
+
+    /* 1 — head materialises */
+    setTimeout(()=>{
+      headImg.style.opacity='1';
+      headImg.style.transform='scale(1)';
+    },120);
+
+    /* 2 — eyes pulse */
+    setTimeout(()=>pulseEyes(1100,()=>{
+      /* 3 — scan sweep */
+      sweepScan(()=>{
+        /* 4 — SVG vfin fades in over image vfin */
+        introVfin.classList.add('iv-show');
+
+        /* 5 — head image fades out, eyes fade with it */
+        setTimeout(()=>{
+          headImg.style.transition='opacity .72s ease,transform .72s ease';
+          headImg.style.opacity='0';
+          headImg.style.transform='scale(1.04)';
+          fadeEyesOut(720);
+        },320);
+
+        /* 6 — title + shell reveal */
+        setTimeout(()=>{
+          target.classList.add('it-show');
+        },680);
+
+        /* 7 — kill overlay entirely */
+        setTimeout(()=>{
+          overlay.classList.add('done');
+          setTimeout(()=>{ overlay.style.display='none'; },520);
+        },1050);
+      });
+    }), 820);
+  }
+
+  if(headImg.complete && headImg.naturalWidth){ run(); }
+  else { headImg.onload=run; headImg.onerror=()=>{ overlay.style.display='none'; target.classList.add('it-show'); }; }
+})();
+/* ─────────────────────────────────────────────────────────────────── */
+
 let roster = [];
 const $=id=>document.getElementById(id);
 
