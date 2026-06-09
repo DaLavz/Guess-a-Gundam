@@ -1563,12 +1563,12 @@
                srcTop = finBaseY - svgHeight * 0.925
                The fins span ~88% of image width, centred (6% margin each side). */
             const headRect = document.getElementById('introHeadWrap').getBoundingClientRect();
-            const svgW   = headRect.width * 0.88;
+            const svgW   = headRect.width * 1.3;
             const svgH   = svgW * (160 / 680);          /* maintain viewBox aspect */
-            const finBaseY = headRect.top + headRect.height * 0.52; /* fin base in photo */
+            const finBaseY = headRect.top + headRect.height * 0.50; /* fin base in photo */
             const srcRect = {
               width  : svgW,
-              left   : headRect.left + headRect.width * 0.06,
+              left   : headRect.left + (headRect.width - svgW) / 2,  /* centred on head */
               top    : finBaseY - svgH * 0.925            /* align SVG base with fin base */
             };
 
