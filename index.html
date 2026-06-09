@@ -1437,28 +1437,35 @@
     });
   }
 
+  /* Draw head image + eye glow on canvas. Called whenever canvas needs redrawing. */
+  function drawFrame(alpha){
+    ectx.clearRect(0,0,W,H);
+    /* head image underneath */
+    if(headImg.naturalWidth) ectx.drawImage(headImg,0,0,W,H);
+    drawEyes(alpha);
+  }
+
   /* Ramp eyes up to full brightness over `rampDur` ms,
      then hold with a gentle high-frequency flicker until stopFlicker() is called */
   let flickerRunning = false;
   function rampAndFlicker(rampDur, cb){
+    /* Hide <img> now — canvas draws it from this point on */
+    headImg.style.opacity = '0';
     const rampStart = performance.now();
     flickerRunning = true;
     function rampFrame(now){
       const p = Math.min((now-rampStart)/rampDur, 1);
-      /* ease-out: fast ramp */
       eyeAlpha = 1 - Math.pow(1-p, 2);
-      ectx.clearRect(0,0,W,H); drawEyes(eyeAlpha);
+      drawFrame(eyeAlpha);
       if(p < 1){ rafId = requestAnimationFrame(rampFrame); }
       else{
         eyeAlpha = 1.0;
-        /* switch to gentle flicker loop */
         const flickerBase = performance.now();
         function flicker(now){
           if(!flickerRunning) return;
-          /* very subtle: ±4% brightness at ~12Hz */
           const t = now - flickerBase;
           eyeAlpha = 0.92 + 0.08*Math.sin(t*0.076) + 0.04*Math.sin(t*0.13+1.2);
-          ectx.clearRect(0,0,W,H); drawEyes(eyeAlpha);
+          drawFrame(eyeAlpha);
           flickerRaf = requestAnimationFrame(flicker);
         }
         flickerRaf = requestAnimationFrame(flicker);
@@ -1471,22 +1478,48 @@
   function stopFlicker(){ flickerRunning=false; if(flickerRaf) cancelAnimationFrame(flickerRaf); }
 
   function sweepScan(cb){
-    const dur=700, start=performance.now();
+    /* headImg is already hidden (rampAndFlicker hid it); canvas owns the image now */
+    const dur = 900, start = performance.now();
+
     function frame(now){
-      const p=Math.min((now-start)/dur,1);
-      ectx.clearRect(0,0,W,H); drawEyes(eyeAlpha);
-      const sx=-W*.15+p*(W*1.3), bw=W*.2;
-      const sg=ectx.createLinearGradient(sx-bw/2,0,sx+bw/2,0);
-      sg.addColorStop(0,'rgba(160,240,255,0)');
-      sg.addColorStop(.3,'rgba(160,240,255,.55)');
-      sg.addColorStop(.5,'rgba(220,250,255,.8)');
-      sg.addColorStop(.7,'rgba(160,240,255,.55)');
-      sg.addColorStop(1,'rgba(160,240,255,0)');
-      ectx.fillStyle=sg; ectx.fillRect(sx-bw/2,0,bw,H);
-      if(p<1){ rafId=requestAnimationFrame(frame); }
-      else{ ectx.clearRect(0,0,W,H); drawEyes(eyeAlpha); if(cb)cb(); }
+      const p    = Math.min((now - start) / dur, 1);
+      const bw   = W * 0.18;
+      const sx   = -bw + p * (W + bw * 2);   /* beam centre */
+      const edge = sx - bw * 0.6;             /* leading wipe edge */
+
+      ectx.clearRect(0, 0, W, H);
+
+      /* Draw head image + glow only to the RIGHT of the wipe edge */
+      const clipLeft = Math.max(0, Math.min(W, edge));
+      if(clipLeft < W){
+        ectx.save();
+        ectx.beginPath();
+        ectx.rect(clipLeft, 0, W - clipLeft, H);
+        ectx.clip();
+        if(headImg.naturalWidth) ectx.drawImage(headImg, 0, 0, W, H);
+        if(eyeAlpha > 0) drawEyes(eyeAlpha);
+        ectx.restore();
+      }
+
+      /* Bright sweep beam */
+      const sg = ectx.createLinearGradient(sx - bw, 0, sx + bw, 0);
+      sg.addColorStop(0,   'rgba(180,245,255,0)');
+      sg.addColorStop(0.3, 'rgba(180,245,255,0.6)');
+      sg.addColorStop(0.5, 'rgba(230,252,255,0.95)');
+      sg.addColorStop(0.7, 'rgba(180,245,255,0.6)');
+      sg.addColorStop(1,   'rgba(180,245,255,0)');
+      ectx.fillStyle = sg;
+      ectx.fillRect(sx - bw, 0, bw * 2, H);
+
+      if(p < 1){
+        rafId = requestAnimationFrame(frame);
+      } else {
+        ectx.clearRect(0, 0, W, H);
+        stopFlicker();
+        if(cb) cb();
+      }
     }
-    rafId=requestAnimationFrame(frame);
+    rafId = requestAnimationFrame(frame);
   }
 
   function fadeEyesOut(dur){
@@ -1537,7 +1570,7 @@
     shell.classList.remove('shell-show');
     shell.style.opacity='0';
 
-    /* Reset head */
+    /* Reset head — visible until rampAndFlicker hides it and canvas takes over */
     headImg.style.cssText='opacity:0;transform:scale(0.9);transition:opacity .6s ease,transform .6s ease;display:block;width:100%;height:auto;';
 
     /* ── 1: Head fades in ── */
@@ -1585,15 +1618,7 @@
             void introVfin.offsetWidth;
             introVfin.style.opacity='1';
 
-            /* ── 6: Head fades out, eyes fade with it ── */
-            setTimeout(()=>{
-              headImg.style.transition='opacity .85s ease,transform .85s ease';
-              headImg.style.opacity='0';
-              headImg.style.transform='scale(1.04)';
-              fadeEyesOut(850);
-            }, 250);
-
-            /* ── 7: Vfin flies to title (starts 700ms after appearing) ── */
+            /* ── 6: Vfin flies to title ── */
             setTimeout(()=>{
               flyVfin(srcRect, dstRect, 950, ()=>{
 
