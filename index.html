@@ -809,6 +809,35 @@
   .gl-guesses{display:flex;flex-direction:column;gap:6px;margin-top:14px;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
   section{overflow-x:hidden;}
 
+  /* ── SPACE COLONIES ── */
+  .space-colony{
+    position:fixed;
+    pointer-events:none;
+    z-index:0;
+    opacity:0;
+    transition:opacity 1.4s ease;
+    will-change:transform;
+    filter:brightness(0.72) saturate(0.85);
+  }
+  .space-colony.visible{ opacity:var(--colony-opacity,0.42); }
+  @keyframes colony-drift-a{
+    0%  {transform:translate(0px,0px) rotate(0deg);}
+    33% {transform:translate(18px,-12px) rotate(0.6deg);}
+    66% {transform:translate(-10px,16px) rotate(-0.4deg);}
+    100%{transform:translate(0px,0px) rotate(0deg);}
+  }
+  @keyframes colony-drift-b{
+    0%  {transform:translate(0px,0px) rotate(0deg);}
+    40% {transform:translate(-22px,8px) rotate(-0.8deg);}
+    75% {transform:translate(14px,-18px) rotate(0.5deg);}
+    100%{transform:translate(0px,0px) rotate(0deg);}
+  }
+  @keyframes colony-drift-c{
+    0%  {transform:translate(0px,0px) rotate(0deg);}
+    50% {transform:translate(10px,20px) rotate(0.7deg);}
+    100%{transform:translate(0px,0px) rotate(0deg);}
+  }
+
   /* ── ACHIEVEMENTS ───────────────────────────────────────────── */
   .stb-achieve-btn{
     position:relative;overflow:hidden;
@@ -1898,7 +1927,78 @@ function showSection(id){
   const fb=$("floatBack");const ft=$("floatTop");
   if(id==="manage"||id==="colorEditor"){if(fb)fb.classList.remove("hide");}else{if(fb)fb.classList.add("hide");}
   if(id==="manage"||id==="colorEditor"){if(ft)ft.classList.remove("hide");}else{if(ft)ft.classList.add("hide");}
+  // show/hide space colonies on main menu only
+  document.querySelectorAll(".space-colony").forEach(el=>{
+    if(id==="start") el.classList.add("visible");
+    else el.classList.remove("visible");
+  });
 }
+
+/* ── SPACE COLONY BACKGROUND ── */
+(function initColonies(){
+  // Config: [imgFile, size range min, size range max]
+  const imgs = ["images/space colony1.png","images/space colony2.png"];
+  const driftAnims = ["colony-drift-a","colony-drift-b","colony-drift-c"];
+  const colonies = [
+    // Each colony: pick image, random size, random screen position, random drift
+    { img:0, minSize:120, maxSize:190 },  // small-ish, feels distant
+    { img:1, minSize:200, maxSize:290 },  // medium
+    { img:0, minSize:80,  maxSize:140 },  // tiny, very distant
+    { img:1, minSize:160, maxSize:240 },  // medium-large
+  ];
+
+  const rng = (a,b)=>a+Math.random()*(b-a);
+
+  // Keep colonies away from the center (where the UI lives)
+  // Place them in the screen margins: edges and corners
+  const zones = [
+    // top-left corner region
+    ()=>({ left: rng(1,18)+'vw',  top: rng(3,22)+'vh' }),
+    // top-right corner region
+    ()=>({ right: rng(1,18)+'vw', top: rng(3,22)+'vh' }),
+    // bottom-left corner region
+    ()=>({ left: rng(1,18)+'vw',  bottom: rng(3,18)+'vh' }),
+    // bottom-right corner region
+    ()=>({ right: rng(1,18)+'vw', bottom: rng(3,18)+'vh' }),
+  ];
+  // Shuffle zones so position assignment is random
+  for(let i=zones.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[zones[i],zones[j]]=[zones[j],zones[i]];}
+
+  colonies.forEach((cfg,i)=>{
+    const el = document.createElement("img");
+    el.className = "space-colony";
+    el.src = imgs[cfg.img];
+    el.alt = "";
+    el.setAttribute("aria-hidden","true");
+
+    const size = Math.round(rng(cfg.minSize, cfg.maxSize));
+    el.style.width = size+"px";
+
+    // Apply zone position
+    const pos = zones[i]();
+    Object.assign(el.style, pos);
+
+    // Random drift animation
+    const anim = driftAnims[Math.floor(Math.random()*driftAnims.length)];
+    const dur  = rng(28,52).toFixed(1)+"s";
+    const delay= rng(0,8).toFixed(1)+"s";
+    el.style.animation = `${anim} ${dur} ${delay} ease-in-out infinite`;
+
+    // Slightly randomise base opacity (further = dimmer)
+    const baseOpacity = rng(0.30, 0.55);
+    el.style.setProperty("--colony-opacity", baseOpacity);
+
+    document.body.appendChild(el);
+  });
+
+  // Show immediately if we're already on start section (page load)
+  if(!document.getElementById("start").classList.contains("hide")){
+    // slight delay so CSS transition fires properly
+    setTimeout(()=>{
+      document.querySelectorAll(".space-colony").forEach(el=>el.classList.add("visible"));
+    }, 200);
+  }
+})();
 
 function startQuiz(){
   if(roster.length===0){alert("No units in database.");return;}
