@@ -128,7 +128,7 @@
   /* title + shell hidden until intro done */
   #introTarget{
     opacity:0;transform:translateY(8px);
-    transition:opacity .7s ease,transform .7s ease;
+    transition:opacity 1s ease,transform 1s ease;
   }
   #introTarget.it-show{opacity:1;transform:translateY(0);}
 
@@ -1004,30 +1004,27 @@
     <canvas id="introEyeCanvas"></canvas>
   </div>
 </div>
-<!-- V-fin lives outside overlay so it can fly to title position -->
-<svg id="introVfin" viewBox="0 0 280 175" xmlns="http://www.w3.org/2000/svg">
+<!-- V-fin lives outside overlay so it can fly to title position.
+     Uses IDENTICAL viewBox + points as titleVfin so geometry matches perfectly. -->
+<svg id="introVfin" viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg">
   <style>.ivg{fill:#e8a800}.ivd{fill:#8a5500}.ivh{fill:#ffe070}</style>
   <!-- outer left fin -->
-  <polygon class="ivg" points="140,103  126,103  18,12"/>
-  <polygon class="ivd" points="140,103  18,12   128,90"/>
-  <polygon class="ivh" points="126,103  18,12   26,22" opacity=".5"/>
+  <polygon class="ivg" points="340,148  318,148  118,8"/>
+  <polygon class="ivd" points="340,148  118,8    322,128"/>
+  <polygon class="ivh" points="318,148  118,8    128,20"  opacity=".5"/>
   <!-- outer right fin -->
-  <polygon class="ivg" points="140,103  154,103  262,12"/>
-  <polygon class="ivd" points="140,103  262,12  152,90"/>
-  <polygon class="ivh" points="154,103  262,12  254,22" opacity=".5"/>
+  <polygon class="ivg" points="340,148  362,148  562,8"/>
+  <polygon class="ivd" points="340,148  562,8    358,128"/>
+  <polygon class="ivh" points="362,148  562,8    552,20"  opacity=".5"/>
   <!-- inner left sub-fin -->
-  <polygon class="ivg" points="140,103  132,103  100,48"/>
-  <polygon class="ivd" points="140,103  100,48  132,90"/>
+  <polygon class="ivg" points="340,148  326,148  242,50"/>
+  <polygon class="ivd" points="340,148  242,50   326,130"/>
   <!-- inner right sub-fin -->
-  <polygon class="ivg" points="140,103  148,103  180,48"/>
-  <polygon class="ivd" points="140,103  180,48  148,90"/>
+  <polygon class="ivg" points="340,148  354,148  438,50"/>
+  <polygon class="ivd" points="340,148  438,50   354,130"/>
   <!-- base bar -->
-  <rect class="ivg" x="118" y="100" width="44" height="7" rx="1"/>
-  <rect class="ivh" x="118" y="100" width="44" height="3" rx="1" opacity=".4"/>
-  <!-- green sensor gem -->
-  <polygon points="140,110 128,126 152,126" fill="#1a3a20" stroke="#2a5a30" stroke-width=".5"/>
-  <polygon points="140,113 131,125 149,125" fill="#4ec97a" opacity=".9"/>
-  <polygon points="140,115 134,124 146,124" fill="#c0ffcc" opacity=".4"/>
+  <rect class="ivg" x="308" y="145" width="64" height="8" rx="1"/>
+  <rect class="ivh" x="308" y="145" width="64" height="3" rx="1" opacity=".4"/>
 </svg>
 
 <!-- TITLE + SHELL wrapped so they fade in after intro -->
@@ -1400,11 +1397,12 @@
     eyeCanvas.height = H;
   }
 
-  /* Eye positions — tighter, lower, closer to actual eye slots on Nu Gundam */
-  /* left eye: ~32-44% x, 50-57% y | right eye: ~56-68% x, 50-57% y */
+  /* Nu Gundam eyes — narrow, close together, lower half of face
+     Left:  38–47% x,  51–57% y
+     Right: 53–62% x,  51–57% y  */
   const EYES = [
-    {x1:.32, y1:.50, x2:.44, y2:.57},
-    {x1:.56, y1:.50, x2:.68, y2:.57}
+    {x1:.38, y1:.51, x2:.47, y2:.57},
+    {x1:.53, y1:.51, x2:.62, y2:.57}
   ];
 
   function drawEyes(alpha){
@@ -1412,22 +1410,22 @@
       const ex=e.x1*W, ey=e.y1*H;
       const ew=(e.x2-e.x1)*W, eh=(e.y2-e.y1)*H;
       const cx=ex+ew/2, cy=ey+eh/2;
-      /* tight bloom — radius = ~1x eye width only */
-      const bloom=ectx.createRadialGradient(cx,cy,0,cx,cy,ew*.9);
-      bloom.addColorStop(0,`rgba(78,201,122,${(alpha*.45).toFixed(2)})`);
+      /* tight bloom only ~0.7x eye width */
+      const bloom=ectx.createRadialGradient(cx,cy,0,cx,cy,ew*.7);
+      bloom.addColorStop(0,`rgba(78,201,122,${(alpha*.5).toFixed(2)})`);
       bloom.addColorStop(1,'rgba(78,201,122,0)');
       ectx.fillStyle=bloom;
       ectx.beginPath();
-      ectx.ellipse(cx,cy,ew*.9,eh*.8,0,0,Math.PI*2);
+      ectx.ellipse(cx,cy,ew*.7,eh*.65,0,0,Math.PI*2);
       ectx.fill();
-      /* bright core matching eye shape */
-      const core=ectx.createRadialGradient(cx,cy,0,cx,cy,ew*.45);
+      /* tight bright core */
+      const core=ectx.createRadialGradient(cx,cy,0,cx,cy,ew*.35);
       core.addColorStop(0,`rgba(200,255,210,${alpha.toFixed(2)})`);
       core.addColorStop(.5,`rgba(78,201,122,${(alpha*.85).toFixed(2)})`);
-      core.addColorStop(1,`rgba(20,80,40,${(alpha*.2).toFixed(2)})`);
+      core.addColorStop(1,`rgba(20,80,40,${(alpha*.15).toFixed(2)})`);
       ectx.fillStyle=core;
       ectx.beginPath();
-      ectx.ellipse(cx,cy,ew*.42,eh*.38,0,0,Math.PI*2);
+      ectx.ellipse(cx,cy,ew*.35,eh*.32,0,0,Math.PI*2);
       ectx.fill();
     });
   }
@@ -1476,103 +1474,123 @@
     rafId=requestAnimationFrame(frame);
   }
 
-  /* Animate the fixed introVfin from its current position to the title vfin position */
-  function flyVfinToTitle(cb){
-    /* Source: where headWrap is now (vfin sits at top of head image) */
-    const headRect = document.getElementById('introHeadWrap').getBoundingClientRect();
-    /* the vfin covers roughly the top 40% of the head image width, centred */
-    const srcW  = headRect.width;
-    const srcX  = headRect.left;
-    const srcY  = headRect.top - headRect.height * 0.05; /* slightly above head top */
+  /* Smooth JS-driven vfin flight — interpolates left/top/width each frame */
+  function flyVfinToTitle(srcRect, dstRect, cb){
+    const dur = 700;
+    const start = performance.now();
+    /* easing: ease-in-out cubic */
+    function ease(t){ return t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; }
 
-    /* Destination: titleVfin element */
-    const titleRect = titleVfin.getBoundingClientRect();
-    const dstW  = titleRect.width;
-    const dstX  = titleRect.left;
-    const dstY  = titleRect.top;
-
-    /* Place introVfin at source */
     introVfin.style.transition = 'none';
-    introVfin.style.width  = srcW + 'px';
-    introVfin.style.left   = srcX + 'px';
-    introVfin.style.top    = srcY + 'px';
-    introVfin.style.opacity = '1';
 
-    /* Force reflow then animate to destination */
-    void introVfin.offsetWidth;
-    const dur = 650;
-    introVfin.style.transition = `top ${dur}ms cubic-bezier(.25,.8,.25,1), left ${dur}ms cubic-bezier(.25,.8,.25,1), width ${dur}ms cubic-bezier(.25,.8,.25,1)`;
-    introVfin.style.width  = dstW + 'px';
-    introVfin.style.left   = dstX + 'px';
-    introVfin.style.top    = dstY + 'px';
-
-    setTimeout(()=>{ if(cb) cb(); }, dur + 50);
+    function frame(now){
+      const raw = Math.min((now-start)/dur, 1);
+      const p   = ease(raw);
+      const w   = srcRect.width  + (dstRect.width  - srcRect.width ) * p;
+      const l   = srcRect.left   + (dstRect.left   - srcRect.left  ) * p;
+      const t   = srcRect.top    + (dstRect.top    - srcRect.top   ) * p;
+      introVfin.style.width = w + 'px';
+      introVfin.style.left  = l + 'px';
+      introVfin.style.top   = t + 'px';
+      if(raw < 1){ rafId = requestAnimationFrame(frame); }
+      else{ if(cb) cb(); }
+    }
+    rafId = requestAnimationFrame(frame);
   }
 
   function run(){
     if(rafId) cancelAnimationFrame(rafId);
     setup();
     ectx.clearRect(0,0,W,H);
-    /* hide title vfin — introVfin will become it */
-    titleVfin.style.opacity = '0';
-    introVfin.style.opacity = '0';
+
+    /* Hide title vfin — introVfin will land on top of it */
+    titleVfin.style.opacity    = '0';
+    titleVfin.style.transition = 'none';
+    introVfin.style.opacity    = '0';
     introVfin.style.transition = 'none';
+    introVfin.style.width = '0px';
     target.classList.remove('it-show');
-    headImg.style.opacity='0';
-    headImg.style.transform='scale(0.88)';
-    headImg.style.transition='opacity .55s ease,transform .55s ease';
+    target.style.transition = 'none';
+
+    headImg.style.opacity   = '0';
+    headImg.style.transform = 'scale(0.88)';
+    headImg.style.transition= 'opacity .55s ease,transform .55s ease';
 
     /* 1 — head fades in */
     setTimeout(()=>{
-      headImg.style.opacity='1';
-      headImg.style.transform='scale(1)';
-    },120);
+      headImg.style.opacity   = '1';
+      headImg.style.transform = 'scale(1)';
+    }, 120);
 
     /* 2 — eyes pulse */
     setTimeout(()=>pulseEyes(1100,()=>{
+
       /* 3 — scan sweep */
       sweepScan(()=>{
 
-        /* 4 — place SVG vfin over head's vfin area and fade in */
+        /* 4 — measure source: the vfin sits over top ~55% of the head image
+               The Nu Gundam vfin spans roughly the full image width at the top */
         const headRect = document.getElementById('introHeadWrap').getBoundingClientRect();
-        introVfin.style.transition = 'none';
-        introVfin.style.width = headRect.width + 'px';
-        introVfin.style.left  = headRect.left + 'px';
-        introVfin.style.top   = (headRect.top - headRect.height * 0.05) + 'px';
-        introVfin.style.transition = 'opacity .35s ease';
-        introVfin.classList.add('iv-show');
+        /* vfin base is at ~55% down the head image; top of vfin tips ~0% */
+        const srcRect = {
+          width : headRect.width,
+          left  : headRect.left,
+          top   : headRect.top            /* top of head = top of fins */
+        };
 
-        /* 5 — head fades out simultaneously */
+        /* Measure destination NOW — titleVfin is in the DOM, just opacity:0,
+           so getBoundingClientRect still works perfectly */
+        const dstRect = titleVfin.getBoundingClientRect();
+
+        /* Place introVfin at source immediately (no transition) */
+        introVfin.style.width   = srcRect.width + 'px';
+        introVfin.style.left    = srcRect.left  + 'px';
+        introVfin.style.top     = srcRect.top   + 'px';
+        introVfin.style.opacity = '0';
+        void introVfin.offsetWidth; /* flush */
+
+        /* Fade introVfin in */
+        introVfin.style.transition = 'opacity .3s ease';
+        introVfin.style.opacity    = '1';
+
+        /* 5 — head + eyes fade out */
         setTimeout(()=>{
-          headImg.style.transition='opacity .65s ease,transform .65s ease';
-          headImg.style.opacity='0';
-          headImg.style.transform='scale(1.03)';
+          headImg.style.transition = 'opacity .65s ease,transform .65s ease';
+          headImg.style.opacity    = '0';
+          headImg.style.transform  = 'scale(1.03)';
           fadeEyesOut(650);
-        }, 200);
+        }, 150);
 
-        /* 6 — vfin flies to title position */
+        /* 6 — fly vfin to title (JS-driven, frame by frame) */
         setTimeout(()=>{
-          flyVfinToTitle(()=>{
-            /* 7 — reveal title (vfin is now in place) */
-            target.classList.add('it-show');
-            /* show permanent title vfin, hide flying one */
-            titleVfin.style.transition = 'opacity .3s ease';
-            titleVfin.style.opacity = '1';
+          flyVfinToTitle(srcRect, dstRect, ()=>{
+
+            /* 7 — vfin has landed: swap to permanent titleVfin */
+            titleVfin.style.transition = 'opacity .25s ease';
+            titleVfin.style.opacity    = '1';
+            introVfin.style.transition = 'opacity .25s ease';
+            introVfin.style.opacity    = '0';
+
+            /* 8 — title + shell fade in slowly */
             setTimeout(()=>{
-              introVfin.style.opacity = '0';
-            }, 320);
-            /* 8 — dissolve overlay */
-            overlay.classList.add('done');
-            setTimeout(()=>{ overlay.style.display='none'; }, 420);
+              target.style.transition = 'opacity 1s ease, transform 1s ease';
+              target.classList.add('it-show');
+            }, 80);
+
+            /* 9 — dissolve dark overlay */
+            setTimeout(()=>{
+              overlay.classList.add('done');
+              setTimeout(()=>{ overlay.style.display='none'; }, 450);
+            }, 300);
           });
-        }, 500);
+        }, 480);
 
       });
     }), 820);
   }
 
   if(headImg.complete && headImg.naturalWidth){ run(); }
-  else{ headImg.onload=run; headImg.onerror=()=>{ overlay.style.display='none'; titleVfin.style.opacity='1'; target.classList.add('it-show'); }; }
+  else{ headImg.onload=run; headImg.onerror=()=>{ overlay.style.display='none'; titleVfin.style.opacity='1'; target.style.transition='none'; target.classList.add('it-show'); }; }
 })();
 /* ─────────────────────────────────────────────────────────────────── */
 
