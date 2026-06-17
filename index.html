@@ -88,66 +88,6 @@
     box-shadow:0 0 16px var(--primary);
   }
 
-  /* ── INTRO ANIMATION ─────────────────────────── */
-  #introOverlay{
-    position:fixed;inset:0;z-index:9999;
-    background:#0d0e12;
-    display:flex;flex-direction:column;
-    align-items:center;justify-content:center;
-    pointer-events:none;
-  }
-  #introOverlay.done{
-    opacity:0;transition:opacity .4s ease;
-    pointer-events:none;
-  }
-  #introHeadWrap{
-    position:relative;
-    width:min(280px,72vw);
-    flex-shrink:0;
-  }
-  #introHeadImg{
-    width:100%;height:auto;display:block;
-    opacity:0;transform:scale(0.88);
-    transition:opacity .55s ease,transform .55s ease;
-  }
-  #introEyeCanvas{
-    position:absolute;top:0;left:0;
-    width:100%;height:100%;
-    pointer-events:none;z-index:2;
-  }
-  /* Flying V-fin — fixed during animation, then re-parented and parked */
-  #introVfin{
-    position:fixed;
-    pointer-events:none;
-    z-index:10000;
-    opacity:0;
-  }
-  #introVfin.vfin-parked{
-    position:absolute !important;
-    top:0 !important;
-    left:0 !important;
-    width:100% !important;
-    opacity:1 !important;
-    z-index:0;
-    transition:none !important;
-  }
-  /* title + shell hidden until intro done */
-  #introTarget{
-    opacity:0;
-    transition:opacity 1.2s ease;
-  }
-  #introTarget.it-show{ opacity:1; }
-
-  /* Title left-to-right wipe reveal */
-  #pageTitle{
-    clip-path: inset(0 100% 0 0);
-    transition: none;
-  }
-  #pageTitle.title-reveal{
-    clip-path: inset(0 0% 0 0);
-    transition: clip-path 1.1s cubic-bezier(.4,0,.2,1);
-  }
-
   /* ── SHELL ────────────────────────────────────── */
   .shell{
     position:relative;
@@ -157,10 +97,7 @@
     border-top:2px solid var(--primary);
     z-index:1;
     overflow:hidden;
-    opacity:0;
-    transition:opacity 1s ease;
   }
-  .shell.shell-show{ opacity:1; }
 
   /* Clip bottom-right corner */
   .shell::after{
@@ -872,35 +809,6 @@
   .gl-guesses{display:flex;flex-direction:column;gap:6px;margin-top:14px;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
   section{overflow-x:hidden;}
 
-  /* ── SPACE COLONIES ── */
-  .space-colony{
-    position:fixed;
-    pointer-events:none;
-    z-index:0;
-    opacity:0;
-    transition:opacity 1.4s ease;
-    will-change:transform;
-    filter:brightness(0.72) saturate(0.85);
-  }
-  .space-colony.visible{ opacity:var(--colony-opacity,0.42); }
-  @keyframes colony-drift-a{
-    0%  {transform:translate(0px,0px) rotate(0deg);}
-    33% {transform:translate(18px,-12px) rotate(0.6deg);}
-    66% {transform:translate(-10px,16px) rotate(-0.4deg);}
-    100%{transform:translate(0px,0px) rotate(0deg);}
-  }
-  @keyframes colony-drift-b{
-    0%  {transform:translate(0px,0px) rotate(0deg);}
-    40% {transform:translate(-22px,8px) rotate(-0.8deg);}
-    75% {transform:translate(14px,-18px) rotate(0.5deg);}
-    100%{transform:translate(0px,0px) rotate(0deg);}
-  }
-  @keyframes colony-drift-c{
-    0%  {transform:translate(0px,0px) rotate(0deg);}
-    50% {transform:translate(10px,20px) rotate(0.7deg);}
-    100%{transform:translate(0px,0px) rotate(0deg);}
-  }
-
   /* ── ACHIEVEMENTS ───────────────────────────────────────────── */
   .stb-achieve-btn{
     position:relative;overflow:hidden;
@@ -1016,37 +924,19 @@
   <div style="position:absolute;top:16px;right:20px;color:var(--txt-dim);font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;">✕ CLOSE</div>
 </div>
 
-<!-- INTRO OVERLAY -->
-<div id="introOverlay" aria-hidden="true">
-  <div id="introHeadWrap">
-    <img id="introHeadImg" src="images/gundam-menu.webp" alt=""/>
-    <canvas id="introEyeCanvas"></canvas>
-  </div>
-</div>
-
-<!-- introVfin is OUTSIDE both overlay and introTarget so parent opacity:0 never hides it -->
-<svg id="introVfin" viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <style>.ivg{fill:#e8a800}.ivd{fill:#8a5500}.ivh{fill:#ffe070}</style>
-  <polygon class="ivg" points="340,148  318,148  118,8"/>
-  <polygon class="ivd" points="340,148  118,8    322,128"/>
-  <polygon class="ivh" points="318,148  118,8    128,20"  opacity=".5"/>
-  <polygon class="ivg" points="340,148  362,148  562,8"/>
-  <polygon class="ivd" points="340,148  562,8    358,128"/>
-  <polygon class="ivh" points="362,148  562,8    552,20"  opacity=".5"/>
-  <polygon class="ivg" points="340,148  326,148  242,50"/>
-  <polygon class="ivd" points="340,148  242,50   326,130"/>
-  <polygon class="ivg" points="340,148  354,148  438,50"/>
-  <polygon class="ivd" points="340,148  438,50   354,130"/>
-  <rect class="ivg" x="308" y="145" width="64" height="8" rx="1"/>
-  <rect class="ivh" x="308" y="145" width="64" height="3" rx="1" opacity=".4"/>
-</svg>
-
-<!-- TITLE + SHELL wrapped so they fade in after intro -->
-<div id="introTarget">
-<div id="titleVfinWrap" style="position:relative;width:100%;max-width:860px;display:flex;flex-direction:column;align-items:center;">
-  <!-- anchor div: measures where parked vfin should land -->
-  <div id="titleVfinAnchor" style="position:absolute;top:0;left:0;width:100%;height:160px;pointer-events:none;"></div>
-  <div class="page-title" id="pageTitle" style="position:relative;z-index:1;">GUESS A <span>GUNDAM</span></div>
+<div style="position:relative;width:100%;max-width:860px;display:flex;flex-direction:column;align-items:center;">
+  <svg style="position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:0;" viewBox="0 0 680 160" role="img" aria-hidden="true">
+    <style>.vfg{fill:#e8a800}.vfd{fill:#8a5500}.vfh{fill:#ffe070}</style>
+    <polygon class="vfg" points="330,150  312,150  192,6"/>
+    <polygon class="vfd" points="330,150  192,6    322,134"/>
+    <polygon class="vfh" points="312,150  192,6    200,18" opacity="0.5"/>
+    <polygon class="vfg" points="350,150  368,150  488,6"/>
+    <polygon class="vfd" points="350,150  488,6    358,134"/>
+    <polygon class="vfh" points="368,150  488,6    480,18" opacity="0.5"/>
+    <rect class="vfg" x="308" y="148" width="64" height="8" rx="1"/>
+    <rect class="vfh" x="308" y="148" width="64" height="3" rx="1" opacity="0.45"/>
+  </svg>
+  <div class="page-title" style="position:relative;z-index:1;">GUESS A <span>GUNDAM</span></div>
 </div>
 
 <div class="shell">
@@ -1074,6 +964,7 @@
           <button data-mode="zoom">Zoom<br>Recon</button>
           <button data-mode="artstyle">Impostor<br>Hunt</button>
           <button data-mode="pilot">Pilot<br>Guess</button>
+          <button data-mode="pilotmc">Pilot<br>MC</button>
         </div>
       </div>
 
@@ -1281,6 +1172,12 @@
 
     <!-- MANAGE SECTION -->
     <section id="manage" class="hide">
+      <div class="seg" id="manageTabSeg" style="margin-bottom:16px;">
+        <button data-mtab="gundams" class="on">Gundams</button>
+        <button data-mtab="pilots">Pilots</button>
+      </div>
+
+      <div id="gundamsPanel">
       <span class="label">Add A New Unit</span>
       <div class="field"><input id="addName" placeholder="name  e.g. RX-78-2 Gundam"></div>
       <div class="field"><input id="addImg" placeholder="image file  e.g. unicorn.webp"></div>
@@ -1314,7 +1211,35 @@
       </div>
       <input id="rosterSearch" class="search-in" placeholder="🔍 search units…" autocomplete="off">
       <div id="rosterList"></div>
+      </div>
+
+      <div id="pilotsPanel" class="hide">
+      <span class="label">Add A New Pilot</span>
+      <div class="field"><input id="addPilotName" placeholder="pilot name  e.g. Amuro Ray"></div>
+      <div class="field"><input id="addPilotImg" placeholder="portrait file  e.g. AmuroRay.webp"></div>
+      <button class="btn" id="addPilotBtn">+ Add Pilot</button>
+
+      <span class="label" style="margin-top:18px;">Save / Sync Files</span>
+      <div class="row">
+        <button class="btn data" id="savePilotsFileBtn">💾 Save to File</button>
+        <button class="btn ghost" id="loadPilotsFileBtn">📂 Load File</button>
+      </div>
+      <input type="file" id="pilotsFileIn" accept="application/json,.json" class="hide">
+      <p class="hint" style="margin-top:10px;">Loading merges portraits onto the current pilot list by name — it never deletes pilots.</p>
+      <button class="btn ghost" id="exportPilotsBtn">⧉ Copy / Paste JSON</button>
+      <div id="pilotsIoBox" class="hide" style="margin-top:12px;">
+        <textarea id="pilotsIoText" rows="5" placeholder="paste pilots JSON, then Load"></textarea>
+        <div class="spacer"></div>
+        <button class="btn warn" id="loadPilotsBtn">Load From Text</button>
+      </div>
+
+      <div class="spacer"></div>
+      <span class="label">Current Pilots (<span id="managePilotCount">0</span>)</span>
+      <input id="pilotSearch" class="search-in" placeholder="🔍 search pilots…" autocomplete="off">
+      <div id="pilotList"></div>
+      </div>
     </section>
+
 
     <!-- COLOR EDITOR SECTION -->
     <section id="colorEditor" class="hide">
@@ -1361,7 +1286,6 @@
 
   </div><!-- /body -->
 </div><!-- /shell -->
-</div><!-- /introTarget -->
 
 <button id="floatBack" class="float-back hide">◀ Done</button>
 <button id="floatTop" class="float-top hide" title="Back to top">▲</button>
@@ -1375,300 +1299,6 @@
 </div>
 
 <script>
-/* ── INTRO ANIMATION ─────────────────────────────────────────────── */
-(function(){
-  const overlay    = document.getElementById('introOverlay');
-  const headImg    = document.getElementById('introHeadImg');
-  const eyeCanvas  = document.getElementById('introEyeCanvas');
-  const introVfin  = document.getElementById('introVfin');
-  const target     = document.getElementById('introTarget');
-  const vfinWrap   = document.getElementById('titleVfinWrap');
-  const anchor     = document.getElementById('titleVfinAnchor');
-  const pageTitle  = document.getElementById('pageTitle');
-  const shell      = document.querySelector('.shell');
-  const ectx       = eyeCanvas.getContext('2d');
-  let W=0, H=0, eyeAlpha=0, rafId=null, flickerRaf=null;
-
-  function setup(){
-    W = headImg.offsetWidth  || 280;
-    H = headImg.offsetHeight || 300;
-    eyeCanvas.width  = W;
-    eyeCanvas.height = H;
-  }
-
-  /* Nu Gundam eyes — close together, centre of face
-     Left: 37-47% x, 51-58% y  |  Right: 53-63% x, 51-58% y */
-  const EYES = [
-    {x1:.37, y1:.51, x2:.47, y2:.58},
-    {x1:.53, y1:.51, x2:.63, y2:.58}
-  ];
-
-  function drawEyes(alpha){
-    EYES.forEach(e=>{
-      const ex=e.x1*W, ey=e.y1*H;
-      const ew=(e.x2-e.x1)*W, eh=(e.y2-e.y1)*H;
-      const cx=ex+ew/2, cy=ey+eh/2;
-      /* large outer bloom */
-      const bloom=ectx.createRadialGradient(cx,cy,0,cx,cy,ew*2.0);
-      bloom.addColorStop(0,`rgba(78,201,122,${(alpha*.5).toFixed(2)})`);
-      bloom.addColorStop(.4,`rgba(78,201,122,${(alpha*.18).toFixed(2)})`);
-      bloom.addColorStop(1,'rgba(78,201,122,0)');
-      ectx.fillStyle=bloom;
-      ectx.beginPath();
-      ectx.ellipse(cx,cy,ew*2.0,eh*1.5,0,0,Math.PI*2);
-      ectx.fill();
-      /* mid ring */
-      const mid=ectx.createRadialGradient(cx,cy,0,cx,cy,ew*1.0);
-      mid.addColorStop(0,`rgba(140,255,180,${(alpha*.75).toFixed(2)})`);
-      mid.addColorStop(1,'rgba(78,201,122,0)');
-      ectx.fillStyle=mid;
-      ectx.beginPath();
-      ectx.ellipse(cx,cy,ew*1.0,eh*.85,0,0,Math.PI*2);
-      ectx.fill();
-      /* bright core */
-      const core=ectx.createRadialGradient(cx,cy,0,cx,cy,ew*.42);
-      core.addColorStop(0,`rgba(220,255,230,${alpha.toFixed(2)})`);
-      core.addColorStop(.6,`rgba(78,201,122,${(alpha*.9).toFixed(2)})`);
-      core.addColorStop(1,'rgba(20,80,40,0)');
-      ectx.fillStyle=core;
-      ectx.beginPath();
-      ectx.ellipse(cx,cy,ew*.42,eh*.36,0,0,Math.PI*2);
-      ectx.fill();
-    });
-  }
-
-  /* Draw head image + eye glow on canvas. Called whenever canvas needs redrawing. */
-  function drawFrame(alpha){
-    ectx.clearRect(0,0,W,H);
-    /* head image underneath */
-    if(headImg.naturalWidth) ectx.drawImage(headImg,0,0,W,H);
-    drawEyes(alpha);
-  }
-
-  /* Ramp eyes up to full brightness over `rampDur` ms,
-     then hold with a gentle high-frequency flicker until stopFlicker() is called */
-  let flickerRunning = false;
-  function rampAndFlicker(rampDur, cb){
-    /* Hide <img> now — canvas draws it from this point on */
-    headImg.style.opacity = '0';
-    const rampStart = performance.now();
-    flickerRunning = true;
-    function rampFrame(now){
-      const p = Math.min((now-rampStart)/rampDur, 1);
-      eyeAlpha = 1 - Math.pow(1-p, 2);
-      drawFrame(eyeAlpha);
-      if(p < 1){ rafId = requestAnimationFrame(rampFrame); }
-      else{
-        eyeAlpha = 1.0;
-        const flickerBase = performance.now();
-        function flicker(now){
-          if(!flickerRunning) return;
-          const t = now - flickerBase;
-          eyeAlpha = 0.92 + 0.08*Math.sin(t*0.076) + 0.04*Math.sin(t*0.13+1.2);
-          drawFrame(eyeAlpha);
-          flickerRaf = requestAnimationFrame(flicker);
-        }
-        flickerRaf = requestAnimationFrame(flicker);
-        if(cb) cb();
-      }
-    }
-    rafId = requestAnimationFrame(rampFrame);
-  }
-
-  function stopFlicker(){ flickerRunning=false; if(flickerRaf) cancelAnimationFrame(flickerRaf); }
-
-  function sweepScan(cb){
-    /* headImg is already hidden (rampAndFlicker hid it); canvas owns the image now */
-    const dur = 900, start = performance.now();
-
-    function frame(now){
-      const p    = Math.min((now - start) / dur, 1);
-      const bw   = W * 0.18;
-      const sx   = -bw + p * (W + bw * 2);   /* beam centre */
-      const edge = sx - bw * 0.6;             /* leading wipe edge */
-
-      ectx.clearRect(0, 0, W, H);
-
-      /* Draw head image + glow only to the RIGHT of the wipe edge */
-      const clipLeft = Math.max(0, Math.min(W, edge));
-      if(clipLeft < W){
-        ectx.save();
-        ectx.beginPath();
-        ectx.rect(clipLeft, 0, W - clipLeft, H);
-        ectx.clip();
-        if(headImg.naturalWidth) ectx.drawImage(headImg, 0, 0, W, H);
-        if(eyeAlpha > 0) drawEyes(eyeAlpha);
-        ectx.restore();
-      }
-
-      /* Bright sweep beam */
-      const sg = ectx.createLinearGradient(sx - bw, 0, sx + bw, 0);
-      sg.addColorStop(0,   'rgba(180,245,255,0)');
-      sg.addColorStop(0.3, 'rgba(180,245,255,0.6)');
-      sg.addColorStop(0.5, 'rgba(230,252,255,0.95)');
-      sg.addColorStop(0.7, 'rgba(180,245,255,0.6)');
-      sg.addColorStop(1,   'rgba(180,245,255,0)');
-      ectx.fillStyle = sg;
-      ectx.fillRect(sx - bw, 0, bw * 2, H);
-
-      if(p < 1){
-        rafId = requestAnimationFrame(frame);
-      } else {
-        ectx.clearRect(0, 0, W, H);
-        stopFlicker();
-        if(cb) cb();
-      }
-    }
-    rafId = requestAnimationFrame(frame);
-  }
-
-  function fadeEyesOut(dur){
-    stopFlicker();
-    const start=performance.now(), startA=eyeAlpha;
-    function frame(now){
-      const p=Math.min((now-start)/dur,1);
-      eyeAlpha=startA*(1-p);
-      ectx.clearRect(0,0,W,H);
-      if(eyeAlpha>.01) drawEyes(eyeAlpha);
-      if(p<1) rafId=requestAnimationFrame(frame);
-      else ectx.clearRect(0,0,W,H);
-    }
-    rafId=requestAnimationFrame(frame);
-  }
-
-  function flyVfin(srcRect, dstRect, dur, cb){
-    const start=performance.now();
-    function ease(t){ return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2; }
-    introVfin.style.transition='none';
-    function frame(now){
-      const raw=Math.min((now-start)/dur,1), p=ease(raw);
-      introVfin.style.width = (srcRect.width +(dstRect.width -srcRect.width )*p)+'px';
-      introVfin.style.left  = (srcRect.left  +(dstRect.left  -srcRect.left  )*p)+'px';
-      introVfin.style.top   = (srcRect.top   +(dstRect.top   -srcRect.top   )*p)+'px';
-      if(raw<1){ rafId=requestAnimationFrame(frame); }
-      else{ if(cb)cb(); }
-    }
-    rafId=requestAnimationFrame(frame);
-  }
-
-  function run(){
-    if(rafId) cancelAnimationFrame(rafId);
-    stopFlicker();
-    setup();
-    ectx.clearRect(0,0,W,H);
-    eyeAlpha=0;
-
-    /* Reset vfin to hidden, outside any opacity parent */
-    introVfin.style.cssText='position:fixed;pointer-events:none;z-index:10000;opacity:0;width:0px;';
-    introVfin.classList.remove('vfin-parked');
-
-    /* Reset title/shell */
-    target.classList.remove('it-show');
-    target.style.opacity='0';
-    pageTitle.style.transition='none';
-    pageTitle.style.clipPath='inset(0 100% 0 0)';
-    shell.classList.remove('shell-show');
-    shell.style.opacity='0';
-
-    /* Reset head — visible until rampAndFlicker hides it and canvas takes over */
-    headImg.style.cssText='opacity:0;transform:scale(0.9);transition:opacity .6s ease,transform .6s ease;display:block;width:100%;height:auto;';
-
-    /* ── 1: Head fades in ── */
-    setTimeout(()=>{
-      headImg.style.opacity='1';
-      headImg.style.transform='scale(1)';
-    }, 200);
-
-    /* ── 2: Eyes ramp up to full then flicker ── */
-    setTimeout(()=>{
-      rampAndFlicker(600, ()=>{
-        /* hold flicker for 600ms, then start sweep */
-        setTimeout(()=>{
-
-          /* ── 3: Measure positions before sweep starts ── */
-          const headRect = document.getElementById('introHeadWrap').getBoundingClientRect();
-          const svgW   = headRect.width * 1.3;
-          const svgH   = svgW * (160 / 680);
-          const finBaseY = headRect.top + headRect.height * 0.50;
-          const srcRect = {
-            width : svgW,
-            left  : headRect.left + (headRect.width - svgW) / 2,
-            top   : finBaseY - svgH * 0.925
-          };
-          const anchorRect = anchor.getBoundingClientRect();
-          const dstRect = {
-            width : anchorRect.width,
-            left  : anchorRect.left,
-            top   : anchorRect.top
-          };
-
-          /* ── 4: Snap vfin 400ms into the sweep so it appears mid-wipe ── */
-          setTimeout(()=>{
-            introVfin.style.cssText = `position:fixed;pointer-events:none;z-index:10000;width:${srcRect.width}px;left:${srcRect.left}px;top:${srcRect.top}px;opacity:0;transition:opacity .4s ease;`;
-            void introVfin.offsetWidth;
-            introVfin.style.opacity = '1';
-          }, 400);
-
-          /* ── 5: Scan sweep ── */
-          sweepScan(()=>{
-
-            /* ── 6: Vfin flies to title (short pause after sweep) ── */
-            setTimeout(()=>{
-              flyVfin(srcRect, dstRect, 950, ()=>{
-
-                /* ── 7: Park vfin ── */
-                introVfin.style.cssText = 'opacity:1;';
-                introVfin.classList.add('vfin-parked');
-                vfinWrap.insertBefore(introVfin, vfinWrap.firstChild);
-
-                /* ── 8: Reveal introTarget ── */
-                target.style.transition='opacity .01s';
-                target.style.opacity='1';
-                target.classList.add('it-show');
-
-                /* ── 9: Title wipes left → right ── */
-                setTimeout(()=>{
-                  pageTitle.style.transition='clip-path 1.1s cubic-bezier(.4,0,.2,1)';
-                  pageTitle.style.clipPath='inset(0 0% 0 0)';
-                }, 150);
-
-                /* ── 10: Shell fades in ── */
-                setTimeout(()=>{
-                  shell.style.transition='opacity 1s ease';
-                  shell.style.opacity='1';
-                  shell.classList.add('shell-show');
-                }, 950);
-
-                /* ── 11: Dissolve overlay ── */
-                overlay.classList.add('done');
-                setTimeout(()=>{ overlay.style.display='none'; }, 450);
-              });
-            }, 700);
-
-          });
-        }, 600);
-      });
-    }, 950);
-  }
-
-  if(headImg.complete && headImg.naturalWidth){ run(); }
-  else{
-    headImg.onload=run;
-    headImg.onerror=()=>{
-      overlay.style.display='none';
-      introVfin.style.cssText='opacity:1;';
-      introVfin.classList.add('vfin-parked');
-      vfinWrap.insertBefore(introVfin, vfinWrap.firstChild);
-      target.style.opacity='1';
-      target.classList.add('it-show');
-      pageTitle.style.clipPath='inset(0 0% 0 0)';
-      shell.style.opacity='1';
-      shell.classList.add('shell-show');
-    };
-  }
-})();
-/* ─────────────────────────────────────────────────────────────────── */
-
 let roster = [];
 const $=id=>document.getElementById(id);
 
@@ -1725,6 +1355,7 @@ function updateModeStat(){
   if(quizMode==="zoom"){label="BEST STREAK";val=stats.zoomBest||0;}
   else if(quizMode==="artstyle"){label="IMPOSTORS FOUND";val=stats.artstyle||0;}
   else if(quizMode==="pilot"){label="PILOTS IDENTIFIED";val=stats.pilot||0;}
+  else if(quizMode==="pilotmc"){label="UNITS MATCHED";val=stats.pilotmc||0;}
   else{label="TOTAL IDENTIFIED";val=(quizMode==="type"?stats.type:stats.mc)||0;}
   el.innerHTML='<span>'+label+'</span><b>'+val+'</b>';
 }
@@ -1948,6 +1579,90 @@ const PILOT_DATA={
   "TYP-G12CMR Typhoeus Gundam Chimera":"Alus",
 };
 
+/* ---------- pilot portraits (Pilot Multiple Choice) ---------- */
+/* Only pilots with an actual portrait file go here. Anything not listed
+   (placeholder pilots like "EFSF Pilot"/"Unknown", or named pilots we just
+   don't have art for yet) is automatically excluded from Pilot MC mode. */
+const PILOT_IMG={
+  "Amuro Ray":            "images/pilots/AmuroRayCCA-GGeneration.webp",
+  "Bellri Zenam":         "images/pilots/BellriZenam-GCrossrays.webp",
+  "Banagher Links":       "images/pilots/cb_g1250c00102.webp",
+  "Suletta Mercury":      "images/pilots/cb_g5010c00104.webp",
+  "Loran Cehack":         "images/pilots/Character_Profile_Loran_Cehack_pilot_suit.webp",
+  "Mikazuki Augus":       "images/pilots/Character_Profile_Mikazuki_Augus_.webp",
+  "Sekai Kamiki":         "images/pilots/Character_Profile_Sekai_Kamiki.webp",
+  "Setsuna F. Seiei":     "images/pilots/Character_Profile_Setsuna_F._Seiei.webp",
+  "Tobia Arronax":        "images/pilots/Character_Profile_Tobia_Arronax.webp",
+  "Domon Kasshu":         "images/pilots/Domon_Kasshu_GGCR.webp",
+  "Christina Mackenzie":  "images/pilots/EXVS2_Chris.webp",
+  "Jona Basta":           "images/pilots/EXVS2_Jona.webp",
+  "Riku Mikami":          "images/pilots/EXVS2_Riku.webp",
+  "Usso Ewin":            "images/pilots/EXVS2_Uso.webp",
+  "Garrod Ran":           "images/pilots/Garrod_Ran_GGCR.webp",
+  "Hathaway Noa":         "images/pilots/HathawayMafty-GEternal.webp",
+  "Heero Yuy":            "images/pilots/Heero_Yuy_GGCR.webp",
+  "Hiroto Kuga":          "images/pilots/Hiroto_smiles_%28GBDR_EP26%29.webp",
+  "Amate Yuzuriha":       "images/pilots/IB_Machu.webp",
+  "Shuji Ito":            "images/pilots/IB_Shuji.webp",
+  "Lockon Stratos":       "images/pilots/IB_Zabanya_Lyle.webp",
+  "Io Fleming":           "images/pilots/IoFlemingS2-GEternal.webp",
+  "Sei Iori":             "images/pilots/iori sei.webp",
+  "Judau Ashta":          "images/pilots/JudauAshta-SDGeneration.webp",
+  "Kamille Bidan":        "images/pilots/KamilleBidanPilotEX.webp",
+  "Kira Yamato":          "images/pilots/Kira_CE73_SEED_Mode_G_Gen_Cross_Rays.webp",
+  "Kou Uraki":            "images/pilots/KouUraki-GEternal.webp",
+  "Nyaan":                "images/pilots/nyaan.webp",
+  "Allelujah Haptism":    "images/pilots/OB_S1_Allelujah.webp",
+  "Tieria Erde":          "images/pilots/OB_S1_Tieria.webp",
+  "Seabook Arno":         "images/pilots/OB_Seabook.webp",
+  "Shiro Amada":          "images/pilots/OB_Shiro.webp",
+  "Reiji":                "images/pilots/ReijiEX-GEternal.webp",
+  "Rio Hojo":             "images/pilots/Rio_Hojo_Avatar_Front.webp",
+  "Shinn Asuka":          "images/pilots/ShinnAsukaUR-GEternal.webp",
+  "Flit Asuno":           "images/pilots/XB_Age-1_Flit.webp",
+  "Asemu Asuno":          "images/pilots/XB_Age-2_Asemu.webp",
+  "Kio Asuno":            "images/pilots/XB_Kio.webp",
+  "Haru Irei":            "images/pilots/106536.webp",
+};
+
+/* ---------- live, editable pilot list (Manager → Pilots tab) ----------
+   Seeded from PILOT_IMG at boot. This is the array Pilot MC mode reads
+   portraits from once loaded (falls back to PILOT_IMG for anything not
+   yet merged in, same pattern as roster / PILOT_DATA). */
+let pilots=Object.keys(PILOT_IMG).map(name=>({name,img:PILOT_IMG[name]}));
+
+function dedupePilots(arr){
+  const seen=new Set(),out=[];
+  (Array.isArray(arr)?arr:[]).forEach(item=>{
+    if(!item||!item.name)return;
+    const k=item.name.trim().toLowerCase();
+    if(seen.has(k))return;
+    seen.add(k);out.push(item);
+  });
+  return out;
+}
+function pilotPortrait(pilotName){
+  if(!pilotName)return"";
+  const p=pilots.find(x=>x.name.toLowerCase()===pilotName.toLowerCase());
+  if(p&&p.img)return p.img;
+  return PILOT_IMG[pilotName]||"";
+}
+function loadPilots(arr){
+  if(!Array.isArray(arr))return;let added=0;let merged=0;
+  arr.forEach(newItem=>{
+    if(!newItem||!newItem.name)return;
+    let match=pilots.find(x=>x.name.toLowerCase()===newItem.name.toLowerCase());
+    if(match){
+      if(newItem.img&&!match.img){match.img=newItem.img;merged++;}
+    }else{
+      pilots.push({name:newItem.name,img:newItem.img||""});
+      added++;
+    }
+  });
+  updatePilotUI();
+  alert(`Loaded pilots: ${added} added, ${merged} merged.`);
+}
+
 
 /* ═══════════════════════════════════════════════════════
    LEADERBOARD  — paste your Apps Script URL below
@@ -1980,7 +1695,7 @@ async function autoSubmit(){
   if(!name) return;
   if(!SCRIPT_URL || SCRIPT_URL === "YOUR_APPS_SCRIPT_URL_HERE") return;
   try{
-    const p=new URLSearchParams({action:'submit',name,mc:stats.mc||0,type:stats.type||0,zoom:stats.zoomBest||0,impostor:stats.artstyle||0,pilot:stats.pilot||0});
+    const p=new URLSearchParams({action:'submit',name,mc:stats.mc||0,type:stats.type||0,zoom:stats.zoomBest||0,impostor:stats.artstyle||0,pilot:stats.pilot||0,pilotmc:stats.pilotmc||0});
     await fetch(SCRIPT_URL+'?'+p, {redirect:'follow'});
     fetchLeaderboard();
   } catch(ex){ /* silent */ }
@@ -2003,7 +1718,7 @@ async function submitScore(){
   $("submitMsg").className="submit-msg";
   $("submitMsg").textContent="Submitting...";
   try{
-    const p=new URLSearchParams({action:'submit',name,mc:stats.mc||0,type:stats.type||0,zoom:stats.zoomBest||0,impostor:stats.artstyle||0,pilot:stats.pilot||0});
+    const p=new URLSearchParams({action:'submit',name,mc:stats.mc||0,type:stats.type||0,zoom:stats.zoomBest||0,impostor:stats.artstyle||0,pilot:stats.pilot||0,pilotmc:stats.pilotmc||0});
     await fetch(SCRIPT_URL+'?'+p, {redirect:'follow'});
     setSavedName(name);
     renderSubmitPanel();
@@ -2040,7 +1755,7 @@ function renderLeaderboard(rows){
     $("lbBody").innerHTML='<div class="lb-empty">No scores yet \u2014 be the first!</div>';
     return;
   }
-  let html='<table class="lb-table"><thead><tr><th></th><th>Name</th><th class="num">MC</th><th class="num">Type</th><th class="num">Zoom</th><th class="num">Hunt</th><th class="num">Pilot</th></tr></thead><tbody>';
+  let html='<table class="lb-table"><thead><tr><th></th><th>Name</th><th class="num">MC</th><th class="num">Type</th><th class="num">Zoom</th><th class="num">Hunt</th><th class="num">Pilot</th><th class="num">PMC</th></tr></thead><tbody>';
   rows.slice(0,5).forEach((r,i)=>{
     const cls  = i===0?' class="gold"':'';
     const rank = i===0?'\ud83e\udd47':i===1?'\ud83e\udd48':i===2?'\ud83e\udd49':i===3?'4':i===4?'5':(i+1);
@@ -2050,7 +1765,8 @@ function renderLeaderboard(rows){
     const zm = fmtN(r.zoom);
     const im = fmtN(r.impostor);
     const pi = fmtN(r.pilot);
-    html+=`<tr${cls}><td class="rank">${rank}</td><td class="pname">${escapeHtml(String(r.name))}</td><td class="num">${mc}</td><td class="num">${ty}</td><td class="num">${zm}</td><td class="num">${im}</td><td class="num">${pi}</td></tr>`;
+    const pm = fmtN(r.pilotmc);
+    html+=`<tr${cls}><td class="rank">${rank}</td><td class="pname">${escapeHtml(String(r.name))}</td><td class="num">${mc}</td><td class="num">${ty}</td><td class="num">${zm}</td><td class="num">${im}</td><td class="num">${pi}</td><td class="num">${pm}</td></tr>`;
   });
   html+='</tbody></table>';
   $("lbBody").innerHTML=html;
@@ -2078,7 +1794,7 @@ function rankRelated(correct,others){
   return[...shuffleArr(family),...shuffleArr(sameSeries)];
 }
 
-function initApp(){buildSeriesDropdown();updateRosterUI();setupEventListeners();updateModeStat();fetchLeaderboard();buildAchievements();}
+function initApp(){pilots=dedupePilots(pilots);buildSeriesDropdown();updateRosterUI();updatePilotUI();setupEventListeners();updateModeStat();fetchLeaderboard();buildAchievements();}
 
 function dedupeRoster(arr){
   const seen=new Set(),out=[];
@@ -2124,6 +1840,13 @@ function updateRosterUI(){
   if(c===0){ew.style.display="";ew.innerHTML="<b>WARNING:</b> Roster database is empty. Register units below or load a profile.";}
   else{ew.style.display="none";}
   renderManageList($("rosterSearch").value);
+}
+
+function updatePilotUI(){
+  const c=pilots.length;
+  const mc=$("managePilotCount");if(mc)mc.textContent=c;
+  const pl=$("pilotSearch");
+  renderPilotManageList(pl?pl.value:"");
 }
 
 function getSanitizedFilename(name){return name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");}
@@ -2228,8 +1951,77 @@ function renderManageList(query=""){
   }
 }
 
+function renderPilotManageList(query=""){
+  const container=$("pilotList");if(!container)return;container.innerHTML="";
+  const q=query.toLowerCase().trim();
+  const sorted=[...pilots].sort((a,b)=>a.name.localeCompare(b.name));
+  sorted.forEach(item=>{
+    if(!item||!item.name)return;
+    if(q&&!item.name.toLowerCase().includes(q))return;
+    const idx=pilots.indexOf(item);
+    const unitCount=roster.filter(u=>(u.pilot||PILOT_DATA[u.name])===item.name).length;
+    const div=document.createElement("div");div.className="roster-item";
+    const thmb=document.createElement("div");thmb.className="thmbwrap";
+    thmb.onclick=()=>{if(item.img) openLightbox(null,item.img);};
+    const zoomHint=document.createElement("div");zoomHint.className="thmb-zoom";zoomHint.textContent="🔍";
+    thmb.appendChild(zoomHint);
+    if(item.img){const img=document.createElement("img");img.src=item.img;img.onerror=()=>{thmb.innerHTML='<div class="noimg err">ERR</div>';};thmb.appendChild(img);}
+    else{const noimg=document.createElement("div");noimg.className="noimg";noimg.textContent="CLICK TO ADD";thmb.appendChild(noimg);}
+    const mid=document.createElement("div");mid.className="ritem-mid";
+    const top=document.createElement("div");top.className="ritem-top";
+    const nameIn=document.createElement("input");nameIn.className="name-in";nameIn.value=item.name;nameIn.placeholder="Edit pilot name...";
+    nameIn.onchange=e=>{
+      const newName=e.target.value.trim()||"Unnamed Pilot";
+      const oldName=pilots[idx].name;
+      pilots[idx].name=newName;
+      if(newName!==oldName){
+        // keep roster pilot references pointed at the renamed pilot
+        roster.forEach(u=>{if(u.pilot===oldName)u.pilot=newName;});
+      }
+      updatePilotUI();
+    };
+    const dbtn=document.createElement("button");dbtn.className="del";dbtn.textContent="✕";dbtn.title="Remove";
+    dbtn.onclick=()=>{
+      const msg=unitCount>0
+        ? `Remove ${item.name}? ${unitCount} unit(s) reference this pilot and will no longer have a portrait in Pilot MC.`
+        : `Remove ${item.name}?`;
+      if(confirm(msg)){pilots.splice(idx,1);updatePilotUI();}
+    };
+    top.appendChild(nameIn);top.appendChild(dbtn);
+    const ctrl=document.createElement("div");ctrl.className="ritem-ctrl";
+    const inp=document.createElement("input");inp.className="url-in";inp.value=imgFileName(item.img).replace(/^pilots[\/\\]/i,"");inp.placeholder="portrait file e.g. AmuroRay.webp";
+    inp.onchange=e=>{
+      let v=e.target.value.trim();
+      if(v&&!/^https?:\/\//i.test(v)&&!/^images[\/\\]/i.test(v))v="images/pilots/"+v.replace(/^[\/\\]+/,"").replace(/^pilots[\/\\]/i,"");
+      pilots[idx].img=v;updatePilotUI();
+    };
+    const dlbtn=document.createElement("button");dlbtn.className="dl-btn";dlbtn.innerHTML="💾";dlbtn.title="Download image";
+    dlbtn.onclick=()=>{if(!item.img){alert("No image set.");return;}downloadTargetImage(item.img,item.name);};
+    ctrl.appendChild(inp);ctrl.appendChild(dlbtn);
+    const usageRow=document.createElement("div");usageRow.className="roster-colors";
+    const lbl=document.createElement("span");lbl.className="roster-color-label";
+    lbl.textContent=unitCount>0?`Piloted units: ${unitCount}`:"No units reference this pilot";
+    lbl.style.color=unitCount>0?"var(--green)":"var(--txt-dim)";
+    usageRow.appendChild(lbl);
+    mid.appendChild(top);mid.appendChild(ctrl);mid.appendChild(usageRow);
+    div.appendChild(thmb);div.appendChild(mid);container.appendChild(div);
+  });
+}
+
 function setupEventListeners(){
   $("rosterSearch").oninput=e=>renderManageList(e.target.value);
+  const pilotSearchEl=$("pilotSearch");
+  if(pilotSearchEl)pilotSearchEl.oninput=e=>renderPilotManageList(e.target.value);
+  document.querySelectorAll("#manageTabSeg button").forEach(b=>{
+    b.onclick=()=>{
+      document.querySelectorAll("#manageTabSeg button").forEach(x=>x.classList.remove("on"));
+      b.classList.add("on");
+      const isPilots=b.dataset.mtab==="pilots";
+      $("gundamsPanel").classList.toggle("hide",isPilots);
+      $("pilotsPanel").classList.toggle("hide",!isPilots);
+      if(isPilots)updatePilotUI();
+    };
+  });
   document.querySelectorAll("#modeSeg button").forEach(b=>{
     b.onclick=()=>{
       document.querySelectorAll("#modeSeg button").forEach(x=>x.classList.remove("on"));
@@ -2291,6 +2083,34 @@ function setupEventListeners(){
   // Color editor
   $("openColorEditorBtn").onclick=()=>{ setupColorEditor(); showSection("colorEditor"); };
   $("colorEditorBack").onclick=()=>showSection("manage");
+
+  // ── Pilots manager ──────────────────────────────────────────────
+  const addPilotBtn=$("addPilotBtn");
+  if(addPilotBtn)addPilotBtn.onclick=()=>{
+    const name=$("addPilotName").value.trim();
+    let img=$("addPilotImg").value.trim();
+    if(!name){alert("Pilot name required.");return;}
+    if(pilots.some(p=>p.name.toLowerCase()===name.toLowerCase())){alert("A pilot with that name already exists.");return;}
+    if(img&&!/^https?:\/\//i.test(img))img="images/pilots/"+img.replace(/^[\/\\]+/,"").replace(/^pilots[\/\\]/i,"").replace(/^images[\/\\]/i,"");
+    pilots.push({name,img});
+    $("addPilotName").value="";$("addPilotImg").value="";
+    updatePilotUI();
+  };
+  const savePilotsBtn=$("savePilotsFileBtn");
+  if(savePilotsBtn)savePilotsBtn.onclick=()=>{
+    const json=JSON.stringify(pilots,null,2);
+    try{const blob=new Blob([json],{type:"application/json"});const url=URL.createObjectURL(blob);
+      const a=document.createElement("a");a.href=url;a.download="pilots.json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+    catch(e){$("pilotsIoBox").classList.remove("hide");$("pilotsIoText").value=json;$("pilotsIoText").select();alert("Download blocked — JSON shown below. Copy to save.");}
+  };
+  const loadPilotsFileBtn=$("loadPilotsFileBtn");
+  if(loadPilotsFileBtn)loadPilotsFileBtn.onclick=()=>$("pilotsFileIn").click();
+  const pilotsFileIn=$("pilotsFileIn");
+  if(pilotsFileIn)pilotsFileIn.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{loadPilots(JSON.parse(r.result));}catch(err){alert("Could not parse file as pilots JSON.");}};r.readAsText(f);e.target.value="";};
+  const exportPilotsBtn=$("exportPilotsBtn");
+  if(exportPilotsBtn)exportPilotsBtn.onclick=()=>{const open=$("pilotsIoBox").classList.toggle("hide")===false;if(open){$("pilotsIoText").value=JSON.stringify(pilots,null,2);$("pilotsIoText").select();}};
+  const loadPilotsBtn=$("loadPilotsBtn");
+  if(loadPilotsBtn)loadPilotsBtn.onclick=()=>{try{const val=$("pilotsIoText").value.trim();if(!val)return;loadPilots(JSON.parse(val));$("pilotsIoBox").classList.add("hide");$("pilotsIoText").value="";}catch(err){alert("JSON syntax error.");}};
 }
 
 function showSection(id){
@@ -2303,127 +2123,7 @@ function showSection(id){
   const fb=$("floatBack");const ft=$("floatTop");
   if(id==="manage"||id==="colorEditor"){if(fb)fb.classList.remove("hide");}else{if(fb)fb.classList.add("hide");}
   if(id==="manage"||id==="colorEditor"){if(ft)ft.classList.remove("hide");}else{if(ft)ft.classList.add("hide");}
-  // show/hide space colonies on main menu only
-  document.querySelectorAll(".space-colony").forEach(el=>{
-    if(id==="start") el.classList.add("visible");
-    else el.classList.remove("visible");
-  });
 }
-
-/* ── SPACE COLONY BACKGROUND ── */
-(function initColonies(){
-  const imgs      = ["images/space-colony-1.png","images/space-colony-2.png"];
-  const driftAnims= ["colony-drift-a","colony-drift-b","colony-drift-c"];
-
-  // Size buckets (px) — min/max per colony slot
-  const sizeBuckets = [
-    { minSize:80,  maxSize:160 },  // tiny — feels very distant
-    { minSize:160, maxSize:280 },  // small-medium
-    { minSize:240, maxSize:360 },  // medium-large
-    { minSize:100, maxSize:200 },  // another small one for variety
-  ];
-
-  const rng = (a,b) => a + Math.random() * (b - a);
-  const pick = arr  => arr[Math.floor(Math.random() * arr.length)];
-
-  /* ── Free random placement in the screen margins ──
-     Divides the screen into an 8-segment ring around the centre:
-     top-strip, bottom-strip, left-strip, right-strip, + 4 corner pockets.
-     Each call picks one segment at random, then places inside it.       */
-  function randomMarginPos(sizePx){
-    // How far in from each edge the UI panel reaches (rough safe margins)
-    const hMargin = 22;  // % from left or right where UI lives
-    const vMargin = 15;  // % from top or bottom
-
-    const segments = [
-      // top-left pocket
-      () => ({ left: rng(1, hMargin-2)+'vw',  top: rng(2, vMargin-1)+'vh' }),
-      // top-center strip (above title)
-      () => ({ left: rng(hMargin, 100-hMargin)+'vw', top: rng(1, 9)+'vh' }),
-      // top-right pocket
-      () => ({ right: rng(1, hMargin-2)+'vw', top: rng(2, vMargin-1)+'vh' }),
-      // right strip (mid-height)
-      () => ({ right: rng(1, 8)+'vw',         top: rng(vMargin, 100-vMargin)+'vh' }),
-      // bottom-right pocket
-      () => ({ right: rng(1, hMargin-2)+'vw', bottom: rng(2, vMargin-1)+'vh' }),
-      // bottom-center strip
-      () => ({ left: rng(hMargin, 100-hMargin)+'vw', bottom: rng(1, 9)+'vh' }),
-      // bottom-left pocket
-      () => ({ left: rng(1, hMargin-2)+'vw',  bottom: rng(2, vMargin-1)+'vh' }),
-      // left strip (mid-height)
-      () => ({ left: rng(1, 8)+'vw',          top: rng(vMargin, 100-vMargin)+'vh' }),
-    ];
-    return pick(segments)();
-  }
-
-  /* ── Apply a fresh random position + drift to an element ── */
-  function reposition(el, sizePx, animate){
-    // Clear old position properties
-    ['left','right','top','bottom'].forEach(p => el.style[p] = '');
-
-    const pos = randomMarginPos(sizePx);
-    Object.assign(el.style, pos);
-
-    // New drift animation
-    const anim  = pick(driftAnims);
-    const dur   = rng(28, 55).toFixed(1)+'s';
-    const delay = animate ? '0s' : rng(0, 8).toFixed(1)+'s';
-    el.style.animation = 'none';               // force reflow
-    void el.offsetWidth;
-    el.style.animation = `${anim} ${dur} ${delay} ease-in-out infinite`;
-  }
-
-  /* ── Schedule random relocations for one colony element ── */
-  function scheduleRelocation(el, sizePx){
-    // Random interval: 18–55 seconds
-    const wait = rng(18000, 55000);
-    setTimeout(()=>{
-      // Only relocate if still visible (user might be in a game)
-      el.classList.remove("visible");
-      setTimeout(()=>{
-        reposition(el, sizePx, true);
-        // Fade back in only if on start screen
-        if(!document.getElementById("start").classList.contains("hide")){
-          el.classList.add("visible");
-        }
-        scheduleRelocation(el, sizePx);  // schedule the next one
-      }, 1600); // wait for fade-out transition to finish
-    }, wait);
-  }
-
-  /* ── Create the 4 colony elements ── */
-  // Shuffle size buckets for variety each page load
-  const shuffled = [...sizeBuckets].sort(() => Math.random() - 0.5);
-
-  shuffled.forEach((bucket, i) => {
-    const el  = document.createElement("img");
-    el.className = "space-colony";
-    el.src    = imgs[i % 2];          // alternate between the two images
-    el.alt    = "";
-    el.setAttribute("aria-hidden","true");
-
-    const sizePx = Math.round(rng(bucket.minSize, bucket.maxSize));
-    el.style.width = sizePx + "px";
-
-    reposition(el, sizePx, false);
-
-    // Opacity: smaller = dimmer (feels further away)
-    const opacity = 0.28 + (sizePx / bucket.maxSize) * 0.28;
-    el.style.setProperty("--colony-opacity", opacity.toFixed(2));
-
-    document.body.appendChild(el);
-
-    // Stagger relocation timers so they don't all disappear at once
-    setTimeout(()=> scheduleRelocation(el, sizePx), i * rng(4000, 9000));
-  });
-
-  // Show immediately if already on start screen
-  if(!document.getElementById("start").classList.contains("hide")){
-    setTimeout(()=>{
-      document.querySelectorAll(".space-colony").forEach(el=>el.classList.add("visible"));
-    }, 200);
-  }
-})();
 
 function startQuiz(){
   if(roster.length===0){alert("No units in database.");return;}
@@ -2431,6 +2131,20 @@ function startQuiz(){
   if(quizMode==="pilot"){
     const pool=shuffleArr(roster.filter(u=>u.img&&(u.pilot||PILOT_DATA[u.name])));
     if(pool.length===0){alert("No pilot data found. Add units with known pilots.");return;}
+    let n=pool.length;
+    if(quizCount==="half")n=Math.max(1,Math.floor(pool.length/2));
+    else if(quizCount!=="all"){const pn=parseInt(quizCount,10);if(pn>0)n=pn;}
+    n=Math.min(n,pool.length);
+    score=0;curIdx=0;misidentified=[];sessionUnits=pool.slice(0,n);
+    showSection("quiz");setupQuizQuestion();return;
+  }
+  if(quizMode==="pilotmc"){
+    // Pool: units whose pilot has a portrait in PILOT_IMG
+    const pool=shuffleArr(roster.filter(u=>{
+      const p=u.pilot||PILOT_DATA[u.name];
+      return p&&pilotPortrait(p);
+    }));
+    if(pool.length===0){alert("No pilot portraits found. Add images to images/pilots and map them in PILOT_IMG.");return;}
     let n=pool.length;
     if(quizCount==="half")n=Math.max(1,Math.floor(pool.length/2));
     else if(quizCount!=="all"){const pn=parseInt(quizCount,10);if(pn>0)n=pn;}
@@ -2528,17 +2242,21 @@ function setupQuizQuestion(){
   $("verdict").className="verdict";$("verdict").textContent="";
   $("reveal").classList.add("hide");$("nextBtn").classList.add("hide");
   const img=$("qImg");const ph=$("qPh");
-  if(item.img){img.src=item.img;img.classList.remove("hide");ph.classList.add("hide");
+  const imgSrc=(quizMode==="pilotmc")?pilotPortrait(item.pilot||PILOT_DATA[item.name]):item.img;
+  if(imgSrc){img.src=imgSrc;img.classList.remove("hide");ph.classList.add("hide");
     const spy=$("quizSpy");if(spy)spy.style.display='flex';
     img.onerror=()=>{img.classList.add("hide");ph.classList.remove("hide");ph.textContent="ERROR LOADING IMAGE";const spy=$("quizSpy");if(spy)spy.style.display='none';};}
   else{img.classList.add("hide");ph.classList.remove("hide");ph.textContent="NO IMAGE ATTACHED";}
   const pun=$("pilotUnitName");
   if(quizMode==="pilot"){pun.textContent=item.name;pun.classList.remove("hide");}
   else{pun.classList.add("hide");}
-  if(quizMode==="mc"||quizMode==="pilot"){
+  if(quizMode==="mc"||quizMode==="pilot"||quizMode==="pilotmc"){
     $("choices").classList.remove("hide");$("typeBox").classList.add("hide");
-    const pt=$("qPrompt");if(pt)pt.textContent=quizMode==="pilot"?"Name the Pilot":"Identify the Mobile Suit";
-    if(quizMode==="pilot")generatePilotChoices(item);else generateMCChoices(item);
+    const pt=$("qPrompt");
+    if(pt)pt.textContent=quizMode==="pilot"?"Name the Pilot":(quizMode==="pilotmc"?"Identify the Pilot's Mobile Suit":"Identify the Mobile Suit");
+    if(quizMode==="pilot")generatePilotChoices(item);
+    else if(quizMode==="pilotmc")generatePilotMCChoices(item);
+    else generateMCChoices(item);
   }else{
     $("choices").classList.add("hide");$("typeBox").classList.remove("hide");
     $("typeInput").value="";$("typeInput").disabled=false;$("typeSuggest").innerHTML="";
@@ -2551,6 +2269,29 @@ function generateMCChoices(correctItem){
   const box=$("choices");box.innerHTML="";
   correctAnswerText=correctItem.name;
   const others=roster.filter(x=>x.name!==correctItem.name);
+  let picks=[];
+  if(Math.random()<0.65){picks=rankRelated(correctItem,others).slice(0,2);}
+  const pool=shuffleArr(others.filter(x=>!picks.includes(x)));
+  while(picks.length<3&&pool.length)picks.push(pool.shift());
+  picks.push(correctItem);shuffleArr(picks);
+  picks.forEach(item=>{
+    const b=document.createElement("button");b.className="choice";b.textContent=item.name;
+    b.onclick=()=>handleMCAnswer(b,item.name===correctItem.name);box.appendChild(b);
+  });
+}
+
+function generatePilotMCChoices(correctItem){
+  const box=$("choices");box.innerHTML="";
+  const correctPilot=correctItem.pilot||PILOT_DATA[correctItem.name];
+  correctAnswerText=correctItem.name;
+  // Exclude ANY unit piloted by the same person as the correct answer —
+  // e.g. if the portrait is Asemu Asuno, only one AGE-2 variant can appear,
+  // never two at once, and never alongside another Asemu-piloted unit.
+  const others=roster.filter(u=>{
+    if(u.name===correctItem.name)return false;
+    const p=u.pilot||PILOT_DATA[u.name];
+    return p!==correctPilot;
+  });
   let picks=[];
   if(Math.random()<0.65){picks=rankRelated(correctItem,others).slice(0,2);}
   const pool=shuffleArr(others.filter(x=>!picks.includes(x)));
@@ -2581,7 +2322,10 @@ function handleMCAnswer(btn,isCorrect){
   document.querySelectorAll("#choices .choice").forEach(b=>b.disabled=true);
   if(isCorrect){
     btn.classList.add("correct");$("verdict").className="verdict ok";$("verdict").textContent="✓ SIGNATURE VERIFIED";
-    score++;addPoint(quizMode==="pilot"?"pilot":"mc");if(quizMode!=="pilot")recordSeenUnit(sessionUnits[curIdx].name);else{recordSeenPilotUnit(sessionUnits[curIdx].name);checkPilotMilestoneAchievements();}
+    score++;
+    if(quizMode==="pilot"){addPoint("pilot");recordSeenPilotUnit(sessionUnits[curIdx].name);checkPilotMilestoneAchievements();}
+    else if(quizMode==="pilotmc"){addPoint("pilotmc");checkPilotMCMilestoneAchievements();}
+    else{addPoint("mc");recordSeenUnit(sessionUnits[curIdx].name);}
   }else{
     btn.classList.add("wrong");$("verdict").className="verdict no";$("verdict").textContent="✕ WARNING: IDENTIFICATION ERROR";
     misidentified.push(sessionUnits[curIdx]);
@@ -2840,7 +2584,7 @@ function showResults(){
   }else{
     pct=sessionUnits.length>0?Math.round(score/sessionUnits.length*100):0;
     $("finalPct").textContent=pct+"%";
-    $("finalLine").textContent=`${score} / ${sessionUnits.length} ${quizMode==="pilot"?"pilots identified":"units classified"}`;
+    $("finalLine").textContent=`${score} / ${sessionUnits.length} ${quizMode==="pilot"?"pilots identified":(quizMode==="pilotmc"?"units matched to pilot":"units classified")}`;
     didWin=(pct>=50);
     $("resultLabel").textContent=didWin?"▲ VICTORY":"▼ MISSION FAILED";
     recordBest(quizMode, score, sessionUnits.length, score+"/"+sessionUnits.length);
@@ -2859,6 +2603,8 @@ function showResults(){
   // Cross-mode squares light up only on a WIN (>=50% for mc/type/pilot)
   if(didWin) recordModeCompletion(quizMode, sessionUnits.length);
   if(quizMode==='pilot'&&misidentified.length===0&&sessionUnits.length>=5)unlockAchievement('pilot_perfect');
+  if(quizMode==='pilotmc'&&misidentified.length===0&&sessionUnits.length>=5)unlockAchievement('pilotmc_perfect');
+  if(quizMode==='pilotmc'&&misidentified.length===0&&sessionUnits.length>=15)unlockAchievement('pilotmc_perfect15');
   autoSubmit();
   renderSubmitPanel();
 }
@@ -4170,6 +3916,12 @@ function buildAchievements(){
     pilot_perfect: {title:'Perfect Debrief', desc:'100% on a 5+ unit Pilot session',  icon:'⭐', cat:'pilot'},
     pilot_all:     {title:'Full Intel',      desc:`All ${pilotableCount} pilots ID'd`, icon:'📋', cat:'pilot',
                     progress:true, progressFn:()=>({cur:seenPilotUnits.size,tot:pilotableCount})},
+    // Pilot Multiple Choice
+    pilotmc_1:       {title:'Cockpit Match',     desc:'Match your first pilot to their Gundam', icon:'🪖', cat:'pilotmc'},
+    pilotmc_10:      {title:'Roster Recognition', desc:'10 units matched to their pilot',         icon:'🪖', cat:'pilotmc',
+                      progress:true, progressFn:()=>({cur:Math.min(stats.pilotmc||0,10),tot:10})},
+    pilotmc_perfect: {title:'Flawless Briefing', desc:'100% on a 5+ unit Pilot MC session',       icon:'⭐', cat:'pilotmc'},
+    pilotmc_perfect15:{title:'Ace Casting Director', desc:'100% on a 15+ unit Pilot MC session',   icon:'🏅', cat:'pilotmc'},
     // Find All
     mc_all: {title:'Complete Analysis', desc:`All ${roster.length} units found`,  icon:'📋', cat:'findall', progress:true, total:roster.length},
     // Cross-mode
@@ -4208,6 +3960,8 @@ function retroCheckAchievements(){
   // Type total
   if((stats.type||0)>=10)unlockAchievement('type_10',false);
   if((stats.pilot||0)>=10)unlockAchievement('pilot_10',false);
+  if((stats.pilotmc||0)>=1)unlockAchievement('pilotmc_1',false);
+  if((stats.pilotmc||0)>=10)unlockAchievement('pilotmc_10',false);
   // Artstyle total
   if((stats.artstyle||0)>=30)unlockAchievement('artstyle_total',false);
 }
@@ -4268,6 +4022,11 @@ function recordSeenPilotUnit(unitName){
 function checkPilotMilestoneAchievements(){
   if(!ACH_DEFS) return;
   if((stats.pilot||0)>=10) unlockAchievement('pilot_10');
+}
+function checkPilotMCMilestoneAchievements(){
+  if(!ACH_DEFS) return;
+  if((stats.pilotmc||0)>=1)  unlockAchievement('pilotmc_1');
+  if((stats.pilotmc||0)>=10) unlockAchievement('pilotmc_10');
 }
 function checkZoomAchievements(streak){
   if(!ACH_DEFS) return;
@@ -4332,6 +4091,7 @@ function renderAchievementsPanel(){
     {key:'zoom',      label:'🔭 Zoom Recon'},
     {key:'type',      label:'⌨️ Type Answer'},
     {key:'pilot',     label:'🎯 Pilot Guess'},
+    {key:'pilotmc',   label:'🪖 Pilot MC'},
     {key:'findall',   label:'📋 Find All'},
     {key:'series',    label:'📡 Series Mastery'},
     {key:'crossmode', label:'🎖️ Cross-Mode'},
