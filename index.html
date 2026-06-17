@@ -1217,6 +1217,10 @@
       <span class="label">Add A New Pilot</span>
       <div class="field"><input id="addPilotName" placeholder="pilot name  e.g. Amuro Ray"></div>
       <div class="field"><input id="addPilotImg" placeholder="portrait file  e.g. AmuroRay.webp"></div>
+      <div class="field series-row">
+        <select id="addPilotSeries"></select>
+        <button class="series-add" id="addPilotSeriesBtn" title="Add a new series">＋</button>
+      </div>
       <button class="btn" id="addPilotBtn">+ Add Pilot</button>
 
       <span class="label" style="margin-top:18px;">Save / Sync Files</span>
@@ -1626,10 +1630,10 @@ const PILOT_IMG={
 };
 
 /* ---------- live, editable pilot list (Manager → Pilots tab) ----------
-   Seeded from PILOT_IMG at boot. This is the array Pilot MC mode reads
-   portraits from once loaded (falls back to PILOT_IMG for anything not
-   yet merged in, same pattern as roster / PILOT_DATA). */
-let pilots=Object.keys(PILOT_IMG).map(name=>({name,img:PILOT_IMG[name]}));
+   Loaded from pilots.json at boot (same pattern as gundam-roster.json).
+   Falls back to PILOT_IMG (hardcoded) if the fetch fails, so Pilot MC
+   still works offline / before the file exists on a fresh fork. */
+let pilots=Object.keys(PILOT_IMG).map(name=>({name,img:PILOT_IMG[name],series:""}));
 
 function dedupePilots(arr){
   const seen=new Set(),out=[];
@@ -1647,21 +1651,50 @@ function pilotPortrait(pilotName){
   if(p&&p.img)return p.img;
   return PILOT_IMG[pilotName]||"";
 }
-function loadPilots(arr){
-  if(!Array.isArray(arr))return;let added=0;let merged=0;
+/* pilots.json on disk is {"Name":{"img":"...","series":"..."}, ...} —
+   convert to/from the array shape used everywhere in memory. */
+function pilotsObjToArray(obj){
+  if(!obj||typeof obj!=="object"||Array.isArray(obj))return[];
+  return Object.entries(obj).map(([name,info])=>({
+    name,
+    img:(info&&info.img)||"",
+    series:(info&&info.series)||"",
+  }));
+}
+function pilotsArrayToObj(arr){
+  const out={};
+  arr.forEach(p=>{if(p&&p.name)out[p.name]={img:p.img||"",series:p.series||""};});
+  return out;
+}
+function loadPilots(data){
+  const arr=Array.isArray(data)?data:pilotsObjToArray(data);
+  if(!arr.length)return;
+  let added=0;let merged=0;
   arr.forEach(newItem=>{
     if(!newItem||!newItem.name)return;
     let match=pilots.find(x=>x.name.toLowerCase()===newItem.name.toLowerCase());
     if(match){
       if(newItem.img&&!match.img){match.img=newItem.img;merged++;}
+      if(newItem.series&&!match.series)match.series=newItem.series;
     }else{
-      pilots.push({name:newItem.name,img:newItem.img||""});
+      pilots.push({name:newItem.name,img:newItem.img||"",series:newItem.series||""});
       added++;
     }
   });
   updatePilotUI();
-  alert(`Loaded pilots: ${added} added, ${merged} merged.`);
+  return{added,merged};
 }
+
+fetch('pilots.json')
+  .then(r=>{if(!r.ok)throw new Error("Could not load pilots.json");return r.json();})
+  .then(data=>{
+    const arr=pilotsObjToArray(data);
+    if(arr.length)pilots=dedupePilots(arr);
+    if($("addPilotSeries"))buildSeriesDropdown("addPilotSeries");
+    updatePilotUI();
+  })
+  .catch(err=>{console.warn("pilots.json not found, using built-in PILOT_IMG fallback.",err);});
+
 
 
 /* ═══════════════════════════════════════════════════════
@@ -1794,7 +1827,7 @@ function rankRelated(correct,others){
   return[...shuffleArr(family),...shuffleArr(sameSeries)];
 }
 
-function initApp(){pilots=dedupePilots(pilots);buildSeriesDropdown();updateRosterUI();updatePilotUI();setupEventListeners();updateModeStat();fetchLeaderboard();buildAchievements();}
+function initApp(){pilots=dedupePilots(pilots);buildSeriesDropdown("addSeries");buildSeriesDropdown("addPilotSeries");updateRosterUI();updatePilotUI();setupEventListeners();updateModeStat();fetchLeaderboard();buildAchievements();}
 
 function dedupeRoster(arr){
   const seen=new Set(),out=[];
@@ -1812,8 +1845,8 @@ fetch('gundam-roster.json')
   .then(data=>{roster=dedupeRoster(data);initApp();})
   .catch(err=>{console.error(err);alert("Failed to load gundam-roster.json automatically.");initApp();});
 
-function buildSeriesDropdown(){
-  const s=$("addSeries");if(!s)return;
+function buildSeriesDropdown(targetId="addSeries"){
+  const s=$(targetId);if(!s)return;
   const merged=[];
   seriesList.forEach(v=>{if(v!=="Other / Custom"&&!merged.includes(v))merged.push(v);});
   roster.forEach(r=>{if(r&&r.series&&!merged.includes(r.series))merged.push(r.series);});
@@ -1954,57 +1987,76 @@ function renderManageList(query=""){
 function renderPilotManageList(query=""){
   const container=$("pilotList");if(!container)return;container.innerHTML="";
   const q=query.toLowerCase().trim();
-  const sorted=[...pilots].sort((a,b)=>a.name.localeCompare(b.name));
-  sorted.forEach(item=>{
+  const groups={};const groupCounts={};
+  pilots.forEach((item,idx)=>{
     if(!item||!item.name)return;
-    if(q&&!item.name.toLowerCase().includes(q))return;
-    const idx=pilots.indexOf(item);
-    const unitCount=roster.filter(u=>(u.pilot||PILOT_DATA[u.name])===item.name).length;
-    const div=document.createElement("div");div.className="roster-item";
-    const thmb=document.createElement("div");thmb.className="thmbwrap";
-    thmb.onclick=()=>{if(item.img) openLightbox(null,item.img);};
-    const zoomHint=document.createElement("div");zoomHint.className="thmb-zoom";zoomHint.textContent="🔍";
-    thmb.appendChild(zoomHint);
-    if(item.img){const img=document.createElement("img");img.src=item.img;img.onerror=()=>{thmb.innerHTML='<div class="noimg err">ERR</div>';};thmb.appendChild(img);}
-    else{const noimg=document.createElement("div");noimg.className="noimg";noimg.textContent="CLICK TO ADD";thmb.appendChild(noimg);}
-    const mid=document.createElement("div");mid.className="ritem-mid";
-    const top=document.createElement("div");top.className="ritem-top";
-    const nameIn=document.createElement("input");nameIn.className="name-in";nameIn.value=item.name;nameIn.placeholder="Edit pilot name...";
-    nameIn.onchange=e=>{
-      const newName=e.target.value.trim()||"Unnamed Pilot";
-      const oldName=pilots[idx].name;
-      pilots[idx].name=newName;
-      if(newName!==oldName){
-        // keep roster pilot references pointed at the renamed pilot
-        roster.forEach(u=>{if(u.pilot===oldName)u.pilot=newName;});
-      }
-      updatePilotUI();
-    };
-    const dbtn=document.createElement("button");dbtn.className="del";dbtn.textContent="✕";dbtn.title="Remove";
-    dbtn.onclick=()=>{
-      const msg=unitCount>0
-        ? `Remove ${item.name}? ${unitCount} unit(s) reference this pilot and will no longer have a portrait in Pilot MC.`
-        : `Remove ${item.name}?`;
-      if(confirm(msg)){pilots.splice(idx,1);updatePilotUI();}
-    };
-    top.appendChild(nameIn);top.appendChild(dbtn);
-    const ctrl=document.createElement("div");ctrl.className="ritem-ctrl";
-    const inp=document.createElement("input");inp.className="url-in";inp.value=imgFileName(item.img).replace(/^pilots[\/\\]/i,"");inp.placeholder="portrait file e.g. AmuroRay.webp";
-    inp.onchange=e=>{
-      let v=e.target.value.trim();
-      if(v&&!/^https?:\/\//i.test(v)&&!/^images[\/\\]/i.test(v))v="images/pilots/"+v.replace(/^[\/\\]+/,"").replace(/^pilots[\/\\]/i,"");
-      pilots[idx].img=v;updatePilotUI();
-    };
-    const dlbtn=document.createElement("button");dlbtn.className="dl-btn";dlbtn.innerHTML="💾";dlbtn.title="Download image";
-    dlbtn.onclick=()=>{if(!item.img){alert("No image set.");return;}downloadTargetImage(item.img,item.name);};
-    ctrl.appendChild(inp);ctrl.appendChild(dlbtn);
-    const usageRow=document.createElement("div");usageRow.className="roster-colors";
-    const lbl=document.createElement("span");lbl.className="roster-color-label";
-    lbl.textContent=unitCount>0?`Piloted units: ${unitCount}`:"No units reference this pilot";
-    lbl.style.color=unitCount>0?"var(--green)":"var(--txt-dim)";
-    usageRow.appendChild(lbl);
-    mid.appendChild(top);mid.appendChild(ctrl);mid.appendChild(usageRow);
-    div.appendChild(thmb);div.appendChild(mid);container.appendChild(div);
+    if(q&&!item.name.toLowerCase().includes(q)&&!(item.series||"").toLowerCase().includes(q))return;
+    const seriesKey=item.series||"Other / Custom";
+    if(!groups[seriesKey]){groups[seriesKey]=[];groupCounts[seriesKey]=0;}
+    groups[seriesKey].push({item,idx});groupCounts[seriesKey]++;
+  });
+  const seriesNames=Object.keys(groups).sort();
+  seriesNames.forEach(seriesName=>{
+    const sectionBlock=document.createElement("div");sectionBlock.style.marginBottom="20px";
+    const sep=document.createElement("div");sep.className="mgr-sep";
+    sep.innerHTML=`${escapeHtml(seriesName)} <em>${groupCounts[seriesName]} pilot${groupCounts[seriesName]===1?'':'s'}</em>`;sectionBlock.appendChild(sep);
+    groups[seriesName].sort((a,b)=>a.item.name.localeCompare(b.item.name)).forEach(({item,idx})=>{
+      const unitCount=roster.filter(u=>(u.pilot||PILOT_DATA[u.name])===item.name).length;
+      const div=document.createElement("div");div.className="roster-item";
+      const thmb=document.createElement("div");thmb.className="thmbwrap";
+      thmb.onclick=()=>{if(item.img) openLightbox(null,item.img);};
+      const zoomHint=document.createElement("div");zoomHint.className="thmb-zoom";zoomHint.textContent="🔍";
+      thmb.appendChild(zoomHint);
+      if(item.img){const img=document.createElement("img");img.src=item.img;img.onerror=()=>{thmb.innerHTML='<div class="noimg err">ERR</div>';};thmb.appendChild(img);}
+      else{const noimg=document.createElement("div");noimg.className="noimg";noimg.textContent="CLICK TO ADD";thmb.appendChild(noimg);}
+      const mid=document.createElement("div");mid.className="ritem-mid";
+      const top=document.createElement("div");top.className="ritem-top";
+      const nameIn=document.createElement("input");nameIn.className="name-in";nameIn.value=item.name;nameIn.placeholder="Edit pilot name...";
+      nameIn.onchange=e=>{
+        const newName=e.target.value.trim()||"Unnamed Pilot";
+        const oldName=pilots[idx].name;
+        pilots[idx].name=newName;
+        if(newName!==oldName){
+          // keep roster pilot references pointed at the renamed pilot
+          roster.forEach(u=>{if(u.pilot===oldName)u.pilot=newName;});
+        }
+        updatePilotUI();
+      };
+      const dbtn=document.createElement("button");dbtn.className="del";dbtn.textContent="✕";dbtn.title="Remove";
+      dbtn.onclick=()=>{
+        const msg=unitCount>0
+          ? `Remove ${item.name}? ${unitCount} unit(s) reference this pilot and will no longer have a portrait in Pilot MC.`
+          : `Remove ${item.name}?`;
+        if(confirm(msg)){pilots.splice(idx,1);updatePilotUI();}
+      };
+      top.appendChild(nameIn);top.appendChild(dbtn);
+      const ctrl=document.createElement("div");ctrl.className="ritem-ctrl";
+      const inp=document.createElement("input");inp.className="url-in";inp.value=imgFileName(item.img).replace(/^pilots[\/\\]/i,"");inp.placeholder="portrait file e.g. AmuroRay.webp";
+      inp.onchange=e=>{
+        let v=e.target.value.trim();
+        if(v&&!/^https?:\/\//i.test(v)&&!/^images[\/\\]/i.test(v))v="images/pilots/"+v.replace(/^[\/\\]+/,"").replace(/^pilots[\/\\]/i,"");
+        pilots[idx].img=v;updatePilotUI();
+      };
+      const dlbtn=document.createElement("button");dlbtn.className="dl-btn";dlbtn.innerHTML="💾";dlbtn.title="Download image";
+      dlbtn.onclick=()=>{if(!item.img){alert("No image set.");return;}downloadTargetImage(item.img,item.name);};
+      ctrl.appendChild(inp);ctrl.appendChild(dlbtn);
+      const seriesSelWrap=document.createElement("div");seriesSelWrap.className="ritem-ctrl";
+      const seriesSel=document.createElement("select");seriesSel.className="url-in";
+      const seriesOptions=[...new Set([...seriesList.filter(v=>v!=="Other / Custom"),...pilots.map(p=>p.series).filter(Boolean)])];
+      seriesOptions.push("Other / Custom");
+      seriesOptions.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;seriesSel.appendChild(o);});
+      seriesSel.value=item.series||"Other / Custom";
+      seriesSel.onchange=e=>{pilots[idx].series=e.target.value;updatePilotUI();};
+      seriesSelWrap.appendChild(seriesSel);
+      const usageRow=document.createElement("div");usageRow.className="roster-colors";
+      const lbl=document.createElement("span");lbl.className="roster-color-label";
+      lbl.textContent=unitCount>0?`Piloted units: ${unitCount}`:"No units reference this pilot";
+      lbl.style.color=unitCount>0?"var(--green)":"var(--txt-dim)";
+      usageRow.appendChild(lbl);
+      mid.appendChild(top);mid.appendChild(ctrl);mid.appendChild(seriesSelWrap);mid.appendChild(usageRow);
+      div.appendChild(thmb);div.appendChild(mid);sectionBlock.appendChild(div);
+    });
+    container.appendChild(sectionBlock);
   });
 }
 
@@ -2071,7 +2123,13 @@ function setupEventListeners(){
   $("addSeriesBtn").onclick=()=>{
     const name=(prompt("New series name:")||"").trim();if(!name)return;
     if(!seriesList.includes(name)){const oi=seriesList.indexOf("Other / Custom");if(oi>=0)seriesList.splice(oi,0,name);else seriesList.push(name);}
-    buildSeriesDropdown();$("addSeries").value=name;
+    buildSeriesDropdown("addSeries");$("addSeries").value=name;
+  };
+  const addPilotSeriesBtn=$("addPilotSeriesBtn");
+  if(addPilotSeriesBtn)addPilotSeriesBtn.onclick=()=>{
+    const name=(prompt("New series name:")||"").trim();if(!name)return;
+    if(!seriesList.includes(name)){const oi=seriesList.indexOf("Other / Custom");if(oi>=0)seriesList.splice(oi,0,name);else seriesList.push(name);}
+    buildSeriesDropdown("addPilotSeries");$("addPilotSeries").value=name;
   };
   $("addBtn").onclick=()=>{
     const name=$("addName").value.trim();const img=normalizeImg($("addImg").value);
@@ -2089,16 +2147,17 @@ function setupEventListeners(){
   if(addPilotBtn)addPilotBtn.onclick=()=>{
     const name=$("addPilotName").value.trim();
     let img=$("addPilotImg").value.trim();
+    const series=$("addPilotSeries")?$("addPilotSeries").value:"";
     if(!name){alert("Pilot name required.");return;}
     if(pilots.some(p=>p.name.toLowerCase()===name.toLowerCase())){alert("A pilot with that name already exists.");return;}
     if(img&&!/^https?:\/\//i.test(img))img="images/pilots/"+img.replace(/^[\/\\]+/,"").replace(/^pilots[\/\\]/i,"").replace(/^images[\/\\]/i,"");
-    pilots.push({name,img});
+    pilots.push({name,img,series});
     $("addPilotName").value="";$("addPilotImg").value="";
     updatePilotUI();
   };
   const savePilotsBtn=$("savePilotsFileBtn");
   if(savePilotsBtn)savePilotsBtn.onclick=()=>{
-    const json=JSON.stringify(pilots,null,2);
+    const json=JSON.stringify(pilotsArrayToObj(pilots),null,2);
     try{const blob=new Blob([json],{type:"application/json"});const url=URL.createObjectURL(blob);
       const a=document.createElement("a");a.href=url;a.download="pilots.json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
     catch(e){$("pilotsIoBox").classList.remove("hide");$("pilotsIoText").value=json;$("pilotsIoText").select();alert("Download blocked — JSON shown below. Copy to save.");}
@@ -2106,11 +2165,11 @@ function setupEventListeners(){
   const loadPilotsFileBtn=$("loadPilotsFileBtn");
   if(loadPilotsFileBtn)loadPilotsFileBtn.onclick=()=>$("pilotsFileIn").click();
   const pilotsFileIn=$("pilotsFileIn");
-  if(pilotsFileIn)pilotsFileIn.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{loadPilots(JSON.parse(r.result));}catch(err){alert("Could not parse file as pilots JSON.");}};r.readAsText(f);e.target.value="";};
+  if(pilotsFileIn)pilotsFileIn.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const res=loadPilots(JSON.parse(r.result));if(res)alert(`Loaded pilots: ${res.added} added, ${res.merged} merged.`);else alert("No valid pilot entries found in that file.");}catch(err){alert("Could not parse file as pilots JSON.");}};r.readAsText(f);e.target.value="";};
   const exportPilotsBtn=$("exportPilotsBtn");
-  if(exportPilotsBtn)exportPilotsBtn.onclick=()=>{const open=$("pilotsIoBox").classList.toggle("hide")===false;if(open){$("pilotsIoText").value=JSON.stringify(pilots,null,2);$("pilotsIoText").select();}};
+  if(exportPilotsBtn)exportPilotsBtn.onclick=()=>{const open=$("pilotsIoBox").classList.toggle("hide")===false;if(open){$("pilotsIoText").value=JSON.stringify(pilotsArrayToObj(pilots),null,2);$("pilotsIoText").select();}};
   const loadPilotsBtn=$("loadPilotsBtn");
-  if(loadPilotsBtn)loadPilotsBtn.onclick=()=>{try{const val=$("pilotsIoText").value.trim();if(!val)return;loadPilots(JSON.parse(val));$("pilotsIoBox").classList.add("hide");$("pilotsIoText").value="";}catch(err){alert("JSON syntax error.");}};
+  if(loadPilotsBtn)loadPilotsBtn.onclick=()=>{try{const val=$("pilotsIoText").value.trim();if(!val)return;const res=loadPilots(JSON.parse(val));$("pilotsIoBox").classList.add("hide");$("pilotsIoText").value="";if(res)alert(`Loaded pilots: ${res.added} added, ${res.merged} merged.`);else alert("No valid pilot entries found in that JSON.");}catch(err){alert("JSON syntax error.");}};
 }
 
 function showSection(id){
