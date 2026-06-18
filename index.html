@@ -88,6 +88,66 @@
     box-shadow:0 0 16px var(--primary);
   }
 
+  /* ── INTRO ANIMATION ─────────────────────────── */
+  #introOverlay{
+    position:fixed;inset:0;z-index:9999;
+    background:#0d0e12;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    pointer-events:none;
+  }
+  #introOverlay.done{
+    opacity:0;transition:opacity .4s ease;
+    pointer-events:none;
+  }
+  #introHeadWrap{
+    position:relative;
+    width:min(280px,72vw);
+    flex-shrink:0;
+  }
+  #introHeadImg{
+    width:100%;height:auto;display:block;
+    opacity:0;transform:scale(0.88);
+    transition:opacity .55s ease,transform .55s ease;
+  }
+  #introEyeCanvas{
+    position:absolute;top:0;left:0;
+    width:100%;height:100%;
+    pointer-events:none;z-index:2;
+  }
+  /* Flying V-fin — fixed during animation, then re-parented and parked */
+  #introVfin{
+    position:fixed;
+    pointer-events:none;
+    z-index:10000;
+    opacity:0;
+  }
+  #introVfin.vfin-parked{
+    position:absolute !important;
+    top:0 !important;
+    left:0 !important;
+    width:100% !important;
+    opacity:1 !important;
+    z-index:0;
+    transition:none !important;
+  }
+  /* title + shell hidden until intro done */
+  #introTarget{
+    opacity:0;
+    transition:opacity 1.2s ease;
+  }
+  #introTarget.it-show{ opacity:1; }
+
+  /* Title left-to-right wipe reveal */
+  #pageTitle{
+    clip-path: inset(0 100% 0 0);
+    transition: none;
+  }
+  #pageTitle.title-reveal{
+    clip-path: inset(0 0% 0 0);
+    transition: clip-path 1.1s cubic-bezier(.4,0,.2,1);
+  }
+
   /* ── SHELL ────────────────────────────────────── */
   .shell{
     position:relative;
@@ -97,7 +157,10 @@
     border-top:2px solid var(--primary);
     z-index:1;
     overflow:hidden;
+    opacity:0;
+    transition:opacity 1s ease;
   }
+  .shell.shell-show{ opacity:1; }
 
   /* Clip bottom-right corner */
   .shell::after{
@@ -809,6 +872,35 @@
   .gl-guesses{display:flex;flex-direction:column;gap:6px;margin-top:14px;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
   section{overflow-x:hidden;}
 
+  /* ── SPACE COLONIES ── */
+  .space-colony{
+    position:fixed;
+    pointer-events:none;
+    z-index:0;
+    opacity:0;
+    transition:opacity 1.4s ease;
+    will-change:transform;
+    filter:brightness(0.72) saturate(0.85);
+  }
+  .space-colony.visible{ opacity:var(--colony-opacity,0.42); }
+  @keyframes colony-drift-a{
+    0%  {transform:translate(0px,0px) rotate(0deg);}
+    33% {transform:translate(18px,-12px) rotate(0.6deg);}
+    66% {transform:translate(-10px,16px) rotate(-0.4deg);}
+    100%{transform:translate(0px,0px) rotate(0deg);}
+  }
+  @keyframes colony-drift-b{
+    0%  {transform:translate(0px,0px) rotate(0deg);}
+    40% {transform:translate(-22px,8px) rotate(-0.8deg);}
+    75% {transform:translate(14px,-18px) rotate(0.5deg);}
+    100%{transform:translate(0px,0px) rotate(0deg);}
+  }
+  @keyframes colony-drift-c{
+    0%  {transform:translate(0px,0px) rotate(0deg);}
+    50% {transform:translate(10px,20px) rotate(0.7deg);}
+    100%{transform:translate(0px,0px) rotate(0deg);}
+  }
+
   /* ── ACHIEVEMENTS ───────────────────────────────────────────── */
   .stb-achieve-btn{
     position:relative;overflow:hidden;
@@ -924,19 +1016,37 @@
   <div style="position:absolute;top:16px;right:20px;color:var(--txt-dim);font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;">✕ CLOSE</div>
 </div>
 
-<div style="position:relative;width:100%;max-width:860px;display:flex;flex-direction:column;align-items:center;">
-  <svg style="position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:0;" viewBox="0 0 680 160" role="img" aria-hidden="true">
-    <style>.vfg{fill:#e8a800}.vfd{fill:#8a5500}.vfh{fill:#ffe070}</style>
-    <polygon class="vfg" points="330,150  312,150  192,6"/>
-    <polygon class="vfd" points="330,150  192,6    322,134"/>
-    <polygon class="vfh" points="312,150  192,6    200,18" opacity="0.5"/>
-    <polygon class="vfg" points="350,150  368,150  488,6"/>
-    <polygon class="vfd" points="350,150  488,6    358,134"/>
-    <polygon class="vfh" points="368,150  488,6    480,18" opacity="0.5"/>
-    <rect class="vfg" x="308" y="148" width="64" height="8" rx="1"/>
-    <rect class="vfh" x="308" y="148" width="64" height="3" rx="1" opacity="0.45"/>
-  </svg>
-  <div class="page-title" style="position:relative;z-index:1;">GUESS A <span>GUNDAM</span></div>
+<!-- INTRO OVERLAY -->
+<div id="introOverlay" aria-hidden="true">
+  <div id="introHeadWrap">
+    <img id="introHeadImg" src="images/gundam-menu.webp" alt=""/>
+    <canvas id="introEyeCanvas"></canvas>
+  </div>
+</div>
+
+<!-- introVfin is OUTSIDE both overlay and introTarget so parent opacity:0 never hides it -->
+<svg id="introVfin" viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <style>.ivg{fill:#e8a800}.ivd{fill:#8a5500}.ivh{fill:#ffe070}</style>
+  <polygon class="ivg" points="340,148  318,148  118,8"/>
+  <polygon class="ivd" points="340,148  118,8    322,128"/>
+  <polygon class="ivh" points="318,148  118,8    128,20"  opacity=".5"/>
+  <polygon class="ivg" points="340,148  362,148  562,8"/>
+  <polygon class="ivd" points="340,148  562,8    358,128"/>
+  <polygon class="ivh" points="362,148  562,8    552,20"  opacity=".5"/>
+  <polygon class="ivg" points="340,148  326,148  242,50"/>
+  <polygon class="ivd" points="340,148  242,50   326,130"/>
+  <polygon class="ivg" points="340,148  354,148  438,50"/>
+  <polygon class="ivd" points="340,148  438,50   354,130"/>
+  <rect class="ivg" x="308" y="145" width="64" height="8" rx="1"/>
+  <rect class="ivh" x="308" y="145" width="64" height="3" rx="1" opacity=".4"/>
+</svg>
+
+<!-- TITLE + SHELL wrapped so they fade in after intro -->
+<div id="introTarget">
+<div id="titleVfinWrap" style="position:relative;width:100%;max-width:860px;display:flex;flex-direction:column;align-items:center;">
+  <!-- anchor div: measures where parked vfin should land -->
+  <div id="titleVfinAnchor" style="position:absolute;top:0;left:0;width:100%;height:160px;pointer-events:none;"></div>
+  <div class="page-title" id="pageTitle" style="position:relative;z-index:1;">GUESS A <span>GUNDAM</span></div>
 </div>
 
 <div class="shell">
@@ -1244,7 +1354,6 @@
       </div>
     </section>
 
-
     <!-- COLOR EDITOR SECTION -->
     <section id="colorEditor" class="hide">
       <button class="menu-back" id="colorEditorBack">◀ Roster</button>
@@ -1290,6 +1399,7 @@
 
   </div><!-- /body -->
 </div><!-- /shell -->
+</div><!-- /introTarget -->
 
 <button id="floatBack" class="float-back hide">◀ Done</button>
 <button id="floatTop" class="float-top hide" title="Back to top">▲</button>
@@ -1303,6 +1413,300 @@
 </div>
 
 <script>
+/* ── INTRO ANIMATION ─────────────────────────────────────────────── */
+(function(){
+  const overlay    = document.getElementById('introOverlay');
+  const headImg    = document.getElementById('introHeadImg');
+  const eyeCanvas  = document.getElementById('introEyeCanvas');
+  const introVfin  = document.getElementById('introVfin');
+  const target     = document.getElementById('introTarget');
+  const vfinWrap   = document.getElementById('titleVfinWrap');
+  const anchor     = document.getElementById('titleVfinAnchor');
+  const pageTitle  = document.getElementById('pageTitle');
+  const shell      = document.querySelector('.shell');
+  const ectx       = eyeCanvas.getContext('2d');
+  let W=0, H=0, eyeAlpha=0, rafId=null, flickerRaf=null;
+
+  function setup(){
+    W = headImg.offsetWidth  || 280;
+    H = headImg.offsetHeight || 300;
+    eyeCanvas.width  = W;
+    eyeCanvas.height = H;
+  }
+
+  /* Nu Gundam eyes — close together, centre of face
+     Left: 37-47% x, 51-58% y  |  Right: 53-63% x, 51-58% y */
+  const EYES = [
+    {x1:.37, y1:.51, x2:.47, y2:.58},
+    {x1:.53, y1:.51, x2:.63, y2:.58}
+  ];
+
+  function drawEyes(alpha){
+    EYES.forEach(e=>{
+      const ex=e.x1*W, ey=e.y1*H;
+      const ew=(e.x2-e.x1)*W, eh=(e.y2-e.y1)*H;
+      const cx=ex+ew/2, cy=ey+eh/2;
+      /* large outer bloom */
+      const bloom=ectx.createRadialGradient(cx,cy,0,cx,cy,ew*2.0);
+      bloom.addColorStop(0,`rgba(78,201,122,${(alpha*.5).toFixed(2)})`);
+      bloom.addColorStop(.4,`rgba(78,201,122,${(alpha*.18).toFixed(2)})`);
+      bloom.addColorStop(1,'rgba(78,201,122,0)');
+      ectx.fillStyle=bloom;
+      ectx.beginPath();
+      ectx.ellipse(cx,cy,ew*2.0,eh*1.5,0,0,Math.PI*2);
+      ectx.fill();
+      /* mid ring */
+      const mid=ectx.createRadialGradient(cx,cy,0,cx,cy,ew*1.0);
+      mid.addColorStop(0,`rgba(140,255,180,${(alpha*.75).toFixed(2)})`);
+      mid.addColorStop(1,'rgba(78,201,122,0)');
+      ectx.fillStyle=mid;
+      ectx.beginPath();
+      ectx.ellipse(cx,cy,ew*1.0,eh*.85,0,0,Math.PI*2);
+      ectx.fill();
+      /* bright core */
+      const core=ectx.createRadialGradient(cx,cy,0,cx,cy,ew*.42);
+      core.addColorStop(0,`rgba(220,255,230,${alpha.toFixed(2)})`);
+      core.addColorStop(.6,`rgba(78,201,122,${(alpha*.9).toFixed(2)})`);
+      core.addColorStop(1,'rgba(20,80,40,0)');
+      ectx.fillStyle=core;
+      ectx.beginPath();
+      ectx.ellipse(cx,cy,ew*.42,eh*.36,0,0,Math.PI*2);
+      ectx.fill();
+    });
+  }
+
+  /* Draw head image + eye glow on canvas. Called whenever canvas needs redrawing. */
+  function drawFrame(alpha){
+    ectx.clearRect(0,0,W,H);
+    /* head image underneath */
+    if(headImg.naturalWidth) ectx.drawImage(headImg,0,0,W,H);
+    drawEyes(alpha);
+  }
+
+  /* Ramp eyes up to full brightness over `rampDur` ms,
+     then hold with a gentle high-frequency flicker until stopFlicker() is called */
+  let flickerRunning = false;
+  function rampAndFlicker(rampDur, cb){
+    /* Hide <img> now — canvas draws it from this point on */
+    headImg.style.opacity = '0';
+    const rampStart = performance.now();
+    flickerRunning = true;
+    function rampFrame(now){
+      const p = Math.min((now-rampStart)/rampDur, 1);
+      eyeAlpha = 1 - Math.pow(1-p, 2);
+      drawFrame(eyeAlpha);
+      if(p < 1){ rafId = requestAnimationFrame(rampFrame); }
+      else{
+        eyeAlpha = 1.0;
+        const flickerBase = performance.now();
+        function flicker(now){
+          if(!flickerRunning) return;
+          const t = now - flickerBase;
+          eyeAlpha = 0.92 + 0.08*Math.sin(t*0.076) + 0.04*Math.sin(t*0.13+1.2);
+          drawFrame(eyeAlpha);
+          flickerRaf = requestAnimationFrame(flicker);
+        }
+        flickerRaf = requestAnimationFrame(flicker);
+        if(cb) cb();
+      }
+    }
+    rafId = requestAnimationFrame(rampFrame);
+  }
+
+  function stopFlicker(){ flickerRunning=false; if(flickerRaf) cancelAnimationFrame(flickerRaf); }
+
+  function sweepScan(cb){
+    /* headImg is already hidden (rampAndFlicker hid it); canvas owns the image now */
+    const dur = 900, start = performance.now();
+
+    function frame(now){
+      const p    = Math.min((now - start) / dur, 1);
+      const bw   = W * 0.18;
+      const sx   = -bw + p * (W + bw * 2);   /* beam centre */
+      const edge = sx - bw * 0.6;             /* leading wipe edge */
+
+      ectx.clearRect(0, 0, W, H);
+
+      /* Draw head image + glow only to the RIGHT of the wipe edge */
+      const clipLeft = Math.max(0, Math.min(W, edge));
+      if(clipLeft < W){
+        ectx.save();
+        ectx.beginPath();
+        ectx.rect(clipLeft, 0, W - clipLeft, H);
+        ectx.clip();
+        if(headImg.naturalWidth) ectx.drawImage(headImg, 0, 0, W, H);
+        if(eyeAlpha > 0) drawEyes(eyeAlpha);
+        ectx.restore();
+      }
+
+      /* Bright sweep beam */
+      const sg = ectx.createLinearGradient(sx - bw, 0, sx + bw, 0);
+      sg.addColorStop(0,   'rgba(180,245,255,0)');
+      sg.addColorStop(0.3, 'rgba(180,245,255,0.6)');
+      sg.addColorStop(0.5, 'rgba(230,252,255,0.95)');
+      sg.addColorStop(0.7, 'rgba(180,245,255,0.6)');
+      sg.addColorStop(1,   'rgba(180,245,255,0)');
+      ectx.fillStyle = sg;
+      ectx.fillRect(sx - bw, 0, bw * 2, H);
+
+      if(p < 1){
+        rafId = requestAnimationFrame(frame);
+      } else {
+        ectx.clearRect(0, 0, W, H);
+        stopFlicker();
+        if(cb) cb();
+      }
+    }
+    rafId = requestAnimationFrame(frame);
+  }
+
+  function fadeEyesOut(dur){
+    stopFlicker();
+    const start=performance.now(), startA=eyeAlpha;
+    function frame(now){
+      const p=Math.min((now-start)/dur,1);
+      eyeAlpha=startA*(1-p);
+      ectx.clearRect(0,0,W,H);
+      if(eyeAlpha>.01) drawEyes(eyeAlpha);
+      if(p<1) rafId=requestAnimationFrame(frame);
+      else ectx.clearRect(0,0,W,H);
+    }
+    rafId=requestAnimationFrame(frame);
+  }
+
+  function flyVfin(srcRect, dstRect, dur, cb){
+    const start=performance.now();
+    function ease(t){ return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2; }
+    introVfin.style.transition='none';
+    function frame(now){
+      const raw=Math.min((now-start)/dur,1), p=ease(raw);
+      introVfin.style.width = (srcRect.width +(dstRect.width -srcRect.width )*p)+'px';
+      introVfin.style.left  = (srcRect.left  +(dstRect.left  -srcRect.left  )*p)+'px';
+      introVfin.style.top   = (srcRect.top   +(dstRect.top   -srcRect.top   )*p)+'px';
+      if(raw<1){ rafId=requestAnimationFrame(frame); }
+      else{ if(cb)cb(); }
+    }
+    rafId=requestAnimationFrame(frame);
+  }
+
+  function run(){
+    if(rafId) cancelAnimationFrame(rafId);
+    stopFlicker();
+    setup();
+    ectx.clearRect(0,0,W,H);
+    eyeAlpha=0;
+
+    /* Reset vfin to hidden, outside any opacity parent */
+    introVfin.style.cssText='position:fixed;pointer-events:none;z-index:10000;opacity:0;width:0px;';
+    introVfin.classList.remove('vfin-parked');
+
+    /* Reset title/shell */
+    target.classList.remove('it-show');
+    target.style.opacity='0';
+    pageTitle.style.transition='none';
+    pageTitle.style.clipPath='inset(0 100% 0 0)';
+    shell.classList.remove('shell-show');
+    shell.style.opacity='0';
+
+    /* Reset head — visible until rampAndFlicker hides it and canvas takes over */
+    headImg.style.cssText='opacity:0;transform:scale(0.9);transition:opacity .6s ease,transform .6s ease;display:block;width:100%;height:auto;';
+
+    /* ── 1: Head fades in ── */
+    setTimeout(()=>{
+      headImg.style.opacity='1';
+      headImg.style.transform='scale(1)';
+    }, 100);
+
+    /* ── 2: Eyes ramp up to full then flicker ── */
+    setTimeout(()=>{
+      rampAndFlicker(600, ()=>{
+        /* hold flicker for 600ms, then start sweep */
+        setTimeout(()=>{
+
+          /* ── 3: Measure positions before sweep starts ── */
+          const headRect = document.getElementById('introHeadWrap').getBoundingClientRect();
+          const svgW   = headRect.width * 1.3;
+          const svgH   = svgW * (160 / 680);
+          const finBaseY = headRect.top + headRect.height * 0.50;
+          const srcRect = {
+            width : svgW,
+            left  : headRect.left + (headRect.width - svgW) / 2,
+            top   : finBaseY - svgH * 0.925
+          };
+          const anchorRect = anchor.getBoundingClientRect();
+          const dstRect = {
+            width : anchorRect.width,
+            left  : anchorRect.left,
+            top   : anchorRect.top
+          };
+
+          /* ── 4: Snap vfin 400ms into the sweep so it appears mid-wipe ── */
+          setTimeout(()=>{
+            introVfin.style.cssText = `position:fixed;pointer-events:none;z-index:10000;width:${srcRect.width}px;left:${srcRect.left}px;top:${srcRect.top}px;opacity:0;transition:opacity .4s ease;`;
+            void introVfin.offsetWidth;
+            introVfin.style.opacity = '1';
+          }, 400);
+
+          /* ── 5: Scan sweep ── */
+          sweepScan(()=>{
+
+            /* ── 6: Vfin flies to title (short pause after sweep) ── */
+            setTimeout(()=>{
+              flyVfin(srcRect, dstRect, 950, ()=>{
+
+                /* ── 7: Park vfin ── */
+                introVfin.style.cssText = 'opacity:1;';
+                introVfin.classList.add('vfin-parked');
+                vfinWrap.insertBefore(introVfin, vfinWrap.firstChild);
+
+                /* ── 8: Reveal introTarget ── */
+                target.style.transition='opacity .01s';
+                target.style.opacity='1';
+                target.classList.add('it-show');
+
+                /* ── 9: Title wipes left → right ── */
+                setTimeout(()=>{
+                  pageTitle.style.transition='clip-path 1.1s cubic-bezier(.4,0,.2,1)';
+                  pageTitle.style.clipPath='inset(0 0% 0 0)';
+                }, 150);
+
+                /* ── 10: Shell fades in ── */
+                setTimeout(()=>{
+                  shell.style.transition='opacity 1s ease';
+                  shell.style.opacity='1';
+                  shell.classList.add('shell-show');
+                }, 950);
+
+                /* ── 11: Dissolve overlay ── */
+                overlay.classList.add('done');
+                setTimeout(()=>{ overlay.style.display='none'; }, 450);
+              });
+            }, 0);
+
+          });
+        }, 600);
+      });
+    }, 250);
+  }
+
+  if(headImg.complete && headImg.naturalWidth){ run(); }
+  else{
+    headImg.onload=run;
+    headImg.onerror=()=>{
+      overlay.style.display='none';
+      introVfin.style.cssText='opacity:1;';
+      introVfin.classList.add('vfin-parked');
+      vfinWrap.insertBefore(introVfin, vfinWrap.firstChild);
+      target.style.opacity='1';
+      target.classList.add('it-show');
+      pageTitle.style.clipPath='inset(0 0% 0 0)';
+      shell.style.opacity='1';
+      shell.classList.add('shell-show');
+    };
+  }
+})();
+/* ─────────────────────────────────────────────────────────────────── */
+
 let roster = [];
 const $=id=>document.getElementById(id);
 
@@ -1694,7 +2098,6 @@ fetch('pilots.json')
     updatePilotUI();
   })
   .catch(err=>{console.warn("pilots.json not found, using built-in PILOT_IMG fallback.",err);});
-
 
 
 /* ═══════════════════════════════════════════════════════
@@ -2182,7 +2585,127 @@ function showSection(id){
   const fb=$("floatBack");const ft=$("floatTop");
   if(id==="manage"||id==="colorEditor"){if(fb)fb.classList.remove("hide");}else{if(fb)fb.classList.add("hide");}
   if(id==="manage"||id==="colorEditor"){if(ft)ft.classList.remove("hide");}else{if(ft)ft.classList.add("hide");}
+  // show/hide space colonies on main menu only
+  document.querySelectorAll(".space-colony").forEach(el=>{
+    if(id==="start") el.classList.add("visible");
+    else el.classList.remove("visible");
+  });
 }
+
+/* ── SPACE COLONY BACKGROUND ── */
+(function initColonies(){
+  const imgs      = ["images/space-colony-1.png","images/space-colony-2.png"];
+  const driftAnims= ["colony-drift-a","colony-drift-b","colony-drift-c"];
+
+  // Size buckets (px) — min/max per colony slot
+  const sizeBuckets = [
+    { minSize:80,  maxSize:160 },  // tiny — feels very distant
+    { minSize:160, maxSize:280 },  // small-medium
+    { minSize:240, maxSize:360 },  // medium-large
+    { minSize:100, maxSize:200 },  // another small one for variety
+  ];
+
+  const rng = (a,b) => a + Math.random() * (b - a);
+  const pick = arr  => arr[Math.floor(Math.random() * arr.length)];
+
+  /* ── Free random placement in the screen margins ──
+     Divides the screen into an 8-segment ring around the centre:
+     top-strip, bottom-strip, left-strip, right-strip, + 4 corner pockets.
+     Each call picks one segment at random, then places inside it.       */
+  function randomMarginPos(sizePx){
+    // How far in from each edge the UI panel reaches (rough safe margins)
+    const hMargin = 22;  // % from left or right where UI lives
+    const vMargin = 15;  // % from top or bottom
+
+    const segments = [
+      // top-left pocket
+      () => ({ left: rng(1, hMargin-2)+'vw',  top: rng(2, vMargin-1)+'vh' }),
+      // top-center strip (above title)
+      () => ({ left: rng(hMargin, 100-hMargin)+'vw', top: rng(1, 9)+'vh' }),
+      // top-right pocket
+      () => ({ right: rng(1, hMargin-2)+'vw', top: rng(2, vMargin-1)+'vh' }),
+      // right strip (mid-height)
+      () => ({ right: rng(1, 8)+'vw',         top: rng(vMargin, 100-vMargin)+'vh' }),
+      // bottom-right pocket
+      () => ({ right: rng(1, hMargin-2)+'vw', bottom: rng(2, vMargin-1)+'vh' }),
+      // bottom-center strip
+      () => ({ left: rng(hMargin, 100-hMargin)+'vw', bottom: rng(1, 9)+'vh' }),
+      // bottom-left pocket
+      () => ({ left: rng(1, hMargin-2)+'vw',  bottom: rng(2, vMargin-1)+'vh' }),
+      // left strip (mid-height)
+      () => ({ left: rng(1, 8)+'vw',          top: rng(vMargin, 100-vMargin)+'vh' }),
+    ];
+    return pick(segments)();
+  }
+
+  /* ── Apply a fresh random position + drift to an element ── */
+  function reposition(el, sizePx, animate){
+    // Clear old position properties
+    ['left','right','top','bottom'].forEach(p => el.style[p] = '');
+
+    const pos = randomMarginPos(sizePx);
+    Object.assign(el.style, pos);
+
+    // New drift animation
+    const anim  = pick(driftAnims);
+    const dur   = rng(28, 55).toFixed(1)+'s';
+    const delay = animate ? '0s' : rng(0, 8).toFixed(1)+'s';
+    el.style.animation = 'none';               // force reflow
+    void el.offsetWidth;
+    el.style.animation = `${anim} ${dur} ${delay} ease-in-out infinite`;
+  }
+
+  /* ── Schedule random relocations for one colony element ── */
+  function scheduleRelocation(el, sizePx){
+    // Random interval: 18–55 seconds
+    const wait = rng(18000, 55000);
+    setTimeout(()=>{
+      // Only relocate if still visible (user might be in a game)
+      el.classList.remove("visible");
+      setTimeout(()=>{
+        reposition(el, sizePx, true);
+        // Fade back in only if on start screen
+        if(!document.getElementById("start").classList.contains("hide")){
+          el.classList.add("visible");
+        }
+        scheduleRelocation(el, sizePx);  // schedule the next one
+      }, 1600); // wait for fade-out transition to finish
+    }, wait);
+  }
+
+  /* ── Create the 4 colony elements ── */
+  // Shuffle size buckets for variety each page load
+  const shuffled = [...sizeBuckets].sort(() => Math.random() - 0.5);
+
+  shuffled.forEach((bucket, i) => {
+    const el  = document.createElement("img");
+    el.className = "space-colony";
+    el.src    = imgs[i % 2];          // alternate between the two images
+    el.alt    = "";
+    el.setAttribute("aria-hidden","true");
+
+    const sizePx = Math.round(rng(bucket.minSize, bucket.maxSize));
+    el.style.width = sizePx + "px";
+
+    reposition(el, sizePx, false);
+
+    // Opacity: smaller = dimmer (feels further away)
+    const opacity = 0.28 + (sizePx / bucket.maxSize) * 0.28;
+    el.style.setProperty("--colony-opacity", opacity.toFixed(2));
+
+    document.body.appendChild(el);
+
+    // Stagger relocation timers so they don't all disappear at once
+    setTimeout(()=> scheduleRelocation(el, sizePx), i * rng(4000, 9000));
+  });
+
+  // Show immediately if already on start screen
+  if(!document.getElementById("start").classList.contains("hide")){
+    setTimeout(()=>{
+      document.querySelectorAll(".space-colony").forEach(el=>el.classList.add("visible"));
+    }, 200);
+  }
+})();
 
 function startQuiz(){
   if(roster.length===0){alert("No units in database.");return;}
