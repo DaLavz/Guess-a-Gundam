@@ -154,5 +154,9 @@
   "Usso Ewin": {
     "img": "images/pilots/EXVS2_Uso.webp",
     "series": "Universal Century"
+  },
+  "Char Aznable": {
+    "img": "images/pilots/char_aznable.webp",
+    "series": "Gundam GQuuuuuuX"
   }
 }
