@@ -1995,5 +1995,23 @@
       "White",
       "Blue-Grey"
     ]
+  },
+  {
+    "name": "XXXG-01D2 Gundam Deathscythe Hell",
+    "img": "images/deathscythe_hell.webp",
+    "alt": [
+      "gundam deathscythe hell",
+      "deathscythe hell"
+    ],
+    "series": "Gundam Wing"
+  },
+  {
+    "name": "XXXG-01S2 Altron Gundam",
+    "img": "images/altron_gundam.webp",
+    "alt": [
+      "altron gundam",
+      "altron"
+    ],
+    "series": "Gundam Wing"
   }
 ]
