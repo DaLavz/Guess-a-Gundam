@@ -1003,6 +1003,35 @@
     #achieveToastWrap{top:8px;right:8px;max-width:calc(100vw - 16px);}
   }
 
+  /* ── MOBILE MAIN-MENU SCALING ──
+     Tightens overall density on narrow phones so the start screen reads
+     like a compact app UI instead of a desktop layout stretched/zoomed
+     to fit. Nothing is hidden or restructured — just smaller paddings,
+     fonts, and gaps so more fits comfortably above the fold. */
+  @media(max-width:480px){
+    body{padding:10px 10px 64px;}
+    .page-title{
+      font-size:clamp(32px,9.5vw,52px);
+      letter-spacing:4px;
+      padding:18px 0 14px;
+      margin-bottom:6px;
+    }
+    .page-title::after{width:46px;margin-top:8px;}
+    .shell-top-bar{height:32px;}
+    .stb-block{padding:0 10px;font-size:9px;letter-spacing:1.5px;}
+    .stb-achieve-btn{font-size:11px;padding:2px 8px;letter-spacing:1px;}
+    .body{padding:14px 12px 20px;}
+    .start-section{padding:11px 12px;margin-bottom:10px;}
+    .start-section-label{font-size:9px;margin-bottom:10px;}
+    .seg button{padding:9px 4px;font-size:11.5px;letter-spacing:1px;min-width:64px;}
+    .mode-stat{padding:8px 10px;margin-bottom:12px;font-size:10px;}
+    .mode-stat b{font-size:17px;}
+    .btn{padding:11px 14px;font-size:13px;letter-spacing:2px;}
+    .label{font-size:9px;letter-spacing:2px;}
+    .field{margin-bottom:10px;}
+    input,textarea,select{padding:10px 12px;font-size:14px;}
+  }
+
 </style>
 </head>
 <body>
@@ -2103,7 +2132,7 @@ fetch('pilots.json')
 /* ═══════════════════════════════════════════════════════
    LEADERBOARD  — paste your Apps Script URL below
    ═══════════════════════════════════════════════════════ */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwuFLs_4AYxqYVruFHMoytkjMviHP3jQ_q8etlAcfJCd9bEIOAMfFXRVDxyHiEiTSBk/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx5HVFiwzKCqi3WUc9pNN9WPlKhMPbwFt0plJphhsrnHuNuDHhDmdB79LwwsVJaIEFZ/exec";
 
 // Stats are already tracked in localStorage via stats.mc / stats.type etc.
 // recordBest is a no-op now — we just read stats directly when submitting.
