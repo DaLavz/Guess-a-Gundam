@@ -315,7 +315,7 @@
   .ce-search-wrap{position:relative;margin-bottom:10px;}
   .ce-search-wrap input{
     width:100%;background:#090a0e;border:1px solid var(--line-bright);color:var(--txt);
-    padding:12px 14px;font-family:"Share Tech Mono",monospace;font-size:14px;outline:none;
+    padding:12px 14px;font-family:"Share Tech Mono",monospace;font-size:16px;outline:none;
   }
   .ce-search-wrap input:focus{border-color:var(--primary-dim);}
   .ce-suggest{display:flex;flex-direction:column;gap:3px;margin-bottom:12px;max-height:420px;overflow-y:auto;}
@@ -338,6 +338,24 @@
     margin-top:4px;pointer-events:none;
   }
   .suggest-series-header.first{margin-top:0;}
+
+  /* Full clickable roster list inside the color editor */
+  .ce-list{display:flex;flex-direction:column;gap:0;margin-bottom:16px;}
+  .ce-list-item{
+    display:flex;align-items:center;gap:10px;width:100%;text-align:left;
+    padding:8px 10px;border:1px solid var(--line-bright);border-top:none;
+    background:var(--panel-2);color:var(--txt);cursor:pointer;transition:.1s;
+  }
+  .ce-list-item:first-of-type,
+  .ce-list-block:first-child .ce-list-item:first-child{border-top:1px solid var(--line-bright);}
+  .ce-list-item:hover{border-color:var(--primary-dim);background:var(--panel-3);}
+  .ce-list-item.active{border-color:var(--primary);background:rgba(232,100,10,.10);}
+  .ce-list-item img{width:40px;height:40px;object-fit:contain;background:#06070a;flex-shrink:0;border:1px solid var(--line);}
+  .ce-list-item .noimg{width:40px;height:40px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#06070a;border:1px solid var(--line);font-size:9px;color:var(--txt-dim);text-align:center;}
+  .ce-list-name{flex:1;min-width:0;font-family:"Share Tech Mono",monospace;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .ce-list-sw{display:flex;gap:3px;align-items:center;margin-left:auto;flex-shrink:0;}
+  .ce-list-sw span{width:12px;height:12px;border-radius:2px;border:1px solid rgba(255,255,255,.15);display:inline-block;}
+  .ce-list-block{margin-bottom:4px;}
 
   .ce-unit-display{
     border:1px solid var(--line-bright);background:var(--panel-3);
@@ -398,6 +416,26 @@
 
   /* color swatches in manage list */
   .roster-colors{display:flex;gap:4px;align-items:center;margin-top:4px;}
+  .link-units-btn{
+    align-self:flex-start;border:1px solid var(--line-bright);background:rgba(232,100,10,.08);
+    color:var(--primary);font-family:"Share Tech Mono",monospace;font-size:10px;letter-spacing:1px;
+    padding:5px 10px;cursor:pointer;transition:.12s;
+  }
+  .link-units-btn:hover{border-color:var(--primary-dim);background:rgba(232,100,10,.18);}
+  .link-units-panel{
+    display:none;flex-direction:column;gap:4px;max-height:260px;overflow-y:auto;
+    margin-top:6px;padding:8px;border:1px solid var(--line-bright);background:var(--panel-3);
+  }
+  .link-units-panel.open{display:flex;}
+  .link-units-panel .luh{
+    font-family:"Share Tech Mono",monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--txt-dim);border-bottom:1px solid var(--line);padding-bottom:4px;margin-bottom:2px;
+  }
+  .link-unit-row{display:flex;align-items:center;gap:8px;padding:4px 2px;font-family:"Share Tech Mono",monospace;font-size:12px;color:var(--txt);}
+  .link-unit-row img{width:26px;height:26px;object-fit:contain;background:#06070a;border:1px solid var(--line);flex-shrink:0;}
+  .link-unit-row span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .link-unit-row .taken{font-size:9px;color:var(--amber);flex-shrink:0;}
+  .link-unit-row input[type=checkbox]{width:16px;height:16px;flex-shrink:0;accent-color:var(--primary);}
   .roster-csq{width:18px;height:18px;border-radius:2px;border:1px solid rgba(255,255,255,.12);flex-shrink:0;}
   .roster-color-label{font-family:"Share Tech Mono",monospace;font-size:9px;color:var(--txt-dim);letter-spacing:1px;}
 
@@ -511,7 +549,7 @@
   .field{margin-bottom:14px;}
   input,textarea,select{
     width:100%;background:#090a0e;border:1px solid var(--line-bright);color:var(--txt);
-    padding:12px 14px;font-family:"Share Tech Mono",monospace;font-size:15px;outline:none;
+    padding:12px 14px;font-family:"Share Tech Mono",monospace;font-size:16px;outline:none;
   }
   input:focus,textarea:focus,select:focus{border-color:var(--primary-dim);box-shadow:0 0 0 1px rgba(232,100,10,.25);}
 
@@ -696,11 +734,11 @@
   .ritem-mid .nm{color:var(--txt);font-size:13px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   .ritem-ctrl{display:flex;gap:6px;}
 
-  .url-in{flex:1;min-width:0;background:#090a0e;border:1px solid var(--line-bright);color:var(--primary);padding:8px 10px;font-family:"Share Tech Mono",monospace;font-size:14px;outline:none;}
+  .url-in{flex:1;min-width:0;background:#090a0e;border:1px solid var(--line-bright);color:var(--primary);padding:8px 10px;font-family:"Share Tech Mono",monospace;font-size:16px;outline:none;}
   .url-in:focus{border-color:var(--primary-dim);}
   
   /* Shared style for name inputs inside roster list items */
-  .name-in{flex:1;min-width:0;background:transparent;border:none;border-bottom:1px dashed var(--line-bright);color:var(--txt);padding:2px 4px;font-family:"Share Tech Mono",monospace;font-size:13px;outline:none;}
+  .name-in{flex:1;min-width:0;background:transparent;border:none;border-bottom:1px dashed var(--line-bright);color:var(--txt);padding:2px 4px;font-family:"Share Tech Mono",monospace;font-size:16px;outline:none;}
   .name-in:focus{border-color:var(--primary);color:var(--primary);}
 
   .paste-btn,.dl-btn{flex-shrink:0;border:1px solid var(--primary-dim);background:rgba(232,100,10,.10);color:var(--primary);padding:0 12px;font-size:16px;transition:.12s;}
@@ -714,7 +752,7 @@
   .hint{font-family:"Share Tech Mono",monospace;font-size:11px;color:var(--txt-dim);line-height:1.7;background:var(--panel-2);border:1px dashed var(--line-bright);padding:10px 12px;margin-bottom:14px;}
   .hint b{color:var(--amber);}
 
-  .custom-count{width:100%;background:#090a0e;border:1px solid var(--line-bright);color:var(--txt);padding:11px 13px;font-family:"Share Tech Mono",monospace;font-size:14px;outline:none;margin-top:10px;}
+  .custom-count{width:100%;background:#090a0e;border:1px solid var(--line-bright);color:var(--txt);padding:11px 13px;font-family:"Share Tech Mono",monospace;font-size:16px;outline:none;margin-top:10px;}
   .custom-count:focus{border-color:var(--primary-dim);}
   .custom-count.on{border-color:var(--primary-dim);color:var(--primary);}
 
@@ -723,7 +761,7 @@
   .series-add{flex-shrink:0;width:48px;border:1px solid var(--primary-dim);background:rgba(232,100,10,.10);color:var(--primary);font-size:22px;font-weight:700;line-height:1;cursor:pointer;transition:.12s;}
   .series-add:hover{background:rgba(232,100,10,.22);}
 
-  .search-in{width:100%;background:#090a0e;border:1px solid var(--line-bright);color:var(--txt);padding:11px 13px;font-family:"Share Tech Mono",monospace;font-size:14px;outline:none;margin-bottom:10px;}
+  .search-in{width:100%;background:#090a0e;border:1px solid var(--line-bright);color:var(--txt);padding:11px 13px;font-family:"Share Tech Mono",monospace;font-size:16px;outline:none;margin-bottom:10px;}
   .search-in:focus{border-color:var(--primary-dim);}
 
   /* ── FLOAT BACK ───────────────────────────────── */
@@ -762,7 +800,7 @@
   .submit-panel{margin-top:18px;border:1px solid var(--primary-dim);background:linear-gradient(180deg,rgba(232,100,10,.08),transparent);padding:16px;}
   .submit-panel .sp-title{font-family:"Share Tech Mono",monospace;font-size:10px;color:var(--primary);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;display:block;}
   .submit-row{display:flex;gap:8px;align-items:stretch;}
-  .submit-row input{flex:1;background:#090a0e;border:1px solid var(--line-bright);color:var(--txt);padding:11px 13px;font-family:"Share Tech Mono",monospace;font-size:15px;outline:none;}
+  .submit-row input{flex:1;background:#090a0e;border:1px solid var(--line-bright);color:var(--txt);padding:11px 13px;font-family:"Share Tech Mono",monospace;font-size:16px;outline:none;}
   .submit-row input:focus{border-color:var(--primary-dim);}
   .submit-row input::placeholder{color:var(--txt-dim);}
   .submit-btn{flex-shrink:0;padding:0 18px;border:1px solid var(--primary-dim);background:rgba(232,100,10,.14);color:var(--primary);font-family:"Barlow Condensed",sans-serif;font-weight:700;letter-spacing:2px;font-size:14px;text-transform:uppercase;cursor:pointer;transition:.15s;}
@@ -1029,7 +1067,47 @@
     .btn{padding:11px 14px;font-size:13px;letter-spacing:2px;}
     .label{font-size:9px;letter-spacing:2px;}
     .field{margin-bottom:10px;}
-    input,textarea,select{padding:10px 12px;font-size:14px;}
+    input,textarea,select{padding:10px 12px;font-size:16px;}
+
+    /* Manage / roster / pilot list rows — smaller thumbnails so the
+       editable fields next to them aren't squeezed to nothing. */
+    .roster-item{padding:8px;gap:8px;font-size:12px;}
+    .thmbwrap,.thmbwrap img,.noimg{width:64px;height:64px;}
+    .ritem-mid{gap:6px;}
+    .ritem-ctrl{gap:4px;}
+    .dl-btn,.paste-btn{padding:0 9px;font-size:14px;}
+    .del{padding:6px 8px;font-size:12px;}
+    .roster-csq{width:15px;height:15px;}
+    .roster-color-label{font-size:8.5px;}
+    .link-units-btn{font-size:9px;padding:5px 8px;}
+    .link-unit-row{font-size:11px;}
+    .link-unit-row img{width:22px;height:22px;}
+
+    /* Color editor — smaller rows + thumbnails for the same reason */
+    .ce-title{font-size:20px;}
+    .ce-list-item{padding:7px 8px;gap:8px;}
+    .ce-list-item img,.ce-list-item .noimg{width:32px;height:32px;}
+    .ce-list-name{font-size:11px;}
+    .ce-unit-display{padding:14px;}
+    .ce-unit-img{max-height:200px;}
+    .ce-palette{grid-template-columns:repeat(5,1fr);}
+  }
+
+  /* ── EXTRA-SMALL PHONES (iPhone SE/mini, compact Android ~360–390px) ──
+     One more notch down so the smallest screens don't feel cramped. */
+  @media(max-width:400px){
+    body{padding:8px 8px 60px;}
+    .page-title{font-size:clamp(28px,10.5vw,44px);letter-spacing:3px;}
+    .body{padding:12px 10px 18px;}
+    .start-section{padding:9px 10px;}
+    .seg button{padding:8px 3px;font-size:10.5px;letter-spacing:.5px;min-width:0;}
+    .btn{padding:10px 12px;font-size:12px;letter-spacing:1.5px;}
+    .thmbwrap,.thmbwrap img,.noimg{width:52px;height:52px;}
+    .roster-item{padding:7px;gap:6px;}
+    .ritem-mid .nm,.name-in{font-size:12px;}
+    .url-in{font-size:16px;padding:7px 8px;}
+    .ce-palette{grid-template-columns:repeat(4,1fr);}
+    .ce-color-row{gap:10px;}
   }
 
 </style>
@@ -1361,6 +1439,7 @@
         <button class="series-add" id="addPilotSeriesBtn" title="Add a new series">＋</button>
       </div>
       <button class="btn" id="addPilotBtn">+ Add Pilot</button>
+      <p class="hint" style="margin-top:8px;">Adding a pilot here doesn't auto-link any units. Use "🔗 Link Units" on a pilot's card below to connect it to mobile suits.</p>
 
       <span class="label" style="margin-top:18px;">Save / Sync Files</span>
       <div class="row">
@@ -1375,6 +1454,8 @@
         <div class="spacer"></div>
         <button class="btn warn" id="loadPilotsBtn">Load From Text</button>
       </div>
+      <div class="spacer"></div>
+      <button class="btn warn" id="zipPilotsBtn">📥 Download All Images (ZIP)</button>
 
       <div class="spacer"></div>
       <span class="label">Current Pilots (<span id="managePilotCount">0</span>)</span>
@@ -1389,7 +1470,7 @@
       <div class="ce-header">
         <div class="ce-title">🎨 Color Editor</div>
       </div>
-      <p class="hint" style="margin-bottom:14px;">Search a unit, see it large, enter hex codes for its 2 primary colors, then save. Changes are stored in the roster JSON.</p>
+      <p class="hint" style="margin-bottom:14px;">Tap any unit below (or search to filter), then pick its 2 primary colors and save. Changes are stored in the roster JSON.</p>
       <div class="ce-search-wrap">
         <input id="ceSearchInput" placeholder="Search unit name or series…" autocomplete="off">
       </div>
@@ -1424,6 +1505,7 @@
         <button class="ce-save-btn" id="ceSaveBtn">💾 Save Colors</button>
         <div class="ce-saved-msg" id="ceSavedMsg"></div>
       </div>
+      <div id="ceFullList" class="ce-list"></div>
     </section>
 
   </div><!-- /body -->
@@ -2356,6 +2438,31 @@ async function downloadAllImagesAsZip(){
   btn.disabled=false;btn.textContent=originalText;
 }
 
+async function downloadAllPilotImagesAsZip(){
+  const pilotsWithImages=pilots.filter(item=>item.img&&item.img.trim()!=="");
+  if(pilotsWithImages.length===0){alert("No pilots have portraits.");return;}
+  if(typeof JSZip==="undefined"){alert("JSZip is still loading. Try again shortly.");return;}
+  const btn=$("zipPilotsBtn");const originalText=btn.textContent;btn.disabled=true;
+  const zip=new JSZip();const imgFolder=zip.folder("images/pilots");let successfulDownloads=0;
+  for(let i=0;i<pilotsWithImages.length;i++){
+    const item=pilotsWithImages[i];btn.textContent=`Downloading (${i+1}/${pilotsWithImages.length})...`;
+    try{
+      const response=await fetch(item.img);if(!response.ok)throw new Error("404");
+      const blob=await response.blob();
+      const existingFilename=item.img.split('/').pop()||getSanitizedFilename(item.name)+".jpg";
+      imgFolder.file(existingFilename,blob);successfulDownloads++;
+    }catch(err){console.warn(`Skipping ${item.name}`,err);}
+  }
+  if(successfulDownloads===0){alert("All downloads failed. Check CORS.");btn.disabled=false;btn.textContent=originalText;return;}
+  btn.textContent="Packing ZIP...";
+  try{
+    const content=await zip.generateAsync({type:"blob"});const objectUrl=URL.createObjectURL(content);
+    const link=document.createElement("a");link.href=objectUrl;link.download="gundam-quiz-pilot-portraits.zip";
+    document.body.appendChild(link);link.click();document.body.removeChild(link);URL.revokeObjectURL(objectUrl);
+  }catch(err){alert("Failed to create ZIP.");}
+  btn.disabled=false;btn.textContent=originalText;
+}
+
 function renderManageList(query=""){
   const container=$("rosterList");container.innerHTML="";
   const q=query.toLowerCase().trim();
@@ -2416,6 +2523,7 @@ function renderManageList(query=""){
   }
 }
 
+let _linkUnitsOpenFor=null;
 function renderPilotManageList(query=""){
   const container=$("pilotList");if(!container)return;container.innerHTML="";
   const q=query.toLowerCase().trim();
@@ -2451,6 +2559,7 @@ function renderPilotManageList(query=""){
         if(newName!==oldName){
           // keep roster pilot references pointed at the renamed pilot
           roster.forEach(u=>{if(u.pilot===oldName)u.pilot=newName;});
+          if(_linkUnitsOpenFor===oldName)_linkUnitsOpenFor=newName;
         }
         updatePilotUI();
       };
@@ -2459,7 +2568,7 @@ function renderPilotManageList(query=""){
         const msg=unitCount>0
           ? `Remove ${item.name}? ${unitCount} unit(s) reference this pilot and will no longer have a portrait in Pilot MC.`
           : `Remove ${item.name}?`;
-        if(confirm(msg)){pilots.splice(idx,1);updatePilotUI();}
+        if(confirm(msg)){if(_linkUnitsOpenFor===item.name)_linkUnitsOpenFor=null;pilots.splice(idx,1);updatePilotUI();}
       };
       top.appendChild(nameIn);top.appendChild(dbtn);
       const ctrl=document.createElement("div");ctrl.className="ritem-ctrl";
@@ -2485,7 +2594,45 @@ function renderPilotManageList(query=""){
       lbl.textContent=unitCount>0?`Piloted units: ${unitCount}`:"No units reference this pilot";
       lbl.style.color=unitCount>0?"var(--green)":"var(--txt-dim)";
       usageRow.appendChild(lbl);
-      mid.appendChild(top);mid.appendChild(ctrl);mid.appendChild(seriesSelWrap);mid.appendChild(usageRow);
+      const linkBtn=document.createElement("button");linkBtn.className="link-units-btn";linkBtn.type="button";
+      linkBtn.textContent="🔗 Link Units";
+      const linkPanel=document.createElement("div");linkPanel.className="link-units-panel";
+      function renderLinkPanel(){
+        linkPanel.innerHTML="";
+        const hdr=document.createElement("div");hdr.className="luh";
+        hdr.textContent="Tap a unit to link/unlink it to "+item.name;linkPanel.appendChild(hdr);
+        const sortedRoster=[...roster].sort((a,b)=>a.name.localeCompare(b.name));
+        sortedRoster.forEach(u=>{
+          const row=document.createElement("label");row.className="link-unit-row";
+          const cb=document.createElement("input");cb.type="checkbox";
+          cb.checked=u.pilot===item.name;
+          const otherPilot=u.pilot&&u.pilot!==item.name?u.pilot:null;
+          if(u.img){const im=document.createElement("img");im.src=u.img;im.alt="";row.appendChild(im);}
+          const nm=document.createElement("span");nm.textContent=u.name;
+          cb.onchange=()=>{
+            if(cb.checked){u.pilot=item.name;}
+            else if(u.pilot===item.name){delete u.pilot;}
+            _linkUnitsOpenFor=item.name;
+            updatePilotUI();
+          };
+          row.appendChild(cb);row.appendChild(nm);
+          if(otherPilot){const tk=document.createElement("span");tk.className="taken";tk.textContent="→ "+otherPilot;row.appendChild(tk);}
+          linkPanel.appendChild(row);
+        });
+      }
+      linkBtn.onclick=()=>{
+        const willOpen=!linkPanel.classList.contains("open");
+        linkPanel.classList.toggle("open",willOpen);
+        linkBtn.textContent=willOpen?"🔗 Hide Units":"🔗 Link Units";
+        _linkUnitsOpenFor=willOpen?item.name:null;
+        if(willOpen)renderLinkPanel();
+      };
+      if(_linkUnitsOpenFor===item.name){
+        linkPanel.classList.add("open");
+        linkBtn.textContent="🔗 Hide Units";
+        renderLinkPanel();
+      }
+      mid.appendChild(top);mid.appendChild(ctrl);mid.appendChild(seriesSelWrap);mid.appendChild(usageRow);mid.appendChild(linkBtn);mid.appendChild(linkPanel);
       div.appendChild(thmb);div.appendChild(mid);sectionBlock.appendChild(div);
     });
     container.appendChild(sectionBlock);
@@ -2549,6 +2696,8 @@ function setupEventListeners(){
   $("againBtn").onclick=startQuiz;
   $("backBtn").onclick=()=>showSection("start");
   $("zipAllBtn").onclick=downloadAllImagesAsZip;
+  const zipPilotsBtn=$("zipPilotsBtn");
+  if(zipPilotsBtn)zipPilotsBtn.onclick=downloadAllPilotImagesAsZip;
   $("submitBtn").onclick=submitScore;
   $("lbRefreshBtn").onclick=fetchLeaderboard;
   $("spChangeName").onclick=()=>{ localStorage.removeItem("gundamPlayerName"); renderSubmitPanel(); };
@@ -3319,6 +3468,7 @@ function getUnitColors(unit){
 function setupColorEditor(){
   const inp=$("ceSearchInput");
   const sugBox=$("ceSuggest");
+  const listBox=$("ceFullList");
   const display=$("ceUnitDisplay");
   let ceUnit=null;
   let ceSelected={1:null,2:null};
@@ -3365,25 +3515,76 @@ function setupColorEditor(){
     msg.style.color=hasCustom?"var(--green)":"var(--amber)";
     msg.textContent=hasCustom?"✓ Custom colors — tap swatches to change.":"⚠ Default colors — pick and save to override.";
     display.classList.add("visible");
-    sugBox.innerHTML="";inp.value="";
+    sugBox.innerHTML="";
+    markActiveRow();
+    display.scrollIntoView({behavior:"smooth",block:"start"});
   }
 
-  function renderSuggestions(matches){
-    sugBox.innerHTML="";
-    matches.forEach(u=>{
-      const b=document.createElement("button");
-      if(u.img){const img=document.createElement("img");img.src=u.img;img.alt="";b.appendChild(img);}
-      const span=document.createElement("span");span.textContent=u.name;b.appendChild(span);
-      const c=getUnitColors(u);
-      const hasCustom=!!(u.colors&&u.colors[0]);
-      const sw=document.createElement("span");sw.style.cssText="display:flex;gap:3px;align-items:center;margin-left:auto;flex-shrink:0;";
-      const s1=document.createElement("span");s1.style.cssText=`width:12px;height:12px;border-radius:2px;background:${c[0]};border:1px solid rgba(255,255,255,.15);display:inline-block;`;
-      const s2=document.createElement("span");s2.style.cssText=`width:12px;height:12px;border-radius:2px;background:${c[1]};border:1px solid rgba(255,255,255,.15);display:inline-block;`;
-      const tk=document.createElement("span");tk.style.cssText=`font-size:9px;margin-left:2px;color:${hasCustom?"var(--green)":"var(--txt-dim)"}`;
-      tk.textContent=hasCustom?"✓":"·";
-      sw.appendChild(s1);sw.appendChild(s2);sw.appendChild(tk);
-      b.appendChild(sw);b.onmousedown=e=>{e.preventDefault();loadUnit(u);};b.onclick=()=>loadUnit(u);sugBox.appendChild(b);
+  function markActiveRow(){
+    if(!listBox)return;
+    [...listBox.querySelectorAll(".ce-list-item")].forEach(row=>{
+      row.classList.toggle("active",!!ceUnit&&row.dataset.name===ceUnit.name);
     });
+  }
+
+  function makeRow(u){
+    const b=document.createElement("button");
+    b.type="button";b.className="ce-list-item";b.dataset.name=u.name;
+    if(u.img){const img=document.createElement("img");img.src=u.img;img.alt="";img.onerror=()=>{img.replaceWith(Object.assign(document.createElement("div"),{className:"noimg",textContent:"ERR"}));};b.appendChild(img);}
+    else{const noimg=document.createElement("div");noimg.className="noimg";noimg.textContent="NO IMG";b.appendChild(noimg);}
+    const nm=document.createElement("span");nm.className="ce-list-name";nm.textContent=u.name;b.appendChild(nm);
+    const c=getUnitColors(u);
+    const hasCustom=!!(u.colors&&u.colors[0]);
+    const sw=document.createElement("span");sw.className="ce-list-sw";
+    const s1=document.createElement("span");s1.style.background=c[0];
+    const s2=document.createElement("span");s2.style.background=c[1];
+    const tk=document.createElement("span");tk.style.cssText=`font-size:9px;margin-left:2px;color:${hasCustom?"var(--green)":"var(--txt-dim)"}`;
+    tk.textContent=hasCustom?"✓":"·";
+    sw.appendChild(s1);sw.appendChild(s2);sw.appendChild(tk);
+    b.appendChild(sw);
+    b.onclick=()=>loadUnit(u);
+    return b;
+  }
+
+  function renderFullList(filtered,isSeriesMode){
+    if(!listBox)return;
+    listBox.innerHTML="";
+    if(!filtered.length){
+      const empty=document.createElement("div");empty.className="hint";empty.style.padding="10px 2px";
+      empty.textContent="No units match that search.";listBox.appendChild(empty);return;
+    }
+    if(isSeriesMode){
+      let lastS=null;let block=null;let fHdr=true;
+      filtered.forEach(u=>{
+        const s=u.series||"Other";
+        if(s!==lastS){
+          block=document.createElement("div");block.className="ce-list-block";
+          const hdr=document.createElement("div");
+          hdr.className="suggest-series-header"+(fHdr?" first":"");
+          hdr.textContent=s;block.appendChild(hdr);
+          listBox.appendChild(block);
+          lastS=s;fHdr=false;
+        }
+        block.appendChild(makeRow(u));
+      });
+    } else {
+      // group by series, alphabetically, same as roster manager
+      const groups={};
+      filtered.forEach(u=>{
+        const s=u.series||"Other / Custom";
+        if(!groups[s])groups[s]=[];
+        groups[s].push(u);
+      });
+      Object.keys(groups).forEach(s=>{
+        const block=document.createElement("div");block.className="ce-list-block";
+        const hdr=document.createElement("div");
+        hdr.className="suggest-series-header"+(listBox.children.length===0?" first":"");
+        hdr.textContent=s;block.appendChild(hdr);
+        groups[s].forEach(u=>block.appendChild(makeRow(u)));
+        listBox.appendChild(block);
+      });
+    }
+    markActiveRow();
   }
 
   const CE_ALIASES={
@@ -3398,9 +3599,9 @@ function setupColorEditor(){
     "bd":"Build Divers","divers":"Build Divers",
     "rerise":"Build Divers Re:RISE","bm":"Build Metaverse","metaverse":"Build Metaverse",
   };
-  let ceIsSeriesMode=false;
-  inp.oninput=()=>{
-    const val=inp.value.toLowerCase().trim();if(!val){sugBox.innerHTML="";ceIsSeriesMode=false;return;}
+  function applyFilter(){
+    const val=inp.value.toLowerCase().trim();
+    if(!val){renderFullList(roster.filter(u=>u&&u.name),false);return;}
     const sm=CE_ALIASES[val];
     let res,isSeries=false;
     if(sm){
@@ -3410,34 +3611,9 @@ function setupColorEditor(){
     } else {
       res=roster.filter(u=>u.name.toLowerCase().includes(val)||(u.series||"").toLowerCase().includes(val));
     }
-    ceIsSeriesMode=isSeries;
-    // Build suggestion list with swatches
-    sugBox.innerHTML="";
-    let lastS=null;let fHdr=true;
-    res.forEach(u=>{
-      if(isSeries){
-        const s=u.series||'Other';
-        if(s!==lastS){
-          const hdr=document.createElement('div');
-          hdr.className='suggest-series-header'+(fHdr?' first':'');
-          hdr.textContent=s;sugBox.appendChild(hdr);
-          lastS=s;fHdr=false;
-        }
-      }
-      const b=document.createElement("button");
-      if(u.img){const img=document.createElement("img");img.src=u.img;img.alt="";b.appendChild(img);}
-      const span=document.createElement("span");span.textContent=u.name;b.appendChild(span);
-      const c=getUnitColors(u);
-      const hasCustom=!!(u.colors&&u.colors[0]);
-      const sw=document.createElement("span");sw.style.cssText="display:flex;gap:3px;align-items:center;margin-left:auto;flex-shrink:0;";
-      const s1=document.createElement("span");s1.style.cssText=`width:12px;height:12px;border-radius:2px;background:${c[0]};border:1px solid rgba(255,255,255,.15);display:inline-block;`;
-      const s2=document.createElement("span");s2.style.cssText=`width:12px;height:12px;border-radius:2px;background:${c[1]};border:1px solid rgba(255,255,255,.15);display:inline-block;`;
-      const tk=document.createElement("span");tk.style.cssText=`font-size:9px;margin-left:2px;color:${hasCustom?"var(--green)":"var(--txt-dim)"}`;
-      tk.textContent=hasCustom?"✓":"·";
-      sw.appendChild(s1);sw.appendChild(s2);sw.appendChild(tk);
-      b.appendChild(sw);b.onmousedown=e=>{e.preventDefault();loadUnit(u);};b.onclick=()=>loadUnit(u);sugBox.appendChild(b);
-    });
-  };
+    renderFullList(res,isSeries);
+  }
+  inp.oninput=applyFilter;
 
   $("ceSaveBtn").onclick=()=>{
     if(!ceUnit)return;
@@ -3448,7 +3624,12 @@ function setupColorEditor(){
     if(idx>=0){roster[idx].colors=[h1,h2,n1,n2];if(typeof GL_COLORS!=="undefined")GL_COLORS[ceUnit.name]=[h1,h2,n1,n2];ceUnit=roster[idx];}
     $("ceSavedMsg").style.color="var(--green)";
     $("ceSavedMsg").textContent="✓ Saved: "+n1+" / "+n2;
+    applyFilter();
   };
+
+  // initial render: full roster, grouped by series
+  inp.value="";
+  renderFullList(roster.filter(u=>u&&u.name),false);
 }
 
 
@@ -4682,6 +4863,13 @@ function openAchievementsPanel(){
 function closeAchievementsPanel(){
   document.getElementById('achievePanel').classList.remove('open');
 }
+(function setupAchievePanelOutsideClick(){
+  const panel=document.getElementById('achievePanel');
+  if(!panel)return;
+  panel.addEventListener('click',e=>{
+    if(e.target===panel) closeAchievementsPanel();
+  });
+})();
 function getAchProgress(def){
   if(!def.progress) return null;
   if(def.progressFn) return def.progressFn();
